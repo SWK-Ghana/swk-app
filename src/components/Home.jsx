@@ -4,21 +4,32 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Empowering Youth for Sustainable Change
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-            SWK Ghana is a youth-focused nonprofit organisation dedicated to holistic youth development as the foundation for resilient communities across Africa.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-gradient text-lg px-8 py-3">
-              Get Involved
-            </button>
-            <button className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-3 rounded-xl font-semibold transition-colors">
-              Learn More
-            </button>
+      <div className="px-4 py-8 sm:px-6 lg:px-8">
+        <div className="relative mb-16 rounded-2xl overflow-hidden">
+          <img
+            src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294683/SWK_at_Ga_West_n0c3fz.jpg"
+            alt="SWK Ghana community engagement at Ga West"
+            className="h-[46vh] sm:h-[56vh] lg:h-[64vh] w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center px-6 max-w-4xl">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                Empowering Youth for Sustainable Change
+              </h1>
+              <p className="text-lg md:text-xl text-emerald-50 mb-8">
+                SWK Ghana is a youth-focused nonprofit organisation dedicated to holistic youth development as the foundation for resilient communities across Africa.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="btn-gradient text-lg px-8 py-3">
+                  Get Involved
+                </button>
+                <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-3 rounded-xl font-semibold transition-colors">
+                  Learn More
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
