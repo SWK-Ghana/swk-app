@@ -7,8 +7,9 @@ const NAV_LINKS = [
   { label: "Our Work", href: "/our-work" },
   { label: "Team", href: "/team" },
   { label: "Resources", href: "/resources" },
-  { label: "Get Involved", href: "/get-involved", cta: true },
   { label: "Contact", href: "/contact" },
+  { label: "Get Involved", href: "/get-involved", cta: true },
+  { label: "Donate", href: "/donate", cta: true },
 ];
 
 const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png", logoAlt = "SWK Ghana Logo" }) => {

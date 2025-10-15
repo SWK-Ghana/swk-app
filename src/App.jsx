@@ -8,6 +8,8 @@ import MeetTheTeam from './components/MeetTheTeam'
 import Resources from './components/Resources'
 import GetInvolved from './components/GetInvolved'
 import Contact from './components/Contact'
+import Donate from './components/Donate'
+import NotFound from './components/NotFound'
 
 function App() {
   const router = createBrowserRouter([
@@ -21,9 +23,11 @@ function App() {
         {path: "team", element: <MeetTheTeam />},
         {path: "resources", element: <Resources />},
         {path: "get-involved", element: <GetInvolved />},
-        {path: "contact", element: <Contact />}
+        {path: "contact", element: <Contact />},
+        {path: "donate", element: <Donate />}
       ]
-    }
+    },
+    { path: "*", element: <NotFound /> }
   ])
 
   return (

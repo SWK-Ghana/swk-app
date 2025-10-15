@@ -8,8 +8,14 @@
     @apply inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
     background-image: linear-gradient(90deg, #059669 0%, #10B981 50%, #22C55E 100%);
   }
-  .btn-gradient:hover { filter: brightness(1.03); }
+
+  .btn-gradient:hover {
+    filter: brightness(1.03);
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .btn-gradient { transition: none; }
+    .btn-gradient {
+      transition: none;
+    }
   }
 }
