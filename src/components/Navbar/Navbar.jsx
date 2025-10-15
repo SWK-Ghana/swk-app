@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-const Navbar = ({ logoSrc = "/vite.svg", logoAlt = "SWK Ghana Logo" }) => {
+const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png", logoAlt = "SWK Ghana Logo" }) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
