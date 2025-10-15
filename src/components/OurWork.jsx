@@ -15,7 +15,7 @@ const OurWork = () => {
           {/* Programs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Youth Development */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
               <div className="mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Youth_Development_j10oja.png"
@@ -28,13 +28,13 @@ const OurWork = () => {
               <p className="text-gray-600 mb-4">
                 Leadership workshops, skills training, and mentorship programs that equip young people with the tools to become effective change-makers in their communities.
               </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+              <button className="btn-gradient">
                 Learn More
               </button>
             </div>
 
             {/* Circular Economy */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
               <div className="mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Circular_Economy_v3oo71.png"
@@ -47,13 +47,13 @@ const OurWork = () => {
               <p className="text-gray-600 mb-4">
                 Waste reduction programs, recycling workshops, and sustainable consumption education that promote circular economy principles among youth and communities.
               </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+              <button className="btn-gradient">
                 Learn More
               </button>
             </div>
 
             {/* Agribusiness */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
               <div className="mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339247/Agribusiness_yqc44a.png"
@@ -66,13 +66,13 @@ const OurWork = () => {
               <p className="text-gray-600 mb-4">
                 Training in sustainable agriculture, agribusiness skills, and value chain development to create economic opportunities for young people in the agricultural sector.
               </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+              <button className="btn-gradient">
                 Learn More
               </button>
             </div>
 
             {/* Technology */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
               <div className="mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Technology_lwdqyb.png"
@@ -85,13 +85,13 @@ const OurWork = () => {
               <p className="text-gray-600 mb-4">
                 Digital literacy programs, tech hackathons, and innovation labs that leverage technology for sustainable development and youth empowerment.
               </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+              <button className="btn-gradient">
                 Learn More
               </button>
             </div>
 
             {/* Climate Action */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
               <div className="mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339245/Climate_Action_ffrdiu.png"
@@ -104,7 +104,7 @@ const OurWork = () => {
               <p className="text-gray-600 mb-4">
                 Environmental conservation programs, climate education, and youth-led initiatives that address climate change and promote environmental stewardship.
               </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+              <button className="btn-gradient">
                 Learn More
               </button>
             </div>

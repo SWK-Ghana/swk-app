@@ -34,7 +34,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label={logoAlt}>
+          <Link to="/" className="flex items-center gap-3 group active:opacity-90" aria-label={logoAlt}>
             <img
               src={logoSrc}
               alt={logoAlt}
@@ -50,7 +50,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 active:scale-95 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
             aria-expanded={open}
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
@@ -85,7 +85,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                 {link.cta ? (
                   <Link
                     to={link.href}
-                      className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105 block w-full text-center"
+                    className="btn-gradient block w-full text-center active:opacity-95"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
@@ -93,7 +93,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                 ) : (
                   <Link
                     to={link.href}
-                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium ${
+                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition active:scale-[0.99] ${
                       isActive(link.href)
                         ? "text-emerald-700 bg-emerald-50"
                         : "text-gray-700 hover:bg-gray-50"
