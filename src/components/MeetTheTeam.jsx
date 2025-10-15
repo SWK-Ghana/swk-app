@@ -1,11 +1,14 @@
 import React from 'react'
 
 const teamMembers = [
-  { name: 'Executive Director', role: 'Leadership', initials: 'ED' },
+  { name: 'Founder & Executive Director', role: 'Leadership', initials: 'FE' },
+  { name: 'Co-Founder', role: 'Leadership', initials: 'CF' },
   { name: 'Programs Lead', role: 'Programs', initials: 'PL' },
   { name: 'Community Manager', role: 'Engagement', initials: 'CM' },
   { name: 'Tech & Innovation Lead', role: 'Technology', initials: 'TI' },
+  { name: 'Agribusiness Lead', role: 'Agriculture', initials: 'AL' },
   { name: 'Climate Action Lead', role: 'Environment', initials: 'CA' },
+  { name: 'Finance Officer', role: 'Finance', initials: 'FO' },
   { name: 'Operations Manager', role: 'Operations', initials: 'OM' }
 ]
 
@@ -35,6 +38,11 @@ const MeetTheTeam = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Volunteers</h2>
+            <p className="text-gray-600">We’ll showcase our amazing volunteers here as they join us.</p>
           </div>
 
           <div className="mt-16 text-center">
