@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-const Navbar = ({ logoSrc = "/logo.svg", logoAlt = "SWK Ghana Logo" }) => {
+const Navbar = ({ logoSrc = "/vite.svg", logoAlt = "SWK Ghana Logo" }) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
@@ -76,7 +76,7 @@ const Navbar = ({ logoSrc = "/logo.svg", logoAlt = "SWK Ghana Logo" }) => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+          {/* Mobile Menu */}
         <div className={`md:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
           <ul className="py-3 space-y-1 border-t border-gray-100">
             {NAV_LINKS.map((link) => (
@@ -84,7 +84,7 @@ const Navbar = ({ logoSrc = "/logo.svg", logoAlt = "SWK Ghana Logo" }) => {
                 {link.cta ? (
                   <Link
                     to={link.href}
-                    className="btn-gradient block w-full text-center"
+                      className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105 block w-full text-center"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
@@ -110,15 +110,6 @@ const Navbar = ({ logoSrc = "/logo.svg", logoAlt = "SWK Ghana Logo" }) => {
           </ul>
         </div>
       </nav>
-
-      {/* Gradient Styles */}
-      <style>{`
-        .btn-gradient {
-          @apply inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60;
-          background-image: linear-gradient(90deg, #059669 0%, #10B981 50%, #22C55E 100%);
-        }
-        .btn-gradient:hover { filter: brightness(1.03); }
-      `}</style>
     </header>
   );
 };
@@ -127,7 +118,10 @@ const NavItem = ({ label, href, active, cta }) => {
   if (cta) {
     return (
       <li>
-        <Link to={href} className="btn-gradient">
+        <Link
+          to={href}
+          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105"
+        >
           {label}
         </Link>
       </li>
@@ -138,7 +132,7 @@ const NavItem = ({ label, href, active, cta }) => {
       <Link
         to={href}
         aria-current={active ? "page" : undefined}
-        className={`relative px-1.5 py-2 text-sm font-medium transition-colors ${
+        className={`group relative px-1.5 py-2 text-sm font-medium transition-colors ${
           active ? "text-emerald-700" : "text-gray-700 hover:text-emerald-700"
         }`}
       >
