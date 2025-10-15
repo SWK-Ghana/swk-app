@@ -37,7 +37,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
             <img
               src={logoSrc}
               alt={logoAlt}
-              className="h-10 md:h-11 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-12 md:h-14 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
             />
             <span className="sr-only">{logoAlt}</span>
           </Link>
