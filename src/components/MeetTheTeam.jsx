@@ -2,102 +2,63 @@ import React from 'react'
 
 const teamMembers = [
   { 
-    name: 'Founder & Executive Director', 
-    role: 'Leadership', 
-    initials: 'FE',
-    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/1752658915453_atc9oo.jpg', // Replace with actual photo
+    name: 'Frank Koomson', 
+    role: 'Founder', 
+    initials: 'FK',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618900/Gemini_Generated_Image_kon0jtkon0jtkon0_2_wreiep.png',
+    imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/founder',
-      twitter: 'https://twitter.com/founder',
-      email: 'mailto:founder@swkghana.org'
+      linkedin: 'https://linkedin.com/in/frank-koomson',
+      twitter: 'https://twitter.com/frankkoomson',
+      email: 'mailto:frank@swkghana.org'
     }
   },
   { 
-    name: 'Co-Founder', 
-    role: 'Leadership', 
-    initials: 'CF',
-    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551737/1752658914512_k1zf9t.jpg', // Replace with actual photo
+    name: 'Ben Brown', 
+    role: 'Co-Founder', 
+    initials: 'BB',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618901/WhatsApp_Image_2025-09-20_at_08.56.03_23333094_xrg9kn.jpg',
+    imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/cofounder',
-      twitter: 'https://twitter.com/cofounder',
-      email: 'mailto:cofounder@swkghana.org'
+      linkedin: 'https://linkedin.com/in/ben-brown',
+      twitter: 'https://twitter.com/benbrown',
+      email: 'mailto:ben@swkghana.org'
     }
   },
   { 
-    name: 'Programs Lead', 
-    role: 'Programs', 
-    initials: 'PL',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=PL', // Placeholder - replace with actual photo
+    name: 'Doreen Lawuratu Baidoo', 
+    role: 'Administrative Manager', 
+    initials: 'DLB',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_500,h_500,f_auto,q_auto/v1762719821/Gemini_Generated_Image_xp3ul4xp3ul4xp3u_et6wsu.png',
+    imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/programslead',
-      twitter: 'https://twitter.com/programslead',
-      email: 'mailto:programs@swkghana.org'
+      linkedin: 'https://linkedin.com/in/doreen-baidoo',
+      twitter: 'https://twitter.com/doreenbaidoo',
+      email: 'mailto:doreen@swkghana.org'
     }
   },
   { 
-    name: 'Community Manager', 
-    role: 'Engagement', 
-    initials: 'CM',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=CM', // Placeholder - replace with actual photo
+    name: 'Ernestina Gyamfi', 
+    role: 'Programs and Agribusiness Lead', 
+    initials: 'EG',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760619065/WhatsApp_Image_2025-08-26_at_10.52.02_3ec2d7b6_uhih1r.jpg',
+    imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/communitymanager',
-      twitter: 'https://twitter.com/communitymanager',
-      email: 'mailto:community@swkghana.org'
+      linkedin: 'https://linkedin.com/in/ernestina-gyamfi',
+      twitter: 'https://twitter.com/ernestinagyamfi',
+      email: 'mailto:ernestina@swkghana.org'
     }
   },
   { 
-    name: 'Tech & Innovation Lead', 
-    role: 'Technology', 
-    initials: 'TI',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=TI', // Placeholder - replace with actual photo
+    name: 'Jessica Awurabena Asamoah', 
+    role: 'Communication and Media Lead', 
+    initials: 'JAA',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1762633599/WhatsApp_Image_2025-10-25_at_13.36.50_981a330d_fwjdgb.jpg',
+    imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/techlead',
-      twitter: 'https://twitter.com/techlead',
-      email: 'mailto:tech@swkghana.org'
-    }
-  },
-  { 
-    name: 'Agribusiness Lead', 
-    role: 'Agriculture', 
-    initials: 'AL',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=AL', // Placeholder - replace with actual photo
-    social: {
-      linkedin: 'https://linkedin.com/in/agribusinesslead',
-      twitter: 'https://twitter.com/agribusinesslead',
-      email: 'mailto:agribusiness@swkghana.org'
-    }
-  },
-  { 
-    name: 'Climate Action Lead', 
-    role: 'Environment', 
-    initials: 'CA',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=CA', // Placeholder - replace with actual photo
-    social: {
-      linkedin: 'https://linkedin.com/in/climatelead',
-      twitter: 'https://twitter.com/climatelead',
-      email: 'mailto:climate@swkghana.org'
-    }
-  },
-  { 
-    name: 'Finance Officer', 
-    role: 'Finance', 
-    initials: 'FO',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=FO', // Placeholder - replace with actual photo
-    social: {
-      linkedin: 'https://linkedin.com/in/financeofficer',
-      twitter: 'https://twitter.com/financeofficer',
-      email: 'mailto:finance@swkghana.org'
-    }
-  },
-  { 
-    name: 'Operations Manager', 
-    role: 'Operations', 
-    initials: 'OM',
-    photo: 'https://via.placeholder.com/300x300/10b981/ffffff?text=OM', // Placeholder - replace with actual photo
-    social: {
-      linkedin: 'https://linkedin.com/in/operationsmanager',
-      twitter: 'https://twitter.com/operationsmanager',
-      email: 'mailto:operations@swkghana.org'
+      linkedin: 'https://linkedin.com/in/jessica-asamoah',
+      twitter: 'https://twitter.com/jessicaasamoah',
+      email: 'mailto:jessica@swkghana.org'
     }
   }
 ]
@@ -116,17 +77,19 @@ const MeetTheTeam = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member) => (
-              <div key={member.name} className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div key={member.name} className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 {/* Photo */}
                 <div className="text-center mb-4">
                   <div className="relative inline-block">
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-emerald-100 shadow-md"
-                      loading="lazy"
-                    />
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                    <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg">
+                      <img
+                        src={member.photo}
+                        alt={member.name}
+                        className={`w-full h-full object-cover ${member.imagePosition || 'object-center'}`}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg border-2 border-white z-10">
                       {member.initials}
                     </div>
                   </div>
@@ -192,6 +155,22 @@ const MeetTheTeam = () => {
           <div className="mt-16 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Join Our Mission</h2>
             <p className="text-gray-600 mb-6">We collaborate with volunteers and partners to amplify impact.</p>
+            
+            {/* Company Social Media */}
+            <div className="flex justify-center space-x-4 mb-6">
+              <a
+                href="https://www.linkedin.com/company/100929740"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors duration-200"
+                aria-label="SWK Ghana LinkedIn"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </div>
+            
             <a href="/get-involved" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
               Get Involved
             </a>

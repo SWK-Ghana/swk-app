@@ -72,13 +72,13 @@ const Contact = () => {
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Follow Us</h3>
                     <div className="flex space-x-4">
-                      <a href="#" className="text-gray-600 hover:text-emerald-600 transition-colors">
+                      <a href="https://twitter.com/swkghana" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600 transition-colors">
                         Twitter
                       </a>
-                      <a href="#" className="text-gray-600 hover:text-emerald-600 transition-colors">
+                      <a href="https://www.linkedin.com/company/100929740" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600 transition-colors">
                         LinkedIn
                       </a>
-                      <a href="#" className="text-gray-600 hover:text-emerald-600 transition-colors">
+                      <a href="https://facebook.com/swkghana" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-600 transition-colors">
                         Facebook
                       </a>
                     </div>
