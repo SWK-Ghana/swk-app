@@ -3,26 +3,26 @@ import React from 'react'
 const GetInvolved = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 text-center">
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">
             Join the SWK Movement
           </h1>
-          <p className="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+          <p className="text-base xs:text-lg sm:text-xl md:text-xl text-gray-600 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
             Join SWK Ghana and help us build a more sustainable and equitable Ghana. Together, we can empower young people, transform communities, and protect our planet.
           </p>
           
           {/* Ways to Get Involved */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             {/* Volunteer */}
-            <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+                <svg className="w-7 h-7 xs:w-8 xs:h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Volunteer</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Volunteer</h3>
+              <p className="text-sm xs:text-base text-gray-600 mb-5 xs:mb-6 leading-relaxed">
                 Give your time and skills to support our community initiatives and make a direct impact.
               </p>
               <button className="btn-gradient w-full">
@@ -64,9 +64,9 @@ const GetInvolved = () => {
           </div>
 
           {/* Success Stories */}
-          <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Success Stories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <h2 className="text-2xl xs:text-3xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Success Stories</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-emerald-600 font-bold text-lg">A</span>
@@ -93,9 +93,9 @@ const GetInvolved = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Get in Touch</h2>
-            <p className="text-gray-600 mb-8 text-center">
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200">
+            <h2 className="text-2xl xs:text-3xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">Get in Touch</h2>
+            <p className="text-sm xs:text-base text-gray-600 mb-6 xs:mb-8 text-center px-4 xs:px-6 sm:px-0">
               Have questions or want to learn more about how you can get involved? We'd love to hear from you!
             </p>
             <form className="max-w-2xl mx-auto">

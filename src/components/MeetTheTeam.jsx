@@ -66,22 +66,22 @@ const teamMembers = [
 const MeetTheTeam = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">Meet the Team</h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-8 xs:mb-10 sm:mb-12">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-3 xs:mb-4 px-2 xs:px-0">Meet the Team</h1>
+            <p className="text-base xs:text-lg sm:text-lg text-gray-600 max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
               The people behind SWK Ghana who are dedicated to empowering youth and building resilient communities.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
             {teamMembers.map((member) => (
-              <div key={member.name} className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div key={member.name} className="bg-white rounded-lg xs:rounded-xl border border-gray-200 p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 {/* Photo */}
                 <div className="text-center mb-4">
                   <div className="relative inline-block">
-                    <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg">
+                    <div className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg">
                       <img
                         src={member.photo}
                         alt={member.name}
@@ -89,16 +89,16 @@ const MeetTheTeam = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="absolute -bottom-1 -right-1 w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg border-2 border-white z-10">
+                    <div className="absolute -bottom-1 -right-1 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs xs:text-sm font-bold shadow-lg border-2 border-white z-10">
                       {member.initials}
                     </div>
                   </div>
                 </div>
 
                 {/* Name and Role */}
-                <div className="text-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{member.name}</h3>
-                  <p className="text-sm text-gray-600">{member.role}</p>
+                <div className="text-center mb-3 xs:mb-4">
+                  <h3 className="text-base xs:text-lg sm:text-lg font-semibold text-gray-900 mb-1">{member.name}</h3>
+                  <p className="text-xs xs:text-sm sm:text-sm text-gray-600">{member.role}</p>
                 </div>
 
                 {/* Social Media Icons */}
@@ -147,14 +147,14 @@ const MeetTheTeam = () => {
             ))}
           </div>
 
-          <div className="mt-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Volunteers</h2>
-            <p className="text-gray-600">We’ll showcase our amazing volunteers here as they join us.</p>
+          <div className="mt-12 xs:mt-14 sm:mt-16 px-4 xs:px-6 sm:px-0">
+            <h2 className="text-xl xs:text-2xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 xs:mb-4">Volunteers</h2>
+            <p className="text-sm xs:text-base text-gray-600">We'll showcase our amazing volunteers here as they join us.</p>
           </div>
 
-          <div className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Join Our Mission</h2>
-            <p className="text-gray-600 mb-6">We collaborate with volunteers and partners to amplify impact.</p>
+          <div className="mt-12 xs:mt-14 sm:mt-16 text-center px-4 xs:px-6 sm:px-0">
+            <h2 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Join Our Mission</h2>
+            <p className="text-sm xs:text-base text-gray-600 mb-5 xs:mb-6">We collaborate with volunteers and partners to amplify impact.</p>
             
             {/* Company Social Media */}
             <div className="flex justify-center space-x-4 mb-6">

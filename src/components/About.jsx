@@ -11,22 +11,22 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto">
           {/* Hero Section */}
-          <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+          <div className={`text-center mb-12 xs:mb-16 sm:mb-18 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent px-2 xs:px-0">
               About SWK Ghana
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 xs:mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed px-4 xs:px-6 sm:px-0">
               A youth-focused nonprofit organisation founded in Ghana, with a vision to scale across Africa. 
               We believe holistic youth development is the foundation for resilient communities.
             </p>
-            <blockquote className="text-lg italic text-gray-700 bg-white p-8 rounded-2xl shadow-lg border-l-4 border-emerald-500 max-w-4xl mx-auto">
+            <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl italic text-gray-700 bg-white p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl shadow-lg border-l-4 border-emerald-500 max-w-4xl mx-auto px-4 xs:px-6 sm:px-8 md:px-10">
               "The power of youth is the common wealth for the entire world. The faces of young people are the faces of our past, our present and our future. No segment in society can match with the power, idealism, enthusiasm and courage of the young people."
-              <footer className="mt-4 text-sm text-gray-600 font-semibold">— Kailash Satyarthi (Nobel Peace Prize laureate, 2014)</footer>
+              <footer className="mt-3 xs:mt-4 sm:mt-5 text-xs xs:text-sm sm:text-base text-gray-600 font-semibold">— Kailash Satyarthi (Nobel Peace Prize laureate, 2014)</footer>
             </blockquote>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mt-6 xs:mt-8 sm:mt-10 flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center px-4 xs:px-0">
               <button 
                 onClick={() => navigate('/get-involved')}
                 className="btn-gradient text-lg px-8 py-3 rounded-xl hover:scale-105 transition-transform duration-200"
@@ -43,17 +43,17 @@ const About = () => {
           </div>
 
           {/* Mission, Vision & Values - Side by Side */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-8 sm:gap-10">
               {/* Mission */}
               <div className="text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 bg-blue-100 rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
+                  <svg className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
-                <p className="text-gray-600 leading-relaxed">
+                <h2 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Our Mission</h2>
+                <p className="text-sm xs:text-base text-gray-600 leading-relaxed">
                   To empower and mobilise young people as holistic changemakers: building leadership skills and opportunities to drive sustainability, community development, and systemic transformation by 2035.
                 </p>
               </div>
@@ -101,9 +101,9 @@ const About = () => {
 
 
           {/* Focus Areas with Interactive Cards */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Our Focus Areas</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Focus Areas</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-8">
               {[
                 { 
                   title: 'Youth Development', 
@@ -170,10 +170,10 @@ const About = () => {
           </div>
 
           {/* Target Group & Impact Stats */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             {/* Target Group */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Target Group</h2>
+            <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-lg border border-gray-200">
+              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Our Target Group</h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -209,9 +209,9 @@ const About = () => {
             </div>
 
             {/* Impact Stats */}
-            <div className="bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl p-8 text-white">
-              <h2 className="text-3xl font-bold mb-6">Our Impact</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
+              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6">Our Impact</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 xs:gap-5 sm:gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">80+</div>
                   <div className="text-emerald-100">Youth Empowered</div>
@@ -247,79 +247,84 @@ const About = () => {
           </div>
 
           {/* Our Approach */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">Our Approach</h2>
-            <p className="text-xl text-gray-600 mb-12 text-center max-w-4xl mx-auto">
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">Our Approach</h2>
+            <p className="text-base xs:text-lg sm:text-xl md:text-xl text-gray-600 mb-8 xs:mb-10 sm:mb-12 text-center max-w-4xl mx-auto px-4 xs:px-6 sm:px-0">
               At SWK, we believe that true sustainability begins with empowered youth. Our approach is grounded in community-driven action, collaborative partnerships, and continuous learning.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-8 sm:gap-10">
               {[
                 {
                   step: '1',
                   title: 'Youth-Centred Engagement',
                   desc: 'We design programmes with and for young people, ensuring their voices shape the future they inherit.',
-                  color: 'emerald',
+                  bgColor: 'bg-emerald-100',
+                  stepColor: 'bg-emerald-600',
                   icon: '👥'
                 },
                 {
                   step: '2',
                   title: 'Community-Based Implementation',
                   desc: 'Our interventions begin at the grassroots, aligning with the needs and aspirations of local communities.',
-                  color: 'blue',
+                  bgColor: 'bg-blue-100',
+                  stepColor: 'bg-blue-600',
                   icon: '🏘️'
                 },
                 {
                   step: '3',
                   title: 'Capacity Building',
                   desc: 'We emphasise skills development, knowledge sharing, and leadership training to build confident and competent change-makers.',
-                  color: 'purple',
+                  bgColor: 'bg-purple-100',
+                  stepColor: 'bg-purple-600',
                   icon: '🎓'
                 },
                 {
                   step: '4',
                   title: 'Systems-Level Advocacy',
                   desc: 'By engaging with MMDAs and national institutions, we influence policy, amplify youth perspectives, and champion systemic change.',
-                  color: 'orange',
+                  bgColor: 'bg-orange-100',
+                  stepColor: 'bg-orange-600',
                   icon: '📢'
                 },
                 {
                   step: '5',
                   title: 'Evidence-Based Impact',
                   desc: 'We evaluate our work rigorously and adapt based on data, stories, and community feedback.',
-                  color: 'green',
+                  bgColor: 'bg-green-100',
+                  stepColor: 'bg-green-600',
                   icon: '📊'
                 }
               ].map((approach, idx) => (
                 <div key={idx} className="text-center group">
-                  <div className={`w-20 h-20 bg-${approach.color}-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-3xl">{approach.icon}</span>
+                  <div className={`w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 ${approach.bgColor} rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <span className="text-2xl xs:text-3xl">{approach.icon}</span>
                   </div>
-                  <div className={`w-12 h-12 bg-${approach.color}-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg`}>
+                  <div className={`w-10 h-10 xs:w-12 xs:h-12 ${approach.stepColor} text-white rounded-full flex items-center justify-center mx-auto mb-3 xs:mb-4 font-bold text-base xs:text-lg`}>
                     {approach.step}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors duration-300">{approach.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{approach.desc}</p>
+                  <h3 className="text-lg xs:text-xl sm:text-xl font-bold text-gray-900 mb-3 xs:mb-4 group-hover:text-emerald-600 transition-colors duration-300">{approach.title}</h3>
+                  <p className="text-sm xs:text-base text-gray-600 leading-relaxed">{approach.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Call to Action */}
-          <div className="bg-gradient-to-r from-emerald-600 to-green-600 rounded-2xl p-12 text-center text-white">
-            <h2 className="text-4xl font-bold mb-4">Ready to Make a Difference?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <div className="bg-gradient-to-r from-emerald-600 to-green-600 rounded-xl xs:rounded-2xl p-6 xs:p-8 sm:p-10 md:p-12 text-center text-white">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 xs:mb-4 sm:mb-5 px-2 xs:px-0">Ready to Make a Difference?</h2>
+            <p className="text-base xs:text-lg sm:text-xl md:text-xl mb-6 xs:mb-8 sm:mb-10 max-w-2xl mx-auto px-4 xs:px-6 sm:px-0">
               Join us in empowering youth and building sustainable communities across Africa.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center px-4 xs:px-6 sm:px-0">
               <button 
                 onClick={() => navigate('/get-involved')}
-                className="bg-white text-emerald-600 font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors duration-200 hover:scale-105 transform"
+                className="bg-white text-emerald-600 font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-gray-100 transition-colors duration-200 hover:scale-105 transform text-sm xs:text-base sm:text-lg"
               >
                 Get Involved Today
               </button>
               <button 
                 onClick={() => navigate('/contact')}
-                className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-white hover:text-emerald-600 transition-all duration-200"
+                className="border-2 border-white text-white font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-white hover:text-emerald-600 transition-all duration-200 text-sm xs:text-base sm:text-lg"
               >
                 Contact Us
               </button>

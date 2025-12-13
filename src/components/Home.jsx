@@ -43,8 +43,8 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       {/* Hero Section */}
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
-        <div className="relative mb-16 rounded-2xl overflow-hidden">
+      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 xs:py-8 sm:py-10 md:py-12">
+        <div className="relative mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20 rounded-xl xs:rounded-2xl overflow-hidden">
           {/* Slides */}
           {slides.map((s, idx) => (
             <img
@@ -53,29 +53,29 @@ const Home = () => {
               srcSet={`${s.image.replace('/upload/', '/upload/w_768/')} 768w, ${s.image.replace('/upload/', '/upload/w_1280/')} 1280w, ${s.image.replace('/upload/', '/upload/w_1920/')} 1920w`}
               sizes="100vw"
               alt={s.title}
-              className={`h-[46vh] sm:h-[56vh] lg:h-[64vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+              className={`h-[40vh] xs:h-[46vh] sm:h-[50vh] md:h-[56vh] lg:h-[60vh] xl:h-[64vh] 2xl:h-[70vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
             />
           ))}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/40 xs:bg-black/50" />
 
           {/* Overlay content */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center px-6 max-w-4xl">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <div className="text-center px-4 xs:px-6 sm:px-8 md:px-10 max-w-4xl xl:max-w-5xl">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
                 {slides[currentSlide].title}
               </h1>
-              <p className="text-lg md:text-xl text-emerald-50 mb-8">
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-emerald-50 mb-6 xs:mb-8 sm:mb-10 px-2 xs:px-0">
                 {slides[currentSlide].subtitle}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 sm:gap-5 justify-center px-4 xs:px-0">
                 <button
-                  className="btn-gradient text-lg px-8 py-3"
+                  className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5"
                   onClick={() => navigate('/get-involved')}
                 >
                   Get Involved
                 </button>
                 <button
-                  className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-3 rounded-xl font-semibold transition-colors"
+                  className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl font-semibold transition-colors text-sm xs:text-base sm:text-lg"
                   onClick={() => navigate('/about')}
                 >
                   Learn More
@@ -101,11 +101,11 @@ const Home = () => {
         </div>
 
         {/* UN SDG Alignment (moved up and redesigned) */}
-        <section className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 mb-16">
+        <section className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">UN SDG Alignment</h2>
-            <p className="text-gray-600 mb-8 text-center max-w-3xl mx-auto">SWK's mission and objectives align with key Sustainable Development Goals that guide our programs and impact.</p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3 sm:mb-4 text-center px-2 xs:px-0">UN SDG Alignment</h2>
+            <p className="text-sm xs:text-base sm:text-lg text-gray-600 mb-6 xs:mb-8 sm:mb-10 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">SWK's mission and objectives align with key Sustainable Development Goals that guide our programs and impact.</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 items-start">
               {/* Image */}
               <div className="order-2 lg:order-1">
                 <div className="overflow-hidden rounded-xl border border-gray-200">
@@ -121,7 +121,7 @@ const Home = () => {
               </div>
               {/* Goals */}
               <div className="order-1 lg:order-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4 sm:gap-5">
                   {[
                     { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
                     { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
@@ -132,11 +132,11 @@ const Home = () => {
                     { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
                     { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
                   ].map((g, i) => (
-                    <div key={i} className={`flex items-center gap-4 rounded-xl border ${g.color} p-4`}>
-                      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-white shadow-inner border">
-                        <span className="font-bold text-lg">{g.n}</span>
+                    <div key={i} className={`flex items-center gap-2 xs:gap-3 sm:gap-4 rounded-lg xs:rounded-xl border ${g.color} p-3 xs:p-4 sm:p-5`}>
+                      <div className="flex items-center justify-center h-10 w-10 xs:h-12 xs:w-12 sm:h-14 sm:w-14 rounded-lg bg-white shadow-inner border flex-shrink-0">
+                        <span className="font-bold text-base xs:text-lg sm:text-xl">{g.n}</span>
                       </div>
-                      <div className="font-medium">{g.title}</div>
+                      <div className="font-medium text-xs xs:text-sm sm:text-base">{g.title}</div>
                     </div>
                   ))}
                 </div>
@@ -146,42 +146,42 @@ const Home = () => {
         </section>
 
         {/* Our Projects & Impact - Compact Version */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Projects & Impact</h2>
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Projects & Impact</h2>
           
           {/* Impact Statistics */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center mb-8">
-            <div className="bg-emerald-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">80+</div>
-              <div className="text-sm text-gray-600">Youth empowered</div>
+          <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 text-center mb-6 xs:mb-8 sm:mb-10">
+            <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">80+</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Youth empowered</div>
             </div>
-            <div className="bg-blue-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-blue-700 mb-1">30</div>
-              <div className="text-sm text-gray-600">Women empowered</div>
+            <div className="bg-blue-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-1">30</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Women empowered</div>
             </div>
-            <div className="bg-green-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-green-700 mb-1">0</div>
-              <div className="text-sm text-gray-600">Trees planted</div>
+            <div className="bg-green-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-green-700 mb-1">0</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Trees planted</div>
             </div>
-            <div className="bg-emerald-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-emerald-700 mb-1">0</div>
-              <div className="text-sm text-gray-600">Green jobs created</div>
+            <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">0</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Green jobs created</div>
             </div>
-            <div className="bg-orange-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-orange-700 mb-1">0</div>
-              <div className="text-sm text-gray-600">Tonnes compost produced</div>
+            <div className="bg-orange-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-orange-700 mb-1">0</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Tonnes compost produced</div>
             </div>
-            <div className="bg-purple-50 rounded-lg p-4">
-              <div className="text-2xl md:text-3xl font-bold text-purple-700 mb-1">0</div>
-              <div className="text-sm text-gray-600">Tonnes plastics processed</div>
+            <div className="bg-purple-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-1">0</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Tonnes plastics processed</div>
             </div>
           </div>
 
           {/* Project Highlights - Compact Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6 md:gap-8">
             {/* Agribusiness Webinar */}
-            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border border-emerald-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
+            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow">
+              <div className="mb-3 xs:mb-4">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png"
                   alt="Agribusiness Webinar"
@@ -189,8 +189,8 @@ const Home = () => {
                   loading="lazy"
                 />
               </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Agribusiness Webinar</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <h4 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-900 mb-2">Agribusiness Webinar</h4>
+              <p className="text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed">
                 Comprehensive webinar series on agriculture as a business for youth empowerment.
               </p>
             </div>
@@ -300,22 +300,22 @@ const Home = () => {
         </div>
 
         {/* Our Focus Areas (using Programs & Initiatives with images) */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Focus Areas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Focus Areas</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
+            <div className="bg-white rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="mb-3 xs:mb-4 overflow-hidden rounded-md">
                 <img
                   src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Youth_Development_j10oja.png"
                   srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339246/Youth_Development_j10oja.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339246/Youth_Development_j10oja.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339246/Youth_Development_j10oja.png 1280w"
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   alt="Youth Development Programs"
-                  className="w-full h-40 object-cover"
+                  className="w-full h-32 xs:h-36 sm:h-40 md:h-44 object-cover"
                   loading="lazy"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Youth Development Programs</h3>
-              <p className="text-gray-600">Leadership workshops, skills training, and mentorship for youth change-makers.</p>
+              <h3 className="text-lg xs:text-xl sm:text-xl font-semibold text-gray-900 mb-2">Youth Development Programs</h3>
+              <p className="text-sm xs:text-base text-gray-600 leading-relaxed">Leadership workshops, skills training, and mentorship for youth change-makers.</p>
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -397,23 +397,23 @@ const Home = () => {
 
 
         {/* FAQs */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">FAQs</h2>
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">FAQs</h2>
           <Faqs />
         </div>
 
         
 
         {/* Testimonials carousel (simple) */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">What People Say</h2>
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6 sm:mb-8 text-center px-2 xs:px-0">What People Say</h2>
           <Testimonials />
         </div>
 
         {/* Partners strip (moved to last section before footer) */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Partners & Supporters</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 items-center">
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6 sm:mb-8 text-center px-2 xs:px-0">Partners & Supporters</h2>
+          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 xs:gap-5 sm:gap-6 md:gap-8 items-center">
             {[
               'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+1',
               'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+2',
@@ -427,38 +427,38 @@ const Home = () => {
         </div>
 
         {/* Newsletter */}
-        <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">Newsletter</h2>
-          <p className="text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up for updates to receive news delivered directly to your inbox.</p>
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 xs:mb-4 sm:mb-5 text-center px-2 xs:px-0">Newsletter</h2>
+          <p className="text-sm xs:text-base sm:text-lg text-gray-600 mb-4 xs:mb-6 sm:mb-8 text-center max-w-2xl mx-auto px-4 xs:px-6 sm:px-0">Sign up for updates to receive news delivered directly to your inbox.</p>
           <form
-            className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3"
+            className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3 xs:gap-4 px-4 xs:px-6 sm:px-0"
             onSubmit={(e) => { e.preventDefault() }}
           >
             <input
               type="email"
               required
               placeholder="your.email@example.com"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="flex-1 px-3 xs:px-4 sm:px-5 py-2.5 xs:py-3 sm:py-3.5 text-sm xs:text-base border border-gray-300 rounded-lg xs:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             />
-            <button type="submit" className="btn-gradient px-6 py-3 rounded-xl">Subscribe</button>
+            <button type="submit" className="btn-gradient px-5 xs:px-6 sm:px-8 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl text-sm xs:text-base">Subscribe</button>
           </form>
         </div>
 
         {/* Call to Action */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Join the Movement</h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        <div className="text-center px-4 xs:px-6 sm:px-0">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 xs:mb-4 sm:mb-5">Join the Movement</h2>
+          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-600 mb-6 xs:mb-8 sm:mb-10 max-w-2xl mx-auto">
             Together, we can empower young people, transform communities, and protect our planet.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 sm:gap-5 justify-center">
             <button
-              className="btn-gradient text-lg px-8 py-3"
+              className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5"
               onClick={() => setIsVolunteerOpen(true)}
             >
               Volunteer Today
             </button>
             <button
-              className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-3 rounded-xl font-semibold transition-colors"
+              className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl font-semibold transition-colors text-sm xs:text-base sm:text-lg"
               onClick={() => setIsPartnerOpen(true)}
             >
               Partner With Us
@@ -469,9 +469,9 @@ const Home = () => {
 
       {/* Volunteer Modal */}
       {isVolunteerOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
           <div className="absolute inset-0 bg-black/50" onClick={() => setIsVolunteerOpen(false)} />
-          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-4 p-6" tabIndex={-1}>
+          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Volunteer Sign-Up</h3>
               <button
@@ -520,9 +520,9 @@ const Home = () => {
 
       {/* Partner Modal */}
       {isPartnerOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
           <div className="absolute inset-0 bg-black/50" onClick={() => setIsPartnerOpen(false)} />
-          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-4 p-6" tabIndex={-1}>
+          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Partnership Inquiry</h3>
               <button
@@ -586,19 +586,19 @@ const Faqs = () => {
     }
   ]
   return (
-    <div className="max-w-3xl mx-auto divide-y divide-gray-200">
+    <div className="max-w-3xl mx-auto divide-y divide-gray-200 px-2 xs:px-4 sm:px-0">
       {items.map((item, idx) => (
-        <div key={idx} className="py-4">
+        <div key={idx} className="py-3 xs:py-4 sm:py-5">
           <button
-            className="w-full text-left flex items-center justify-between gap-4"
+            className="w-full text-left flex items-center justify-between gap-3 xs:gap-4"
             onClick={() => toggle(idx)}
             aria-expanded={open === idx}
           >
-            <span className="font-semibold text-gray-900">{item.q}</span>
-            <span className="text-gray-500">{open === idx ? '−' : '+'}</span>
+            <span className="font-semibold text-sm xs:text-base sm:text-lg text-gray-900 pr-2">{item.q}</span>
+            <span className="text-gray-500 text-lg xs:text-xl sm:text-2xl flex-shrink-0">{open === idx ? '−' : '+'}</span>
           </button>
           {open === idx && (
-            <p className="mt-2 text-gray-600">{item.a}</p>
+            <p className="mt-2 xs:mt-3 text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed">{item.a}</p>
           )}
         </div>
       ))}
@@ -630,10 +630,10 @@ const Testimonials = () => {
   }, [items.length])
   const item = items[idx]
   return (
-    <div className="max-w-3xl mx-auto text-center">
-      <blockquote className="text-lg text-gray-700 bg-emerald-50/60 border border-emerald-100 rounded-xl p-6 mb-3">“{item.text}”</blockquote>
-      <div className="text-sm font-semibold text-gray-900">— {item.name}</div>
-      <div className="mt-3 flex items-center justify-center gap-2" role="tablist" aria-label="Testimonials">
+    <div className="max-w-3xl mx-auto text-center px-4 xs:px-6 sm:px-0">
+      <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-700 bg-emerald-50/60 border border-emerald-100 rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 md:p-8 mb-3 xs:mb-4 sm:mb-5">"{item.text}"</blockquote>
+      <div className="text-xs xs:text-sm sm:text-base font-semibold text-gray-900">— {item.name}</div>
+      <div className="mt-3 xs:mt-4 sm:mt-5 flex items-center justify-center gap-2" role="tablist" aria-label="Testimonials">
         {items.map((_, i) => (
           <button
             key={i}

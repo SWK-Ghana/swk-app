@@ -32,32 +32,32 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <nav className="mx-auto max-w-7xl px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="flex h-14 xs:h-16 sm:h-18 md:h-20 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group active:opacity-90" aria-label={logoAlt}>
+          <Link to="/" className="flex items-center gap-2 xs:gap-3 group active:opacity-90" aria-label={logoAlt}>
             <img
               src={logoSrc}
               alt={logoAlt}
-              className="h-12 md:h-14 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-10 xs:h-12 sm:h-13 md:h-14 lg:h-16 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
             />
             <span className="sr-only">{logoAlt}</span>
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center space-x-8">
+          <ul className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-8">
             {desktopLinks}
           </ul>
 
-          {/* Mobile Menu Toggle */}
+          {/* Tablet Menu Toggle */}
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 active:scale-95 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
+            className="lg:hidden inline-flex items-center justify-center p-1.5 xs:p-2 sm:p-2.5 rounded-lg xs:rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 active:scale-95 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60"
             aria-expanded={open}
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
           >
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -78,15 +78,15 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
           </button>
         </div>
 
-          {/* Mobile Menu */}
-        <div className={`md:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
-          <ul className="py-3 space-y-1 border-t border-gray-100">
+          {/* Mobile/Tablet Menu */}
+        <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[600px]" : "max-h-0"}`}>
+          <ul className="py-2 xs:py-3 sm:py-4 space-y-1 xs:space-y-1.5 border-t border-gray-100">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 {link.cta ? (
                   <Link
                     to={link.href}
-                    className="btn-gradient block w-full text-center active:opacity-95"
+                    className="btn-gradient block w-full text-center active:opacity-95 text-sm xs:text-base sm:text-base py-2 xs:py-2.5 sm:py-3 mx-1 xs:mx-2"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
@@ -94,7 +94,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                 ) : (
                   <Link
                     to={link.href}
-                    className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition active:scale-[0.99] ${
+                    className={`flex items-center justify-between px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5 sm:py-3 rounded-lg text-sm xs:text-base sm:text-base font-medium transition active:scale-[0.99] ${
                       isActive(link.href)
                         ? "text-emerald-700 bg-emerald-50"
                         : "text-gray-700 hover:bg-gray-50"
@@ -122,7 +122,7 @@ const NavItem = ({ label, href, active, cta }) => {
       <li>
         <Link
           to={href}
-          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105"
+          className="inline-flex items-center justify-center px-3 xl:px-4 py-1.5 xl:py-2 rounded-lg xl:rounded-xl text-xs xl:text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105 transition-transform active:scale-95"
         >
           {label}
         </Link>
@@ -134,11 +134,11 @@ const NavItem = ({ label, href, active, cta }) => {
       <Link
         to={href}
         aria-current={active ? "page" : undefined}
-        className={`group relative px-1.5 py-2 text-sm font-medium transition-colors ${
+        className={`group relative px-1.5 xl:px-2 py-1.5 xl:py-2 text-xs xl:text-sm font-medium transition-colors ${
           active ? "text-emerald-700" : "text-gray-700 hover:text-emerald-700"
         }`}
       >
-        <span className="inline-flex items-center gap-1.5">
+        <span className="inline-flex items-center gap-1 xs:gap-1.5">
           {label}
           {active && <span className="sr-only">(current)</span>}
         </span>
