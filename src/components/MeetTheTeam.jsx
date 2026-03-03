@@ -60,6 +60,18 @@ const teamMembers = [
       twitter: 'https://twitter.com/jessicaasamoah',
       email: 'mailto:jessica@swkghana.org'
     }
+  },
+  { 
+    name: 'Musah Hidir', 
+    role: 'Finance Officer & Climate Action Lead', 
+    initials: 'MH',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1772549398/IMG_9111_o3yibq.jpg',
+    imagePosition: 'object-center',
+    social: {
+      linkedin: '',
+      twitter: '',
+      email: 'mailto:info@swkghana.org'
+    }
   }
 ]
 

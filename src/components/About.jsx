@@ -84,10 +84,10 @@ const About = () => {
                   {[
                     { name: 'Youth Leadership', icon: '👥' },
                     { name: 'Sustainability', icon: '🌱' },
-                    { name: 'Integrity', icon: '✅' },
-                    { name: 'Collaboration', icon: '🤝' },
                     { name: 'Innovation', icon: '💡' },
-                    { name: 'Equity', icon: '⚖️' }
+                    { name: 'Collaboration', icon: '🤝' },
+                    { name: 'Equity', icon: '⚖️' },
+                    { name: 'Integrity', icon: '✅' }
                   ].map((value, idx) => (
                     <div key={idx} className="flex items-center justify-center gap-2 text-sm text-gray-600">
                       <span className="text-lg">{value.icon}</span>
@@ -211,30 +211,14 @@ const About = () => {
             {/* Impact Stats */}
             <div className="bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
               <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6">Our Impact</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 xs:gap-5 sm:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">80+</div>
-                  <div className="text-emerald-100">Youth Empowered</div>
+                  <div className="text-4xl font-bold mb-2">236</div>
+                  <div className="text-emerald-100">Youth empowered</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">30</div>
-                  <div className="text-emerald-100">Women Empowered</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">0</div>
-                  <div className="text-emerald-100">Trees Planted</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">0</div>
-                  <div className="text-emerald-100">Green Jobs Created</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">0</div>
-                  <div className="text-emerald-100">Tonnes Compost Produced</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">0</div>
-                  <div className="text-emerald-100">Tonnes Plastics Processed</div>
+                  <div className="text-4xl font-bold mb-2">72</div>
+                  <div className="text-emerald-100">Women impacted</div>
                 </div>
               </div>
               <button 
