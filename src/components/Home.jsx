@@ -152,28 +152,12 @@ const Home = () => {
           {/* Impact Statistics */}
           <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 text-center mb-6 xs:mb-8 sm:mb-10">
             <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">80+</div>
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">236</div>
               <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Youth empowered</div>
             </div>
             <div className="bg-blue-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-1">30</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Women empowered</div>
-            </div>
-            <div className="bg-green-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-green-700 mb-1">0</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Trees planted</div>
-            </div>
-            <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">0</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Green jobs created</div>
-            </div>
-            <div className="bg-orange-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-orange-700 mb-1">0</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Tonnes compost produced</div>
-            </div>
-            <div className="bg-purple-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-1">0</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Tonnes plastics processed</div>
+              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-1">72</div>
+              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Women impacted</div>
             </div>
           </div>
 
