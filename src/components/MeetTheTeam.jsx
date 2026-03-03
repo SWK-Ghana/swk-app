@@ -8,9 +8,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618900/Gemini_Generated_Image_kon0jtkon0jtkon0_2_wreiep.png',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/frank-koomson',
-      twitter: 'https://twitter.com/frankkoomson',
-      email: 'mailto:frank@swkghana.org'
+      linkedin: 'http://linkedin.com/in/frank-koomson-%F0%9F%87%AC%F0%9F%87%AD-b227901ba',
+      email: 'mailto:frank.koomson@localpathways.org'
     }
   },
   { 
@@ -20,9 +19,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618901/WhatsApp_Image_2025-09-20_at_08.56.03_23333094_xrg9kn.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/ben-brown',
-      twitter: 'https://twitter.com/benbrown',
-      email: 'mailto:ben@swkghana.org'
+      linkedin: 'http://linkedin.com/in/thebenbrown',
+      email: 'mailto:browntheben@gmail.com'
     }
   },
   { 
@@ -32,9 +30,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_500,h_500,f_auto,q_auto/v1762719821/Gemini_Generated_Image_xp3ul4xp3ul4xp3u_et6wsu.png',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/doreen-baidoo',
-      twitter: 'https://twitter.com/doreenbaidoo',
-      email: 'mailto:doreen@swkghana.org'
+      linkedin: 'http://linkedin.com/in/doreenlawuratubaidoo',
+      email: 'mailto:lawuratubaidoo@gmail.com'
     }
   },
   { 
@@ -44,9 +41,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760619065/WhatsApp_Image_2025-08-26_at_10.52.02_3ec2d7b6_uhih1r.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/ernestina-gyamfi',
-      twitter: 'https://twitter.com/ernestinagyamfi',
-      email: 'mailto:ernestina@swkghana.org'
+      linkedin: 'http://linkedin.com/in/ernestinagyamfi',
+      email: 'mailto:ernestinag215@gmail.com'
     }
   },
   { 
@@ -56,9 +52,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1762633599/WhatsApp_Image_2025-10-25_at_13.36.50_981a330d_fwjdgb.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'https://linkedin.com/in/jessica-asamoah',
-      twitter: 'https://twitter.com/jessicaasamoah',
-      email: 'mailto:jessica@swkghana.org'
+      linkedin: 'http://linkedin.com/in/jessica-awuradjoa-asamoah',
+      email: 'mailto:jessicaasamoah903@gmail.com'
     }
   },
   { 
@@ -68,9 +63,8 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1772549398/IMG_9111_o3yibq.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: '',
-      twitter: '',
-      email: 'mailto:info@swkghana.org'
+      linkedin: 'http://linkedin.com/in/musah-hidir',
+      email: 'mailto:musahmohammad00@gmail.com'
     }
   }
 ]
@@ -113,7 +107,7 @@ const MeetTheTeam = () => {
                   <p className="text-xs xs:text-sm sm:text-sm text-gray-600">{member.role}</p>
                 </div>
 
-                {/* Social Media Icons */}
+                {/* Social Media Icons (LinkedIn & Email only) */}
                 <div className="flex justify-center space-x-3">
                   {member.social.linkedin && (
                     <a
@@ -125,20 +119,6 @@ const MeetTheTeam = () => {
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                    </a>
-                  )}
-                  
-                  {member.social.twitter && (
-                    <a
-                      href={member.social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors duration-200"
-                      aria-label={`${member.name} Twitter`}
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                       </svg>
                     </a>
                   )}
