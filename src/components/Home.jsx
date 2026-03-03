@@ -220,6 +220,12 @@ const Home = () => {
             {/* Taka Kipawa App */}
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100 hover:shadow-md transition-shadow">
               <div className="mb-4">
+                <img
+                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552758/Taka_Kipawa_2_wdxkpo.jpg"
+                  alt="Taka Kipawa App video thumbnail"
+                  className="w-full rounded-lg shadow-sm object-cover mb-3"
+                  loading="lazy"
+                />
                 <video
                   controls
                   className="w-full rounded-lg shadow-sm"
@@ -236,6 +242,12 @@ const Home = () => {
             {/* Circular Economy Innovation */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100 hover:shadow-md transition-shadow">
               <div className="mb-4">
+                <img
+                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760551740/1711018812883_mbddbv.jpg"
+                  alt="Circular Economy Innovation video thumbnail"
+                  className="w-full rounded-lg shadow-sm object-cover mb-3"
+                  loading="lazy"
+                />
                 <video
                   controls
                   className="w-full rounded-lg shadow-sm"
@@ -252,6 +264,12 @@ const Home = () => {
             {/* Climate Action */}
             <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 border border-orange-100 hover:shadow-md transition-shadow">
               <div className="mb-4">
+                <img
+                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552757/Galamsey_1_iyyc25.jpg"
+                  alt="Climate Action video thumbnail"
+                  className="w-full rounded-lg shadow-sm object-cover mb-3"
+                  loading="lazy"
+                />
                 <video
                   controls
                   className="w-full rounded-lg shadow-sm"
@@ -268,6 +286,12 @@ const Home = () => {
             {/* Fight Against Galamsey */}
             <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-100 hover:shadow-md transition-shadow">
               <div className="mb-4">
+                <img
+                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760554407/1727031150424_dx6ece.jpg"
+                  alt="Fight Against Galamsey video thumbnail"
+                  className="w-full rounded-lg shadow-sm object-cover mb-3"
+                  loading="lazy"
+                />
                 <video
                   controls
                   className="w-full rounded-lg shadow-sm"
