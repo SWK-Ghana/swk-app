@@ -5,6 +5,12 @@ const Home = () => {
   const navigate = useNavigate()
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false)
   const [isPartnerOpen, setIsPartnerOpen] = useState(false)
+  const [volunteerFullName, setVolunteerFullName] = useState('')
+  const [volunteerAge, setVolunteerAge] = useState('')
+  const [volunteerEmail, setVolunteerEmail] = useState('')
+  const [volunteerMotivation, setVolunteerMotivation] = useState('')
+  const [volunteerDocLink, setVolunteerDocLink] = useState('')
+  const [volunteerDocFile, setVolunteerDocFile] = useState(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const slides = useMemo(() => ([
     {
@@ -40,6 +46,40 @@ const Home = () => {
       window.removeEventListener('keydown', onKey)
     }
   }, [slides.length])
+
+  const openVolunteerEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const subject = `Volunteer Application - ${volunteerFullName || 'SWK Website'}`
+    const body = [
+      'Volunteer Application (via SWK website)',
+      '',
+      `Full name: ${volunteerFullName}`,
+      `Age: ${volunteerAge}`,
+      `Email: ${volunteerEmail}`,
+      '',
+      'Motivation:',
+      volunteerMotivation,
+      '',
+      `Document link (optional): ${volunteerDocLink || 'N/A'}`,
+      `Selected file (optional): ${volunteerDocFile?.name || 'N/A'}`,
+      '',
+      volunteerDocFile
+        ? 'Note: If you selected a file, please attach it to this email before sending (websites cannot auto-attach files to your email).'
+        : 'Note: You can attach your CV/resume directly in this email, or include a link above.',
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
+  const resetVolunteerForm = () => {
+    setVolunteerFullName('')
+    setVolunteerAge('')
+    setVolunteerEmail('')
+    setVolunteerMotivation('')
+    setVolunteerDocLink('')
+    setVolunteerDocFile(null)
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       {/* Hero Section */}
@@ -490,36 +530,103 @@ const Home = () => {
                 ✕
               </button>
             </div>
-            <form className="space-y-4">
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault()
+                openVolunteerEmail()
+                resetVolunteerForm()
+                setIsVolunteerOpen(false)
+              }}
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                <input
+                  required
+                  type="text"
+                  value={volunteerFullName}
+                  onChange={(e) => setVolunteerFullName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Your full name"
+                />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                  <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                  <input
+                    required
+                    type="number"
+                    min={10}
+                    max={120}
+                    value={volunteerAge}
+                    onChange={(e) => setVolunteerAge(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="e.g. 24"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                  <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    required
+                    type="email"
+                    value={volunteerEmail}
+                    onChange={(e) => setVolunteerEmail(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="your.email@example.com"
+                  />
                 </div>
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input required type="email" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation to volunteer</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={volunteerMotivation}
+                  onChange={(e) => setVolunteerMotivation(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Tell us why you want to volunteer with SWK…"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Availability</label>
-                <select className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
-                  <option>Weekdays</option>
-                  <option>Weekends</option>
-                  <option>Evenings</option>
-                </select>
+
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                    onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Or paste a document link (optional)</label>
+                  <input
+                    type="url"
+                    value={volunteerDocLink}
+                    onChange={(e) => setVolunteerDocLink(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="https://drive.google.com/…"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  When you submit, your email app will open addressed to us. If you selected a file, please attach it in the email before sending.
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Interests</label>
-                <textarea rows={3} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Tell us how you'd like to help" />
-              </div>
+
               <div className="flex justify-end gap-3 pt-2">
-                <button type="button" className="px-4 py-2 rounded-lg border" onClick={() => setIsVolunteerOpen(false)}>Cancel</button>
-                <button type="submit" className="btn-gradient px-5 py-2">Submit</button>
+                <button
+                  type="button"
+                  className="px-4 py-2 rounded-lg border"
+                  onClick={() => {
+                    resetVolunteerForm()
+                    setIsVolunteerOpen(false)
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn-gradient px-5 py-2">Send</button>
               </div>
             </form>
           </div>

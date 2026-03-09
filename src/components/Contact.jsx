@@ -1,6 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Contact = () => {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+
+  const openContactEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const mailSubject = subject?.trim() ? `SWK Website: ${subject.trim()}` : 'SWK Website: Get in Touch'
+    const body = [
+      'Message sent via SWK website (Contact page)',
+      '',
+      `Name: ${`${firstName} ${lastName}`.trim()}`,
+      `Email: ${email}`,
+      '',
+      'Message:',
+      message,
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
@@ -94,7 +117,18 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200">
               <h2 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Send us a Message</h2>
-              <form className="space-y-4 xs:space-y-5 sm:space-y-6">
+              <form
+                className="space-y-4 xs:space-y-5 sm:space-y-6"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  openContactEmail()
+                  setFirstName('')
+                  setLastName('')
+                  setEmail('')
+                  setSubject('')
+                  setMessage('')
+                }}
+              >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-5">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -103,6 +137,9 @@ const Contact = () => {
                     <input
                       type="text"
                       id="firstName"
+                      required
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                       placeholder="Your first name"
                     />
@@ -114,6 +151,9 @@ const Contact = () => {
                     <input
                       type="text"
                       id="lastName"
+                      required
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                       placeholder="Your last name"
                     />
@@ -127,6 +167,9 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     placeholder="your.email@example.com"
                   />
@@ -139,6 +182,8 @@ const Contact = () => {
                   <input
                     type="text"
                     id="subject"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     placeholder="What's this about?"
                   />
@@ -151,6 +196,9 @@ const Contact = () => {
                   <textarea
                     id="message"
                     rows={4}
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     placeholder="Tell us how we can help you..."
                   ></textarea>

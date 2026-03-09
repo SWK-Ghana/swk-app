@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const GetInvolved = () => {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  const openGetInTouchEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const subject = 'SWK Website: Get in Touch'
+    const body = [
+      'Message sent via SWK website (Get Involved page)',
+      '',
+      `Name: ${`${firstName} ${lastName}`.trim()}`,
+      `Email: ${email}`,
+      '',
+      'Message:',
+      message,
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
@@ -98,7 +120,17 @@ const GetInvolved = () => {
             <p className="text-sm xs:text-base text-gray-600 mb-6 xs:mb-8 text-center px-4 xs:px-6 sm:px-0">
               Have questions or want to learn more about how you can get involved? We'd love to hear from you!
             </p>
-            <form className="max-w-2xl mx-auto">
+            <form
+              className="max-w-2xl mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault()
+                openGetInTouchEmail()
+                setFirstName('')
+                setLastName('')
+                setEmail('')
+                setMessage('')
+              }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -107,6 +139,9 @@ const GetInvolved = () => {
                   <input
                     type="text"
                     id="firstName"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     placeholder="Your first name"
                   />
@@ -118,6 +153,9 @@ const GetInvolved = () => {
                   <input
                     type="text"
                     id="lastName"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                     placeholder="Your last name"
                   />
@@ -130,6 +168,9 @@ const GetInvolved = () => {
                 <input
                   type="email"
                   id="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="your.email@example.com"
                 />
@@ -141,6 +182,9 @@ const GetInvolved = () => {
                 <textarea
                   id="message"
                   rows={4}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="Tell us how you'd like to get involved..."
                 ></textarea>
