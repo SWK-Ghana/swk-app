@@ -1,10 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const GetInvolved = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  const [isVolunteerOpen, setIsVolunteerOpen] = useState(false)
+  const [isDonateOpen, setIsDonateOpen] = useState(false)
+  const [isPartnerOpen, setIsPartnerOpen] = useState(false)
+
+  const [volunteerFullName, setVolunteerFullName] = useState('')
+  const [volunteerAge, setVolunteerAge] = useState('')
+  const [volunteerEmail, setVolunteerEmail] = useState('')
+  const [volunteerMotivation, setVolunteerMotivation] = useState('')
+  const [volunteerDocLink, setVolunteerDocLink] = useState('')
+  const [volunteerDocFile, setVolunteerDocFile] = useState(null)
+
+  const [donorFullName, setDonorFullName] = useState('')
+  const [donorEmail, setDonorEmail] = useState('')
+  const [donationAmount, setDonationAmount] = useState('')
+  const [donationCurrency, setDonationCurrency] = useState('GHS')
+  const [donationMessage, setDonationMessage] = useState('')
+
+  const [partnerOrgName, setPartnerOrgName] = useState('')
+  const [partnerContactName, setPartnerContactName] = useState('')
+  const [partnerEmail, setPartnerEmail] = useState('')
+  const [partnerMessage, setPartnerMessage] = useState('')
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setIsVolunteerOpen(false)
+        setIsDonateOpen(false)
+        setIsPartnerOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const openGetInTouchEmail = () => {
     const to = 'sustainabilitywithkoomson@gmail.com'
@@ -21,6 +55,91 @@ const GetInvolved = () => {
 
     const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     window.location.href = mailto
+  }
+
+  const openVolunteerEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const subject = `Volunteer Application - ${volunteerFullName || 'SWK Website'}`
+    const body = [
+      'Volunteer Application (via SWK website)',
+      '',
+      `Full name: ${volunteerFullName}`,
+      `Age: ${volunteerAge}`,
+      `Email: ${volunteerEmail}`,
+      '',
+      'Motivation:',
+      volunteerMotivation,
+      '',
+      `Document link (optional): ${volunteerDocLink || 'N/A'}`,
+      `Selected file (optional): ${volunteerDocFile?.name || 'N/A'}`,
+      '',
+      volunteerDocFile
+        ? 'Note: If you selected a file, please attach it to this email before sending (websites cannot auto-attach files to your email).'
+        : 'Note: You can attach your CV/resume directly in this email, or include a link above.',
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
+  const openDonationEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const subject = `Donation - ${donorFullName || 'SWK Website'}`
+    const body = [
+      'Donation Interest (via SWK website)',
+      '',
+      `Name: ${donorFullName}`,
+      `Email: ${donorEmail}`,
+      `Amount (optional): ${donationAmount ? `${donationAmount} ${donationCurrency}` : 'N/A'}`,
+      '',
+      'Message:',
+      donationMessage || 'N/A',
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
+  const openPartnerEmail = () => {
+    const to = 'sustainabilitywithkoomson@gmail.com'
+    const subject = `Partnership - ${partnerOrgName || partnerContactName || 'SWK Website'}`
+    const body = [
+      'Partnership Inquiry (via SWK website)',
+      '',
+      `Organization: ${partnerOrgName}`,
+      `Contact name: ${partnerContactName}`,
+      `Email: ${partnerEmail}`,
+      '',
+      'How would you like to partner?',
+      partnerMessage,
+    ].join('\n')
+
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailto
+  }
+
+  const resetVolunteerForm = () => {
+    setVolunteerFullName('')
+    setVolunteerAge('')
+    setVolunteerEmail('')
+    setVolunteerMotivation('')
+    setVolunteerDocLink('')
+    setVolunteerDocFile(null)
+  }
+
+  const resetDonateForm = () => {
+    setDonorFullName('')
+    setDonorEmail('')
+    setDonationAmount('')
+    setDonationCurrency('GHS')
+    setDonationMessage('')
+  }
+
+  const resetPartnerForm = () => {
+    setPartnerOrgName('')
+    setPartnerContactName('')
+    setPartnerEmail('')
+    setPartnerMessage('')
   }
 
   return (
@@ -47,7 +166,7 @@ const GetInvolved = () => {
               <p className="text-sm xs:text-base text-gray-600 mb-5 xs:mb-6 leading-relaxed">
                 Give your time and skills to support our community initiatives and make a direct impact.
               </p>
-              <button className="btn-gradient w-full">
+              <button type="button" className="btn-gradient w-full" onClick={() => setIsVolunteerOpen(true)}>
                 Become a Volunteer
               </button>
             </div>
@@ -63,7 +182,7 @@ const GetInvolved = () => {
               <p className="text-gray-600 mb-6">
                 Support our mission financially and help us expand our programs and reach more people.
               </p>
-              <button className="btn-gradient w-full">
+              <button type="button" className="btn-gradient w-full" onClick={() => setIsDonateOpen(true)}>
                 Make a Donation
               </button>
             </div>
@@ -79,7 +198,7 @@ const GetInvolved = () => {
               <p className="text-gray-600 mb-6">
                 Collaborate with us as an organization or business to create meaningful partnerships.
               </p>
-              <button className="btn-gradient w-full">
+              <button type="button" className="btn-gradient w-full" onClick={() => setIsPartnerOpen(true)}>
                 Become a Partner
               </button>
             </div>
@@ -196,6 +315,323 @@ const GetInvolved = () => {
           </div>
         </div>
       </div>
+
+      {/* Volunteer Modal */}
+      {isVolunteerOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsVolunteerOpen(false)} />
+          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-gray-900">Volunteer With Us</h3>
+              <button
+                aria-label="Close"
+                className="text-gray-500 hover:text-gray-700"
+                onClick={() => setIsVolunteerOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault()
+                openVolunteerEmail()
+                resetVolunteerForm()
+                setIsVolunteerOpen(false)
+              }}
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                <input
+                  required
+                  type="text"
+                  value={volunteerFullName}
+                  onChange={(e) => setVolunteerFullName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                  <input
+                    required
+                    type="number"
+                    min={10}
+                    max={120}
+                    value={volunteerAge}
+                    onChange={(e) => setVolunteerAge(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="e.g. 24"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    required
+                    type="email"
+                    value={volunteerEmail}
+                    onChange={(e) => setVolunteerEmail(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation to volunteer</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={volunteerMotivation}
+                  onChange={(e) => setVolunteerMotivation(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Tell us why you want to volunteer with SWK…"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                    onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Or paste a document link (optional)</label>
+                  <input
+                    type="url"
+                    value={volunteerDocLink}
+                    onChange={(e) => setVolunteerDocLink(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="https://drive.google.com/…"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  When you submit, your email app will open addressed to us. If you selected a file, please attach it in the email before sending.
+                </p>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  className="px-4 py-2 rounded-lg border"
+                  onClick={() => {
+                    resetVolunteerForm()
+                    setIsVolunteerOpen(false)
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn-gradient px-5 py-2">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Donation Modal */}
+      {isDonateOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsDonateOpen(false)} />
+          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-gray-900">Donate</h3>
+              <button
+                aria-label="Close"
+                className="text-gray-500 hover:text-gray-700"
+                onClick={() => setIsDonateOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault()
+                openDonationEmail()
+                resetDonateForm()
+                setIsDonateOpen(false)
+              }}
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                <input
+                  required
+                  type="text"
+                  value={donorFullName}
+                  onChange={(e) => setDonorFullName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input
+                  required
+                  type="email"
+                  value={donorEmail}
+                  onChange={(e) => setDonorEmail(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Amount (optional)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    step="0.01"
+                    value={donationAmount}
+                    onChange={(e) => setDonationAmount(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="e.g. 200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                  <select
+                    value={donationCurrency}
+                    onChange={(e) => setDonationCurrency(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                  >
+                    <option value="GHS">GHS</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Message (optional)</label>
+                <textarea
+                  rows={4}
+                  value={donationMessage}
+                  onChange={(e) => setDonationMessage(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Any notes for us (preferred payment method, purpose, etc.)"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  className="px-4 py-2 rounded-lg border"
+                  onClick={() => {
+                    resetDonateForm()
+                    setIsDonateOpen(false)
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn-gradient px-5 py-2">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Partner Modal */}
+      {isPartnerOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsPartnerOpen(false)} />
+          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-gray-900">Partner With Us</h3>
+              <button
+                aria-label="Close"
+                className="text-gray-500 hover:text-gray-700"
+                onClick={() => setIsPartnerOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault()
+                openPartnerEmail()
+                resetPartnerForm()
+                setIsPartnerOpen(false)
+              }}
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Organization name</label>
+                <input
+                  required
+                  type="text"
+                  value={partnerOrgName}
+                  onChange={(e) => setPartnerOrgName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Your organization"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact name</label>
+                  <input
+                    required
+                    type="text"
+                    value={partnerContactName}
+                    onChange={(e) => setPartnerContactName(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    required
+                    type="email"
+                    value={partnerEmail}
+                    onChange={(e) => setPartnerEmail(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">How would you like to partner?</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={partnerMessage}
+                  onChange={(e) => setPartnerMessage(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  placeholder="Tell us what partnership you have in mind…"
+                />
+              </div>
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  className="px-4 py-2 rounded-lg border"
+                  onClick={() => {
+                    resetPartnerForm()
+                    setIsPartnerOpen(false)
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn-gradient px-5 py-2">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
