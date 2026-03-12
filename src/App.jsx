@@ -10,6 +10,7 @@ import GetInvolved from './components/GetInvolved'
 import Contact from './components/Contact'
 import Donate from './components/Donate'
 import NotFound from './components/NotFound'
+import Reports from './components/Reports'
 
 function App() {
   const router = createBrowserRouter([
@@ -24,7 +25,8 @@ function App() {
         {path: "resources", element: <Resources />},
         {path: "get-involved", element: <GetInvolved />},
         {path: "contact", element: <Contact />},
-        {path: "donate", element: <Donate />}
+        {path: "donate", element: <Donate />},
+        {path: "reports", element: <Reports />}
       ]
     },
     { path: "*", element: <NotFound /> }
