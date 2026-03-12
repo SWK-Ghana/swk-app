@@ -49,7 +49,7 @@ const imageProjects = [
     badge: 'Recognition',
     thumb: null, // dual-image layout
     title: 'Ambassador Recognition',
-    desc: 'SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.',
+    desc: "SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.",
     stat: 'Partnership',
     dual: [
       img('v1760551738/1752658915453_atc9oo.jpg', 400),
