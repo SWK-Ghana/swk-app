@@ -1,971 +1,532 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// Cloudinary helpers
+const CLD = 'https://res.cloudinary.com/dwgj3lovn'
+const img = (path, w = 600) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path}`
+const videoThumb = (publicId) => `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
+const videoUrl = (publicId, version) => `${CLD}/video/upload/v${version}/${publicId}.mp4`
+
+// Video card with proper Cloudinary thumbnail + fallback
+const VideoCard = ({ bg, border, accent, badge, publicId, version, title, description }) => {
+  const [playing, setPlaying] = useState(false)
+  return (
+    <div className={`bg-gradient-to-br ${bg} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
+      {!playing ? (
+        <div className="relative cursor-pointer group" onClick={() => setPlaying(true)}>
+          <img
+            src={videoThumb(publicId)}
+            alt={title}
+            className="w-full h-44 object-cover bg-gray-200"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+              e.currentTarget.nextElementSibling.style.display = 'flex'
+            }}
+          />
+          {/* Fallback if thumbnail fails */}
+          <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2">
+            <span className="text-4xl">🎬</span>
+            <span className="text-xs text-gray-500">Click to play</span>
+          </div>
+          {/* Play overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
+            <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
+              <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <video controls autoPlay className="w-full h-44 bg-black">
+          <source src={videoUrl(publicId, version)} type="video/mp4" />
+        </video>
+      )}
+      <div className="p-4 flex flex-col flex-1">
+        <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
+        <h4 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h4>
+        <p className="text-xs text-gray-600 leading-relaxed flex-1">{description}</p>
+      </div>
+    </div>
+  )
+}
+
+const Faqs = () => {
+  const [open, setOpen] = useState(null)
+  const items = [
+    { q: 'What is the difference between weather and climate?', a: 'Weather is short-term atmospheric conditions; climate is long-term average patterns.' },
+    { q: 'What is climate change?', a: 'A long-term change in average temperature and weather patterns, largely driven by human activities.' },
+    { q: 'How does climate change affect health?', a: 'It increases respiratory and cardiovascular risks, extreme weather injuries, disease spread, and mental health stressors.' },
+    { q: 'How can climate risks be reduced?', a: 'Through mitigation, adaptation, knowledge expansion, and responsible innovation.' },
+  ]
+  return (
+    <div className="max-w-3xl mx-auto divide-y divide-gray-200">
+      {items.map((item, idx) => (
+        <div key={idx} className="py-4">
+          <button className="w-full text-left flex items-center justify-between gap-3" onClick={() => setOpen(v => v === idx ? null : idx)}>
+            <span className="font-semibold text-sm xs:text-base text-gray-900">{item.q}</span>
+            <span className="text-gray-400 text-xl flex-shrink-0">{open === idx ? '−' : '+'}</span>
+          </button>
+          {open === idx && <p className="mt-2 text-xs xs:text-sm text-gray-600 leading-relaxed">{item.a}</p>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const Testimonials = () => {
+  const items = [
+    { name: 'Alex Johnson', text: 'Volunteering with SWK has been incredibly rewarding. The impact is real.' },
+    { name: 'Maria Rodriguez', text: 'The programs helped me grow personally and professionally.' },
+    { name: 'Kofi Mensah', text: 'Community projects brought people together and created amazing opportunities.' },
+  ]
+  const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setIdx((v) => (v + 1) % items.length), 7000)
+    return () => clearInterval(id)
+  }, [items.length])
+  return (
+    <div className="max-w-3xl mx-auto text-center">
+      <blockquote className="text-sm xs:text-base sm:text-lg text-gray-700 bg-emerald-50 border border-emerald-100 rounded-xl p-5 xs:p-6 sm:p-8 mb-4 italic">
+        "{items[idx].text}"
+      </blockquote>
+      <div className="text-sm font-semibold text-gray-800">— {items[idx].name}</div>
+      <div className="mt-4 flex justify-center gap-2">
+        {items.map((_, i) => (
+          <button key={i} onClick={() => setIdx(i)}
+            className={`h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 const Home = () => {
   const navigate = useNavigate()
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false)
   const [isPartnerOpen, setIsPartnerOpen] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [volunteerFullName, setVolunteerFullName] = useState('')
   const [volunteerAge, setVolunteerAge] = useState('')
   const [volunteerEmail, setVolunteerEmail] = useState('')
   const [volunteerMotivation, setVolunteerMotivation] = useState('')
   const [volunteerDocLink, setVolunteerDocLink] = useState('')
   const [volunteerDocFile, setVolunteerDocFile] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+
   const slides = useMemo(() => ([
-    {
-      image: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294683/SWK_at_Ga_West_n0c3fz.jpg',
-      title: 'Empowering Youth for Sustainable Change',
-      subtitle: 'Youth-focused programs driving resilient communities across Africa.'
-    },
-    {
-      image: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339245/Climate_Action_ffrdiu.png',
-      title: 'Climate Action & Environmental Stewardship',
-      subtitle: 'Youth-led initiatives protecting our planet for future generations.'
-    },
-    {
-      image: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Technology_lwdqyb.png',
-      title: 'Technology & Innovation',
-      subtitle: 'Building digital skills and solutions for sustainable development.'
-    }
+    { image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
+    { image: img('v1760339245/Climate_Action_ffrdiu.png', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
+    { image: img('v1760339244/Technology_lwdqyb.png', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
   ]), [])
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        setIsVolunteerOpen(false)
-        setIsPartnerOpen(false)
-      }
-    }
+    const onKey = (e) => { if (e.key === 'Escape') { setIsVolunteerOpen(false); setIsPartnerOpen(false) } }
     window.addEventListener('keydown', onKey)
-    const id = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 6000)
-    return () => {
-      clearInterval(id)
-      window.removeEventListener('keydown', onKey)
-    }
+    const id = setInterval(() => setCurrentSlide((prev) => (prev + 1) % slides.length), 6000)
+    return () => { clearInterval(id); window.removeEventListener('keydown', onKey) }
   }, [slides.length])
 
   const openVolunteerEmail = () => {
     const to = 'sustainabilitywithkoomson@gmail.com'
     const subject = `Volunteer Application - ${volunteerFullName || 'SWK Website'}`
-    const body = [
-      'Volunteer Application (via SWK website)',
-      '',
-      `Full name: ${volunteerFullName}`,
-      `Age: ${volunteerAge}`,
-      `Email: ${volunteerEmail}`,
-      '',
-      'Motivation:',
-      volunteerMotivation,
-      '',
-      `Document link (optional): ${volunteerDocLink || 'N/A'}`,
-      `Selected file (optional): ${volunteerDocFile?.name || 'N/A'}`,
-      '',
-      volunteerDocFile
-        ? 'Note: If you selected a file, please attach it to this email before sending (websites cannot auto-attach files to your email).'
-        : 'Note: You can attach your CV/resume directly in this email, or include a link above.',
-    ].join('\n')
-
-    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    window.location.href = mailto
+    const body = ['Volunteer Application (via SWK website)', '', `Full name: ${volunteerFullName}`, `Age: ${volunteerAge}`, `Email: ${volunteerEmail}`, '', 'Motivation:', volunteerMotivation, '', `Document link: ${volunteerDocLink || 'N/A'}`, `File selected: ${volunteerDocFile?.name || 'N/A'}`, '', volunteerDocFile ? 'Note: Please attach the file before sending.' : ''].join('\n')
+    window.location.href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
-  const resetVolunteerForm = () => {
-    setVolunteerFullName('')
-    setVolunteerAge('')
-    setVolunteerEmail('')
-    setVolunteerMotivation('')
-    setVolunteerDocLink('')
-    setVolunteerDocFile(null)
-  }
+  const resetVolunteer = () => { setVolunteerFullName(''); setVolunteerAge(''); setVolunteerEmail(''); setVolunteerMotivation(''); setVolunteerDocLink(''); setVolunteerDocFile(null) }
+
+  const videoProjects = [
+    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', publicId: 'Taka_Kipawa_2_wdxkpo', version: '1760552758', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
+    { id: 'circular', bg: 'from-green-50 to-emerald-50', border: 'border-green-100', accent: 'bg-green-100 text-green-700', badge: 'Circular Economy', publicId: '1711018812883_mbddbv', version: '1760551740', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
+    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', publicId: 'Galamsey_1_iyyc25', version: '1760552757', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
+    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', publicId: '1727031150424_dx6ece', version: '1760554407', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
+  ]
+
+  const Section = ({ children, className = '' }) => (
+    <div className={`bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12 ${className}`}>
+      {children}
+    </div>
+  )
+
+  const SectionHeader = ({ badge, badgeColor = 'bg-emerald-100 text-emerald-700', title, subtitle }) => (
+    <div className="text-center mb-6 xs:mb-8 sm:mb-10">
+      <span className={`inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 ${badgeColor}`}>{badge}</span>
+      <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">{title}</h2>
+      {subtitle && <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      {/* Hero Section */}
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 xs:py-8 sm:py-10 md:py-12">
-        <div className="relative mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20 rounded-xl xs:rounded-2xl overflow-hidden">
-          {/* Slides */}
+
+        {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
+        <div className="relative mb-8 xs:mb-10 sm:mb-12 rounded-xl xs:rounded-2xl overflow-hidden">
           {slides.map((s, idx) => (
-            <img
-              key={s.image}
-              src={s.image}
-              srcSet={`${s.image.replace('/upload/', '/upload/w_768/')} 768w, ${s.image.replace('/upload/', '/upload/w_1280/')} 1280w, ${s.image.replace('/upload/', '/upload/w_1920/')} 1920w`}
-              sizes="100vw"
-              alt={s.title}
-              className={`h-[40vh] xs:h-[46vh] sm:h-[50vh] md:h-[56vh] lg:h-[60vh] xl:h-[64vh] 2xl:h-[70vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+            <img key={s.image} src={s.image} alt={s.title}
+              className={`h-[42vh] xs:h-[48vh] sm:h-[52vh] md:h-[58vh] lg:h-[62vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
             />
           ))}
-          <div className="absolute inset-0 bg-black/40 xs:bg-black/50" />
-
-          {/* Overlay content */}
+          <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center px-4 xs:px-6 sm:px-8 md:px-10 max-w-4xl xl:max-w-5xl">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 xs:mb-4 sm:mb-5 md:mb-6 leading-tight">
-                {slides[currentSlide].title}
-              </h1>
-              <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-emerald-50 mb-6 xs:mb-8 sm:mb-10 px-2 xs:px-0">
-                {slides[currentSlide].subtitle}
-              </p>
-              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 sm:gap-5 justify-center px-4 xs:px-0">
-                <button
-                  className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5"
-                  onClick={() => navigate('/get-involved')}
-                >
-                  Get Involved
-                </button>
-                <button
-                  className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl font-semibold transition-colors text-sm xs:text-base sm:text-lg"
-                  onClick={() => navigate('/about')}
-                >
-                  Learn More
-                </button>
+            <div className="text-center px-4 xs:px-6 sm:px-8 max-w-4xl xl:max-w-5xl">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 xs:mb-4 leading-tight">{slides[currentSlide].title}</h1>
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-emerald-100 mb-6 xs:mb-8">{slides[currentSlide].subtitle}</p>
+              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
+                <button className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/get-involved')}>Get Involved</button>
+                <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base" onClick={() => navigate('/about')}>Learn More</button>
               </div>
             </div>
           </div>
-
-          {/* Controls */}
-          <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2" role="tablist" aria-label="Hero slides">
+          <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
             {slides.map((_, idx) => (
-              <button
-                key={idx}
-                aria-label={`Go to slide ${idx + 1}`}
-                role="tab"
-                aria-selected={idx === currentSlide}
-                className={`h-2.5 w-2.5 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 ${idx === currentSlide ? 'bg-white' : 'bg-white/50 hover:bg-white/80'}`}
-                onClick={() => setCurrentSlide(idx)}
-              />
+              <button key={idx} onClick={() => setCurrentSlide(idx)}
+                className={`h-2.5 w-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'}`} />
             ))}
-            <div className="sr-only" aria-live="polite">Slide {currentSlide + 1} of {slides.length}</div>
           </div>
         </div>
 
-        {/* UN SDG Alignment (moved up and redesigned) */}
-        <section className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3 sm:mb-4 text-center px-2 xs:px-0">UN SDG Alignment</h2>
-            <p className="text-sm xs:text-base sm:text-lg text-gray-600 mb-6 xs:mb-8 sm:mb-10 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">SWK's mission and objectives align with key Sustainable Development Goals that guide our programs and impact.</p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 items-start">
-              {/* Image */}
-              <div className="order-2 lg:order-1">
-                <div className="overflow-hidden rounded-xl border border-gray-200">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg"
-                    srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg 1280w"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    alt="SWK team highlighting UN SDG alignment"
-                    className="w-full h-auto"
-                    loading="lazy"
-                  />
+        {/* ══ 2. IMPACT STATS ═════════════════════════════════════════════════ */}
+        <div className="bg-emerald-700 rounded-xl xs:rounded-2xl p-5 xs:p-6 sm:p-8 mb-8 xs:mb-10 sm:mb-12">
+          <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 xs:gap-6 text-center">
+            {[{ n: '230+', label: 'Webinar Registrants' }, { n: '236', label: 'Youth Empowered' }, { n: '72', label: 'Women Impacted' }, { n: '3', label: 'Program Editions' }].map((s, i) => (
+              <div key={i}>
+                <div className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white mb-1">{s.n}</div>
+                <div className="text-xs xs:text-sm text-emerald-200">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ══ 3. FOCUS AREAS ══════════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="What We Do" title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
+            {[
+              { src: 'v1760339246/Youth_Development_j10oja.png', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
+              { src: 'v1760339246/Circular_Economy_v3oo71.png', title: 'Circular Economy Initiatives', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
+              { src: 'v1760339247/Agribusiness_yqc44a.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
+              { src: 'v1760339244/Technology_lwdqyb.png', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
+              { src: 'v1760339245/Climate_Action_ffrdiu.png', title: 'Climate Action Projects', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
+              { src: 'v1760339244/Community_Engagement_jnun1t.png', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                <img src={img(item.src)} alt={item.title} className="w-full h-40 object-cover" loading="lazy" />
+                <div className="p-4 xs:p-5">
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
-              {/* Goals */}
-              <div className="order-1 lg:order-2">
-                <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4 sm:gap-5">
-                  {[
-                    { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
-                    { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
-                    { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
-                    { n: '11', title: 'Sustainable Cities & Communities', color: 'bg-green-50 text-green-700 border-green-100' },
-                    { n: '12', title: 'Responsible Consumption & Production', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
-                    { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
-                    { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
-                    { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
-                  ].map((g, i) => (
-                    <div key={i} className={`flex items-center gap-2 xs:gap-3 sm:gap-4 rounded-lg xs:rounded-xl border ${g.color} p-3 xs:p-4 sm:p-5`}>
-                      <div className="flex items-center justify-center h-10 w-10 xs:h-12 xs:w-12 sm:h-14 sm:w-14 rounded-lg bg-white shadow-inner border flex-shrink-0">
-                        <span className="font-bold text-base xs:text-lg sm:text-xl">{g.n}</span>
-                      </div>
-                      <div className="font-medium text-xs xs:text-sm sm:text-base">{g.title}</div>
-                    </div>
-                  ))}
+            ))}
+          </div>
+        </Section>
+
+        {/* ══ 4. PROJECTS & IMPACT ════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Impact" badgeColor="bg-blue-100 text-blue-700" title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
+
+          {/* Image projects */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
+            {[
+              {
+                gradient: 'from-emerald-50 to-green-50', border: 'border-emerald-100', badge: 'Impact', accent: 'bg-emerald-100 text-emerald-700',
+                src: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'), title: 'Agribusiness Webinar Series',
+                desc: 'Three-edition webinar series on agriculture as a business for youth empowerment.', stat: '230+ Registrants',
+              },
+              {
+                gradient: 'from-blue-50 to-cyan-50', border: 'border-blue-100', badge: 'Learning', accent: 'bg-blue-100 text-blue-700',
+                src: img('v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png'), title: 'e-Academy Courses',
+                desc: 'Online learning platform for agribusiness and sustainable farming practices.', stat: 'Online',
+              },
+            ].map((p, i) => (
+              <div key={i} className={`bg-gradient-to-br ${p.gradient} rounded-xl border ${p.border} overflow-hidden hover:shadow-md transition-shadow flex flex-col`}>
+                <img src={p.src} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
+                <div className="p-4 xs:p-5 flex flex-col flex-1">
+                  <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>{p.badge}</span>
+                  <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
+                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
+                  <span className="self-start text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">{p.stat}</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Projects & Impact - Compact Version */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Projects & Impact</h2>
-          
-          {/* Impact Statistics */}
-          <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 text-center mb-6 xs:mb-8 sm:mb-10">
-            <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">236</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Youth empowered</div>
-            </div>
-            <div className="bg-blue-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-              <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-1">72</div>
-              <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Women impacted</div>
+            ))}
+            {/* Ambassador — dual image */}
+            <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+              <div className="grid grid-cols-2 gap-0.5">
+                <img src={img('v1760551738/1752658915453_atc9oo.jpg', 400)} alt="Founder Ambassador" className="w-full h-48 object-cover" loading="lazy" />
+                <img src={img('v1760551737/1752658914512_k1zf9t.jpg', 400)} alt="Ambassador" className="w-full h-48 object-cover" loading="lazy" />
+              </div>
+              <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <span className="self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 bg-purple-100 text-purple-700">Recognition</span>
+                <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Ambassador Recognition</h4>
+                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.</p>
+                <span className="self-start text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 py-1 rounded-full">Partnership</span>
+              </div>
             </div>
           </div>
 
-          {/* Project Highlights - Compact Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6 md:gap-8">
-            {/* Agribusiness Webinar */}
-            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow">
-              <div className="mb-3 xs:mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png"
-                  alt="Agribusiness Webinar"
-                  className="w-full rounded-lg shadow-sm"
-                  loading="lazy"
-                />
-              </div>
-              <h4 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-900 mb-2">Agribusiness Webinar</h4>
-              <p className="text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed">
-                Comprehensive webinar series on agriculture as a business for youth empowerment.
-              </p>
-            </div>
-
-            {/* Agribusiness e-Academy */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png"
-                  alt="Agribusiness e-Academy"
-                  className="w-full rounded-lg shadow-sm"
-                  loading="lazy"
-                />
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">e-Academy Courses</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Online learning platform for agribusiness and sustainable farming practices.
-              </p>
-            </div>
-
-            {/* Ambassador Recognition */}
-            <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-5 border border-emerald-100 hover:shadow-md transition-shadow">
-              <div className="mb-3 grid grid-cols-2 gap-2">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/1752658915453_atc9oo.jpg"
-                  alt="Founder Ambassador"
-                  className="w-full rounded-lg shadow-sm"
-                  loading="lazy"
-                />
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551737/1752658914512_k1zf9t.jpg"
-                  alt="Agribusiness Lead Ambassador"
-                  className="w-full rounded-lg shadow-sm"
-                  loading="lazy"
-                />
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Ambassador Recognition</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Our leadership team selected as ambassadors for Agribusiness e-Academy.
-              </p>
-            </div>
-
-            {/* Taka Kipawa App */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552758/Taka_Kipawa_2_wdxkpo.jpg"
-                  alt="Taka Kipawa App video thumbnail"
-                  className="w-full rounded-lg shadow-sm object-cover mb-3"
-                  loading="lazy"
-                />
-                <video
-                  controls
-                  className="w-full rounded-lg shadow-sm"
-                >
-                  <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552758/Taka_Kipawa_2_wdxkpo.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Taka Kipawa App</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Digital solutions for waste management and circular economy initiatives.
-              </p>
-            </div>
-
-            {/* Circular Economy Innovation */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760551740/1711018812883_mbddbv.jpg"
-                  alt="Circular Economy Innovation video thumbnail"
-                  className="w-full rounded-lg shadow-sm object-cover mb-3"
-                  loading="lazy"
-                />
-                <video
-                  controls
-                  className="w-full rounded-lg shadow-sm"
-                >
-                  <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760551740/1711018812883_mbddbv.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Circular Economy Innovation</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Youth-led solutions for sustainable consumption and waste reduction.
-              </p>
-            </div>
-
-            {/* Climate Action */}
-            <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 border border-orange-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552757/Galamsey_1_iyyc25.jpg"
-                  alt="Climate Action video thumbnail"
-                  className="w-full rounded-lg shadow-sm object-cover mb-3"
-                  loading="lazy"
-                />
-                <video
-                  controls
-                  className="w-full rounded-lg shadow-sm"
-                >
-                  <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552757/Galamsey_1_iyyc25.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Climate Action</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Children advocating for environmental protection and climate action.
-              </p>
-            </div>
-
-            {/* Fight Against Galamsey */}
-            <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-100 hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760554407/1727031150424_dx6ece.jpg"
-                  alt="Fight Against Galamsey video thumbnail"
-                  className="w-full rounded-lg shadow-sm object-cover mb-3"
-                  loading="lazy"
-                />
-                <video
-                  controls
-                  className="w-full rounded-lg shadow-sm"
-                >
-                  <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760554407/1727031150424_dx6ece.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Fight Against Galamsey</h4>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Children adding their voices to combat illegal mining and protect Ghana's natural resources.
-              </p>
+          {/* Video stories */}
+          <div>
+            <h3 className="text-base xs:text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-xl">🎬</span> Video Stories
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5">
+              {videoProjects.map((v) => <VideoCard key={v.id} {...v} />)}
             </div>
           </div>
-        </div>
+        </Section>
 
-        {/* Our Focus Areas (using Programs & Initiatives with images) */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Focus Areas</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
-            <div className="bg-white rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-3 xs:mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Youth_Development_j10oja.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339246/Youth_Development_j10oja.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339246/Youth_Development_j10oja.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339246/Youth_Development_j10oja.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Youth Development Programs"
-                  className="w-full h-32 xs:h-36 sm:h-40 md:h-44 object-cover"
-                  loading="lazy"
-                />
+        {/* ══ 5. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Currently Active" title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5">
+            {[
+              { icon: '🌾', tag: 'Agribusiness', tc: 'bg-green-100 text-green-700', title: 'Agribusiness Webinar Series', desc: "Ongoing webinar series equipping youth with agribusiness knowledge, tools, and networks." },
+              { icon: '🌍', tag: 'Climate Action', tc: 'bg-blue-100 text-blue-700', title: 'Climate Action Campaigns', desc: 'Youth-led campaigns raising awareness about climate change and sustainable practices across Ghana.' },
+              { icon: '🤝', tag: 'Community', tc: 'bg-purple-100 text-purple-700', title: 'Community Outreach Programs', desc: 'Grassroots programs engaging communities in sustainable development and education across Greater Accra.' },
+              { icon: '💡', tag: 'Training', tc: 'bg-yellow-100 text-yellow-700', title: 'Skills & Leadership Workshops', desc: 'Practical workshops building leadership, entrepreneurship, and digital skills for young Ghanaians.' },
+              { icon: '📢', tag: 'Advocacy', tc: 'bg-red-100 text-red-700', title: 'Youth Advocacy Initiatives', desc: 'Amplifying youth voices in policy discussions on climate and sustainability at local and continental levels.' },
+            ].map((a, idx) => (
+              <div key={idx} className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-5 border border-emerald-100 hover:shadow-md transition-shadow flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${a.tc}`}>{a.tag}</span>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">● Ongoing</span>
+                </div>
+                <div className="text-3xl mb-3">{a.icon}</div>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">{a.title}</h3>
+                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{a.desc}</p>
               </div>
-              <h3 className="text-lg xs:text-xl sm:text-xl font-semibold text-gray-900 mb-2">Youth Development Programs</h3>
-              <p className="text-sm xs:text-base text-gray-600 leading-relaxed">Leadership workshops, skills training, and mentorship for youth change-makers.</p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Circular_Economy_v3oo71.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339246/Circular_Economy_v3oo71.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339246/Circular_Economy_v3oo71.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339246/Circular_Economy_v3oo71.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Circular Economy Initiatives"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Circular Economy Initiatives</h3>
-              <p className="text-gray-600">Waste reduction, recycling workshops, and sustainable consumption education.</p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339247/Agribusiness_yqc44a.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339247/Agribusiness_yqc44a.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339247/Agribusiness_yqc44a.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339247/Agribusiness_yqc44a.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Agribusiness Development"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Agribusiness Development</h3>
-              <p className="text-gray-600">Training in sustainable agriculture and agribusiness value chains.</p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Technology_lwdqyb.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339244/Technology_lwdqyb.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339244/Technology_lwdqyb.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339244/Technology_lwdqyb.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Technology & Innovation"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Technology & Innovation</h3>
-              <p className="text-gray-600">Digital literacy, hackathons, and innovation labs for sustainable solutions.</p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339245/Climate_Action_ffrdiu.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339245/Climate_Action_ffrdiu.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339245/Climate_Action_ffrdiu.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339245/Climate_Action_ffrdiu.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Climate Action Projects"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Climate Action Projects</h3>
-              <p className="text-gray-600">Conservation, climate education, and youth-led environmental initiatives.</p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Community_Engagement_jnun1t.png"
-                  srcSet="https://res.cloudinary.com/dwgj3lovn/image/upload/w_640/v1760339244/Community_Engagement_jnun1t.png 640w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_960/v1760339244/Community_Engagement_jnun1t.png 960w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760339244/Community_Engagement_jnun1t.png 1280w"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt="Community Engagement"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Community Engagement</h3>
-              <p className="text-gray-600">Grassroots projects, forums, and participatory initiatives for resilience.</p>
-            </div>
+            ))}
           </div>
-        </div>
+        </Section>
 
-        {/* ============================================
-            CURRENT ACTIVITIES SECTION
-        ============================================ */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-              <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Currently Active
-              </span>
-              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3">
-                What We're Doing
-              </h2>
-              <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Here's a look at the programs and initiatives SWK Ghana is actively running right now.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6">
-              {[
-                {
-                  icon: '🌾',
-                  tag: 'Agribusiness',
-                  tagColor: 'bg-green-100 text-green-700',
-                  title: 'Agribusiness Webinar Series',
-                  description: 'An ongoing webinar series equipping youth with agribusiness knowledge, tools, and networks to thrive in Ghana\'s agricultural sector.',
-                  status: 'Ongoing',
-                  statusColor: 'bg-emerald-100 text-emerald-700',
-                  link: null,
-                },
-                {
-                  icon: '🌍',
-                  tag: 'Climate Action',
-                  tagColor: 'bg-blue-100 text-blue-700',
-                  title: 'Climate Action Campaigns',
-                  description: 'Youth-led campaigns raising awareness about climate change, environmental protection, and sustainable practices across communities in Ghana.',
-                  status: 'Ongoing',
-                  statusColor: 'bg-emerald-100 text-emerald-700',
-                  link: null,
-                },
-                {
-                  icon: '🤝',
-                  tag: 'Community',
-                  tagColor: 'bg-purple-100 text-purple-700',
-                  title: 'Community Outreach Programs',
-                  description: 'Grassroots programs engaging local communities in sustainable development, health, and education initiatives across Greater Accra.',
-                  status: 'Ongoing',
-                  statusColor: 'bg-emerald-100 text-emerald-700',
-                  link: null,
-                },
-                {
-                  icon: '💡',
-                  tag: 'Training',
-                  tagColor: 'bg-yellow-100 text-yellow-700',
-                  title: 'Skills & Leadership Workshops',
-                  description: 'Practical training workshops building leadership, entrepreneurship, and digital skills for young people across Ghana.',
-                  status: 'Ongoing',
-                  statusColor: 'bg-emerald-100 text-emerald-700',
-                  link: null,
-                },
-                {
-                  icon: '📢',
-                  tag: 'Advocacy',
-                  tagColor: 'bg-red-100 text-red-700',
-                  title: 'Youth Advocacy Initiatives',
-                  description: 'Amplifying youth voices in policy discussions on climate, sustainability, and development at local, national, and continental levels.',
-                  status: 'Ongoing',
-                  statusColor: 'bg-emerald-100 text-emerald-700',
-                  link: null,
-                },
-              ].map((activity, idx) => (
-                <div
-                  key={idx}
-                  className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-5 xs:p-6 border border-emerald-100 hover:shadow-md transition-shadow flex flex-col"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${activity.tagColor}`}>
-                      {activity.tag}
-                    </span>
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${activity.statusColor}`}>
-                      ● {activity.status}
-                    </span>
+        {/* ══ 6. UPCOMING EVENTS ══════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
+          <div className="space-y-4 xs:space-y-5 mb-8">
+            {[
+              { tag: 'Webinar', tc: 'bg-green-100 text-green-700', title: 'Agribusiness Webinar Series — Next Edition', desc: 'Join us for the next edition of our popular Agribusiness Webinar Series. Details coming soon!', location: 'Google Meet (Online)' },
+              { tag: 'Workshop', tc: 'bg-yellow-100 text-yellow-700', title: 'Youth Leadership & Skills Training Workshop', desc: 'A hands-on workshop building leadership, entrepreneurship, and digital skills for young Ghanaians.', location: 'Accra, Ghana' },
+              { tag: 'Community', tc: 'bg-purple-100 text-purple-700', title: 'Community Outreach & Engagement Day', desc: "An outreach day bringing SWK Ghana's programs directly to communities across Greater Accra.", location: 'Greater Accra, Ghana' },
+            ].map((event, idx) => (
+              <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-emerald-200 px-5 py-3 text-center gap-2 sm:gap-0">
+                  <span className="text-xl font-bold text-emerald-700">TBA</span>
+                  <span className="text-xs font-medium text-gray-400 uppercase">Soon</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${event.tc}`}>{event.tag}</span>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Free</span>
                   </div>
-                  <div className="text-3xl mb-3">{activity.icon}</div>
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{activity.title}</h3>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{activity.description}</p>
-                  {activity.link && (
-                    <a
-                      href={activity.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 text-sm font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
-                    >
-                      Learn More →
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================
-            UPCOMING EVENTS SECTION
-        ============================================ */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-              <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Mark Your Calendar
-              </span>
-              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3">
-                Upcoming Events
-              </h2>
-              <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Join us at our next events and be part of the movement for sustainable change.
-              </p>
-            </div>
-
-            <div className="space-y-4 xs:space-y-5 sm:space-y-6 mb-8">
-              {[
-                {
-                  date: { day: 'TBA', month: 'Soon' },
-                  tag: 'Webinar',
-                  tagColor: 'bg-green-100 text-green-700',
-                  title: 'Agribusiness Webinar Series — Next Edition',
-                  description: 'Join us for the next edition of our popular Agribusiness Webinar Series. Details coming soon — stay tuned!',
-                  location: 'Google Meet (Online)',
-                  registrationLink: null,
-                  isFree: true,
-                },
-                {
-                  date: { day: 'TBA', month: 'Soon' },
-                  tag: 'Workshop',
-                  tagColor: 'bg-yellow-100 text-yellow-700',
-                  title: 'Youth Leadership & Skills Training Workshop',
-                  description: 'A hands-on workshop building leadership, entrepreneurship, and digital skills for young Ghanaians.',
-                  location: 'Accra, Ghana',
-                  registrationLink: null,
-                  isFree: true,
-                },
-                {
-                  date: { day: 'TBA', month: 'Soon' },
-                  tag: 'Community',
-                  tagColor: 'bg-purple-100 text-purple-700',
-                  title: 'Community Outreach & Engagement Day',
-                  description: 'An outreach day bringing SWK Ghana\'s programs directly to communities across Greater Accra.',
-                  location: 'Greater Accra, Ghana',
-                  registrationLink: null,
-                  isFree: true,
-                },
-              ].map((event, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col sm:flex-row gap-4 xs:gap-5 sm:gap-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex-shrink-0 flex sm:flex-col items-center sm:items-center justify-start sm:justify-center bg-white rounded-xl border border-emerald-200 px-4 py-3 sm:px-5 sm:py-4 min-w-[80px] text-center gap-3 sm:gap-0">
-                    <span className="text-2xl xs:text-3xl sm:text-4xl font-bold text-emerald-700 sm:mb-1">{event.date.day}</span>
-                    <span className="text-xs xs:text-sm font-semibold text-gray-500 uppercase tracking-wide">{event.date.month}</span>
-                  </div>
-
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${event.tagColor}`}>
-                        {event.tag}
-                      </span>
-                      {event.isFree && (
-                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">
-                          Free
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-900 mb-1 xs:mb-2">
-                      {event.title}
-                    </h3>
-                    <p className="text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed mb-2 xs:mb-3">
-                      {event.description}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-3 xs:gap-4">
-                      <span className="text-xs xs:text-sm text-gray-500 flex items-center gap-1">
-                        📍 {event.location}
-                      </span>
-                      {event.registrationLink ? (
-                        <a
-                          href={event.registrationLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs xs:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 xs:px-4 py-1.5 rounded-lg transition-colors"
-                        >
-                          Register Now →
-                        </a>
-                      ) : (
-                        <span className="text-xs xs:text-sm font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 xs:px-4 py-1.5 rounded-lg">
-                          Registration Opening Soon
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <p className="text-sm xs:text-base text-gray-600 mb-3">
-                Want to stay updated on all SWK Ghana events?
-              </p>
-              <button
-                className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3"
-                onClick={() => navigate('/get-involved')}
-              >
-                Get Notified About Events
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================
-            REPORTS & PUBLICATIONS SECTION
-        ============================================ */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-              <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-                Publications
-              </span>
-              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3">
-                Reports & Resources
-              </h2>
-              <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                Access our latest impact reports, annual reviews, and research publications.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6 mb-8">
-
-              {/* Card 1 – Agribusiness Impact Report */}
-              <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="relative">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png"
-                    alt="Agribusiness Webinar Impact Report 2025"
-                    className="w-full h-48 object-cover"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                    Latest Report
-                  </span>
-                </div>
-                <div className="p-4 xs:p-5 sm:p-6">
-                  <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Impact Report</span>
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mt-1 mb-2">
-                    Agribusiness Webinar Series Impact Report 2025
-                  </h3>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-4">
-                    Three editions. 230+ verified registrants. Full impact metrics, SDG alignment, and demographic insights.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <a
-                      href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/edit?usp=sharing"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 text-center text-xs xs:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 xs:px-4 py-2 rounded-lg transition-colors"
-                    >
-                      📄 View Report
-                    </a>
-                    <a
-                      href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/export?format=pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 text-center text-xs xs:text-sm font-semibold text-emerald-600 border border-emerald-600 hover:bg-emerald-50 px-3 xs:px-4 py-2 rounded-lg transition-colors"
-                    >
-                      ⬇️ Download PDF
-                    </a>
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{event.title}</h3>
+                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-3">{event.desc}</p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="text-xs text-gray-500">📍 {event.location}</span>
+                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg">Registration Opening Soon</span>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/get-involved')}>
+              Get Notified About Events
+            </button>
+          </div>
+        </Section>
 
-              {/* Card 2 – Annual Report */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-48 bg-blue-100 flex items-center justify-center">
+        {/* ══ 7. REPORTS & RESOURCES ══════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
+
+            {/* Report 1 — Agribusiness Impact Report (cover = webinar flyer) */}
+            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+              <div className="relative">
+                <img src={img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')} alt="Agribusiness Impact Report 2025" className="w-full h-48 object-cover" loading="lazy" />
+                <span className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
+              </div>
+              <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Impact Report</span>
+                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar Series Impact Report 2025</h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Three editions. 230+ verified registrants. Full impact metrics, SDG alignment, and demographic insights.</p>
+                <div className="flex gap-2">
+                  <a href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 text-center text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-2 rounded-lg transition-colors">📄 View</a>
+                  <a href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/export?format=pdf" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 text-center text-xs font-semibold text-emerald-600 border border-emerald-600 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Report 2 — Annual Report (cover = SWK team photo) */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+              <div className="relative">
+                <img
+                  src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg')}
+                  alt="SWK Ghana Annual Report 2025"
+                  className="w-full h-48 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                    e.currentTarget.nextElementSibling.style.display = 'flex'
+                  }}
+                />
+                {/* Fallback cover */}
+                <div className="hidden w-full h-48 bg-gradient-to-br from-blue-200 to-cyan-200 items-center justify-center">
                   <span className="text-5xl">📊</span>
                 </div>
-                <div className="p-4 xs:p-5 sm:p-6">
-                  <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Annual Report</span>
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mt-1 mb-2">
-                    SWK Ghana Annual Report 2025
-                  </h3>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-4">
-                    Our annual review of programs, partnerships, community impact, and organizational milestones for 2025.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <a
-                      href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/edit?usp=sharing"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 text-center text-xs xs:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-3 xs:px-4 py-2 rounded-lg transition-colors"
-                    >
-                      📄 View Report
-                    </a>
-                    <a
-                      href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/export?format=pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 text-center text-xs xs:text-sm font-semibold text-blue-600 border border-blue-600 hover:bg-blue-50 px-3 xs:px-4 py-2 rounded-lg transition-colors"
-                    >
-                      ⬇️ Download PDF
-                    </a>
-                  </div>
+                <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Annual Report</span>
+              </div>
+              <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Annual Report</span>
+                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">SWK Ghana Annual Report 2025</h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our annual review of programs, partnerships, community impact, and organizational milestones for 2025.</p>
+                <div className="flex gap-2">
+                  <a href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 text-center text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg transition-colors">📄 View</a>
+                  <a href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/export?format=pdf" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 text-center text-xs font-semibold text-blue-600 border border-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>
-
-              {/* Card 3 – Program Summary (Coming Soon) */}
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-48 bg-purple-100 flex items-center justify-center">
-                  <span className="text-5xl">📋</span>
-                </div>
-                <div className="p-4 xs:p-5 sm:p-6">
-                  <span className="text-xs font-semibold text-purple-600 uppercase tracking-wide">Program Summary</span>
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mt-1 mb-2">
-                    Youth Development Program Summary
-                  </h3>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-4">
-                    A summary of SWK Ghana's youth development programs, reach, and outcomes across Ghana.
-                  </p>
-                  <span className="inline-block text-xs xs:text-sm font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 xs:px-4 py-2 rounded-lg">
-                    Coming Soon
-                  </span>
-                </div>
-              </div>
-
             </div>
 
-            <div className="text-center">
-              <button
-                className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3"
-                onClick={() => navigate('/reports')}
-              >
-                View All Reports & Publications →
-              </button>
+            {/* Report 3 — Coming soon */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+              <div className="h-48 bg-gradient-to-br from-purple-200 to-pink-200 flex flex-col items-center justify-center gap-2">
+                <span className="text-5xl">📋</span>
+                <span className="text-sm font-semibold text-purple-800">Coming Soon</span>
+              </div>
+              <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <span className="text-xs font-semibold text-purple-600 uppercase tracking-wide">Program Summary</span>
+                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Youth Development Program Summary</h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">A comprehensive summary of SWK Ghana's youth development programs, reach, and outcomes across Ghana.</p>
+                <span className="self-start text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 py-2 rounded-lg">Coming Soon</span>
+              </div>
             </div>
           </div>
-        </div>
+          <div className="text-center">
+            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/reports')}>
+              View All Reports & Publications →
+            </button>
+          </div>
+        </Section>
 
-        {/* FAQs */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">FAQs</h2>
+        {/* ══ 8. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Global Goals" badgeColor="bg-blue-100 text-blue-700" title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 items-center">
+            <div className="overflow-hidden rounded-xl border border-gray-200">
+              <img src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg', 900)} alt="SWK team" className="w-full h-auto" loading="lazy" />
+            </div>
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
+              {[
+                { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+                { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
+                { n: '11', title: 'Sustainable Cities', color: 'bg-green-50 text-green-700 border-green-100' },
+                { n: '12', title: 'Responsible Consumption', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
+                { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+              ].map((g, i) => (
+                <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3 xs:p-4`}>
+                  <div className="flex items-center justify-center h-10 w-10 xs:h-12 xs:w-12 rounded-lg bg-white shadow-inner border flex-shrink-0">
+                    <span className="font-bold text-base xs:text-lg">{g.n}</span>
+                  </div>
+                  <div className="font-medium text-xs xs:text-sm leading-tight">{g.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* ══ 9. FAQs ═════════════════════════════════════════════════════════ */}
+        <Section>
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">FAQs</h2>
           <Faqs />
-        </div>
+        </Section>
 
-        {/* Testimonials carousel (simple) */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6 sm:mb-8 text-center px-2 xs:px-0">What People Say</h2>
+        {/* ══ 10. TESTIMONIALS ════════════════════════════════════════════════ */}
+        <Section>
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">What People Say</h2>
           <Testimonials />
-        </div>
+        </Section>
 
-        {/* Partners strip */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6 sm:mb-8 text-center px-2 xs:px-0">Partners & Supporters</h2>
-          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 xs:gap-5 sm:gap-6 md:gap-8 items-center">
-            {[
-              'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+1',
-              'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+2',
-              'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+3',
-              'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+4',
-              'https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+5',
-            ].map((logo, idx) => (
-              <img key={idx} src={logo} alt={`Partner ${idx + 1}`} className="mx-auto h-10 object-contain opacity-80 hover:opacity-100 transition" loading="lazy" />
+        {/* ══ 11. PARTNERS ════════════════════════════════════════════════════ */}
+        <Section>
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">Partners & Supporters</h2>
+          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 xs:gap-5 items-center">
+            {[1,2,3,4,5].map((n) => (
+              <img key={n} src={`https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+${n}`} alt={`Partner ${n}`} className="mx-auto h-10 object-contain opacity-80 hover:opacity-100 transition" loading="lazy" />
             ))}
           </div>
-        </div>
+        </Section>
 
-        {/* Newsletter */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 xs:mb-4 sm:mb-5 text-center px-2 xs:px-0">Newsletter</h2>
-          <p className="text-sm xs:text-base sm:text-lg text-gray-600 mb-4 xs:mb-6 sm:mb-8 text-center max-w-2xl mx-auto px-4 xs:px-6 sm:px-0">Sign up for updates to receive news delivered directly to your inbox.</p>
-          <form
-            className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3 xs:gap-4 px-4 xs:px-6 sm:px-0"
-            onSubmit={(e) => { e.preventDefault() }}
-          >
-            <input
-              type="email"
-              required
-              placeholder="your.email@example.com"
-              className="flex-1 px-3 xs:px-4 sm:px-5 py-2.5 xs:py-3 sm:py-3.5 text-sm xs:text-base border border-gray-300 rounded-lg xs:rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
-            <button type="submit" className="btn-gradient px-5 xs:px-6 sm:px-8 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl text-sm xs:text-base">Subscribe</button>
+        {/* ══ 12. NEWSLETTER ══════════════════════════════════════════════════ */}
+        <Section>
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Newsletter</h2>
+          <p className="text-sm xs:text-base text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up to receive updates and news from SWK Ghana directly in your inbox.</p>
+          <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" required placeholder="your.email@example.com" className="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+            <button type="submit" className="btn-gradient px-6 py-3 rounded-xl text-sm">Subscribe</button>
           </form>
-        </div>
+        </Section>
 
-        {/* Call to Action */}
-        <div className="text-center px-4 xs:px-6 sm:px-0">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 xs:mb-4 sm:mb-5">Join the Movement</h2>
-          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-600 mb-6 xs:mb-8 sm:mb-10 max-w-2xl mx-auto">
-            Together, we can empower young people, transform communities, and protect our planet.
-          </p>
-          <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 sm:gap-5 justify-center">
-            <button
-              className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5"
-              onClick={() => setIsVolunteerOpen(true)}
-            >
-              Volunteer Today
-            </button>
-            <button
-              className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 sm:px-10 py-2.5 xs:py-3 sm:py-3.5 rounded-lg xs:rounded-xl font-semibold transition-colors text-sm xs:text-base sm:text-lg"
-              onClick={() => setIsPartnerOpen(true)}
-            >
-              Partner With Us
-            </button>
+        {/* ══ 13. CTA ═════════════════════════════════════════════════════════ */}
+        <div className="text-center mb-4">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Join the Movement</h2>
+          <p className="text-sm xs:text-base text-gray-600 mb-8 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
+          <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
+            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
+            <button className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
           </div>
         </div>
+
       </div>
 
-      {/* Volunteer Modal */}
+      {/* VOLUNTEER MODAL */}
       {isVolunteerOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
           <div className="absolute inset-0 bg-black/50" onClick={() => setIsVolunteerOpen(false)} />
-          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
+          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Volunteer Sign-Up</h3>
-              <button
-                aria-label="Close"
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setIsVolunteerOpen(false)}
-              >
-                ✕
-              </button>
+              <button className="text-gray-400 hover:text-gray-600 text-xl" onClick={() => setIsVolunteerOpen(false)}>✕</button>
             </div>
-            <form
-              className="space-y-4"
-              onSubmit={(e) => {
-                e.preventDefault()
-                openVolunteerEmail()
-                resetVolunteerForm()
-                setIsVolunteerOpen(false)
-              }}
-            >
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); openVolunteerEmail(); resetVolunteer(); setIsVolunteerOpen(false) }}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
-                <input
-                  required
-                  type="text"
-                  value={volunteerFullName}
-                  onChange={(e) => setVolunteerFullName(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="Your full name"
-                />
+                <input required type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Your full name" />
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                  <input
-                    required
-                    type="number"
-                    min={10}
-                    max={120}
-                    value={volunteerAge}
-                    onChange={(e) => setVolunteerAge(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="e.g. 24"
-                  />
+                  <input required type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g. 24" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input
-                    required
-                    type="email"
-                    value={volunteerEmail}
-                    onChange={(e) => setVolunteerEmail(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="your.email@example.com"
-                  />
+                  <input required type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="you@email.com" />
                 </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation to volunteer</label>
-                <textarea
-                  required
-                  rows={4}
-                  value={volunteerMotivation}
-                  onChange={(e) => setVolunteerMotivation(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="Tell us why you want to volunteer with SWK…"
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation</label>
+                <textarea required rows={4} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us why you want to volunteer…" />
               </div>
-
               <div className="space-y-2">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                    onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-                  />
+                  <input type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Or paste a document link (optional)</label>
-                  <input
-                    type="url"
-                    value={volunteerDocLink}
-                    onChange={(e) => setVolunteerDocLink(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="https://drive.google.com/…"
-                  />
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Or paste a link (optional)</label>
+                  <input type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="https://drive.google.com/…" />
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  When you submit, your email app will open addressed to us. If you selected a file, please attach it in the email before sending.
-                </p>
+                <p className="text-xs text-gray-500">Your email app will open on submit. Attach files before sending.</p>
               </div>
-
               <div className="flex justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  className="px-4 py-2 rounded-lg border"
-                  onClick={() => {
-                    resetVolunteerForm()
-                    setIsVolunteerOpen(false)
-                  }}
-                >
-                  Cancel
-                </button>
+                <button type="button" className="px-4 py-2 rounded-lg border text-gray-700" onClick={() => { resetVolunteer(); setIsVolunteerOpen(false) }}>Cancel</button>
                 <button type="submit" className="btn-gradient px-5 py-2">Send</button>
               </div>
             </form>
@@ -973,42 +534,36 @@ const Home = () => {
         </div>
       )}
 
-      {/* Partner Modal */}
+      {/* PARTNER MODAL */}
       {isPartnerOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4 sm:p-6" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
           <div className="absolute inset-0 bg-black/50" onClick={() => setIsPartnerOpen(false)} />
-          <div className="relative bg-white rounded-xl xs:rounded-2xl shadow-xl w-full max-w-xl mx-auto p-4 xs:p-5 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto" tabIndex={-1}>
+          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Partnership Inquiry</h3>
-              <button
-                aria-label="Close"
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setIsPartnerOpen(false)}
-              >
-                ✕
-              </button>
+              <button className="text-gray-400 hover:text-gray-600 text-xl" onClick={() => setIsPartnerOpen(false)}>✕</button>
             </div>
             <form className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Organization Name</label>
-                <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Contact Name</label>
-                  <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                  <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input required type="email" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+                  <input required type="email" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">How would you like to partner?</label>
-                <textarea rows={4} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Describe partnership interest" />
+                <textarea rows={4} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Describe partnership interest" />
               </div>
               <div className="flex justify-end gap-3 pt-2">
-                <button type="button" className="px-4 py-2 rounded-lg border" onClick={() => setIsPartnerOpen(false)}>Cancel</button>
+                <button type="button" className="px-4 py-2 rounded-lg border text-gray-700" onClick={() => setIsPartnerOpen(false)}>Cancel</button>
                 <button type="submit" className="btn-gradient px-5 py-2">Submit</button>
               </div>
             </form>
@@ -1019,87 +574,4 @@ const Home = () => {
   )
 }
 
-const Faqs = () => {
-  const [open, setOpen] = useState(null)
-  const toggle = (idx) => setOpen((v) => (v === idx ? null : idx))
-  const items = [
-    {
-      q: 'What is the difference between weather and climate?',
-      a: 'Weather is short-term atmospheric conditions; climate is long-term average patterns.'
-    },
-    {
-      q: 'What is climate change?',
-      a: 'A long-term change in average temperature and weather patterns, largely driven by human activities.'
-    },
-    {
-      q: 'How does climate change affect health?',
-      a: 'It increases respiratory and cardiovascular risks, extreme weather injuries, disease spread, and mental health stressors.'
-    },
-    {
-      q: 'How can climate risks be reduced?',
-      a: 'Through mitigation, adaptation, knowledge expansion, and responsible innovation.'
-    }
-  ]
-  return (
-    <div className="max-w-3xl mx-auto divide-y divide-gray-200 px-2 xs:px-4 sm:px-0">
-      {items.map((item, idx) => (
-        <div key={idx} className="py-3 xs:py-4 sm:py-5">
-          <button
-            className="w-full text-left flex items-center justify-between gap-3 xs:gap-4"
-            onClick={() => toggle(idx)}
-            aria-expanded={open === idx}
-          >
-            <span className="font-semibold text-sm xs:text-base sm:text-lg text-gray-900 pr-2">{item.q}</span>
-            <span className="text-gray-500 text-lg xs:text-xl sm:text-2xl flex-shrink-0">{open === idx ? '−' : '+'}</span>
-          </button>
-          {open === idx && (
-            <p className="mt-2 xs:mt-3 text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed">{item.a}</p>
-          )}
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export default Home
-
-const Testimonials = () => {
-  const items = [
-    {
-      name: 'Alex Johnson',
-      text: 'Volunteering with SWK has been incredibly rewarding. The impact is real.'
-    },
-    {
-      name: 'Maria Rodriguez',
-      text: 'The programs helped me grow personally and professionally.'
-    },
-    {
-      name: 'Kofi Mensah',
-      text: 'Community projects brought people together and created opportunities.'
-    }
-  ]
-  const [idx, setIdx] = useState(0)
-  useEffect(() => {
-    const id = setInterval(() => setIdx((v) => (v + 1) % items.length), 7000)
-    return () => clearInterval(id)
-  }, [items.length])
-  const item = items[idx]
-  return (
-    <div className="max-w-3xl mx-auto text-center px-4 xs:px-6 sm:px-0">
-      <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-700 bg-emerald-50/60 border border-emerald-100 rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 md:p-8 mb-3 xs:mb-4 sm:mb-5">"{item.text}"</blockquote>
-      <div className="text-xs xs:text-sm sm:text-base font-semibold text-gray-900">— {item.name}</div>
-      <div className="mt-3 xs:mt-4 sm:mt-5 flex items-center justify-center gap-2" role="tablist" aria-label="Testimonials">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            aria-label={`Go to testimonial ${i + 1}`}
-            role="tab"
-            aria-selected={i === idx}
-            className={`h-2.5 w-2.5 rounded-full ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'} focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60`}
-            onClick={() => setIdx(i)}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}

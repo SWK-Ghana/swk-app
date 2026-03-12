@@ -1,307 +1,353 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+// ─── Cloudinary helpers ───────────────────────────────────────────────────────
+const CLD = 'https://res.cloudinary.com/dwgj3lovn'
+
+// Image optimised URL
+const img = (path, w = 600) =>
+  `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path}`
+
+// Video thumbnail: Cloudinary generates a JPEG from frame 0 of the video
+// The trick: use /video/upload/ path but request .jpg extension with so_0
+const videoThumb = (publicId) =>
+  `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
+
+// Video stream URL
+const videoUrl = (publicId, version) =>
+  `${CLD}/video/upload/v${version}/${publicId}.mp4`
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const imageProjects = [
+  {
+    id: 'webinar',
+    gradient: 'from-emerald-50 to-green-50',
+    border: 'border-emerald-100',
+    accent: 'bg-emerald-100 text-emerald-700',
+    badge: 'Impact',
+    thumb: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'),
+    title: 'Agribusiness Webinar Series',
+    desc: 'A three-edition webinar series empowering youth with agribusiness knowledge, powered by Agribusiness e-Academy.',
+    stat: '230+ Registrants',
+  },
+  {
+    id: 'eacademy',
+    gradient: 'from-blue-50 to-cyan-50',
+    border: 'border-blue-100',
+    accent: 'bg-blue-100 text-blue-700',
+    badge: 'Learning',
+    thumb: img('v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png'),
+    title: 'e-Academy Courses',
+    desc: 'Online learning platform for agribusiness and sustainable farming practices available to youth across Ghana.',
+    stat: 'Online',
+  },
+  {
+    id: 'ambassador',
+    gradient: 'from-emerald-50 to-blue-50',
+    border: 'border-emerald-100',
+    accent: 'bg-purple-100 text-purple-700',
+    badge: 'Recognition',
+    thumb: null, // dual-image layout
+    title: 'Ambassador Recognition',
+    desc: 'SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.',
+    stat: 'Partnership',
+    dual: [
+      img('v1760551738/1752658915453_atc9oo.jpg', 400),
+      img('v1760551737/1752658914512_k1zf9t.jpg', 400),
+    ],
+  },
+]
+
+const videoProjects = [
+  {
+    id: 'taka',
+    gradient: 'from-purple-50 to-pink-50',
+    border: 'border-purple-100',
+    accent: 'bg-purple-100 text-purple-700',
+    badge: 'Innovation',
+    publicId: 'Taka_Kipawa_2_wdxkpo',
+    version: '1760552758',
+    title: 'Taka Kipawa App',
+    desc: 'Digital waste management solutions for a circular economy.',
+  },
+  {
+    id: 'circular',
+    gradient: 'from-green-50 to-emerald-50',
+    border: 'border-green-100',
+    accent: 'bg-green-100 text-green-700',
+    badge: 'Circular Economy',
+    publicId: '1711018812883_mbddbv',
+    version: '1760551740',
+    title: 'Circular Economy Innovation',
+    desc: 'Youth-led solutions for sustainable consumption and waste reduction.',
+  },
+  {
+    id: 'climate',
+    gradient: 'from-orange-50 to-red-50',
+    border: 'border-orange-100',
+    accent: 'bg-orange-100 text-orange-700',
+    badge: 'Climate Action',
+    publicId: 'Galamsey_1_iyyc25',
+    version: '1760552757',
+    title: 'Climate Action',
+    desc: 'Children advocating for environmental protection and climate action.',
+  },
+  {
+    id: 'galamsey',
+    gradient: 'from-red-50 to-pink-50',
+    border: 'border-red-100',
+    accent: 'bg-red-100 text-red-700',
+    badge: 'Advocacy',
+    publicId: '1727031150424_dx6ece',
+    version: '1760554407',
+    title: 'Fight Against Galamsey',
+    desc: "Youth voices against illegal mining to protect Ghana's natural resources.",
+  },
+]
+
+// ─── VideoCard ─────────────────────────────────────────────────────────────────
+const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, desc }) => {
+  const [playing, setPlaying] = useState(false)
+  const thumb = videoThumb(publicId)
+  const src = videoUrl(publicId, version)
+
+  return (
+    <div className={`bg-gradient-to-br ${gradient} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
+      {/* Media area */}
+      {!playing ? (
+        <div
+          className="relative cursor-pointer group"
+          onClick={() => setPlaying(true)}
+          role="button"
+          aria-label={`Play video: ${title}`}
+        >
+          {/* Thumbnail image — Cloudinary serves a JPEG from the video's first frame */}
+          <img
+            src={thumb}
+            alt={`${title} thumbnail`}
+            className="w-full h-44 object-cover bg-gray-200"
+            loading="lazy"
+            onError={(e) => {
+              // If the auto-thumbnail fails, show a styled fallback
+              e.currentTarget.style.display = 'none'
+              e.currentTarget.nextElementSibling.style.display = 'flex'
+            }}
+          />
+          {/* Fallback — hidden by default, revealed only if thumbnail 404s */}
+          <div
+            className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2"
+            aria-hidden="true"
+          >
+            <span className="text-4xl">🎬</span>
+            <span className="text-xs text-gray-500 font-medium">Click to play</span>
+          </div>
+          {/* Play button overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
+            <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
+              <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <video
+          controls
+          autoPlay
+          className="w-full h-44 object-cover bg-black"
+        >
+          <source src={src} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
+
+      {/* Text */}
+      <div className="p-4 flex flex-col flex-1">
+        <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>
+          {badge}
+        </span>
+        <h4 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h4>
+        <p className="text-xs text-gray-600 leading-relaxed flex-1">{desc}</p>
+      </div>
+    </div>
+  )
+}
+
+// ─── Main component ────────────────────────────────────────────────────────────
 const OurWork = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">
-            Our Programs & Initiatives
+      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
+
+        {/* ── Page header ── */}
+        <div className="text-center mb-10 xs:mb-12 sm:mb-14">
+          <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+            Programs & Impact
+          </span>
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+            Our Work
           </h1>
-          <p className="text-base xs:text-lg sm:text-xl md:text-xl text-gray-600 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
-            At the heart of SWK's work are our dynamic programs that empower youth and promote sustainability. These initiatives are designed to be participatory, inclusive, and impactful.
+          <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+            From agribusiness webinars to climate action films — explore the full breadth of SWK Ghana's programs and impact.
           </p>
-          
-          {/* Our Projects & Impact (aligned with Home) */}
-          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Projects & Impact</h2>
-            
-            {/* Impact Statistics */}
-            <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 text-center mb-6 xs:mb-8 sm:mb-10">
-              <div className="bg-emerald-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-                <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-700 mb-1">236</div>
-                <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Youth empowered</div>
-              </div>
-              <div className="bg-blue-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-5">
-                <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-1">72</div>
-                <div className="text-xs xs:text-sm sm:text-base text-gray-600 leading-tight">Women impacted</div>
-              </div>
-            </div>
+        </div>
 
-            {/* Project Highlights - Compact Grid (same cards as Home for consistency) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6 md:gap-8">
-              {/* Agribusiness Webinar */}
-              <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow">
-                <div className="mb-3 xs:mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png"
-                    alt="Agribusiness Webinar"
-                    className="w-full rounded-lg shadow-sm"
-                    loading="lazy"
-                  />
-                </div>
-                <h4 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-900 mb-2">Agribusiness Webinar</h4>
-                <p className="text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Comprehensive webinar series on agriculture as a business for youth empowerment.
-                </p>
-              </div>
+        {/* ── Projects & Impact ── */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
 
-              {/* Agribusiness e-Academy */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-100 hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png"
-                    alt="Agribusiness e-Academy"
-                    className="w-full rounded-lg shadow-sm"
-                    loading="lazy"
-                  />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">e-Academy Courses</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Online learning platform for agribusiness and sustainable farming practices.
-                </p>
-              </div>
-
-              {/* Ambassador Recognition */}
-              <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-5 border border-emerald-100 hover:shadow-md transition-shadow">
-                <div className="mb-3 grid grid-cols-2 gap-2">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551738/1752658915453_atc9oo.jpg"
-                    alt="Founder Ambassador"
-                    className="w-full rounded-lg shadow-sm"
-                    loading="lazy"
-                  />
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760551737/1752658914512_k1zf9t.jpg"
-                    alt="Agribusiness Lead Ambassador"
-                    className="w-full rounded-lg shadow-sm"
-                    loading="lazy"
-                  />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Ambassador Recognition</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Our leadership team selected as ambassadors for Agribusiness e-Academy.
-                </p>
-              </div>
-
-              {/* Taka Kipawa App */}
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100 hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552758/Taka_Kipawa_2_wdxkpo.jpg"
-                    alt="Taka Kipawa App video thumbnail"
-                    className="w-full rounded-lg shadow-sm object-cover mb-3"
-                    loading="lazy"
-                  />
-                  <video
-                    controls
-                    className="w-full rounded-lg shadow-sm"
-                  >
-                    <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552758/Taka_Kipawa_2_wdxkpo.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Taka Kipawa App</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Digital solutions for waste management and circular economy initiatives.
-                </p>
-              </div>
-
-              {/* Circular Economy Innovation */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100 hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760551740/1711018812883_mbddbv.jpg"
-                    alt="Circular Economy Innovation video thumbnail"
-                    className="w-full rounded-lg shadow-sm object-cover mb-3"
-                    loading="lazy"
-                  />
-                  <video
-                    controls
-                    className="w-full rounded-lg shadow-sm"
-                  >
-                    <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760551740/1711018812883_mbddbv.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Circular Economy Innovation</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Youth-led solutions for sustainable consumption and waste reduction.
-                </p>
-              </div>
-
-              {/* Climate Action */}
-              <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-6 border border-orange-100 hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552757/Galamsey_1_iyyc25.jpg"
-                    alt="Climate Action video thumbnail"
-                    className="w-full rounded-lg shadow-sm object-cover mb-3"
-                    loading="lazy"
-                  />
-                  <video
-                    controls
-                    className="w-full rounded-lg shadow-sm"
-                  >
-                    <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760552757/Galamsey_1_iyyc25.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Climate Action</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Children advocating for environmental protection and climate action.
-                </p>
-              </div>
-
-              {/* Fight Against Galamsey */}
-              <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-100 hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <img
-                    src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760554407/1727031150424_dx6ece.jpg"
-                    alt="Fight Against Galamsey video thumbnail"
-                    className="w-full rounded-lg shadow-sm object-cover mb-3"
-                    loading="lazy"
-                  />
-                  <video
-                    controls
-                    className="w-full rounded-lg shadow-sm"
-                  >
-                    <source src="https://res.cloudinary.com/dwgj3lovn/video/upload/v1760554407/1727031150424_dx6ece.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Fight Against Galamsey</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Children adding their voices to combat illegal mining and protect Ghana's natural resources.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Programs Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
-            {/* Youth Development */}
-            <div className="bg-white rounded-lg xs:rounded-xl p-4 xs:p-5 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
-              <div className="mb-3 xs:mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Youth_Development_j10oja.png"
-                  alt="Youth Development Programs"
-                  className="w-full h-32 xs:h-36 sm:h-40 md:h-44 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-lg xs:text-xl sm:text-xl font-semibold text-gray-900 mb-2">Youth Development Programs</h3>
-              <p className="text-sm xs:text-base text-gray-600 mb-4 leading-relaxed">
-                Leadership workshops, skills training, and mentorship programs that equip young people with the tools to become effective change-makers in their communities.
-              </p>
-              <button className="btn-gradient">
-                Learn More
-              </button>
-            </div>
-
-            {/* Circular Economy */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339246/Circular_Economy_v3oo71.png"
-                  alt="Circular Economy Initiatives"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Circular Economy Initiatives</h3>
-              <p className="text-gray-600 mb-4">
-                Waste reduction programs, recycling workshops, and sustainable consumption education that promote circular economy principles among youth and communities.
-              </p>
-              <button className="btn-gradient">
-                Learn More
-              </button>
-            </div>
-
-            {/* Agribusiness */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339247/Agribusiness_yqc44a.png"
-                  alt="Agribusiness Development"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Agribusiness Development</h3>
-              <p className="text-gray-600 mb-4">
-                Training in sustainable agriculture, agribusiness skills, and value chain development to create economic opportunities for young people in the agricultural sector.
-              </p>
-              <button className="btn-gradient">
-                Learn More
-              </button>
-            </div>
-
-            {/* Technology */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Technology_lwdqyb.png"
-                  alt="Technology & Innovation"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Technology & Innovation</h3>
-              <p className="text-gray-600 mb-4">
-                Digital literacy programs, tech hackathons, and innovation labs that leverage technology for sustainable development and youth empowerment.
-              </p>
-              <button className="btn-gradient">
-                Learn More
-              </button>
-            </div>
-
-            {/* Climate Action */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339245/Climate_Action_ffrdiu.png"
-                  alt="Climate Action Projects"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Climate Action Projects</h3>
-              <p className="text-gray-600 mb-4">
-                Environmental conservation programs, climate education, and youth-led initiatives that address climate change and promote environmental stewardship.
-              </p>
-              <button className="btn-gradient">
-                Learn More
-              </button>
-            </div>
-
-            {/* Community Engagement */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="mb-4 overflow-hidden rounded-md">
-                <img
-                  src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760339244/Community_Engagement_jnun1t.png"
-                  alt="Community Engagement"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Community Engagement</h3>
-              <p className="text-gray-600 mb-4">
-                Grassroots community projects, town hall forums, and participatory initiatives that build resilient communities and promote active citizenship.
-              </p>
-              <button className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
-                Learn More
-              </button>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="mt-12 xs:mt-14 sm:mt-16 text-center px-4 xs:px-6 sm:px-0">
-            <h2 className="text-2xl xs:text-3xl sm:text-3xl font-bold text-gray-900 mb-3 xs:mb-4">Want to Get Involved?</h2>
-            <p className="text-base xs:text-lg sm:text-lg text-gray-600 mb-6 xs:mb-8">
-              Join us in making a difference in our community.
+          <div className="text-center mb-6 xs:mb-8 sm:mb-10">
+            <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+              Impact
+            </span>
+            <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              Our Projects & Impact
+            </h2>
+            <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Real projects, real youth, real impact — across Ghana and beyond.
             </p>
-            <button className="btn-gradient text-lg px-8 py-3">
+          </div>
+
+          {/* Image-based projects */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
+            {imageProjects.map((p) => (
+              <div
+                key={p.id}
+                className={`bg-gradient-to-br ${p.gradient} rounded-xl border ${p.border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}
+              >
+                {/* Image or dual-image */}
+                {p.dual ? (
+                  <div className="grid grid-cols-2 gap-0.5">
+                    <img src={p.dual[0]} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
+                    <img src={p.dual[1]} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
+                  </div>
+                ) : (
+                  <img src={p.thumb} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
+                )}
+                <div className="p-4 xs:p-5 flex flex-col flex-1">
+                  <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>
+                    {p.badge}
+                  </span>
+                  <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
+                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
+                  <span className="self-start text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+                    {p.stat}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Video projects */}
+          <div className="mb-2">
+            <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-xl">🎬</span> Video Stories
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5">
+              {videoProjects.map((v) => (
+                <VideoCard key={v.id} {...v} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Focus areas ── */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
+          <div className="text-center mb-6 xs:mb-8">
+            <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+              Our Pillars
+            </span>
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              Focus Areas
+            </h2>
+            <p className="text-sm xs:text-base text-gray-600 max-w-2xl mx-auto">
+              Six interconnected pillars driving sustainable impact across Ghana.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
+            {[
+              { img: 'v1760339246/Youth_Development_j10oja.png', title: 'Youth Development', desc: 'Leadership workshops, skills training, and mentorship for young change-makers.' },
+              { img: 'v1760339246/Circular_Economy_v3oo71.png', title: 'Circular Economy', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
+              { img: 'v1760339247/Agribusiness_yqc44a.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
+              { img: 'v1760339244/Technology_lwdqyb.png', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
+              { img: 'v1760339245/Climate_Action_ffrdiu.png', title: 'Climate Action', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
+              { img: 'v1760339244/Community_Engagement_jnun1t.png', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                <img
+                  src={img(item.img)}
+                  alt={item.title}
+                  className="w-full h-40 object-cover"
+                  loading="lazy"
+                />
+                <div className="p-4 xs:p-5">
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── SDG Alignment ── */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
+          <div className="text-center mb-6 xs:mb-8">
+            <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+              Global Goals
+            </span>
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              UN SDG Alignment
+            </h2>
+            <p className="text-sm xs:text-base text-gray-600 max-w-2xl mx-auto">
+              Our work directly contributes to eight UN Sustainable Development Goals.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-4 gap-3 xs:gap-4">
+            {[
+              { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+              { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
+              { n: '11', title: 'Sustainable Cities', color: 'bg-green-50 text-green-700 border-green-100' },
+              { n: '12', title: 'Responsible Consumption', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
+              { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+            ].map((g, i) => (
+              <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3 xs:p-4`}>
+                <div className="flex items-center justify-center h-10 w-10 xs:h-12 xs:w-12 rounded-lg bg-white shadow-inner border flex-shrink-0">
+                  <span className="font-bold text-base xs:text-lg">{g.n}</span>
+                </div>
+                <div className="font-medium text-xs xs:text-sm leading-tight">{g.title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── CTA ── */}
+        <div className="text-center py-6 xs:py-8">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+            Want to Be Part of Our Work?
+          </h2>
+          <p className="text-sm xs:text-base text-gray-600 mb-6 max-w-xl mx-auto">
+            Join SWK Ghana as a volunteer, partner, or supporter and help us scale impact across Africa.
+          </p>
+          <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
+            <button
+              className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3"
+              onClick={() => navigate('/get-involved')}
+            >
               Get Involved
+            </button>
+            <button
+              className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base"
+              onClick={() => navigate('/donate')}
+            >
+              Donate Now
             </button>
           </div>
         </div>
+
       </div>
     </div>
   )
