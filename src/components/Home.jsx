@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 const Home = () => {
   const navigate = useNavigate()
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false)
@@ -443,6 +444,226 @@ const Home = () => {
           </div>
         </div>
 
+{/* ============================================
+            CURRENT ACTIVITIES SECTION
+            Update the activities array with real content
+        ============================================ */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-6 xs:mb-8 sm:mb-10">
+              <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+                Currently Active
+              </span>
+              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3">
+                What We're Doing
+              </h2>
+              <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                Here's a look at the programs and initiatives SWK Ghana is actively running right now.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5 sm:gap-6">
+              {[
+                {
+                  icon: '🌾',
+                  tag: 'Agribusiness',
+                  tagColor: 'bg-green-100 text-green-700',
+                  title: 'Agribusiness Webinar Series',
+                  description: 'An ongoing webinar series equipping youth with agribusiness knowledge, tools, and networks to thrive in Ghana\'s agricultural sector.',
+                  status: 'Ongoing',
+                  statusColor: 'bg-emerald-100 text-emerald-700',
+                  link: null,
+                },
+                {
+                  icon: '🌍',
+                  tag: 'Climate Action',
+                  tagColor: 'bg-blue-100 text-blue-700',
+                  title: 'Climate Action Campaigns',
+                  description: 'Youth-led campaigns raising awareness about climate change, environmental protection, and sustainable practices across communities in Ghana.',
+                  status: 'Ongoing',
+                  statusColor: 'bg-emerald-100 text-emerald-700',
+                  link: null,
+                },
+                {
+                  icon: '🤝',
+                  tag: 'Community',
+                  tagColor: 'bg-purple-100 text-purple-700',
+                  title: 'Community Outreach Programs',
+                  description: 'Grassroots programs engaging local communities in sustainable development, health, and education initiatives across Greater Accra.',
+                  status: 'Ongoing',
+                  statusColor: 'bg-emerald-100 text-emerald-700',
+                  link: null,
+                },
+                {
+                  icon: '💡',
+                  tag: 'Training',
+                  tagColor: 'bg-yellow-100 text-yellow-700',
+                  title: 'Skills & Leadership Workshops',
+                  description: 'Practical training workshops building leadership, entrepreneurship, and digital skills for young people across Ghana.',
+                  status: 'Ongoing',
+                  statusColor: 'bg-emerald-100 text-emerald-700',
+                  link: null,
+                },
+                {
+                  icon: '📢',
+                  tag: 'Advocacy',
+                  tagColor: 'bg-red-100 text-red-700',
+                  title: 'Youth Advocacy Initiatives',
+                  description: 'Amplifying youth voices in policy discussions on climate, sustainability, and development at local, national, and continental levels.',
+                  status: 'Ongoing',
+                  statusColor: 'bg-emerald-100 text-emerald-700',
+                  link: null,
+                },
+              ].map((activity, idx) => (
+                <div
+                  key={idx}
+                  className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-5 xs:p-6 border border-emerald-100 hover:shadow-md transition-shadow flex flex-col"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${activity.tagColor}`}>
+                      {activity.tag}
+                    </span>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${activity.statusColor}`}>
+                      ● {activity.status}
+                    </span>
+                  </div>
+                  <div className="text-3xl mb-3">{activity.icon}</div>
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{activity.title}</h3>
+                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{activity.description}</p>
+                  {activity.link && (
+                    <a
+                      href={activity.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 text-sm font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
+                    >
+                      Learn More →
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================
+            UPCOMING EVENTS SECTION
+            Update the events array with real event details
+        ============================================ */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-6 xs:mb-8 sm:mb-10">
+              <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+                Mark Your Calendar
+              </span>
+              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3">
+                Upcoming Events
+              </h2>
+              <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                Join us at our next events and be part of the movement for sustainable change.
+              </p>
+            </div>
+
+            {/* Events List */}
+            <div className="space-y-4 xs:space-y-5 sm:space-y-6 mb-8">
+              {[
+                {
+                  date: { day: 'TBA', month: 'Soon' },
+                  tag: 'Webinar',
+                  tagColor: 'bg-green-100 text-green-700',
+                  title: 'Agribusiness Webinar Series — Next Edition',
+                  description: 'Join us for the next edition of our popular Agribusiness Webinar Series. Details coming soon — stay tuned!',
+                  location: 'Google Meet (Online)',
+                  registrationLink: null,
+                  isFree: true,
+                },
+                {
+                  date: { day: 'TBA', month: 'Soon' },
+                  tag: 'Workshop',
+                  tagColor: 'bg-yellow-100 text-yellow-700',
+                  title: 'Youth Leadership & Skills Training Workshop',
+                  description: 'A hands-on workshop building leadership, entrepreneurship, and digital skills for young Ghanaians.',
+                  location: 'Accra, Ghana',
+                  registrationLink: null,
+                  isFree: true,
+                },
+                {
+                  date: { day: 'TBA', month: 'Soon' },
+                  tag: 'Community',
+                  tagColor: 'bg-purple-100 text-purple-700',
+                  title: 'Community Outreach & Engagement Day',
+                  description: 'An outreach day bringing SWK Ghana\'s programs directly to communities across Greater Accra.',
+                  location: 'Greater Accra, Ghana',
+                  registrationLink: null,
+                  isFree: true,
+                },
+              ].map((event, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col sm:flex-row gap-4 xs:gap-5 sm:gap-6 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow"
+                >
+                  {/* Date Badge */}
+                  <div className="flex-shrink-0 flex sm:flex-col items-center sm:items-center justify-start sm:justify-center bg-white rounded-xl border border-emerald-200 px-4 py-3 sm:px-5 sm:py-4 min-w-[80px] text-center gap-3 sm:gap-0">
+                    <span className="text-2xl xs:text-3xl sm:text-4xl font-bold text-emerald-700 sm:mb-1">{event.date.day}</span>
+                    <span className="text-xs xs:text-sm font-semibold text-gray-500 uppercase tracking-wide">{event.date.month}</span>
+                  </div>
+
+                  {/* Event Details */}
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${event.tagColor}`}>
+                        {event.tag}
+                      </span>
+                      {event.isFree && (
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">
+                          Free
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-900 mb-1 xs:mb-2">
+                      {event.title}
+                    </h3>
+                    <p className="text-xs xs:text-sm sm:text-base text-gray-600 leading-relaxed mb-2 xs:mb-3">
+                      {event.description}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-3 xs:gap-4">
+                      <span className="text-xs xs:text-sm text-gray-500 flex items-center gap-1">
+                        📍 {event.location}
+                      </span>
+                      {event.registrationLink ? (
+                        <a
+                          href={event.registrationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs xs:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 xs:px-4 py-1.5 rounded-lg transition-colors"
+                        >
+                          Register Now →
+                        </a>
+                      ) : (
+                        <span className="text-xs xs:text-sm font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 xs:px-4 py-1.5 rounded-lg">
+                          Registration Opening Soon
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* View All Events CTA */}
+            <div className="text-center">
+              <p className="text-sm xs:text-base text-gray-600 mb-3">
+                Want to stay updated on all SWK Ghana events?
+              </p>
+              <button
+                className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3"
+                onClick={() => navigate('/get-involved')}
+              >
+                Get Notified About Events
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* FAQs */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-sm border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
