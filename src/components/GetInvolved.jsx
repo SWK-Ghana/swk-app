@@ -172,14 +172,14 @@ const GetInvolved = () => {
             </div>
 
             {/* Donate */}
-            <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
                 <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Donate</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Donate</h3>
+              <p className="text-sm xs:text-base text-gray-600 mb-5 xs:mb-6 leading-relaxed">
                 Support our mission financially and help us expand our programs and reach more people.
               </p>
               <button type="button" className="btn-gradient w-full" onClick={() => setIsDonateOpen(true)}>
@@ -188,14 +188,14 @@ const GetInvolved = () => {
             </div>
 
             {/* Partner */}
-            <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow motion-safe:hover:-translate-y-0.5 motion-safe:transition-transform">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
                 <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Partner With Us</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl xs:text-2xl sm:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Partner With Us</h3>
+              <p className="text-sm xs:text-base text-gray-600 mb-5 xs:mb-6 leading-relaxed">
                 Collaborate with us as an organization or business to create meaningful partnerships.
               </p>
               <button type="button" className="btn-gradient w-full" onClick={() => setIsPartnerOpen(true)}>

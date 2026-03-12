@@ -33,13 +33,13 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
       <nav className="mx-auto max-w-7xl px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
-        <div className="flex h-14 xs:h-16 sm:h-18 md:h-20 items-center justify-between">
+        <div className="flex h-14 xs:h-16 sm:h-[72px] md:h-20 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 xs:gap-3 group active:opacity-90" aria-label={logoAlt}>
             <img
               src={logoSrc}
               alt={logoAlt}
-              className="h-10 xs:h-12 sm:h-13 md:h-14 lg:h-16 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-10 xs:h-12 sm:h-12 md:h-14 lg:h-16 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
             />
             <span className="sr-only">{logoAlt}</span>
           </Link>
