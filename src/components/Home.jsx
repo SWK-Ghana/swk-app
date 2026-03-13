@@ -433,9 +433,9 @@ const Home = () => {
                 <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar Series Impact Report 2025</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Three editions. 230+ verified registrants. Full impact metrics, SDG alignment, and demographic insights.</p>
                 <div className="flex gap-2">
-                  <a href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-2 rounded-lg transition-colors">📄 View</a>
-                  <a href="https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/export?format=pdf" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-emerald-600 border border-emerald-600 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>
@@ -468,9 +468,9 @@ const Home = () => {
                 <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">SWK Ghana Annual Report 2025</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our annual review of programs, partnerships, community impact, and organizational milestones for 2025.</p>
                 <div className="flex gap-2">
-                  <a href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/file/d/17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4/view?usp=sharing" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg transition-colors">📄 View</a>
-                  <a href="https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/export?format=pdf" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/uc?export=download&id=17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-blue-600 border border-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>

@@ -18,8 +18,8 @@ const reports = [
     thumbnail:
       'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png',
     badgeText: 'Latest Report',
-    driveLink: 'https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/edit?usp=sharing',
-    downloadLink: 'https://docs.google.com/document/d/1C7_1Yh86niEFApNaQFBcJn37zLgz3kOb/export?format=pdf',
+    driveLink: 'https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po',
   },
   {
     id: 2,
@@ -37,8 +37,8 @@ const reports = [
     thumbnail:
       'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg',
     badgeText: 'Annual Report',
-    driveLink: 'https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/edit?usp=sharing',
-    downloadLink: 'https://docs.google.com/document/d/12mrbzehyu34yzYL_xpxm5OcJUoEeAyz8/export?format=pdf',
+    driveLink: 'https://drive.google.com/file/d/17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4',
   },
   {
     id: 3,
