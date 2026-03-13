@@ -108,6 +108,8 @@ const Testimonials = () => {
       <div className="mt-4 flex justify-center gap-2">
         {items.map((_, i) => (
           <button key={i} onClick={() => setIdx(i)}
+            aria-label={`Go to testimonial ${i + 1}`}
+            aria-current={i === idx ? 'true' : undefined}
             className={`h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
         ))}
       </div>
@@ -201,6 +203,8 @@ const Home = () => {
           <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
             {slides.map((_, idx) => (
               <button key={idx} onClick={() => setCurrentSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                aria-current={idx === currentSlide ? 'true' : undefined}
                 className={`h-2.5 w-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'}`} />
             ))}
           </div>
@@ -523,7 +527,14 @@ const Home = () => {
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Newsletter</h2>
           <p className="text-sm xs:text-base text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up to receive updates and news from SWK Ghana directly in your inbox.</p>
           <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
-            <input type="email" required placeholder="your.email@example.com" className="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" />
+            <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+            <input
+              id="newsletter-email"
+              type="email"
+              required
+              placeholder="your.email@example.com"
+              className="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            />
             <button type="submit" className="btn-gradient px-6 py-3 rounded-xl text-sm">Subscribe</button>
           </form>
         </Section>
@@ -547,35 +558,35 @@ const Home = () => {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Volunteer Sign-Up</h3>
-              <button className="text-gray-400 hover:text-gray-600 text-xl" onClick={() => setIsVolunteerOpen(false)}>✕</button>
+              <button className="text-gray-400 hover:text-gray-600 text-xl" aria-label="Close volunteer form" onClick={() => setIsVolunteerOpen(false)}>✕</button>
             </div>
             <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); openVolunteerEmail(); resetVolunteer(); setIsVolunteerOpen(false) }}>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
-                <input required type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Your full name" />
+                <label htmlFor="vol-name" className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                <input required id="vol-name" type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Your full name" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                  <input required type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g. 24" />
+                  <label htmlFor="vol-age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                  <input required id="vol-age" type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g. 24" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input required type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="you@email.com" />
+                  <label htmlFor="vol-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input required id="vol-email" type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="you@email.com" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation</label>
-                <textarea required rows={4} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us why you want to volunteer…" />
+                <label htmlFor="vol-motivation" className="block text-sm font-medium text-gray-700 mb-1">Motivation</label>
+                <textarea required id="vol-motivation" rows={4} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us why you want to volunteer…" />
               </div>
               <div className="space-y-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
-                  <input type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white" />
+                  <label htmlFor="vol-file" className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
+                  <input id="vol-file" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Or paste a link (optional)</label>
-                  <input type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="https://drive.google.com/…" />
+                  <label htmlFor="vol-link" className="block text-sm font-medium text-gray-700 mb-1">Or paste a link (optional)</label>
+                  <input id="vol-link" type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="https://drive.google.com/…" />
                 </div>
                 <p className="text-xs text-gray-500">Your email app will open on submit. Attach files before sending.</p>
               </div>
@@ -595,26 +606,26 @@ const Home = () => {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Partnership Inquiry</h3>
-              <button className="text-gray-400 hover:text-gray-600 text-xl" onClick={() => setIsPartnerOpen(false)}>✕</button>
+              <button className="text-gray-400 hover:text-gray-600 text-xl" aria-label="Close partnership form" onClick={() => setIsPartnerOpen(false)}>✕</button>
             </div>
             <form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Organization Name</label>
-                <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                <label htmlFor="partner-org" className="block text-sm font-medium text-gray-700 mb-1">Organization Name</label>
+                <input required id="partner-org" type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact Name</label>
-                  <input required type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                  <label htmlFor="partner-name" className="block text-sm font-medium text-gray-700 mb-1">Contact Name</label>
+                  <input required id="partner-name" type="text" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input required type="email" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                  <label htmlFor="partner-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input required id="partner-email" type="email" className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">How would you like to partner?</label>
-                <textarea rows={4} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Describe partnership interest" />
+                <label htmlFor="partner-message" className="block text-sm font-medium text-gray-700 mb-1">How would you like to partner?</label>
+                <textarea id="partner-message" rows={4} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Describe partnership interest" />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button type="button" className="px-4 py-2 rounded-lg border text-gray-700" onClick={() => setIsPartnerOpen(false)}>Cancel</button>
