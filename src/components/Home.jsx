@@ -58,7 +58,7 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
       )}
       <div className="p-4 flex flex-col flex-1">
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
-        <h4 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h4>
+        <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-600 leading-relaxed flex-1">{description}</p>
       </div>
     </div>
@@ -105,12 +105,15 @@ const Testimonials = () => {
         "{items[idx].text}"
       </blockquote>
       <div className="text-sm font-semibold text-gray-800">— {items[idx].name}</div>
-      <div className="mt-4 flex justify-center gap-2">
+      <div className="mt-4 flex justify-center gap-1">
         {items.map((_, i) => (
           <button key={i} onClick={() => setIdx(i)}
             aria-label={`Go to testimonial ${i + 1}`}
             aria-current={i === idx ? 'true' : undefined}
-            className={`h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
+            className="p-2 flex items-center justify-center"
+          >
+            <span className={`block h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
+          </button>
         ))}
       </div>
     </div>
@@ -173,7 +176,7 @@ const Home = () => {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 xs:py-8 sm:py-10 md:py-12">
 
         {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
@@ -200,12 +203,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
+          <div className="absolute inset-x-0 bottom-4 flex justify-center gap-1">
             {slides.map((_, idx) => (
               <button key={idx} onClick={() => setCurrentSlide(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
                 aria-current={idx === currentSlide ? 'true' : undefined}
-                className={`h-2.5 w-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'}`} />
+                className="p-2 flex items-center justify-center"
+              >
+                <span className={`block h-2.5 w-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'}`} />
+              </button>
             ))}
           </div>
         </div>
@@ -216,7 +222,7 @@ const Home = () => {
             {[{ n: '230+', label: 'Webinar Registrants' }, { n: '236', label: 'Youth Empowered' }, { n: '72', label: 'Women Impacted' }, { n: '3', label: 'Program Editions' }].map((s, i) => (
               <div key={i}>
                 <div className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white mb-1">{s.n}</div>
-                <div className="text-xs xs:text-sm text-emerald-200">{s.label}</div>
+                <div className="text-xs xs:text-sm text-white/80">{s.label}</div>
               </div>
             ))}
           </div>
@@ -283,7 +289,7 @@ const Home = () => {
                 />
                 <div className="p-4 xs:p-5 flex flex-col flex-1">
                   <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>{p.badge}</span>
-                  <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
                   <span className="self-start text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">{p.stat}</span>
                 </div>
@@ -305,7 +311,7 @@ const Home = () => {
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
                 <span className="self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 bg-purple-100 text-purple-700">Recognition</span>
-                <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Ambassador Recognition</h4>
+                <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Ambassador Recognition</h3>
                 <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.</p>
                 <span className="self-start text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 py-1 rounded-full">Partnership</span>
               </div>
@@ -635,7 +641,7 @@ const Home = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   )
 }
 
