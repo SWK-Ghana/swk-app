@@ -103,8 +103,8 @@ const Footer = () => {
             <h4 className="text-base xs:text-lg font-semibold mb-3 xs:mb-4">Contact</h4>
             <ul className="space-y-2 text-sm xs:text-base text-gray-300">
               <li>
-                <a href="mailto:sustainabilitywithkoomson@gmail.com" className="hover:text-white transition-colors break-words">
-                  sustainabilitywithkoomson@gmail.com
+                <a href="mailto:info@swkghana.org" className="hover:text-white transition-colors break-words">
+                  info@swkghana.org
                 </a>
               </li>
               <li>
