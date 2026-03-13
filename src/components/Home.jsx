@@ -3,7 +3,20 @@ import { useNavigate } from 'react-router-dom'
 
 // Cloudinary helpers
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
+
+// Single-width optimised image (fallback src)
 const img = (path, w = 600) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path}`
+
+// Responsive srcset — Cloudinary serves WebP/AVIF automatically via f_auto
+const srcset = (path, widths = [400, 800, 1200]) =>
+  widths.map((w) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path} ${w}w`).join(', ')
+
+// Hero images — full-width banner breakpoints
+const heroSrcset = (path) => srcset(path, [480, 768, 1024, 1280, 1920])
+
+// Card images — smaller breakpoints for thumbnails
+const cardSrcset = (path) => srcset(path, [300, 600, 900])
+
 const videoThumb = (publicId) => `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
 const videoUrl = (publicId, version) => `${CLD}/video/upload/v${version}/${publicId}.mp4`
 
@@ -115,9 +128,9 @@ const Home = () => {
   const [volunteerDocFile, setVolunteerDocFile] = useState(null)
 
   const slides = useMemo(() => ([
-    { image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
-    { image: img('v1760339245/Climate_Action_ffrdiu.png', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
-    { image: img('v1760339244/Technology_lwdqyb.png', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
+    { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
+    { _path: 'v1760339245/Climate_Action_ffrdiu.png', image: img('v1760339245/Climate_Action_ffrdiu.png', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
+    { _path: 'v1760339244/Technology_lwdqyb.png', image: img('v1760339244/Technology_lwdqyb.png', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
   ]), [])
 
   useEffect(() => {
@@ -164,7 +177,13 @@ const Home = () => {
         {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
         <div className="relative mb-8 xs:mb-10 sm:mb-12 rounded-xl xs:rounded-2xl overflow-hidden">
           {slides.map((s, idx) => (
-            <img key={s.image} src={s.image} alt={s.title}
+            <img key={s.image} src={s.image}
+              srcSet={heroSrcset(s._path)}
+              sizes="100vw"
+              alt={s.title}
+              fetchPriority={idx === 0 ? 'high' : 'low'}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              decoding={idx === 0 ? 'sync' : 'async'}
               className={`h-[42vh] xs:h-[48vh] sm:h-[52vh] md:h-[58vh] lg:h-[62vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
             />
           ))}
@@ -212,7 +231,15 @@ const Home = () => {
               { src: 'v1760339244/Community_Engagement_jnun1t.png', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <img src={img(item.src)} alt={item.title} className="w-full h-40 object-cover" loading="lazy" />
+                <img
+                  src={img(item.src)}
+                  srcSet={cardSrcset(item.src)}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  alt={item.title}
+                  className="w-full h-40 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="p-4 xs:p-5">
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
@@ -231,17 +258,25 @@ const Home = () => {
             {[
               {
                 gradient: 'from-emerald-50 to-green-50', border: 'border-emerald-100', badge: 'Impact', accent: 'bg-emerald-100 text-emerald-700',
-                src: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'), title: 'Agribusiness Webinar Series',
+                path: 'v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png', title: 'Agribusiness Webinar Series',
                 desc: 'Three-edition webinar series on agriculture as a business for youth empowerment.', stat: '230+ Registrants',
               },
               {
                 gradient: 'from-blue-50 to-cyan-50', border: 'border-blue-100', badge: 'Learning', accent: 'bg-blue-100 text-blue-700',
-                src: img('v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png'), title: 'e-Academy Courses',
+                path: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'e-Academy Courses',
                 desc: 'Online learning platform for agribusiness and sustainable farming practices.', stat: 'Online',
               },
             ].map((p, i) => (
               <div key={i} className={`bg-gradient-to-br ${p.gradient} rounded-xl border ${p.border} overflow-hidden hover:shadow-md transition-shadow flex flex-col`}>
-                <img src={p.src} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
+                <img
+                  src={img(p.path)}
+                  srcSet={cardSrcset(p.path)}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  alt={p.title}
+                  className="w-full h-48 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="p-4 xs:p-5 flex flex-col flex-1">
                   <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>{p.badge}</span>
                   <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
@@ -253,8 +288,16 @@ const Home = () => {
             {/* Ambassador — dual image */}
             <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="grid grid-cols-2 gap-0.5">
-                <img src={img('v1760551738/1752658915453_atc9oo.jpg', 400)} alt="Founder Ambassador" className="w-full h-48 object-cover" loading="lazy" />
-                <img src={img('v1760551737/1752658914512_k1zf9t.jpg', 400)} alt="Ambassador" className="w-full h-48 object-cover" loading="lazy" />
+                <img
+                  src={img('v1760551738/1752658915453_atc9oo.jpg', 400)}
+                  srcSet={cardSrcset('v1760551738/1752658915453_atc9oo.jpg')}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 17vw"
+                  alt="Founder Ambassador" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
+                <img
+                  src={img('v1760551737/1752658914512_k1zf9t.jpg', 400)}
+                  srcSet={cardSrcset('v1760551737/1752658914512_k1zf9t.jpg')}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 17vw"
+                  alt="Ambassador" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
                 <span className="self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 bg-purple-100 text-purple-700">Recognition</span>
@@ -344,7 +387,11 @@ const Home = () => {
             {/* Report 1 — Agribusiness Impact Report (cover = webinar flyer) */}
             <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="relative">
-                <img src={img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')} alt="Agribusiness Impact Report 2025" className="w-full h-48 object-cover" loading="lazy" />
+                <img
+                  src={img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
+                  srcSet={cardSrcset('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  alt="Agribusiness Impact Report 2025" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
                 <span className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
@@ -365,9 +412,12 @@ const Home = () => {
               <div className="relative">
                 <img
                   src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg')}
+                  srcSet={cardSrcset('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg')}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt="SWK Ghana Annual Report 2025"
                   className="w-full h-48 object-cover"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                     e.currentTarget.nextElementSibling.style.display = 'flex'
@@ -418,7 +468,11 @@ const Home = () => {
           <SectionHeader badge="Global Goals" badgeColor="bg-blue-100 text-blue-700" title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 items-center">
             <div className="overflow-hidden rounded-xl border border-gray-200">
-              <img src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg', 900)} alt="SWK team" className="w-full h-auto" loading="lazy" />
+              <img
+                src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg', 900)}
+                srcSet={srcset('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg', [480, 768, 900])}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                alt="SWK team" className="w-full h-auto" loading="lazy" decoding="async" />
             </div>
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
               {[
