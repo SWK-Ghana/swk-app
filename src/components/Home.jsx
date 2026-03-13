@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { sendEmail, subscribeContact, formatEmailHtml } from '../utils/brevo'
+import { sendEmail, subscribeContact } from '../utils/brevo'
 
 // Cloudinary helpers
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -159,17 +159,14 @@ const Home = () => {
     setVolunteerStatus('sending')
     try {
       await sendEmail({
-        subject: `Volunteer Application — ${volunteerFullName}`,
-        htmlContent: formatEmailHtml('Volunteer Application', [
-          ['Full Name', volunteerFullName],
-          ['Age', volunteerAge],
-          ['Email', volunteerEmail],
-          ['Motivation', volunteerMotivation.replace(/\n/g, '<br/>')],
-          ['Document Link', volunteerDocLink || 'N/A'],
-          ['File Attached', volunteerDocFile?.name || 'N/A'],
-        ]),
-        replyToEmail: volunteerEmail,
-        replyToName: volunteerFullName,
+        _subject: `Volunteer Application — ${volunteerFullName}`,
+        name: volunteerFullName,
+        age: volunteerAge,
+        email: volunteerEmail,
+        motivation: volunteerMotivation,
+        document_link: volunteerDocLink || 'N/A',
+        file_name: volunteerDocFile?.name || 'N/A',
+        form_type: 'Volunteer Application',
       })
       setVolunteerStatus('success')
     } catch {
@@ -182,15 +179,12 @@ const Home = () => {
     setPartnerStatus('sending')
     try {
       await sendEmail({
-        subject: `Partnership Inquiry — ${partnerOrg}`,
-        htmlContent: formatEmailHtml('Partnership Inquiry', [
-          ['Organisation', partnerOrg],
-          ['Contact Name', partnerName],
-          ['Email', partnerEmail],
-          ['Message', partnerMessage.replace(/\n/g, '<br/>')],
-        ]),
-        replyToEmail: partnerEmail,
-        replyToName: partnerName,
+        _subject: `Partnership Inquiry — ${partnerOrg}`,
+        organisation: partnerOrg,
+        contact_name: partnerName,
+        email: partnerEmail,
+        message: partnerMessage,
+        form_type: 'Partnership Inquiry',
       })
       setPartnerStatus('success')
     } catch {

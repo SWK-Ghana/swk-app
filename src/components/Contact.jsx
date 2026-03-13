@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { sendEmail, formatEmailHtml } from '../utils/brevo'
+import { sendEmail } from '../utils/brevo'
 
 const Contact = () => {
   const [firstName, setFirstName] = useState('')
@@ -16,15 +16,11 @@ const Contact = () => {
     setErrorMsg('')
     try {
       await sendEmail({
-        subject: subject.trim() ? `SWK Website: ${subject.trim()}` : 'SWK Website: Get in Touch',
-        htmlContent: formatEmailHtml('New Contact Message', [
-          ['Name', `${firstName} ${lastName}`.trim()],
-          ['Email', email],
-          ['Subject', subject],
-          ['Message', message.replace(/\n/g, '<br/>')],
-        ]),
-        replyToEmail: email,
-        replyToName: `${firstName} ${lastName}`.trim(),
+        _subject: subject.trim() ? `SWK Website: ${subject.trim()}` : 'SWK Website: Get in Touch',
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        subject,
+        message,
       })
       setStatus('success')
       setFirstName('')
