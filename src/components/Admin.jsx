@@ -6,6 +6,22 @@ const CATEGORIES = ['Event Recap', 'Program Update', 'Impact Story', 'Opinion']
 const slugify = (text) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
+const CLOUDINARY_CLOUD = 'dwgj3lovn'
+const CLOUDINARY_PRESET = 'wx7boz2b'
+
+const uploadToCloudinary = async (file) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('upload_preset', CLOUDINARY_PRESET)
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+    method: 'POST',
+    body: formData,
+  })
+  if (!res.ok) throw new Error('Upload failed')
+  const data = await res.json()
+  return data.secure_url
+}
+
 const emptyForm = {
   title: '',
   excerpt: '',
@@ -20,6 +36,7 @@ const emptyForm = {
 const RichEditor = ({ value, onChange }) => {
   const editorRef = useRef(null)
   const isInternalUpdate = useRef(false)
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     if (editorRef.current && !isInternalUpdate.current) {
@@ -47,9 +64,27 @@ const RichEditor = ({ value, onChange }) => {
     if (url) exec('createLink', url)
   }
 
-  const insertImage = () => {
-    const url = prompt('Enter image URL (Cloudinary link):')
+  const insertImageByUrl = () => {
+    const url = prompt('Enter image URL:')
     if (url) exec('insertImage', url)
+  }
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    try {
+      const url = await uploadToCloudinary(file)
+      editorRef.current?.focus()
+      document.execCommand('insertImage', false, url)
+      isInternalUpdate.current = true
+      onChange(editorRef.current?.innerHTML || '')
+    } catch {
+      alert('Image upload failed. Please try again.')
+    } finally {
+      setUploading(false)
+      e.target.value = ''
+    }
   }
 
   const ToolBtn = ({ cmd, val, title, children, onClick }) => (
@@ -113,11 +148,24 @@ const RichEditor = ({ value, onChange }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
           </svg>
         </ToolBtn>
-        <ToolBtn title="Insert image" onClick={insertImage}>
+        <ToolBtn title="Insert image by URL" onClick={insertImageByUrl}>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         </ToolBtn>
+        <label title="Upload image from laptop" className="px-2 py-1.5 rounded hover:bg-gray-200 text-gray-700 text-sm transition-colors cursor-pointer flex items-center justify-center min-w-[28px]">
+          {uploading ? (
+            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+            </svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+          )}
+          <input type="file" accept="image/*" className="hidden" disabled={uploading} onChange={handleImageUpload} />
+        </label>
 
         <span className="w-px h-5 bg-gray-300 mx-1" />
 
@@ -155,6 +203,7 @@ const Admin = () => {
   const [form, setForm] = useState(emptyForm)
   const [editId, setEditId] = useState(null)
   const [saved, setSaved] = useState(false)
+  const [uploadingCover, setUploadingCover] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('swk_blog_posts')
@@ -275,14 +324,47 @@ const Admin = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image URL <span className="text-gray-400 font-normal">(optional)</span></label>
-                <input type="url" value={form.coverImage}
-                  onChange={e => setForm({ ...form, coverImage: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
-                  placeholder="https://res.cloudinary.com/..." />
-                <p className="text-xs text-gray-400 mt-1">Paste a Cloudinary image URL</p>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image <span className="text-gray-400 font-normal">(optional)</span></label>
+                <div className="flex gap-2 items-center">
+                  <label className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-300 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors text-sm font-medium">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                    {uploadingCover ? 'Uploading...' : 'Upload from laptop'}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={uploadingCover}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (!file) return
+                        setUploadingCover(true)
+                        try {
+                          const url = await uploadToCloudinary(file)
+                          setForm(f => ({ ...f, coverImage: url }))
+                        } catch {
+                          alert('Image upload failed. Please try again or paste a URL.')
+                        } finally {
+                          setUploadingCover(false)
+                        }
+                      }}
+                    />
+                  </label>
+                  <span className="text-xs text-gray-400">or paste URL:</span>
+                  <input type="url" value={form.coverImage}
+                    onChange={e => setForm({ ...form, coverImage: e.target.value })}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm"
+                    placeholder="https://res.cloudinary.com/..." />
+                </div>
                 {form.coverImage && (
-                  <img src={form.coverImage} alt="Cover preview" className="mt-2 h-32 w-full object-cover rounded-lg border border-gray-200" />
+                  <div className="mt-2 relative">
+                    <img src={form.coverImage} alt="Cover preview" className="h-32 w-full object-cover rounded-lg border border-gray-200" />
+                    <button type="button" onClick={() => setForm(f => ({ ...f, coverImage: '' }))}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">
+                      ✕
+                    </button>
+                  </div>
                 )}
               </div>
 
