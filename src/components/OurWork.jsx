@@ -15,7 +15,7 @@ const videoThumb = (publicId) =>
 
 // Video stream URL
 const videoUrl = (publicId, version) =>
-  `${CLD}/video/upload/v${version}/${publicId}.mp4`
+  `${CLD}/video/upload/f_auto,q_auto,vc_auto,br_800k/v${version}/${publicId}.mp4`
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const imageProjects = [
@@ -108,40 +108,23 @@ const videoProjects = [
 // ─── VideoCard ─────────────────────────────────────────────────────────────────
 const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, desc }) => {
   const [playing, setPlaying] = useState(false)
+  const [buffering, setBuffering] = useState(false)
   const thumb = videoThumb(publicId)
   const src = videoUrl(publicId, version)
 
   return (
     <div className={`bg-gradient-to-br ${gradient} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
-      {/* Media area */}
       {!playing ? (
-        <div
-          className="relative cursor-pointer group"
-          onClick={() => setPlaying(true)}
-          role="button"
-          aria-label={`Play video: ${title}`}
-        >
-          {/* Thumbnail image — Cloudinary serves a JPEG from the video's first frame */}
-          <img
-            src={thumb}
-            alt={`${title} thumbnail`}
-            className="w-full h-44 object-cover bg-gray-200"
-            loading="lazy"
-            onError={(e) => {
-              // If the auto-thumbnail fails, show a styled fallback
-              e.currentTarget.style.display = 'none'
-              e.currentTarget.nextElementSibling.style.display = 'flex'
-            }}
-          />
-          {/* Fallback — hidden by default, revealed only if thumbnail 404s */}
-          <div
-            className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2"
-            aria-hidden="true"
-          >
+        <div className="relative cursor-pointer group"
+          onClick={() => { setPlaying(true); setBuffering(true) }}
+          role="button" aria-label={`Play video: ${title}`}>
+          <img src={thumb} alt={`${title} thumbnail`}
+            className="w-full h-44 object-cover bg-gray-200" loading="lazy"
+            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }} />
+          <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2" aria-hidden="true">
             <span className="text-4xl">🎬</span>
             <span className="text-xs text-gray-500 font-medium">Click to play</span>
           </div>
-          {/* Play button overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
             <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
               <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -151,14 +134,23 @@ const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, 
           </div>
         </div>
       ) : (
-        <video
-          controls
-          autoPlay
-          className="w-full h-44 object-cover bg-black"
-        >
-          <source src={src} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className="relative w-full h-44 bg-black">
+          {buffering && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <svg className="animate-spin h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+              </svg>
+            </div>
+          )}
+          <video controls autoPlay preload="auto" className="w-full h-44 object-cover bg-black"
+            onCanPlay={() => setBuffering(false)}
+            onWaiting={() => setBuffering(true)}
+            onPlaying={() => setBuffering(false)}>
+            <source src={src} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       )}
 
       {/* Text */}
@@ -303,7 +295,7 @@ const OurWork = () => {
               Our work directly contributes to eight UN Sustainable Development Goals.
             </p>
           </div>
-          <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-4 gap-3 xs:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
               { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
               { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
