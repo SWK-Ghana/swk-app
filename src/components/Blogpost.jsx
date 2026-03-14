@@ -126,11 +126,9 @@ const BlogPost = () => {
 
               {/* Post content */}
               <div
-                className="prose prose-emerald max-w-none text-gray-700 leading-relaxed text-sm xs:text-base"
-                style={{ whiteSpace: 'pre-wrap' }}
-              >
-                {post.content}
-              </div>
+                className="prose prose-emerald max-w-none text-gray-700 leading-relaxed text-sm xs:text-base [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:my-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:my-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_p]:my-3 [&_a]:text-emerald-600 [&_a]:underline [&_img]:max-w-full [&_img]:rounded-lg [&_img]:my-4 [&_strong]:font-bold [&_em]:italic"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
 
               {/* Share buttons — bottom */}
               <div className="mt-8 pt-6 border-t border-gray-100">
