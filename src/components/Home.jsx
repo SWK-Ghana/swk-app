@@ -155,10 +155,12 @@ const Home = () => {
   const [volunteerFullName, setVolunteerFullName] = useState('')
   const [volunteerAge, setVolunteerAge] = useState('')
   const [volunteerEmail, setVolunteerEmail] = useState('')
+  const [volunteerRole, setVolunteerRole] = useState('')
+  const [volunteerHours, setVolunteerHours] = useState('')
   const [volunteerMotivation, setVolunteerMotivation] = useState('')
   const [volunteerDocLink, setVolunteerDocLink] = useState('')
   const [volunteerDocFile, setVolunteerDocFile] = useState(null)
-  const [volunteerStatus, setVolunteerStatus] = useState('idle') // idle | sending | success | error
+  const [volunteerStatus, setVolunteerStatus] = useState('idle')
   const [partnerOrg, setPartnerOrg] = useState('')
   const [partnerName, setPartnerName] = useState('')
   const [partnerEmail, setPartnerEmail] = useState('')
@@ -189,6 +191,8 @@ const Home = () => {
         name: volunteerFullName,
         age: volunteerAge,
         email: volunteerEmail,
+        role: volunteerRole || 'N/A',
+        hours_per_week: volunteerHours || 'N/A',
         motivation: volunteerMotivation,
         document_link: volunteerDocLink || 'N/A',
         file_name: volunteerDocFile?.name || 'N/A',
@@ -230,7 +234,7 @@ const Home = () => {
     }
   }
 
-  const resetVolunteer = () => { setVolunteerFullName(''); setVolunteerAge(''); setVolunteerEmail(''); setVolunteerMotivation(''); setVolunteerDocLink(''); setVolunteerDocFile(null); setVolunteerStatus('idle') }
+  const resetVolunteer = () => { setVolunteerFullName(''); setVolunteerAge(''); setVolunteerEmail(''); setVolunteerRole(''); setVolunteerHours(''); setVolunteerMotivation(''); setVolunteerDocLink(''); setVolunteerDocFile(null); setVolunteerStatus('idle') }
   const resetPartner = () => { setPartnerOrg(''); setPartnerName(''); setPartnerEmail(''); setPartnerMessage(''); setPartnerStatus('idle') }
 
   const videoProjects = [
@@ -722,16 +726,44 @@ const Home = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="vol-motivation" className="block text-sm font-medium text-gray-700 mb-1">Motivation</label>
-                <textarea required id="vol-motivation" rows={4} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us why you want to volunteer…" />
+                <label htmlFor="vol-role" className="block text-sm font-medium text-gray-700 mb-1">Preferred volunteer role *</label>
+                <select required id="vol-role" value={volunteerRole} onChange={(e) => setVolunteerRole(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                  <option value="">— Select a role —</option>
+                  <option>Media & Communications</option>
+                  <option>Programs & Events</option>
+                  <option>Agribusiness & Agriculture</option>
+                  <option>Climate & Environment</option>
+                  <option>Technology & Innovation</option>
+                  <option>Community Outreach</option>
+                  <option>Research & Documentation</option>
+                  <option>Fundraising & Partnerships</option>
+                  <option>Admin & Operations</option>
+                  <option>Open to Any Role</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="vol-hours" className="block text-sm font-medium text-gray-700 mb-1">Hours available per week *</label>
+                <select required id="vol-hours" value={volunteerHours} onChange={(e) => setVolunteerHours(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                  <option value="">— Select hours —</option>
+                  <option>1–3 hours</option>
+                  <option>4–6 hours</option>
+                  <option>7–10 hours</option>
+                  <option>10+ hours</option>
+                  <option>Flexible / Project-based</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="vol-motivation" className="block text-sm font-medium text-gray-700 mb-1">Why do you want to volunteer? *</label>
+                <textarea required id="vol-motivation" rows={3} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us about your passion and what you'd like to contribute…" />
               </div>
               <div className="space-y-2">
                 <div>
-                  <label htmlFor="vol-file" className="block text-sm font-medium text-gray-700 mb-1">Attach document (optional)</label>
-                  <input id="vol-file" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white" />
+                  <label htmlFor="vol-file" className="block text-sm font-medium text-gray-700 mb-1">Upload CV / Resume <span className="text-gray-400 font-normal">(optional)</span></label>
+                  <input id="vol-file" type="file" accept=".pdf,.doc,.docx" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white text-sm" />
+                  <p className="text-xs text-gray-400 mt-0.5">PDF or Word document</p>
                 </div>
                 <div>
-                  <label htmlFor="vol-link" className="block text-sm font-medium text-gray-700 mb-1">Or paste a link (optional)</label>
+                  <label htmlFor="vol-link" className="block text-sm font-medium text-gray-700 mb-1">Or paste a link <span className="text-gray-400 font-normal">(Google Drive, LinkedIn, etc.)</span></label>
                   <input id="vol-link" type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="https://drive.google.com/…" />
                 </div>
               </div>
