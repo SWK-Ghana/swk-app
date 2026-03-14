@@ -19,15 +19,24 @@ const heroSrcset = (path) => srcset(path, [480, 768, 1024, 1280, 1920])
 const cardSrcset = (path) => srcset(path, [300, 600, 900])
 
 const videoThumb = (publicId) => `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
-const videoUrl = (publicId, version) => `${CLD}/video/upload/v${version}/${publicId}.mp4`
+const videoUrl = (publicId, version) =>
+  `${CLD}/video/upload/f_auto,q_auto,vc_auto,br_800k/v${version}/${publicId}.mp4`
 
 // Video card with proper Cloudinary thumbnail + fallback
 const VideoCard = ({ bg, border, accent, badge, publicId, version, title, description }) => {
   const [playing, setPlaying] = useState(false)
+  const [buffering, setBuffering] = useState(false)
+  const videoRef = React.useRef(null)
+
+  const handlePlay = () => {
+    setPlaying(true)
+    setBuffering(true)
+  }
+
   return (
     <div className={`bg-gradient-to-br ${bg} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
       {!playing ? (
-        <div className="relative cursor-pointer group" onClick={() => setPlaying(true)}>
+        <div className="relative cursor-pointer group" onClick={handlePlay}>
           <img
             src={videoThumb(publicId)}
             alt={title}
@@ -38,12 +47,10 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
               e.currentTarget.nextElementSibling.style.display = 'flex'
             }}
           />
-          {/* Fallback if thumbnail fails */}
           <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2">
             <span className="text-4xl">🎬</span>
             <span className="text-xs text-gray-500">Click to play</span>
           </div>
-          {/* Play overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
             <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
               <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -53,9 +60,28 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
           </div>
         </div>
       ) : (
-        <video controls autoPlay className="w-full h-44 bg-black">
-          <source src={videoUrl(publicId, version)} type="video/mp4" />
-        </video>
+        <div className="relative w-full h-44 bg-black">
+          {buffering && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <svg className="animate-spin h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+              </svg>
+            </div>
+          )}
+          <video
+            ref={videoRef}
+            controls
+            autoPlay
+            preload="auto"
+            className="w-full h-44 bg-black"
+            onCanPlay={() => setBuffering(false)}
+            onWaiting={() => setBuffering(true)}
+            onPlaying={() => setBuffering(false)}
+          >
+            <source src={videoUrl(publicId, version)} type="video/mp4" />
+          </video>
+        </div>
       )}
       <div className="p-4 flex flex-col flex-1">
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
@@ -561,7 +587,7 @@ const Home = () => {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 alt="SWK team" className="w-full h-auto" loading="lazy" decoding="async" />
             </div>
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
                 { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
@@ -572,11 +598,11 @@ const Home = () => {
                 { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
                 { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
               ].map((g, i) => (
-                <div key={i} className={`flex items-center gap-2 xs:gap-3 rounded-xl border ${g.color} p-2.5 xs:p-3`}>
-                  <div className="flex items-center justify-center h-9 w-9 xs:h-10 xs:w-10 rounded-lg bg-white shadow-inner border flex-shrink-0">
-                    <span className="font-bold text-sm xs:text-base">{g.n}</span>
+                <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3`}>
+                  <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-white shadow-inner border flex-shrink-0">
+                    <span className="font-bold text-base">{g.n}</span>
                   </div>
-                  <div className="font-medium text-xs leading-tight min-w-0 break-words">{g.title}</div>
+                  <div className="font-medium text-sm leading-tight">{g.title}</div>
                 </div>
               ))}
             </div>
@@ -640,14 +666,14 @@ const Home = () => {
         <div className="text-center mb-4">
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Join the Movement</h2>
           <p className="text-sm xs:text-base text-gray-600 mb-8 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-3 w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
-            <button className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
+          <div className="flex flex-col gap-3 justify-center items-stretch max-w-xs mx-auto sm:max-w-none sm:flex-row sm:items-center">
+            <button className="btn-gradient text-sm xs:text-base px-6 py-3 w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
+            <button className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
             <a
               href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 text-sm xs:text-base font-semibold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-6 xs:px-8 py-3 rounded-xl transition-colors w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 text-sm xs:text-base font-semibold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-6 py-3 rounded-xl transition-colors w-full sm:w-auto"
             >
               <svg className="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
