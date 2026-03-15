@@ -273,25 +273,25 @@ const Home = () => {
   ]
 
   const Section = ({ children, className = '' }) => (
-    <div className={`bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12 ${className}`}>
+    <div className={`bg-white rounded-2xl p-6 sm:p-10 md:p-14 shadow-sm border border-gray-100 mb-10 sm:mb-16 ${className}`}>
       {children}
     </div>
   )
 
   const SectionHeader = ({ badge, badgeColor = 'bg-emerald-100 text-emerald-700', title, subtitle }) => (
-    <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-      <span className={`inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 ${badgeColor}`}>{badge}</span>
-      <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">{title}</h2>
-      {subtitle && <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
+    <div className="text-center mb-10 sm:mb-14">
+      <span className={`inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest ${badgeColor}`}>{badge}</span>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h2>
+      {subtitle && <p className="text-lg sm:text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
     </div>
   )
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
-      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 xs:py-8 sm:py-10 md:py-12">
+    <main className="min-h-screen bg-white">
+      <div className="px-0 pb-0">
 
         {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
-        <div className="relative mb-8 xs:mb-10 sm:mb-12 rounded-xl xs:rounded-2xl overflow-hidden">
+        <div className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden">
           {slides.map((s, idx) => (
             <img key={s.image} src={s.image}
               srcSet={heroSrcset(s._path)}
@@ -300,40 +300,61 @@ const Home = () => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               loading={idx === 0 ? 'eager' : 'lazy'}
               decoding={idx === 0 ? 'sync' : 'async'}
-              className={`h-[42vh] xs:h-[48vh] sm:h-[52vh] md:h-[58vh] lg:h-[62vh] w-full object-cover transition-opacity duration-700 ${idx === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'}`}
             />
           ))}
-          <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center px-4 xs:px-6 sm:px-8 max-w-4xl xl:max-w-5xl">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 xs:mb-4 leading-tight">{slides[currentSlide].title}</h1>
-              <p className="text-sm xs:text-base sm:text-lg md:text-xl text-emerald-100 mb-6 xs:mb-8">{slides[currentSlide].subtitle}</p>
-              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
-                <button className="btn-gradient text-sm xs:text-base sm:text-lg px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/get-involved')}>Get Involved</button>
-                <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base" onClick={() => navigate('/about')}>Learn More</button>
-              </div>
+          {/* Dark gradient overlay — stronger at bottom */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+
+          {/* Hero content */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10">
+            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-emerald-500/30 text-emerald-200 border border-emerald-400/40">
+              Youth · Sustainability · Africa
+            </span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl">
+              {slides[currentSlide].title}
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light leading-relaxed">
+              {slides[currentSlide].subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="btn-gradient text-base sm:text-lg px-8 py-4 rounded-xl" onClick={() => navigate('/get-involved')}>
+                Get Involved
+              </button>
+              <button
+                className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 rounded-xl font-bold transition-all text-base sm:text-lg"
+                onClick={() => navigate('/about')}>
+                Learn More
+              </button>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-4 flex justify-center gap-1">
+
+          {/* Slide dots */}
+          <div className="absolute inset-x-0 bottom-8 flex justify-center gap-2">
             {slides.map((_, idx) => (
               <button key={idx} onClick={() => setCurrentSlide(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                aria-current={idx === currentSlide ? 'true' : undefined}
-                className="p-2 flex items-center justify-center"
-              >
-                <span className={`block h-2.5 w-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-white scale-110' : 'bg-white/50 hover:bg-white/75'}`} />
+                className="p-1.5">
+                <span className={`block rounded-full transition-all duration-300 ${idx === currentSlide ? 'bg-white w-8 h-2' : 'bg-white/40 w-2 h-2 hover:bg-white/70'}`} />
               </button>
             ))}
           </div>
         </div>
 
+        <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16">
+
         {/* ══ 2. IMPACT STATS ═════════════════════════════════════════════════ */}
-        <div className="bg-emerald-700 rounded-xl xs:rounded-2xl p-5 xs:p-6 sm:p-8 mb-8 xs:mb-10 sm:mb-12">
-          <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 xs:gap-6 text-center">
-            {[{ n: '230+', label: 'Webinar Registrants' }, { n: '236', label: 'Youth Empowered' }, { n: '72', label: 'Women Impacted' }, { n: '3', label: 'Program Editions' }].map((s, i) => (
+        <div className="bg-emerald-700 rounded-2xl p-8 sm:p-12 mb-10 sm:mb-16">
+          <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 text-center">
+            {[
+              { n: '230+', label: 'Webinar Registrants' },
+              { n: '236', label: 'Youth Empowered' },
+              { n: '72', label: 'Women Impacted' },
+              { n: '3', label: 'Program Editions' }
+            ].map((s, i) => (
               <div key={i}>
-                <div className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white mb-1">{s.n}</div>
-                <div className="text-xs xs:text-sm text-white/80">{s.label}</div>
+                <div className="text-4xl sm:text-5xl font-bold text-white mb-2">{s.n}</div>
+                <div className="text-sm sm:text-base text-white/70 font-light">{s.label}</div>
               </div>
             ))}
           </div>
@@ -341,48 +362,45 @@ const Home = () => {
 
         {/* ══ 3. ABOUT US SNAPSHOT ════════════════════════════════════════════ */}
         <Section>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xs:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             {/* Image */}
-            <div className="overflow-hidden rounded-xl border border-gray-200 order-2 lg:order-1">
+            <div className="overflow-hidden rounded-2xl order-2 lg:order-1">
               <img
                 src={img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 900)}
                 srcSet={srcset('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', [480, 768, 900])}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 alt="SWK Ghana team"
-                className="w-full h-64 sm:h-80 object-cover"
+                className="w-full h-72 sm:h-96 object-cover"
                 loading="lazy"
                 decoding="async"
               />
             </div>
             {/* Text */}
             <div className="order-1 lg:order-2">
-              <span className="inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 bg-emerald-100 text-emerald-700">Who We Are</span>
-              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-emerald-100 text-emerald-700">Who We Are</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Building Africa's Next Generation of Changemakers
               </h2>
-              <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-4">
+              <p className="text-lg text-gray-500 font-light leading-relaxed mb-4">
                 SWK Ghana is a youth-focused nonprofit founded in Accra, Ghana. We empower young people aged 15–35 to lead sustainable change through programs in agribusiness, climate action, circular economy, technology, and community development.
               </p>
-              <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-6">
+              <p className="text-lg text-gray-500 font-light leading-relaxed mb-8">
                 Founded in 2024, our vision is a thriving Africa where empowered youth shape resilient communities and rewrite the future of the continent.
               </p>
-              <div className="flex flex-wrap gap-3 mb-6">
+              <div className="flex flex-wrap gap-3 mb-8">
                 {[
                   { label: 'Founded', value: '2024' },
                   { label: 'Based in', value: 'Accra, Ghana' },
                   { label: 'Target', value: 'Ages 15–35' },
                   { label: 'Vision', value: 'Pan-African' },
                 ].map(({ label, value }) => (
-                  <div key={label} className="bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
-                    <div className="text-xs text-gray-500">{label}</div>
-                    <div className="text-sm font-semibold text-emerald-700">{value}</div>
+                  <div key={label} className="bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3 text-center">
+                    <div className="text-xs text-gray-400 uppercase tracking-wide mb-0.5">{label}</div>
+                    <div className="text-sm font-bold text-emerald-700">{value}</div>
                   </div>
                 ))}
               </div>
-              <button
-                className="btn-gradient text-sm xs:text-base px-6 py-2.5"
-                onClick={() => navigate('/about')}
-              >
+              <button className="btn-gradient text-base px-8 py-4" onClick={() => navigate('/about')}>
                 Learn More About Us →
               </button>
             </div>
@@ -745,17 +763,17 @@ const Home = () => {
         </Section>
 
         {/* ══ 14. CTA ═════════════════════════════════════════════════════════ */}
-        <div className="text-center mb-4">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Join the Movement</h2>
-          <p className="text-sm xs:text-base text-gray-600 mb-8 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
-          <div className="flex flex-col gap-3 justify-center items-stretch max-w-xs mx-auto sm:max-w-none sm:flex-row sm:items-center">
-            <button className="btn-gradient text-sm xs:text-base px-6 py-3 w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
-            <button className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
+        <div className="text-center py-10 sm:py-16 bg-emerald-700 rounded-2xl mb-10 sm:mb-16 px-6 sm:px-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Join the Movement</h2>
+          <p className="text-lg sm:text-xl text-white/70 font-light mb-10 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
+          <div className="flex flex-col gap-4 justify-center items-stretch max-w-xs mx-auto sm:max-w-none sm:flex-row sm:items-center">
+            <button className="bg-white text-emerald-700 font-bold text-base px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
+            <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 rounded-xl font-bold transition-colors text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
             <a
               href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 text-sm xs:text-base font-semibold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-6 py-3 rounded-xl transition-colors w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 text-base font-bold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-8 py-4 rounded-xl transition-colors w-full sm:w-auto"
             >
               <svg className="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
@@ -765,7 +783,9 @@ const Home = () => {
           </div>
         </div>
 
-      </div>
+        </div>{/* end inner padding div */}
+
+      </div>{/* end outer wrapper */}
 
       {/* VOLUNTEER MODAL */}
       {isVolunteerOpen && (

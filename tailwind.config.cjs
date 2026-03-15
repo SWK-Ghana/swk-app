@@ -7,8 +7,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        body: ['"Inter"', 'sans-serif'],
+        ubuntu: ['"Ubuntu"', 'sans-serif'],
+        sans: ['"Ubuntu"', 'sans-serif'],
+      },
+      fontSize: {
+        'hero': ['5rem', { lineHeight: '1.05', fontWeight: '700' }],
+        'hero-sm': ['3.5rem', { lineHeight: '1.1', fontWeight: '700' }],
+        'display': ['4rem', { lineHeight: '1.1', fontWeight: '700' }],
       },
       screens: {
         'xs': '320px',

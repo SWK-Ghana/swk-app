@@ -2,78 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Global font application ─────────────────────────────────────────────── */
+/* ── Global font: Ubuntu ─────────────────────────────────────────────────── */
 @layer base {
-  html {
-    font-family: 'Inter', sans-serif;
+  html, body {
+    font-family: 'Ubuntu', sans-serif;
     color: #111827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
-    color: #064e3b; /* emerald-900 — deeper, more sophisticated heading colour */
+    line-height: 1.15;
+    color: #064e3b;
+  }
+
+  p, span, a, li, input, textarea, select, button {
+    font-family: 'Ubuntu', sans-serif;
   }
 }
 
 /* ── Gradient button ─────────────────────────────────────────────────────── */
 @layer components {
   .btn-gradient {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 focus-visible:ring-offset-2 transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 0.01em;
     background-image: linear-gradient(90deg, #059669 0%, #10B981 50%, #22C55E 100%);
   }
 
   .btn-gradient:hover {
-    filter: brightness(1.03);
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white transition duration-150 ease-out active:scale-[0.98];
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
+    font-family: 'Ubuntu', sans-serif;
+    color: #064e3b;
+  }
+
+  .section-subheading {
+    @apply text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+  }
+
+  .badge {
+    @apply inline-block text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-widest;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-gradient {
+    .btn-gradient, .btn-outline {
       transition: none;
+      transform: none;
     }
   }
 }
 
 /* ── Responsive utilities ────────────────────────────────────────────────── */
 @layer utilities {
-  .text-responsive-xs {
-    @apply text-xs sm:text-sm md:text-base;
-  }
-
-  .text-responsive-sm {
-    @apply text-sm sm:text-base md:text-lg;
-  }
-
-  .text-responsive-base {
-    @apply text-base sm:text-lg md:text-xl;
-  }
-
-  .text-responsive-lg {
-    @apply text-lg sm:text-xl md:text-2xl;
-  }
-
-  .text-responsive-xl {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
-  }
-
-  .text-responsive-2xl {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  .text-responsive-3xl {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  .container-responsive {
-    @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
-  }
-
-  .padding-responsive {
-    @apply p-4 sm:p-6 md:p-8 lg:p-12;
-  }
-
-  .gap-responsive {
-    @apply gap-4 sm:gap-6 md:gap-8;
-  }
+  .text-responsive-xs { @apply text-xs sm:text-sm md:text-base; }
+  .text-responsive-sm { @apply text-sm sm:text-base md:text-lg; }
+  .text-responsive-base { @apply text-base sm:text-lg md:text-xl; }
+  .text-responsive-lg { @apply text-lg sm:text-xl md:text-2xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl; }
+  .text-responsive-2xl { @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl; }
+  .text-responsive-3xl { @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl; }
+  .container-responsive { @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16; }
+  .padding-responsive { @apply p-4 sm:p-6 md:p-8 lg:p-12; }
+  .gap-responsive { @apply gap-4 sm:gap-6 md:gap-8; }
 }
