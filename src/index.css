@@ -2,10 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your gradient button (so you can use `className="btn-gradient"`): */
+/* ── Global font application ─────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    color: #111827;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: #064e3b; /* emerald-900 — deeper, more sophisticated heading colour */
+  }
+}
+
+/* ── Gradient button ─────────────────────────────────────────────────────── */
 @layer components {
   .btn-gradient {
     @apply inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
+    font-family: 'Plus Jakarta Sans', sans-serif;
     background-image: linear-gradient(90deg, #059669 0%, #10B981 50%, #22C55E 100%);
   }
 
@@ -20,10 +35,8 @@
   }
 }
 
-/* Responsive utilities */
+/* ── Responsive utilities ────────────────────────────────────────────────── */
 @layer utilities {
-
-  /* Responsive text sizes */
   .text-responsive-xs {
     @apply text-xs sm:text-sm md:text-base;
   }
@@ -52,17 +65,14 @@
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
-  /* Responsive spacing */
   .container-responsive {
     @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
   }
 
-  /* Responsive padding */
   .padding-responsive {
     @apply p-4 sm:p-6 md:p-8 lg:p-12;
   }
 
-  /* Responsive gap */
   .gap-responsive {
     @apply gap-4 sm:gap-6 md:gap-8;
   }
