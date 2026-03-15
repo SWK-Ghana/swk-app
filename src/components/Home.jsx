@@ -311,7 +311,57 @@ const Home = () => {
           </div>
         </div>
 
-        {/* ══ 3. FOCUS AREAS ══════════════════════════════════════════════════ */}
+        {/* ══ 3. ABOUT US SNAPSHOT ════════════════════════════════════════════ */}
+        <Section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xs:gap-10 items-center">
+            {/* Image */}
+            <div className="overflow-hidden rounded-xl border border-gray-200 order-2 lg:order-1">
+              <img
+                src={img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 900)}
+                srcSet={srcset('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', [480, 768, 900])}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                alt="SWK Ghana team"
+                className="w-full h-64 sm:h-80 object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            {/* Text */}
+            <div className="order-1 lg:order-2">
+              <span className="inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 bg-emerald-100 text-emerald-700">Who We Are</span>
+              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                Building Africa's Next Generation of Changemakers
+              </h2>
+              <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-4">
+                SWK Ghana — Sustainability With Koomson — is a youth-focused nonprofit founded in Accra, Ghana. We empower young people aged 15–35 to lead sustainable change through programs in agribusiness, climate action, circular economy, technology, and community development.
+              </p>
+              <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-6">
+                Founded in 2024, our vision is a thriving Africa where empowered youth shape resilient communities and rewrite the future of the continent.
+              </p>
+              <div className="flex flex-wrap gap-3 mb-6">
+                {[
+                  { label: 'Founded', value: '2024' },
+                  { label: 'Based in', value: 'Accra, Ghana' },
+                  { label: 'Target', value: 'Ages 15–35' },
+                  { label: 'Vision', value: 'Pan-African' },
+                ].map(({ label, value }) => (
+                  <div key={label} className="bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 text-center">
+                    <div className="text-xs text-gray-500">{label}</div>
+                    <div className="text-sm font-semibold text-emerald-700">{value}</div>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="btn-gradient text-sm xs:text-base px-6 py-2.5"
+                onClick={() => navigate('/about')}
+              >
+                Learn More About Us →
+              </button>
+            </div>
+          </div>
+        </Section>
+
+        {/* ══ 4. FOCUS AREAS ══════════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="What We Do" title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
@@ -342,7 +392,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 4. PROJECTS & IMPACT ════════════════════════════════════════════ */}
+        {/* ══ 5. PROJECTS & IMPACT ════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Impact" badgeColor="bg-blue-100 text-blue-700" title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
 
@@ -425,7 +475,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 5. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
+        {/* ══ 6. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Currently Active" title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5">
@@ -449,7 +499,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 6. UPCOMING EVENTS ══════════════════════════════════════════════ */}
+        {/* ══ 7. UPCOMING EVENTS ══════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
           <div className="space-y-4 xs:space-y-5 mb-8">
@@ -496,7 +546,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 7. REPORTS & RESOURCES ══════════════════════════════════════════ */}
+        {/* ══ 8. REPORTS & RESOURCES ══════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
@@ -580,7 +630,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 8. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
+        {/* ══ 9. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
         <Section>
           <SectionHeader badge="Global Goals" badgeColor="bg-blue-100 text-blue-700" title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 items-center">
@@ -613,19 +663,19 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 9. FAQs ═════════════════════════════════════════════════════════ */}
+        {/* ══ 10. FAQs ═════════════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">FAQs</h2>
           <Faqs />
         </Section>
 
-        {/* ══ 10. TESTIMONIALS ════════════════════════════════════════════════ */}
+        {/* ══ 11. TESTIMONIALS ════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">What People Say</h2>
           <Testimonials />
         </Section>
 
-        {/* ══ 11. PARTNERS ════════════════════════════════════════════════════ */}
+        {/* ══ 12. PARTNERS ════════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">Partners & Supporters</h2>
           <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 xs:gap-5 items-center">
@@ -635,7 +685,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 12. NEWSLETTER ══════════════════════════════════════════════════ */}
+        {/* ══ 13. NEWSLETTER ══════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Newsletter</h2>
           <p className="text-sm xs:text-base text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up to receive updates and news from SWK Ghana directly in your inbox.</p>
@@ -666,7 +716,7 @@ const Home = () => {
           )}
         </Section>
 
-        {/* ══ 13. CTA ═════════════════════════════════════════════════════════ */}
+        {/* ══ 14. CTA ═════════════════════════════════════════════════════════ */}
         <div className="text-center mb-4">
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Join the Movement</h2>
           <p className="text-sm xs:text-base text-gray-600 mb-8 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
