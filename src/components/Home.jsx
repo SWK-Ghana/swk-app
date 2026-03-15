@@ -333,7 +333,7 @@ const Home = () => {
                 Building Africa's Next Generation of Changemakers
               </h2>
               <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-4">
-                SWK Ghana — Sustainability With Koomson — is a youth-focused nonprofit founded in Accra, Ghana. We empower young people aged 15–35 to lead sustainable change through programs in agribusiness, climate action, circular economy, technology, and community development.
+                SWK Ghana is a youth-focused nonprofit founded in Accra, Ghana. We empower young people aged 15–35 to lead sustainable change through programs in agribusiness, climate action, circular economy, technology, and community development.
               </p>
               <p className="text-sm xs:text-base text-gray-600 leading-relaxed mb-6">
                 Founded in 2024, our vision is a thriving Africa where empowered youth shape resilient communities and rewrite the future of the continent.
