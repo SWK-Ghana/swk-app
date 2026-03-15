@@ -12,7 +12,7 @@ import Donate from './components/Donate'
 import NotFound from './components/NotFound'
 import Reports from './components/Reports'
 import Blog from './components/Blog'
-import BlogPost from './components/BlogPost'
+import BlogPost from './components/Blogpost'
 import Admin from './components/Admin'
 import Marketplace from './components/Marketplace'
 
