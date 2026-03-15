@@ -95,10 +95,38 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
 const Faqs = () => {
   const [open, setOpen] = useState(null)
   const items = [
-    { q: 'What is the difference between weather and climate?', a: 'Weather is short-term atmospheric conditions; climate is long-term average patterns.' },
-    { q: 'What is climate change?', a: 'A long-term change in average temperature and weather patterns, largely driven by human activities.' },
-    { q: 'How does climate change affect health?', a: 'It increases respiratory and cardiovascular risks, extreme weather injuries, disease spread, and mental health stressors.' },
-    { q: 'How can climate risks be reduced?', a: 'Through mitigation, adaptation, knowledge expansion, and responsible innovation.' },
+    {
+      q: 'How do I join SWK Ghana?',
+      a: 'There are several ways to join! You can volunteer, partner with us, or simply stay connected through our community. Visit the Get Involved page to fill out a volunteer application or reach out to us at info@swkghana.org. We welcome young people aged 15–35 who are passionate about sustainability and community development.',
+    },
+    {
+      q: 'Do you have a WhatsApp group I can join for updates and to meet other people?',
+      a: 'Yes! We have an active WhatsApp community where we share updates, opportunities, and connect with like-minded youth across Ghana and Africa. Click the "Join our WhatsApp Community" button anywhere on the site or use this link: https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu',
+    },
+    {
+      q: 'I have a project and/or collaboration suggestion. What do I do?',
+      a: 'We love new ideas! Send us a message through the Contact page or email us directly at info@swkghana.org with your project idea or collaboration proposal. You can also fill out the Partner With Us form on the Get Involved page. Our team reviews all submissions and will get back to you within 3–5 business days.',
+    },
+    {
+      q: 'I am a young entrepreneur. Can I list my product on SWK Marketplace?',
+      a: 'Absolutely! SWK Marketplace is built specifically to support youth-led ventures in agribusiness and the circular economy. Head to the Marketplace page and click "List Your Product". All products must align with UN SDG 12 and be eco-friendly. Our team will review your submission within 24–48 hours.',
+    },
+    {
+      q: 'Does SWK Ghana operate outside of Accra?',
+      a: 'Our current base is in Accra, Greater Accra Region, but our programs — especially our webinar series — reach youth across Ghana and beyond. We have had participants from 9+ countries. Our vision is to scale across Africa by 2035.',
+    },
+    {
+      q: 'How can my organization partner with SWK Ghana?',
+      a: 'We are always open to meaningful partnerships with organizations, businesses, NGOs, and institutions that share our vision. Visit the Get Involved page and click "Become a Partner", or email us at info@swkghana.org with details about your organization and the type of partnership you have in mind.',
+    },
+    {
+      q: 'Are your programs free to participate in?',
+      a: 'Yes! Most of our programs, webinars, and community events are free of charge. Our mission is to make youth development and sustainability education accessible to all young people regardless of their financial situation.',
+    },
+    {
+      q: 'How can I support SWK Ghana financially?',
+      a: 'You can support us through donations on our Donate page. Every contribution — big or small — goes directly towards funding our programs, events, and community initiatives. We also welcome in-kind support and sponsorships.',
+    },
   ]
   return (
     <div className="max-w-3xl mx-auto divide-y divide-gray-200">
