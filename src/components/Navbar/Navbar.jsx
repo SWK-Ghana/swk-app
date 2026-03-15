@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "Resources", href: "/resources" },
   { label: "Reports", href: "/reports" },
   { label: "Blog", href: "/blog" },
+  { label: "Marketplace", href: "/marketplace" },
   { label: "Contact", href: "/contact" },
   { label: "Get Involved", href: "/get-involved", cta: true },
   { label: "Donate", href: "/donate", cta: true },
