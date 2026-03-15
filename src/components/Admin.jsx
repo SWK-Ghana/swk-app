@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 const ADMIN_PASSWORD = 'SWKGhana@2024'
 const CATEGORIES = ['Event Recap', 'Program Update', 'Impact Story', 'Opinion']
-const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce', 'Processed Food & Drinks']
+const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
 
 const slugify = (text) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')

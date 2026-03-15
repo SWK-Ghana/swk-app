@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-const CATEGORIES = ['All', 'Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce', 'Processed Food & Drinks']
+const CATEGORIES = ['All', 'Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
 
 const categoryColors = {
   'Agribusiness': 'bg-green-100 text-green-700',
   'Recycled & Upcycled': 'bg-blue-100 text-blue-700',
   'Handmade Crafts': 'bg-purple-100 text-purple-700',
   'Organic Produce': 'bg-emerald-100 text-emerald-700',
-  'Processed Food & Drinks': 'bg-orange-100 text-orange-700',
 }
 
 const emptyOrder = {
@@ -31,6 +30,7 @@ const Marketplace = () => {
   const [vendorModal, setVendorModal] = useState(false)
   const [vendor, setVendor] = useState({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' })
   const [vendorStatus, setVendorStatus] = useState('idle')
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('swk_marketplace_products')
@@ -108,7 +108,7 @@ const Marketplace = () => {
             <p className="text-base xs:text-lg text-gray-600 max-w-2xl mx-auto mb-6">
               Shop directly from Ghana's youth-led agribusiness and circular economy ventures. Every purchase supports a young entrepreneur.
             </p>
-            <button onClick={() => { setVendor({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' }); setVendorStatus('idle'); setVendorModal(true) }}
+            <button onClick={() => { setVendor({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' }); setVendorStatus('idle'); setAgreedToTerms(false); setVendorModal(true) }}
               className="btn-gradient px-6 py-2.5 text-sm xs:text-base">
               + List Your Product
             </button>
@@ -280,6 +280,20 @@ const Marketplace = () => {
               <h3 className="text-xl font-semibold text-gray-900">List Your Product</h3>
               <button aria-label="Close" className="text-gray-500 hover:text-gray-700 text-xl" onClick={() => setVendorModal(false)}>✕</button>
             </div>
+
+            {/* Sustainability notice */}
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-5">
+              <div className="flex items-start gap-2">
+                <span className="text-emerald-600 text-lg flex-shrink-0">🌱</span>
+                <div>
+                  <p className="text-sm font-semibold text-emerald-800 mb-1">Sustainability Requirement</p>
+                  <p className="text-xs text-emerald-700 leading-relaxed">
+                    All products listed on SWK Marketplace must align with <strong>UN SDG 12 — Responsible Consumption and Production</strong>. Products must be eco-friendly, sustainably sourced or made, and minimize environmental harm. SWK Ghana reserves the right to reject any product that does not meet these criteria.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <p className="text-sm text-gray-500 mb-5">Fill in your product details. Our team will review and publish it within 24–48 hours.</p>
 
             {vendorStatus === 'success' ? (
@@ -342,7 +356,6 @@ const Marketplace = () => {
                       <option>Recycled & Upcycled</option>
                       <option>Handmade Crafts</option>
                       <option>Organic Produce</option>
-                      <option>Processed Food & Drinks</option>
                     </select>
                   </div>
                 </div>
@@ -377,9 +390,33 @@ const Marketplace = () => {
                     placeholder="Minimum order, availability, delivery options..." />
                 </div>
                 {vendorStatus === 'error' && <p className="text-xs text-red-500">Something went wrong. Please try again.</p>}
+
+                {/* Terms & Conditions */}
+                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-600 leading-relaxed space-y-2">
+                  <p className="font-semibold text-gray-800 text-sm">Vendor Terms & Conditions</p>
+                  <p>By listing your product on SWK Marketplace, you agree to the following:</p>
+                  <ol className="list-decimal pl-4 space-y-1">
+                    <li>Your product must be eco-friendly and align with <strong>UN SDG 12</strong> — Responsible Consumption and Production.</li>
+                    <li>Products must be sustainably sourced, produced, or made with minimal environmental impact.</li>
+                    <li>No harmful chemicals, non-biodegradable materials, or environmentally damaging processes may be used.</li>
+                    <li>You are responsible for the accuracy of your product description, pricing, and availability.</li>
+                    <li>You are responsible for the quality of your product. SWK Ghana acts solely as a marketplace intermediary.</li>
+                    <li>SWK Ghana reserves the right to reject, remove, or unpublish any product at any time without notice.</li>
+                    <li>A commission fee may be introduced in the future. Vendors will be notified in advance.</li>
+                    <li>SWK Ghana is not liable for any disputes between vendors and buyers.</li>
+                  </ol>
+                </div>
+                <div className="flex items-start gap-3">
+                  <input type="checkbox" id="agree-terms" required checked={agreedToTerms} onChange={e => setAgreedToTerms(e.target.checked)}
+                    className="w-4 h-4 mt-0.5 accent-emerald-600 flex-shrink-0" />
+                  <label htmlFor="agree-terms" className="text-xs text-gray-600 leading-relaxed">
+                    I have read and agree to the SWK Marketplace Vendor Terms & Conditions, and confirm that my product meets the sustainability criteria aligned with UN SDG 12.
+                  </label>
+                </div>
+
                 <div className="flex gap-3 pt-2">
                   <button type="button" onClick={() => setVendorModal(false)} className="px-4 py-2 border rounded-lg text-gray-600 text-sm">Cancel</button>
-                  <button type="submit" disabled={vendorStatus === 'sending'} className="btn-gradient flex-1 py-2.5 disabled:opacity-60 text-sm">
+                  <button type="submit" disabled={vendorStatus === 'sending' || !agreedToTerms} className="btn-gradient flex-1 py-2.5 disabled:opacity-60 text-sm">
                     {vendorStatus === 'sending' ? 'Submitting...' : 'Submit Product'}
                   </button>
                 </div>
