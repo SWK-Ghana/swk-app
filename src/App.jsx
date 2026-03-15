@@ -12,8 +12,9 @@ import Donate from './components/Donate'
 import NotFound from './components/NotFound'
 import Reports from './components/Reports'
 import Blog from './components/Blog'
-import BlogPost from './components/Blogpost'
+import BlogPost from './components/BlogPost'
 import Admin from './components/Admin'
+import Marketplace from './components/Marketplace'
 
 function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,7 @@ function App() {
         { path: 'reports', element: <Reports /> },
         { path: 'blog', element: <Blog /> },
         { path: 'blog/:slug', element: <BlogPost /> },
+        { path: 'marketplace', element: <Marketplace /> },
       ]
     },
     { path: 'admin', element: <Admin /> },

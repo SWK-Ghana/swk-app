@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 const ADMIN_PASSWORD = 'SWKGhana@2024'
 const CATEGORIES = ['Event Recap', 'Program Update', 'Impact Story', 'Opinion']
+const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce', 'Processed Food & Drinks']
 
 const slugify = (text) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -193,6 +194,212 @@ const RichEditor = ({ value, onChange }) => {
   )
 }
 
+// ─── Marketplace Admin ─────────────────────────────────────────────────────────
+const emptyProduct = { productName: '', category: '', business: '', name: '', email: '', phone: '', location: '', description: '', price: '', unit: '', imageUrl: '', notes: '', approved: false }
+
+const MarketplaceAdmin = () => {
+  const [products, setProducts] = useState([])
+  const [view, setView] = useState('list')
+  const [form, setForm] = useState(emptyProduct)
+  const [editId, setEditId] = useState(null)
+  const [saved, setSaved] = useState(false)
+  const [uploadingImg, setUploadingImg] = useState(false)
+
+  useEffect(() => {
+    const stored = localStorage.getItem('swk_marketplace_products')
+    if (stored) setProducts(JSON.parse(stored))
+  }, [])
+
+  const saveProducts = (updated) => {
+    setProducts(updated)
+    localStorage.setItem('swk_marketplace_products', JSON.stringify(updated))
+  }
+
+  const handleSave = (e) => {
+    e.preventDefault()
+    if (editId) {
+      saveProducts(products.map(p => p.id === editId ? { ...p, ...form } : p))
+    } else {
+      saveProducts([{ ...form, id: Date.now(), submittedAt: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }, ...products])
+    }
+    setSaved(true)
+    setTimeout(() => { setSaved(false); setView('list'); setForm(emptyProduct); setEditId(null) }, 1200)
+  }
+
+  const handleEdit = (product) => { setForm({ ...product }); setEditId(product.id); setView('edit') }
+  const handleDelete = (id) => { if (window.confirm('Delete this product?')) saveProducts(products.filter(p => p.id !== id)) }
+  const toggleApprove = (id) => saveProducts(products.map(p => p.id === id ? { ...p, approved: !p.approved } : p))
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploadingImg(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', CLOUDINARY_PRESET)
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: 'POST', body: formData })
+      const data = await res.json()
+      setForm(f => ({ ...f, imageUrl: data.secure_url }))
+    } catch { alert('Image upload failed.') }
+    finally { setUploadingImg(false); e.target.value = '' }
+  }
+
+  if (view === 'new' || view === 'edit') {
+    return (
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-gray-900">{view === 'new' ? 'Add Product' : 'Edit Product'}</h2>
+          <button onClick={() => { setView('list'); setForm(emptyProduct); setEditId(null) }} className="text-sm text-gray-500 hover:text-gray-700">← Back</button>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+          <form onSubmit={handleSave} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Product name *</label>
+                <input required type="text" value={form.productName} onChange={e => setForm({ ...form, productName: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="e.g. Organic Tomatoes" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+                <select required value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white text-sm">
+                  <option value="">— Select —</option>
+                  {PRODUCT_CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Business / Farm name *</label>
+                <input required type="text" value={form.business} onChange={e => setForm({ ...form, business: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="e.g. Kofi Farms" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Location *</label>
+                <input required type="text" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="e.g. Accra" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
+              <textarea required rows={3} value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Describe the product..." />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price (GHS) *</label>
+                <input required type="number" min={0} step="0.01" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="e.g. 50" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Unit *</label>
+                <input required type="text" value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="e.g. kg, bag, piece" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
+              <div className="flex gap-2 items-center">
+                <label className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-300 text-emerald-700 rounded-lg hover:bg-emerald-100 transition-colors text-sm font-medium">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  {uploadingImg ? 'Uploading...' : 'Upload image'}
+                  <input type="file" accept="image/*" className="hidden" disabled={uploadingImg} onChange={handleImageUpload} />
+                </label>
+                <span className="text-xs text-gray-400">or paste URL:</span>
+                <input type="url" value={form.imageUrl} onChange={e => setForm({ ...form, imageUrl: e.target.value })}
+                  className="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="https://..." />
+              </div>
+              {form.imageUrl && <img src={form.imageUrl} alt="Preview" className="mt-2 h-24 w-full object-cover rounded-lg border border-gray-200" />}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vendor name</label>
+                <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Contact person" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vendor email</label>
+                <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="vendor@email.com" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vendor phone</label>
+                <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="+233..." />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+              <textarea rows={2} value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 text-sm" placeholder="Min order, availability, etc." />
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="prod-approved" checked={form.approved} onChange={e => setForm({ ...form, approved: e.target.checked })} className="w-4 h-4 accent-emerald-600" />
+              <label htmlFor="prod-approved" className="text-sm font-medium text-gray-700">Approve & publish immediately</label>
+            </div>
+            <div className="flex gap-3 pt-2">
+              <button type="submit" className="btn-gradient px-6 py-2.5 text-sm">{saved ? '✓ Saved!' : (view === 'new' ? 'Add Product' : 'Save Changes')}</button>
+              <button type="button" onClick={() => { setView('list'); setForm(emptyProduct); setEditId(null) }} className="px-5 py-2 border border-gray-300 rounded-lg text-gray-600 text-sm">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Marketplace</h2>
+          <p className="text-sm text-gray-500">{products.length} product{products.length !== 1 ? 's' : ''} · {products.filter(p => !p.approved).length} pending approval</p>
+        </div>
+        <div className="flex gap-3">
+          <a href="/marketplace" target="_blank" rel="noopener noreferrer" className="text-sm text-emerald-600 border border-emerald-300 px-4 py-2 rounded-lg hover:bg-emerald-50">View Marketplace →</a>
+          <button onClick={() => { setForm(emptyProduct); setView('new') }} className="btn-gradient px-5 py-2 text-sm">+ Add Product</button>
+        </div>
+      </div>
+      {products.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
+          <span className="text-5xl mb-4 block">🛒</span>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">No products yet</h3>
+          <p className="text-sm text-gray-500 mb-5">Add your first product or wait for vendor submissions.</p>
+          <button onClick={() => setView('new')} className="btn-gradient px-6 py-2.5 text-sm">Add First Product</button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {products.map(product => (
+            <div key={product.id} className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+              {product.imageUrl && <img src={product.imageUrl} alt={product.productName} className="w-full sm:w-16 h-24 sm:h-12 object-cover rounded-lg flex-shrink-0" />}
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="text-xs font-semibold text-emerald-600">{product.category}</span>
+                  <span className="text-xs text-gray-400">{product.location}</span>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${product.approved ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    {product.approved ? 'Live' : 'Pending'}
+                  </span>
+                </div>
+                <p className="text-sm font-semibold text-gray-900 truncate">{product.productName}</p>
+                <p className="text-xs text-gray-500">by {product.business} · GHS {product.price} / {product.unit}</p>
+              </div>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <button onClick={() => toggleApprove(product.id)} className="text-xs px-3 py-1.5 border rounded-lg hover:bg-gray-50 text-gray-600">
+                  {product.approved ? 'Unpublish' : 'Approve'}
+                </button>
+                <button onClick={() => handleEdit(product)} className="text-xs px-3 py-1.5 border border-emerald-300 text-emerald-600 rounded-lg hover:bg-emerald-50">Edit</button>
+                <button onClick={() => handleDelete(product.id)} className="text-xs px-3 py-1.5 border border-red-200 text-red-500 rounded-lg hover:bg-red-50">Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── Admin Component ───────────────────────────────────────────────────────────
 const Admin = () => {
   const [authed, setAuthed] = useState(false)
@@ -204,6 +411,7 @@ const Admin = () => {
   const [editId, setEditId] = useState(null)
   const [saved, setSaved] = useState(false)
   const [uploadingCover, setUploadingCover] = useState(false)
+  const [adminTab, setAdminTab] = useState('blog')
 
   useEffect(() => {
     const stored = localStorage.getItem('swk_blog_posts')
@@ -415,6 +623,22 @@ const Admin = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 py-10 max-w-5xl">
+
+        {/* Tab switcher */}
+        <div className="flex gap-2 mb-6">
+          <button onClick={() => setAdminTab('blog')}
+            className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${adminTab === 'blog' ? 'bg-emerald-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+            📝 Blog
+          </button>
+          <button onClick={() => setAdminTab('marketplace')}
+            className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${adminTab === 'marketplace' ? 'bg-emerald-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+            🛒 Marketplace
+          </button>
+        </div>
+
+        {/* ── BLOG TAB ── */}
+        {adminTab === 'blog' && (
+          <>
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Blog Admin</h1>
@@ -472,6 +696,13 @@ const Admin = () => {
               </div>
             ))}
           </div>
+        )}
+          </>
+        )}
+
+        {/* ── MARKETPLACE TAB ── */}
+        {adminTab === 'marketplace' && (
+          <MarketplaceAdmin />
         )}
       </div>
     </main>
