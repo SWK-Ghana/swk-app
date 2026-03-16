@@ -21,14 +21,14 @@ const ShareButtons = ({ url, title }) => {
 
   return (
     <div className="flex flex-wrap items-center gap-2 mt-3">
-      <span className="text-xs font-semibold text-gray-500">Share:</span>
+      <span className="text-xs font-semibold text-gray-700">Share:</span>
       {shares.map(({ label, color, href, icon }) => (
         <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${label}`}
           className={`${color} text-white rounded-lg p-1.5 transition-colors`}>
           <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
         </a>
       ))}
-      <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs px-2.5 py-1.5 rounded-lg transition-colors">
+      <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs px-2.5 py-1.5 rounded-lg transition-colors">
         {copied ? '✓ Copied!' : '🔗 Copy'}
       </button>
     </div>
@@ -40,11 +40,11 @@ const reports = [
   {
     id: 1,
     category: 'Impact Report',
-    categoryColor: 'bg-emerald-100 text-emerald-700',
-    gradient: 'from-emerald-50 to-green-50',
-    border: 'border-emerald-100',
-    btnColor: 'bg-emerald-600 hover:bg-emerald-700',
-    btnBorder: 'border-emerald-600 text-emerald-600 hover:bg-emerald-50',
+    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
+    gradient: 'from-[#F2FAE8] to-green-50',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
+    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
     title: 'Agribusiness Webinar Series Impact Report 2025',
     description:
       'Three-edition webinar series (September–November 2025). 230+ verified registrants, demographic insights, SDG alignment, and full impact metrics.',
@@ -129,17 +129,17 @@ const Reports = () => {
       : reports.filter((r) => r.category === activeCategory)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100 px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
+    <div className="min-h-screen bg-gradient-to-br from-white to-white px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
 
       {/* ── Page header ── */}
       <div className="max-w-6xl mx-auto text-center mb-8 xs:mb-10 sm:mb-12">
-        <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+        <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
           Publications
         </span>
         <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
           Reports & Publications
         </h1>
-        <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-sm xs:text-base sm:text-lg text-gray-800 max-w-2xl mx-auto">
           Access SWK Ghana's impact reports, annual reviews, program summaries, research findings, and latest articles.
         </p>
       </div>
@@ -161,7 +161,7 @@ const Reports = () => {
                   loading="lazy"
                 />
                 {report.badgeText && (
-                  <span className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
+                  <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
                     {report.badgeText}
                   </span>
                 )}
@@ -171,11 +171,11 @@ const Reports = () => {
               </div>
               {/* Content */}
               <div className="p-5 xs:p-6 flex flex-col flex-1">
-                <p className="text-xs text-gray-500 mb-1">{report.date}</p>
+                <p className="text-xs text-gray-700 mb-1">{report.date}</p>
                 <h3 className="text-base xs:text-lg font-bold text-gray-900 mb-2 leading-snug">
                   {report.title}
                 </h3>
-                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-5 flex-1">
+                <p className="text-xs xs:text-sm text-gray-800 leading-relaxed mb-5 flex-1">
                   {report.description}
                 </p>
                 <div className="flex gap-2">
@@ -217,8 +217,8 @@ const Reports = () => {
                 onClick={() => setActiveCategory(cat)}
                 className={`text-xs xs:text-sm font-semibold px-3 xs:px-4 py-1.5 rounded-full border transition-colors ${
                   activeCategory === cat
-                    ? 'bg-emerald-600 text-white border-emerald-600'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-emerald-400 hover:text-emerald-600'
+                    ? 'bg-[#78C31E] text-white border-[#78C31E]'
+                    : 'bg-white text-gray-800 border-gray-300 hover:border-[#78C31E] hover:text-[#78C31E]'
                 }`}
               >
                 {cat}
@@ -243,7 +243,7 @@ const Reports = () => {
                     loading="lazy"
                   />
                   {report.driveLink && (
-                    <span className="absolute top-2 right-2 bg-white/90 text-xs font-semibold text-emerald-700 px-2 py-0.5 rounded-full">
+                    <span className="absolute top-2 right-2 bg-white/90 text-xs font-semibold text-[#1E963C] px-2 py-0.5 rounded-full">
                       Available
                     </span>
                   )}
@@ -251,7 +251,7 @@ const Reports = () => {
               ) : (
                 <div className={`h-40 bg-gradient-to-br ${report.thumbBg} flex flex-col items-center justify-center gap-1`}>
                   <span className="text-4xl">{report.thumbEmoji}</span>
-                  <span className="text-xs font-semibold text-gray-600">Coming Soon</span>
+                  <span className="text-xs font-semibold text-gray-800">Coming Soon</span>
                 </div>
               )}
 
@@ -260,12 +260,12 @@ const Reports = () => {
                   <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${report.categoryColor}`}>
                     {report.category}
                   </span>
-                  <span className="text-xs text-gray-500">{report.date}</span>
+                  <span className="text-xs text-gray-700">{report.date}</span>
                 </div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug flex-1">
                   {report.title}
                 </h3>
-                <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                <p className="text-xs text-gray-800 leading-relaxed mb-3">
                   {report.description.slice(0, 80)}…
                 </p>
                 {report.driveLink ? (
@@ -308,18 +308,18 @@ const Reports = () => {
             {articles.map((article) => (
               <div
                 key={article.id}
-                className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl border border-emerald-100 p-4 xs:p-5 hover:shadow-md transition-shadow"
+                className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] p-4 xs:p-5 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${article.categoryColor}`}>
                     {article.category}
                   </span>
-                  <span className="text-xs text-gray-500">{article.date}</span>
+                  <span className="text-xs text-gray-700">{article.date}</span>
                 </div>
                 <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-2 leading-snug">
                   {article.title}
                 </h3>
-                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-4">
+                <p className="text-xs xs:text-sm text-gray-800 leading-relaxed mb-4">
                   {article.description}
                 </p>
                 {article.link && (
@@ -327,7 +327,7 @@ const Reports = () => {
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs xs:text-sm font-semibold text-emerald-600 hover:text-emerald-700"
+                    className="text-xs xs:text-sm font-semibold text-[#78C31E] hover:text-[#1E963C]"
                   >
                     Read Article →
                   </a>
@@ -339,7 +339,7 @@ const Reports = () => {
           <div className="flex flex-col items-center justify-center text-center py-14 border-2 border-dashed border-gray-200 rounded-xl">
             <span className="text-4xl mb-4">✍️</span>
             <h3 className="text-base xs:text-lg font-semibold text-gray-700 mb-2">Articles Coming Soon</h3>
-            <p className="text-xs xs:text-sm text-gray-500 max-w-sm">
+            <p className="text-xs xs:text-sm text-gray-700 max-w-sm">
               We're working on new articles and thought leadership content. Check back soon!
             </p>
           </div>

@@ -21,9 +21,9 @@ const videoUrl = (publicId, version) =>
 const imageProjects = [
   {
     id: 'webinar',
-    gradient: 'from-emerald-50 to-green-50',
-    border: 'border-emerald-100',
-    accent: 'bg-emerald-100 text-emerald-700',
+    gradient: 'from-[#F2FAE8] to-green-50',
+    border: 'border-[#D4F0A0]',
+    accent: 'bg-[#F2FAE8] text-[#1E963C]',
     badge: 'Impact',
     thumb: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'),
     title: 'Agribusiness Webinar Series',
@@ -43,8 +43,8 @@ const imageProjects = [
   },
   {
     id: 'ambassador',
-    gradient: 'from-emerald-50 to-blue-50',
-    border: 'border-emerald-100',
+    gradient: 'from-[#F2FAE8] to-blue-50',
+    border: 'border-[#D4F0A0]',
     accent: 'bg-purple-100 text-purple-700',
     badge: 'Recognition',
     thumb: null, // dual-image layout
@@ -123,11 +123,11 @@ const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, 
             onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }} />
           <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2" aria-hidden="true">
             <span className="text-4xl">🎬</span>
-            <span className="text-xs text-gray-500 font-medium">Click to play</span>
+            <span className="text-xs text-gray-700 font-medium">Click to play</span>
           </div>
           <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
             <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
-              <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-[#1E963C] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
@@ -159,7 +159,7 @@ const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, 
           {badge}
         </span>
         <h4 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h4>
-        <p className="text-xs text-gray-600 leading-relaxed flex-1">{desc}</p>
+        <p className="text-xs text-gray-800 leading-relaxed flex-1">{desc}</p>
       </div>
     </div>
   )
@@ -170,18 +170,18 @@ const OurWork = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <div className="min-h-screen bg-gradient-to-br from-white to-white">
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
 
         {/* ── Page header ── */}
         <div className="text-center mb-10 xs:mb-12 sm:mb-14">
-          <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+          <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
             Programs & Impact
           </span>
           <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
             Our Work
           </h1>
-          <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm xs:text-base sm:text-lg text-gray-800 max-w-2xl mx-auto">
             From agribusiness webinars to climate action films — explore the full breadth of SWK Ghana's programs and impact.
           </p>
         </div>
@@ -196,7 +196,7 @@ const OurWork = () => {
             <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Our Projects & Impact
             </h2>
-            <p className="text-sm xs:text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm xs:text-base sm:text-lg text-gray-800 max-w-2xl mx-auto">
               Real projects, real youth, real impact — across Ghana and beyond.
             </p>
           </div>
@@ -222,8 +222,8 @@ const OurWork = () => {
                     {p.badge}
                   </span>
                   <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
-                  <span className="self-start text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+                  <p className="text-xs xs:text-sm text-gray-800 leading-relaxed flex-1 mb-3">{p.desc}</p>
+                  <span className="self-start text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">
                     {p.stat}
                   </span>
                 </div>
@@ -247,13 +247,13 @@ const OurWork = () => {
         {/* ── Focus areas ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
           <div className="text-center mb-6 xs:mb-8">
-            <span className="inline-block bg-emerald-100 text-emerald-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+            <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
               Our Pillars
             </span>
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Focus Areas
             </h2>
-            <p className="text-sm xs:text-base text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm xs:text-base text-gray-800 max-w-2xl mx-auto">
               Six interconnected pillars driving sustainable impact across Ghana.
             </p>
           </div>
@@ -275,7 +275,7 @@ const OurWork = () => {
                 />
                 <div className="p-4 xs:p-5">
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-sm text-gray-800 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -291,19 +291,19 @@ const OurWork = () => {
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               UN SDG Alignment
             </h2>
-            <p className="text-sm xs:text-base text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm xs:text-base text-gray-800 max-w-2xl mx-auto">
               Our work directly contributes to eight UN Sustainable Development Goals.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '4', title: 'Quality Education', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
               { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
               { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
               { n: '11', title: 'Sustainable Cities', color: 'bg-green-50 text-green-700 border-green-100' },
-              { n: '12', title: 'Responsible Consumption', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '12', title: 'Responsible Consumption', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
               { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
-              { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+              { n: '15', title: 'Life on Land', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
               { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
             ].map((g, i) => (
               <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3 xs:p-4`}>
@@ -321,7 +321,7 @@ const OurWork = () => {
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
             Want to Be Part of Our Work?
           </h2>
-          <p className="text-sm xs:text-base text-gray-600 mb-6 max-w-xl mx-auto">
+          <p className="text-sm xs:text-base text-gray-800 mb-6 max-w-xl mx-auto">
             Join SWK Ghana as a volunteer, partner, or supporter and help us scale impact across Africa.
           </p>
           <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
@@ -332,7 +332,7 @@ const OurWork = () => {
               Get Involved
             </button>
             <button
-              className="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base"
+              className="border-2 border-[#78C31E] text-[#78C31E] hover:bg-[#78C31E] hover:text-white px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base"
               onClick={() => navigate('/donate')}
             >
               Donate Now

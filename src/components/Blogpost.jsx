@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const categoryColors = {
   'Event Recap': 'bg-blue-100 text-blue-700',
-  'Program Update': 'bg-emerald-100 text-emerald-700',
+  'Program Update': 'bg-[#F2FAE8] text-[#1E963C]',
   'Impact Story': 'bg-purple-100 text-purple-700',
   'Opinion': 'bg-orange-100 text-orange-700',
 }
@@ -48,7 +48,7 @@ const ShareButtons = ({ url, title }) => {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="text-sm font-semibold text-gray-600">Share:</span>
+      <span className="text-sm font-semibold text-gray-800">Share:</span>
       {shares.map(({ label, color, href, icon }) => (
         <a key={label} href={href} target="_blank" rel="noopener noreferrer"
           aria-label={`Share on ${label}`}
@@ -79,11 +79,11 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100 flex items-center justify-center">
+      <main className="min-h-screen bg-gradient-to-br from-white to-white flex items-center justify-center">
         <div className="text-center bg-white rounded-2xl p-10 shadow-sm border border-gray-200">
           <span className="text-5xl mb-4 block">🔍</span>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Post not found</h2>
-          <p className="text-gray-500 text-sm mb-5">This post may have been removed or doesn't exist.</p>
+          <p className="text-gray-700 text-sm mb-5">This post may have been removed or doesn't exist.</p>
           <button onClick={() => navigate('/blog')} className="btn-gradient px-6 py-2 text-sm">Back to Blog</button>
         </div>
       </main>
@@ -93,11 +93,11 @@ const BlogPost = () => {
   const postUrl = `https://swkghana.org/blog/${post.slug}`
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <main className="min-h-screen bg-gradient-to-br from-white to-white">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16">
         <div className="max-w-3xl mx-auto">
           {/* Back button */}
-          <button onClick={() => navigate('/blog')} className="flex items-center gap-2 text-sm text-emerald-600 font-semibold mb-6 hover:underline">
+          <button onClick={() => navigate('/blog')} className="flex items-center gap-2 text-sm text-[#78C31E] font-semibold mb-6 hover:underline">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -110,7 +110,7 @@ const BlogPost = () => {
             )}
             <div className="p-5 xs:p-6 sm:p-8 md:p-10">
               <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] || 'bg-gray-100 text-gray-600'}`}>
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] || 'bg-gray-100 text-gray-800'}`}>
                   {post.category}
                 </span>
                 <span className="text-xs text-gray-400">{post.date}</span>
@@ -126,7 +126,7 @@ const BlogPost = () => {
 
               {/* Post content */}
               <div
-                className="prose prose-emerald max-w-none text-gray-700 leading-relaxed text-sm xs:text-base [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:my-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:my-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_p]:my-3 [&_a]:text-emerald-600 [&_a]:underline [&_img]:max-w-full [&_img]:rounded-lg [&_img]:my-4 [&_strong]:font-bold [&_em]:italic"
+                className="prose prose-emerald max-w-none text-gray-700 leading-relaxed text-sm xs:text-base [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:my-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:my-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_p]:my-3 [&_a]:text-[#78C31E] [&_a]:underline [&_img]:max-w-full [&_img]:rounded-lg [&_img]:my-4 [&_strong]:font-bold [&_em]:italic"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 

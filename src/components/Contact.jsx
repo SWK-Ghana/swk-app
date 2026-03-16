@@ -35,13 +35,13 @@ const Contact = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <main className="min-h-screen bg-gradient-to-br from-white to-white">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">
             Contact SWK Ghana
           </h1>
-          <p className="text-base xs:text-lg sm:text-xl text-gray-600 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
+          <p className="text-base xs:text-lg sm:text-xl text-gray-800 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
             Get in touch with our team and learn how you can support youth empowerment and sustainable development in Ghana.
           </p>
 
@@ -52,14 +52,14 @@ const Contact = () => {
               <div className="space-y-5 xs:space-y-6 sm:space-y-7">
                 {/* Email */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
-                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-[#F2FAE8] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@swkghana.org" className="text-sm xs:text-base text-gray-600 hover:text-emerald-600 transition-colors break-words">
+                    <a href="mailto:info@swkghana.org" className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors break-words">
                       info@swkghana.org
                     </a>
                   </div>
@@ -74,10 +74,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+233534492220" className="text-sm xs:text-base text-gray-600 hover:text-emerald-600 transition-colors">
+                    <a href="tel:+233534492220" className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors">
                       +233 (0) 534 492 220
                     </a>
-                    <p className="text-sm xs:text-base text-gray-600">Mon–Fri 9AM – 6PM GMT</p>
+                    <p className="text-sm xs:text-base text-gray-800">Mon–Fri 9AM – 6PM GMT</p>
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Address</h3>
-                    <p className="text-sm xs:text-base text-gray-600">Accra, Ghana</p>
+                    <p className="text-sm xs:text-base text-gray-800">Accra, Ghana</p>
                   </div>
                 </div>
 
@@ -113,7 +113,7 @@ const Contact = () => {
                         { label: 'YouTube', href: 'https://www.youtube.com/@swkghana' },
                       ].map(({ label, href }) => (
                         <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                          className="text-sm xs:text-base text-gray-600 hover:text-emerald-600 transition-colors">
+                          className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors">
                           {label}
                         </a>
                       ))}
@@ -130,13 +130,13 @@ const Contact = () => {
               {/* Success state */}
               {status === 'success' ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-4">
+                    <svg className="w-8 h-8 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                  <p className="text-gray-600 mb-6">Thank you for reaching out. We'll get back to you as soon as possible.</p>
+                  <p className="text-gray-800 mb-6">Thank you for reaching out. We'll get back to you as soon as possible.</p>
                   <button onClick={() => setStatus('idle')} className="btn-gradient px-6 py-2.5 text-sm">
                     Send Another Message
                   </button>
@@ -148,14 +148,14 @@ const Contact = () => {
                       <label htmlFor="contact-firstName" className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
                       <input type="text" id="contact-firstName" required value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                         placeholder="Your first name" />
                     </div>
                     <div>
                       <label htmlFor="contact-lastName" className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
                       <input type="text" id="contact-lastName" required value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                         placeholder="Your last name" />
                     </div>
                   </div>
@@ -164,7 +164,7 @@ const Contact = () => {
                     <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                     <input type="email" id="contact-email" required value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="your.email@example.com" />
                   </div>
 
@@ -172,7 +172,7 @@ const Contact = () => {
                     <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
                     <input type="text" id="contact-subject" value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="What's this about?" />
                   </div>
 
@@ -180,7 +180,7 @@ const Contact = () => {
                     <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                     <textarea id="contact-message" rows={4} required value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="Tell us how we can help you..." />
                   </div>
 
