@@ -45,20 +45,8 @@ const About = () => {
           {/* Mission, Vision & Values */}
           <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-8 sm:gap-10">
-              {/* Mission */}
-              <div className="text-center">
-                <div className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 bg-blue-100 rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
-                  <svg className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h2 className="text-xl xs:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Our Mission</h2>
-                <p className="text-sm xs:text-base text-gray-800 leading-relaxed">
-                  To empower and mobilise young people as holistic changemakers: building leadership skills and opportunities to drive sustainability, community development, and systemic transformation by 2035.
-                </p>
-              </div>
 
-              {/* Vision */}
+              {/* Vision — FIRST */}
               <div className="text-center">
                 <div className="w-20 h-20 bg-[#F2FAE8] rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <svg className="w-10 h-10 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,6 +57,19 @@ const About = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
                 <p className="text-gray-800 leading-relaxed">
                   A thriving Africa where empowered youth lead sustainable change, shaping resilient communities and rewriting the future of the continent.
+                </p>
+              </div>
+
+              {/* Mission — SECOND */}
+              <div className="text-center">
+                <div className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 bg-blue-100 rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
+                  <svg className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl xs:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Our Mission</h2>
+                <p className="text-sm xs:text-base text-gray-800 leading-relaxed">
+                  To empower and mobilise young people as holistic changemakers: building leadership skills and opportunities to drive sustainability, community development, and systemic transformation by 2035.
                 </p>
               </div>
 

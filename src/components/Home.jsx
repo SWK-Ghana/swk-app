@@ -429,7 +429,41 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 5. PROJECTS & IMPACT ════════════════════════════════════════════ */}
+        {/* ══ 5. PHOTO HIGHLIGHTS ═════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader badge="Gallery" title="Moments in Action" subtitle="A glimpse into our programs, events, and community impact across Ghana." />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
+            {[
+              { path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', caption: 'Youth Empowerment' },
+              { path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', caption: 'Climate Action' },
+              { path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', caption: 'Community Engagement' },
+              { path: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', caption: 'Agribusiness' },
+              { path: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', caption: 'Circular Economy' },
+              { path: 'v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', caption: 'SWK Ghana Team' },
+            ].map((photo, i) => (
+              <div key={i} className="relative overflow-hidden rounded-xl cursor-pointer group aspect-square">
+                <img
+                  src={img(photo.path, 500)}
+                  alt={photo.caption}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end">
+                  <p className="text-white text-xs font-semibold px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {photo.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <button className="btn-gradient px-8 py-3 text-base" onClick={() => navigate('/our-work')}>
+              View Full Gallery →
+            </button>
+          </div>
+        </Section>
+
+        {/* ══ 6. PROJECTS & IMPACT ════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Impact" badgeColor="bg-blue-100 text-blue-700" title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
 
@@ -512,7 +546,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 6. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
+        {/* ══ 7. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Currently Active" title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5">
@@ -536,7 +570,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 7. UPCOMING EVENTS ══════════════════════════════════════════════ */}
+        {/* ══ 8. UPCOMING EVENTS ══════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
           <div className="space-y-4 xs:space-y-5 mb-8">
@@ -583,7 +617,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 8. REPORTS & RESOURCES ══════════════════════════════════════════ */}
+        {/* ══ 9. REPORTS & RESOURCES ══════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
@@ -667,7 +701,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 9. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
+        {/* ══ 10. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
         <Section>
           <SectionHeader badge="Global Goals" badgeColor="bg-blue-100 text-blue-700" title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 items-center">
@@ -700,19 +734,19 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 10. FAQs ═════════════════════════════════════════════════════════ */}
+        {/* ══ 11. FAQs ═════════════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">FAQs</h2>
           <Faqs />
         </Section>
 
-        {/* ══ 11. TESTIMONIALS ════════════════════════════════════════════════ */}
+        {/* ══ 12. TESTIMONIALS ════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">What People Say</h2>
           <Testimonials />
         </Section>
 
-        {/* ══ 12. PARTNERS ════════════════════════════════════════════════════ */}
+        {/* ══ 13. PARTNERS ════════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-10 text-center">Partners & Supporters</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 items-center">
@@ -736,7 +770,7 @@ const Home = () => {
           </div>
         </Section>
 
-        {/* ══ 13. NEWSLETTER ══════════════════════════════════════════════════ */}
+        {/* ══ 14. NEWSLETTER ══════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3 text-center">Newsletter</h2>
           <p className="text-sm xs:text-base text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up to receive updates and news from SWK Ghana directly in your inbox.</p>
@@ -767,7 +801,7 @@ const Home = () => {
           )}
         </Section>
 
-        {/* ══ 14. CTA ═════════════════════════════════════════════════════════ */}
+        {/* ══ 15. CTA ═════════════════════════════════════════════════════════ */}
         <div className="text-center py-10 sm:py-16 bg-[#1E963C] rounded-2xl mb-10 sm:mb-16 px-6 sm:px-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Join the Movement</h2>
           <p className="text-lg sm:text-xl text-white/70 font-light mb-10 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>

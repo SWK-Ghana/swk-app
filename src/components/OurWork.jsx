@@ -12,6 +12,85 @@ const img = (path, w = 600) =>
 // The trick: use /video/upload/ path but request .jpg extension with so_0
 const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
+// ─── Gallery photos ───────────────────────────────────────────────────────────
+const GALLERY_PHOTOS = [
+  { path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', caption: 'Youth Empowerment Program' },
+  { path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', caption: 'Climate Action Campaign' },
+  { path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', caption: 'Community Engagement — Ga West' },
+  { path: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', caption: 'Agribusiness Development' },
+  { path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', caption: 'Technology & Innovation' },
+  { path: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', caption: 'Circular Economy Initiative' },
+  { path: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', caption: 'Climate Action Projects' },
+  { path: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', caption: 'Community Outreach' },
+  { path: 'v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', caption: 'SWK Ghana Team' },
+  { path: 'v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', caption: 'Youth in Agriculture' },
+  { path: 'v1760551738/1752658915453_atc9oo.jpg', caption: 'Ambassador Recognition' },
+  { path: 'v1760551737/1752658914512_k1zf9t.jpg', caption: 'e-Academy Ambassador' },
+]
+
+const GalleryGrid = () => {
+  const [lightbox, setLightbox] = useState(null)
+
+  return (
+    <>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        {GALLERY_PHOTOS.map((photo, i) => (
+          <div
+            key={i}
+            className="relative overflow-hidden rounded-xl cursor-pointer group aspect-square"
+            onClick={() => setLightbox(i)}
+          >
+            <img
+              src={img(photo.path, 500)}
+              alt={photo.caption}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end">
+              <p className="text-white text-xs font-semibold px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {photo.caption}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 transition-colors"
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+          >✕</button>
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl font-bold hover:text-gray-300 transition-colors px-2"
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length) }}
+            aria-label="Previous"
+          >‹</button>
+          <div className="max-w-4xl max-h-[85vh] flex flex-col items-center gap-3" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={img(GALLERY_PHOTOS[lightbox].path, 1200)}
+              alt={GALLERY_PHOTOS[lightbox].caption}
+              className="max-h-[75vh] max-w-full object-contain rounded-xl shadow-2xl"
+            />
+            <p className="text-white text-sm font-semibold">{GALLERY_PHOTOS[lightbox].caption}</p>
+            <p className="text-white/50 text-xs">{lightbox + 1} / {GALLERY_PHOTOS.length}</p>
+          </div>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl font-bold hover:text-gray-300 transition-colors px-2"
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % GALLERY_PHOTOS.length) }}
+            aria-label="Next"
+          >›</button>
+        </div>
+      )}
+    </>
+  )
+}
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const imageProjects = [
   {
@@ -309,6 +388,20 @@ const OurWork = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ── Photo Gallery ── */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
+          <div className="text-center mb-6 xs:mb-8 sm:mb-10">
+            <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
+              Gallery
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Moments in Action</h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto font-light">A glimpse into our programs, events, and community impact across Ghana.</p>
+          </div>
+
+          {/* Gallery Grid */}
+          <GalleryGrid />
         </div>
 
         {/* ── CTA ── */}
