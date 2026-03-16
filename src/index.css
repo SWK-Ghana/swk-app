@@ -8,84 +8,94 @@
   --swk-green-dark: #1E963C;
   --swk-green-light: #A8E04A;
   --swk-green-bg: #F2FAE8;
-  --swk-charcoal: #3C3C2D;
-  --swk-charcoal-light: #5A5A45;
+  --swk-charcoal: #1A1A1A;
 }
 
 /* ── Global font: Ubuntu ─────────────────────────────────────────────────── */
 @layer base {
-  html, body {
+
+  html,
+  body {
     font-family: 'Ubuntu', sans-serif;
-    color: var(--swk-charcoal);
+    color: #1A1A1A;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
     line-height: 1.15;
-    color: var(--swk-charcoal);
+    color: #1A1A1A;
   }
 
-  p, span, a, li, input, textarea, select, button {
+  p {
+    color: #1A1A1A;
+    line-height: 1.7;
+  }
+
+  p,
+  span,
+  a,
+  li,
+  input,
+  textarea,
+  select,
+  button {
     font-family: 'Ubuntu', sans-serif;
   }
 
   a {
-    color: var(--swk-green-dark);
+    color: #1E963C;
   }
 
   a:hover {
-    color: var(--swk-green);
+    color: #78C31E;
   }
 }
 
-/* ── Gradient button ─────────────────────────────────────────────────────── */
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
 @layer components {
+
+  /* Primary button — solid SWK lime green */
   .btn-gradient {
-    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E] focus-visible:ring-offset-2 transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-all duration-150 ease-out active:scale-[0.98];
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 0.01em;
-    background-image: linear-gradient(90deg, #1E963C 0%, #78C31E 60%, #A8E04A 100%);
+    background-color: #78C31E;
+    color: #ffffff;
+    focus-visible-ring-color: #78C31E;
   }
 
   .btn-gradient:hover {
-    filter: brightness(1.08);
+    background-color: #1E963C;
     transform: translateY(-1px);
   }
 
+  /* Outline button */
   .btn-outline {
-    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 transition duration-150 ease-out active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 transition-all duration-150 ease-out active:scale-[0.98];
     font-family: 'Ubuntu', sans-serif;
-    border-color: var(--swk-green);
-    color: var(--swk-green-dark);
+    border-color: #78C31E;
+    color: #1E963C;
+    background-color: transparent;
   }
 
   .btn-outline:hover {
-    background-color: var(--swk-green);
-    color: white;
-  }
-
-  .section-heading {
-    @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
-    font-family: 'Ubuntu', sans-serif;
-    color: var(--swk-charcoal);
-  }
-
-  .section-subheading {
-    @apply text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 300;
-    color: var(--swk-charcoal-light);
-  }
-
-  .badge {
-    @apply inline-block text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-widest;
+    background-color: #78C31E;
+    color: #ffffff;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-gradient, .btn-outline {
+
+    .btn-gradient,
+    .btn-outline {
       transition: none;
       transform: none;
     }
@@ -94,14 +104,43 @@
 
 /* ── Responsive utilities ────────────────────────────────────────────────── */
 @layer utilities {
-  .text-responsive-xs { @apply text-xs sm:text-sm md:text-base; }
-  .text-responsive-sm { @apply text-sm sm:text-base md:text-lg; }
-  .text-responsive-base { @apply text-base sm:text-lg md:text-xl; }
-  .text-responsive-lg { @apply text-lg sm:text-xl md:text-2xl; }
-  .text-responsive-xl { @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl; }
-  .text-responsive-2xl { @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl; }
-  .text-responsive-3xl { @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl; }
-  .container-responsive { @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16; }
-  .padding-responsive { @apply p-4 sm:p-6 md:p-8 lg:p-12; }
-  .gap-responsive { @apply gap-4 sm:gap-6 md:gap-8; }
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  .container-responsive {
+    @apply w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  .padding-responsive {
+    @apply p-4 sm:p-6 md:p-8 lg:p-12;
+  }
+
+  .gap-responsive {
+    @apply gap-4 sm:gap-6 md:gap-8;
+  }
 }
