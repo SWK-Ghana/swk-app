@@ -198,11 +198,11 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState('idle')
 
   const slides = useMemo(() => ([
-    { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
-    { _path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', image: img('v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
-    { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Building Resilient Communities', subtitle: 'Connecting young people across Ghana and Africa for lasting impact.' },
-    { _path: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', image: img('v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', 1280), title: 'Agribusiness Development', subtitle: 'Equipping youth with the knowledge and tools to thrive in agribusiness.' },
-    { _path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', image: img('v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
+    { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.', position: 'object-center' },
+    { _path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', image: img('v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.', position: 'object-center' },
+    { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Building Resilient Communities', subtitle: 'Connecting young people across Ghana and Africa for lasting impact.', position: 'object-center' },
+    { _path: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', image: img('v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', 1280), title: 'Agribusiness Development', subtitle: 'Equipping youth with the knowledge and tools to thrive in agribusiness.', position: 'object-top' },
+    { _path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', image: img('v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.', position: 'object-center' },
   ]), [])
 
   useEffect(() => {
@@ -302,7 +302,7 @@ const Home = () => {
               fetchPriority={idx === 0 ? 'high' : 'low'}
               loading={idx === 0 ? 'eager' : 'lazy'}
               decoding={idx === 0 ? 'sync' : 'async'}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 w-full h-full object-cover ${s.position || 'object-center'} transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'}`}
             />
           ))}
           {/* Dark gradient overlay — stronger at bottom */}
