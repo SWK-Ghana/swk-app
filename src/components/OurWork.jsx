@@ -26,6 +26,21 @@ const GALLERY_PHOTOS = [
   { path: 'v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', caption: 'Youth in Agriculture' },
   { path: 'v1760551738/1752658915453_atc9oo.jpg', caption: 'Ambassador Recognition' },
   { path: 'v1760551737/1752658914512_k1zf9t.jpg', caption: 'e-Academy Ambassador' },
+  { path: 'v1773663232/photo_3_2026-03-16_12-13-08_mqvnze.jpg', caption: 'SWK Ghana Event' },
+  { path: 'v1773663233/photo_5_2026-03-16_12-13-08_xowgpz.jpg', caption: 'Youth Engagement Session' },
+  { path: 'v1773663232/photo_1_2026-03-16_12-13-08_fganoq.jpg', caption: 'Program Activity' },
+  { path: 'v1773663231/photo_2_2026-03-16_12-13-08_exkdgy.jpg', caption: 'Community Impact' },
+  { path: 'v1773660844/photo_2026-03-16_11-33-50_wn3lbm.jpg', caption: 'SWK Ghana in Action' },
+  { path: 'v1773660247/photo_2026-03-16_11-22-45_dx3age.jpg', caption: 'Youth Development Session' },
+  { path: 'v1773660246/photo_2026-03-16_11-22-51_ooouse.jpg', caption: 'Sustainability Program' },
+  { path: 'v1773660247/photo_2026-03-16_11-22-27_u5yojg.jpg', caption: 'Innovation Workshop' },
+  { path: 'v1773615456/photo_2026-03-15_22-52-55_hkgbn5.jpg', caption: 'Youth Leadership' },
+  { path: 'v1773615456/photo_2026-03-15_22-53-03_ztbshj.jpg', caption: 'SWK Ghana Programs' },
+  { path: 'v1773615455/photo_2026-03-15_22-56-57_j5xdzc.jpg', caption: 'Community Engagement' },
+  { path: 'v1773615093/Second_Session_Flyer_1_myorui.png', caption: 'Agribusiness Webinar — Session 2' },
+  { path: 'v1773615090/First_Session_Speaker_Email_Header_10_irclea.png', caption: 'Agribusiness Webinar — Session 1' },
+  { path: 'v1773615091/First_Session_Speaker_Email_Header_ueawxx.png', caption: 'Webinar Speaker Feature' },
+  { path: 'v1773615092/Save_the_date_flyer_-_YouthOvaFashionWaste_1_owvjpc.png', caption: 'Youth Over Fashion Waste Event' },
 ]
 
 const GalleryGrid = () => {
