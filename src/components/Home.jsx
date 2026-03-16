@@ -736,9 +736,9 @@ const Home = () => {
             ].map(({ src, alt }) => (
               <div key={alt} className="flex items-center justify-center p-3">
                 <img
-                  src={img(src, 300)}
+                  src={img(src, 400)}
                   alt={alt}
-                  className="max-h-14 w-auto object-contain opacity-80 hover:opacity-100 transition grayscale hover:grayscale-0"
+                  className="max-h-20 w-auto object-contain opacity-90 hover:opacity-100 transition"
                   loading="lazy"
                   title={alt}
                 />
