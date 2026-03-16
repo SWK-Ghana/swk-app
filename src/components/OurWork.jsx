@@ -259,12 +259,12 @@ const OurWork = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
             {[
-              { img: 'v1760339246/Youth_Development_j10oja.png', title: 'Youth Development', desc: 'Leadership workshops, skills training, and mentorship for young change-makers.' },
-              { img: 'v1760339246/Circular_Economy_v3oo71.png', title: 'Circular Economy', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
-              { img: 'v1760339247/Agribusiness_yqc44a.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
-              { img: 'v1760339244/Technology_lwdqyb.png', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
-              { img: 'v1760339245/Climate_Action_ffrdiu.png', title: 'Climate Action', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
-              { img: 'v1760339244/Community_Engagement_jnun1t.png', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
+              { img: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development', desc: 'Leadership workshops, skills training, and mentorship for young change-makers.' },
+              { img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
+              { img: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
+              { img: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
+              { img: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
+              { img: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <img

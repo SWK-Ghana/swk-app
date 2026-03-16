@@ -104,24 +104,29 @@ const About = () => {
             <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-6 xs:mb-8 sm:mb-10 text-center px-2 xs:px-0">Our Focus Areas</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-8">
               {[
-                { title: 'Youth Development', icon: '👥', desc: 'Empowering young people with leadership, technical, and entrepreneurial skills', color: 'from-[#F2FAE8]0 to-[#78C31E]', bgColor: 'bg-[#F2FAE8]' },
-                { title: 'Circular Economy', icon: '♻️', desc: 'Promoting sustainable consumption and waste reduction practices', color: 'from-green-500 to-teal-500', bgColor: 'bg-green-50' },
-                { title: 'Agribusiness', icon: '🌾', desc: 'Supporting sustainable agriculture and food security initiatives', color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-50' },
-                { title: 'Technology', icon: '💻', desc: 'Leveraging digital tools for sustainable development and innovation', color: 'from-purple-500 to-pink-500', bgColor: 'bg-purple-50' },
-                { title: 'Climate Action', icon: '🌍', desc: 'Addressing climate change through youth-led environmental initiatives', color: 'from-orange-500 to-red-500', bgColor: 'bg-orange-50' },
-                { title: 'Community Engagement', icon: '🏘️', desc: 'Building resilient communities through grassroots participation', color: 'from-[#F2FAE8]0 to-[#78C31E]', bgColor: 'bg-[#F2FAE8]' },
+                { img: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development', desc: 'Empowering young people with leadership, technical, and entrepreneurial skills.' },
+                { img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy', desc: 'Promoting sustainable consumption and waste reduction practices.' },
+                { img: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness', desc: 'Supporting sustainable agriculture and food security initiatives.' },
+                { img: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', title: 'Technology & Innovation', desc: 'Leveraging digital tools for sustainable development and innovation.' },
+                { img: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action', desc: 'Addressing climate change through youth-led environmental initiatives.' },
+                { img: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Building resilient communities through grassroots participation.' },
               ].map((area, idx) => (
-                <div key={idx} className={`${area.bgColor} rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group`} onClick={() => navigate('/our-work')}>
-                  <div className={`w-16 h-16 bg-gradient-to-r ${area.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-2xl">{area.icon}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#78C31E] transition-colors duration-300">{area.title}</h3>
-                  <p className="text-gray-800 leading-relaxed">{area.desc}</p>
-                  <div className="mt-4 flex items-center text-[#78C31E] font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                    Learn More
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                <div key={idx} className="bg-white rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group" onClick={() => navigate('/our-work')}>
+                  <img
+                    src={`https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/${area.img}`}
+                    alt={area.title}
+                    className="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#78C31E] transition-colors duration-300">{area.title}</h3>
+                    <p className="text-gray-800 leading-relaxed text-sm">{area.desc}</p>
+                    <div className="mt-4 flex items-center text-[#78C31E] font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                      Learn More
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               ))}

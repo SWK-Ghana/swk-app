@@ -70,7 +70,7 @@ const reports = [
     date: 'March 2026',
     // Using the SWK community photo as the annual report cover
     thumbnail:
-      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg',
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg',
     badgeText: 'Annual Report',
     driveLink: 'https://drive.google.com/file/d/17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4/view?usp=sharing',
     downloadLink: 'https://drive.google.com/uc?export=download&id=17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4',
