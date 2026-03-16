@@ -53,7 +53,7 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
           </div>
           <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
             <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
-              <svg className="w-6 h-6 text-emerald-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-[#1E963C] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
@@ -156,7 +156,7 @@ const Testimonials = () => {
   }, [items.length])
   return (
     <div className="max-w-3xl mx-auto text-center">
-      <blockquote className="text-sm xs:text-base sm:text-lg text-gray-700 bg-emerald-50 border border-emerald-100 rounded-xl p-5 xs:p-6 sm:p-8 mb-4 italic">
+      <blockquote className="text-sm xs:text-base sm:text-lg text-gray-700 bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl p-5 xs:p-6 sm:p-8 mb-4 italic">
         "{items[idx].text}"
       </blockquote>
       <div className="text-sm font-semibold text-gray-800">— {items[idx].name}</div>
@@ -167,7 +167,7 @@ const Testimonials = () => {
             aria-current={i === idx ? 'true' : undefined}
             className="p-2 flex items-center justify-center"
           >
-            <span className={`block h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-emerald-600' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
+            <span className={`block h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-[#78C31E]' : 'bg-emerald-200 hover:bg-emerald-300'}`} />
           </button>
         ))}
       </div>
@@ -280,7 +280,7 @@ const Home = () => {
     </div>
   )
 
-  const SectionHeader = ({ badge, badgeColor = 'bg-emerald-100 text-emerald-700', title, subtitle }) => (
+  const SectionHeader = ({ badge, badgeColor = 'bg-[#F2FAE8] text-[#1E963C]', title, subtitle }) => (
     <div className="text-center mb-10 sm:mb-14">
       <span className={`inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest ${badgeColor}`}>{badge}</span>
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h2>
@@ -310,7 +310,7 @@ const Home = () => {
 
           {/* Hero content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-emerald-500/30 text-emerald-200 border border-emerald-400/40">
+            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-[#F2FAE8]0/30 text-emerald-200 border border-emerald-400/40">
               Youth · Sustainability · Africa
             </span>
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl">
@@ -324,7 +324,7 @@ const Home = () => {
                 Get Involved
               </button>
               <button
-                className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 rounded-xl font-bold transition-all text-base sm:text-lg"
+                className="border-2 border-white text-white hover:bg-white hover:text-[#1E963C] px-8 py-4 rounded-xl font-bold transition-all text-base sm:text-lg"
                 onClick={() => navigate('/about')}>
                 Learn More
               </button>
@@ -346,7 +346,7 @@ const Home = () => {
         <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16">
 
         {/* ══ 2. IMPACT STATS ═════════════════════════════════════════════════ */}
-        <div className="bg-emerald-700 rounded-2xl p-8 sm:p-12 mb-10 sm:mb-16">
+        <div className="bg-[#1E963C] rounded-2xl p-8 sm:p-12 mb-10 sm:mb-16">
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 text-center">
             {[
               { n: '230+', label: 'Webinar Registrants' },
@@ -379,7 +379,7 @@ const Home = () => {
             </div>
             {/* Text */}
             <div className="order-1 lg:order-2">
-              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-emerald-100 text-emerald-700">Who We Are</span>
+              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">Who We Are</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Building Africa's Next Generation of Changemakers
               </h2>
@@ -396,9 +396,9 @@ const Home = () => {
                   { label: 'Target', value: 'Ages 15–35' },
                   { label: 'Vision', value: 'Pan-African' },
                 ].map(({ label, value }) => (
-                  <div key={label} className="bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3 text-center">
+                  <div key={label} className="bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl px-4 py-3 text-center">
                     <div className="text-xs text-gray-400 uppercase tracking-wide mb-0.5">{label}</div>
-                    <div className="text-sm font-bold text-emerald-700">{value}</div>
+                    <div className="text-sm font-bold text-[#1E963C]">{value}</div>
                   </div>
                 ))}
               </div>
@@ -448,7 +448,7 @@ const Home = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
             {[
               {
-                gradient: 'from-emerald-50 to-green-50', border: 'border-emerald-100', badge: 'Impact', accent: 'bg-emerald-100 text-emerald-700',
+                gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]', badge: 'Impact', accent: 'bg-[#F2FAE8] text-[#1E963C]',
                 path: 'v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png', title: 'Agribusiness Webinar Series',
                 desc: 'Three-edition webinar series on agriculture as a business for youth empowerment.', stat: '230+ Registrants',
               },
@@ -472,7 +472,7 @@ const Home = () => {
                   <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>{p.badge}</span>
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
-                  <span className="self-start text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">{p.stat}</span>
+                  <span className="self-start text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">{p.stat}</span>
                   {p.title === 'Agribusiness Webinar Series' && (
                     <a
                       href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
@@ -490,7 +490,7 @@ const Home = () => {
               </div>
             ))}
             {/* Ambassador — dual image */}
-            <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+            <div className="bg-gradient-to-br from-[#F2FAE8] to-blue-50 rounded-xl border border-[#D4F0A0] overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="grid grid-cols-2 gap-0.5">
                 <img
                   src={img('v1760551738/1752658915453_atc9oo.jpg', 400)}
@@ -534,10 +534,10 @@ const Home = () => {
               { icon: '💡', tag: 'Training', tc: 'bg-yellow-100 text-yellow-700', title: 'Skills & Leadership Workshops', desc: 'Practical workshops building leadership, entrepreneurship, and digital skills for young Ghanaians.' },
               { icon: '📢', tag: 'Advocacy', tc: 'bg-red-100 text-red-700', title: 'Youth Advocacy Initiatives', desc: 'Amplifying youth voices in policy discussions on climate and sustainability at local and continental levels.' },
             ].map((a, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-5 border border-emerald-100 hover:shadow-md transition-shadow flex flex-col">
+              <div key={idx} className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl p-5 border border-[#D4F0A0] hover:shadow-md transition-shadow flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${a.tc}`}>{a.tag}</span>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">● Ongoing</span>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F2FAE8] text-[#1E963C]">● Ongoing</span>
                 </div>
                 <div className="text-3xl mb-3">{a.icon}</div>
                 <h3 className="text-base font-semibold text-gray-900 mb-2">{a.title}</h3>
@@ -556,21 +556,21 @@ const Home = () => {
               { tag: 'Workshop', tc: 'bg-yellow-100 text-yellow-700', title: 'Youth Leadership & Skills Training Workshop', desc: 'A hands-on workshop building leadership, entrepreneurship, and digital skills for young Ghanaians.', location: 'Accra, Ghana' },
               { tag: 'Community', tc: 'bg-purple-100 text-purple-700', title: 'Community Outreach & Engagement Day', desc: "An outreach day bringing SWK Ghana's programs directly to communities across Greater Accra.", location: 'Greater Accra, Ghana' },
             ].map((event, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-emerald-100 hover:shadow-md transition-shadow">
-                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-emerald-200 px-5 py-3 text-center gap-2 sm:gap-0">
-                  <span className="text-xl font-bold text-emerald-700">TBA</span>
+              <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-[#F2FAE8] to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-[#D4F0A0] hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-[#C0E870] px-5 py-3 text-center gap-2 sm:gap-0">
+                  <span className="text-xl font-bold text-[#1E963C]">TBA</span>
                   <span className="text-xs font-medium text-gray-400 uppercase">Soon</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-2">
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${event.tc}`}>{event.tag}</span>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Free</span>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F2FAE8] text-[#1E963C]">Free</span>
                   </div>
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{event.title}</h3>
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-3">{event.desc}</p>
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="text-xs text-gray-500">📍 {event.location}</span>
-                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg">Registration Opening Soon</span>
+                    <span className="text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1.5 rounded-lg">Registration Opening Soon</span>
                   </div>
                 </div>
               </div>
@@ -600,24 +600,24 @@ const Home = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
 
             {/* Report 1 — Agribusiness Impact Report (cover = webinar flyer) */}
-            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl border border-emerald-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+            <div className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="relative">
                 <img
                   src={img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
                   srcSet={cardSrcset('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt="Agribusiness Impact Report 2025" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
-                <span className="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
+                <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
-                <span className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">Impact Report</span>
+                <span className="text-xs font-semibold text-[#78C31E] uppercase tracking-wide">Impact Report</span>
                 <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar Series Impact Report 2025</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Three editions. 230+ verified registrants. Full impact metrics, SDG alignment, and demographic insights.</p>
                 <div className="flex gap-2">
                   <a href="https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing" target="_blank" rel="noopener noreferrer"
-                    className="flex-1 text-center text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-2 rounded-lg transition-colors">📄 View</a>
+                    className="flex-1 text-center text-xs font-semibold text-white bg-[#78C31E] hover:bg-[#1E963C] px-3 py-2 rounded-lg transition-colors">📄 View</a>
                   <a href="https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po" target="_blank" rel="noopener noreferrer"
-                    className="flex-1 text-center text-xs font-semibold text-emerald-600 border border-emerald-600 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
+                    className="flex-1 text-center text-xs font-semibold text-[#78C31E] border border-[#78C31E] hover:bg-[#F2FAE8] px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>
             </div>
@@ -691,13 +691,13 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                { n: '4', title: 'Quality Education', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '4', title: 'Quality Education', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
                 { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
                 { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
                 { n: '11', title: 'Sustainable Cities', color: 'bg-green-50 text-green-700 border-green-100' },
-                { n: '12', title: 'Responsible Consumption', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '12', title: 'Responsible Consumption', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
                 { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
-                { n: '15', title: 'Life on Land', color: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
+                { n: '15', title: 'Life on Land', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
                 { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
               ].map((g, i) => (
                 <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3`}>
@@ -753,7 +753,7 @@ const Home = () => {
           <p className="text-sm xs:text-base text-gray-600 mb-6 text-center max-w-2xl mx-auto">Sign up to receive updates and news from SWK Ghana directly in your inbox.</p>
           {newsletterStatus === 'success' ? (
             <div className="text-center py-4">
-              <span className="text-emerald-600 font-semibold text-lg">🎉 You're subscribed! Welcome to the SWK Ghana community.</span>
+              <span className="text-[#78C31E] font-semibold text-lg">🎉 You're subscribed! Welcome to the SWK Ghana community.</span>
             </div>
           ) : (
             <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3" onSubmit={handleNewsletterSubmit}>
@@ -765,7 +765,7 @@ const Home = () => {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="your.email@example.com"
-                className="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                className="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-emerald-500"
               />
               <button type="submit" disabled={newsletterStatus === 'sending'}
                 className="btn-gradient px-6 py-3 rounded-xl text-sm disabled:opacity-60 disabled:cursor-not-allowed">
@@ -779,12 +779,12 @@ const Home = () => {
         </Section>
 
         {/* ══ 14. CTA ═════════════════════════════════════════════════════════ */}
-        <div className="text-center py-10 sm:py-16 bg-emerald-700 rounded-2xl mb-10 sm:mb-16 px-6 sm:px-12">
+        <div className="text-center py-10 sm:py-16 bg-[#1E963C] rounded-2xl mb-10 sm:mb-16 px-6 sm:px-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Join the Movement</h2>
           <p className="text-lg sm:text-xl text-white/70 font-light mb-10 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
           <div className="flex flex-col gap-4 justify-center items-stretch max-w-xs mx-auto sm:max-w-none sm:flex-row sm:items-center">
-            <button className="bg-white text-emerald-700 font-bold text-base px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-700 px-8 py-4 rounded-xl font-bold transition-colors text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
+            <button className="bg-white text-[#1E963C] font-bold text-base px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
+            <button className="border-2 border-white text-white hover:bg-white hover:text-[#1E963C] px-8 py-4 rounded-xl font-bold transition-colors text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
             <a
               href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
               target="_blank"
@@ -814,8 +814,8 @@ const Home = () => {
             </div>
             {volunteerStatus === 'success' ? (
               <div className="flex flex-col items-center py-10 text-center">
-                <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
+                  <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -827,21 +827,21 @@ const Home = () => {
             <form className="space-y-4" onSubmit={handleVolunteerSubmit}>
               <div>
                 <label htmlFor="vol-name" className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
-                <input required id="vol-name" type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Your full name" />
+                <input required id="vol-name" type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="Your full name" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="vol-age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                  <input required id="vol-age" type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g. 24" />
+                  <input required id="vol-age" type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="e.g. 24" />
                 </div>
                 <div>
                   <label htmlFor="vol-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input required id="vol-email" type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="you@email.com" />
+                  <input required id="vol-email" type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="you@email.com" />
                 </div>
               </div>
               <div>
                 <label htmlFor="vol-role" className="block text-sm font-medium text-gray-700 mb-1">Preferred volunteer role *</label>
-                <select required id="vol-role" value={volunteerRole} onChange={(e) => setVolunteerRole(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                <select required id="vol-role" value={volunteerRole} onChange={(e) => setVolunteerRole(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] bg-white">
                   <option value="">— Select a role —</option>
                   <option>Media & Communications</option>
                   <option>Programs & Events</option>
@@ -857,7 +857,7 @@ const Home = () => {
               </div>
               <div>
                 <label htmlFor="vol-hours" className="block text-sm font-medium text-gray-700 mb-1">Hours available per week *</label>
-                <select required id="vol-hours" value={volunteerHours} onChange={(e) => setVolunteerHours(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white">
+                <select required id="vol-hours" value={volunteerHours} onChange={(e) => setVolunteerHours(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] bg-white">
                   <option value="">— Select hours —</option>
                   <option>1–3 hours</option>
                   <option>4–6 hours</option>
@@ -868,7 +868,7 @@ const Home = () => {
               </div>
               <div>
                 <label htmlFor="vol-motivation" className="block text-sm font-medium text-gray-700 mb-1">Why do you want to volunteer? *</label>
-                <textarea required id="vol-motivation" rows={3} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Tell us about your passion and what you'd like to contribute…" />
+                <textarea required id="vol-motivation" rows={3} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="Tell us about your passion and what you'd like to contribute…" />
               </div>
               <div className="space-y-2">
                 <div>
@@ -878,7 +878,7 @@ const Home = () => {
                 </div>
                 <div>
                   <label htmlFor="vol-link" className="block text-sm font-medium text-gray-700 mb-1">Or paste a link <span className="text-gray-400 font-normal">(Google Drive, LinkedIn, etc.)</span></label>
-                  <input id="vol-link" type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="https://drive.google.com/…" />
+                  <input id="vol-link" type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="https://drive.google.com/…" />
                 </div>
               </div>
               {volunteerStatus === 'error' && (
@@ -907,8 +907,8 @@ const Home = () => {
             </div>
             {partnerStatus === 'success' ? (
               <div className="flex flex-col items-center py-10 text-center">
-                <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
+                  <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -920,21 +920,21 @@ const Home = () => {
               <form className="space-y-4" onSubmit={handlePartnerSubmit}>
                 <div>
                   <label htmlFor="partner-org" className="block text-sm font-medium text-gray-700 mb-1">Organization Name</label>
-                  <input required id="partner-org" type="text" value={partnerOrg} onChange={(e) => setPartnerOrg(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                  <input required id="partner-org" type="text" value={partnerOrg} onChange={(e) => setPartnerOrg(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="partner-name" className="block text-sm font-medium text-gray-700 mb-1">Contact Name</label>
-                    <input required id="partner-name" type="text" value={partnerName} onChange={(e) => setPartnerName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                    <input required id="partner-name" type="text" value={partnerName} onChange={(e) => setPartnerName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" />
                   </div>
                   <div>
                     <label htmlFor="partner-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input required id="partner-email" type="email" value={partnerEmail} onChange={(e) => setPartnerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                    <input required id="partner-email" type="email" value={partnerEmail} onChange={(e) => setPartnerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="partner-message" className="block text-sm font-medium text-gray-700 mb-1">How would you like to partner?</label>
-                  <textarea id="partner-message" rows={4} value={partnerMessage} onChange={(e) => setPartnerMessage(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Describe your partnership interest" />
+                  <textarea id="partner-message" rows={4} value={partnerMessage} onChange={(e) => setPartnerMessage(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="Describe your partnership interest" />
                 </div>
                 {partnerStatus === 'error' && (
                   <p className="text-xs text-red-500">Something went wrong. Please try again.</p>

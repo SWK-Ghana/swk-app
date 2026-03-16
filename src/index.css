@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── SWK Ghana Brand Colours ─────────────────────────────────────────────── */
+:root {
+  --swk-green: #78C31E;
+  --swk-green-dark: #1E963C;
+  --swk-green-light: #A8E04A;
+  --swk-green-bg: #F2FAE8;
+  --swk-charcoal: #3C3C2D;
+  --swk-charcoal-light: #5A5A45;
+}
+
 /* ── Global font: Ubuntu ─────────────────────────────────────────────────── */
 @layer base {
   html, body {
     font-family: 'Ubuntu', sans-serif;
-    color: #111827;
+    color: var(--swk-charcoal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -15,43 +25,59 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
     line-height: 1.15;
-    color: #064e3b;
+    color: var(--swk-charcoal);
   }
 
   p, span, a, li, input, textarea, select, button {
     font-family: 'Ubuntu', sans-serif;
+  }
+
+  a {
+    color: var(--swk-green-dark);
+  }
+
+  a:hover {
+    color: var(--swk-green);
   }
 }
 
 /* ── Gradient button ─────────────────────────────────────────────────────── */
 @layer components {
   .btn-gradient {
-    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 focus-visible:ring-offset-2 transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E] focus-visible:ring-offset-2 transition duration-150 ease-out active:scale-[0.98] active:translate-y-[1px];
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 0.01em;
-    background-image: linear-gradient(90deg, #059669 0%, #10B981 50%, #22C55E 100%);
+    background-image: linear-gradient(90deg, #1E963C 0%, #78C31E 60%, #A8E04A 100%);
   }
 
   .btn-gradient:hover {
-    filter: brightness(1.05);
+    filter: brightness(1.08);
     transform: translateY(-1px);
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white transition duration-150 ease-out active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 transition duration-150 ease-out active:scale-[0.98];
     font-family: 'Ubuntu', sans-serif;
+    border-color: var(--swk-green);
+    color: var(--swk-green-dark);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--swk-green);
+    color: white;
   }
 
   .section-heading {
     @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
     font-family: 'Ubuntu', sans-serif;
-    color: #064e3b;
+    color: var(--swk-charcoal);
   }
 
   .section-subheading {
-    @apply text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto;
+    @apply text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 300;
+    color: var(--swk-charcoal-light);
   }
 
   .badge {

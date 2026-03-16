@@ -10,6 +10,16 @@ module.exports = {
         ubuntu: ['"Ubuntu"', 'sans-serif'],
         sans: ['"Ubuntu"', 'sans-serif'],
       },
+      colors: {
+        swk: {
+          green: '#78C31E',
+          'green-dark': '#1E963C',
+          'green-light': '#A8E04A',
+          'green-bg': '#F2FAE8',
+          charcoal: '#3C3C2D',
+          'charcoal-light': '#5A5A45',
+        },
+      },
       fontSize: {
         'hero': ['5rem', { lineHeight: '1.05', fontWeight: '700' }],
         'hero-sm': ['3.5rem', { lineHeight: '1.1', fontWeight: '700' }],
