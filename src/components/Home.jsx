@@ -198,9 +198,11 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState('idle')
 
   const slides = useMemo(() => ([
-    { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
-    { _path: 'v1760339245/Climate_Action_ffrdiu.png', image: img('v1760339245/Climate_Action_ffrdiu.png', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
-    { _path: 'v1760339244/Technology_lwdqyb.png', image: img('v1760339244/Technology_lwdqyb.png', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
+    { _path: 'v1773615456/photo_2026-03-15_22-55-40_tagra4.jpg', image: img('v1773615456/photo_2026-03-15_22-55-40_tagra4.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
+    { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
+    { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Building Resilient Communities', subtitle: 'Connecting young people across Ghana and Africa for lasting impact.' },
+    { _path: 'v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', image: img('v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', 1280), title: 'Agribusiness Development', subtitle: 'Equipping youth with the knowledge and tools to thrive in agribusiness.' },
+    { _path: 'v1773660247/photo_2026-03-16_11-22-45_dx3age.jpg', image: img('v1773660247/photo_2026-03-16_11-22-45_dx3age.jpg', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
   ]), [])
 
   useEffect(() => {
@@ -366,8 +368,8 @@ const Home = () => {
             {/* Image */}
             <div className="overflow-hidden rounded-2xl order-2 lg:order-1">
               <img
-                src={img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 900)}
-                srcSet={srcset('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', [480, 768, 900])}
+                src={img('v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', 900)}
+                srcSet={srcset('v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', [480, 768, 900])}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 alt="SWK Ghana team"
                 className="w-full h-72 sm:h-96 object-cover"
@@ -412,12 +414,12 @@ const Home = () => {
           <SectionHeader badge="What We Do" title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
             {[
-              { src: 'v1760339246/Youth_Development_j10oja.png', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
-              { src: 'v1760339246/Circular_Economy_v3oo71.png', title: 'Circular Economy Initiatives', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
-              { src: 'v1760339247/Agribusiness_yqc44a.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
-              { src: 'v1760339244/Technology_lwdqyb.png', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
-              { src: 'v1760339245/Climate_Action_ffrdiu.png', title: 'Climate Action Projects', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
-              { src: 'v1760339244/Community_Engagement_jnun1t.png', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
+              { src: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
+              { src: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy Initiatives', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
+              { src: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
+              { src: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
+              { src: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action Projects', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
+              { src: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <img
