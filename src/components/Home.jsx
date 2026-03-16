@@ -21,8 +21,11 @@ const cardSrcset = (path) => srcset(path, [300, 600, 900])
 const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
 // Video card using YouTube embed
-const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
+const VideoCard = ({ bg, border, accent, badge, ytId, isShort, title, description }) => {
   const [playing, setPlaying] = useState(false)
+  const embedUrl = isShort
+    ? `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
+    : `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
 
   return (
     <div className={`bg-gradient-to-br ${bg} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
@@ -55,7 +58,7 @@ const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
         <div className="relative w-full h-44 bg-black">
           <iframe
             className="w-full h-44"
-            src={`https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=1&rel=0&playsinline=1`}
+            src={embedUrl}
             title={title}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -248,10 +251,10 @@ const Home = () => {
   const resetPartner = () => { setPartnerOrg(''); setPartnerName(''); setPartnerEmail(''); setPartnerMessage(''); setPartnerStatus('idle') }
 
   const videoProjects = [
-    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', ytId: 'mqVJMGlINt4', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
-    { id: 'circular', bg: 'from-green-50 to-[#F2FAE8]', border: 'border-green-100', accent: 'bg-[#F2FAE8] text-[#1E963C]', badge: 'Circular Economy', ytId: '2SIXUJJppP4', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
-    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', ytId: 'GAE6AL3NWBo', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
-    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', ytId: 'zDywICh3Ay0', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
+    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', ytId: 'mqVJMGlINt4', isShort: false, title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
+    { id: 'circular', bg: 'from-green-50 to-[#F2FAE8]', border: 'border-green-100', accent: 'bg-[#F2FAE8] text-[#1E963C]', badge: 'Circular Economy', ytId: '2SIXUJJppP4', isShort: false, title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
+    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', ytId: 'GAE6AL3NWBo', isShort: true, title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
+    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', ytId: 'zDywICh3Ay0', isShort: true, title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
   ]
 
   const Section = ({ children, className = '' }) => (

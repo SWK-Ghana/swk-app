@@ -61,6 +61,7 @@ const videoProjects = [
     accent: 'bg-purple-100 text-purple-700',
     badge: 'Innovation',
     ytId: 'mqVJMGlINt4',
+    isShort: false,
     title: 'Taka Kipawa App',
     desc: 'Digital waste management solutions for a circular economy.',
   },
@@ -71,6 +72,7 @@ const videoProjects = [
     accent: 'bg-[#F2FAE8] text-[#1E963C]',
     badge: 'Circular Economy',
     ytId: '2SIXUJJppP4',
+    isShort: false,
     title: 'Circular Economy Innovation',
     desc: 'Youth-led solutions for sustainable consumption and waste reduction.',
   },
@@ -81,6 +83,7 @@ const videoProjects = [
     accent: 'bg-orange-100 text-orange-700',
     badge: 'Climate Action',
     ytId: 'GAE6AL3NWBo',
+    isShort: true,
     title: 'Climate Action',
     desc: 'Children advocating for environmental protection and climate action.',
   },
@@ -91,14 +94,18 @@ const videoProjects = [
     accent: 'bg-red-100 text-red-700',
     badge: 'Advocacy',
     ytId: 'zDywICh3Ay0',
+    isShort: true,
     title: 'Fight Against Galamsey',
     desc: "Youth voices against illegal mining to protect Ghana's natural resources.",
   },
 ]
 
 // ─── VideoCard ─────────────────────────────────────────────────────────────────
-const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
+const VideoCard = ({ gradient, border, accent, badge, ytId, isShort, title, desc }) => {
   const [playing, setPlaying] = useState(false)
+  const embedUrl = isShort
+    ? `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
+    : `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
 
   return (
     <div className={`bg-gradient-to-br ${gradient} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
@@ -130,7 +137,7 @@ const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
         <div className="relative w-full h-44 bg-black">
           <iframe
             className="w-full h-44"
-            src={`https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=1&rel=0&playsinline=1`}
+            src={embedUrl}
             title={title}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
