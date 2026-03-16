@@ -147,6 +147,14 @@ const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{desc}</p>
+        <a
+          href={`https://www.youtube.com/watch?v=${ytId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 self-start text-xs font-bold text-red-600 hover:text-red-700 hover:underline flex items-center gap-1"
+        >
+          ▶ Watch on YouTube
+        </a>
       </div>
     </div>
   )
