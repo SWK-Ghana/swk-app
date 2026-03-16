@@ -22,54 +22,44 @@ const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
 // Video card using YouTube embed
 const VideoCard = ({ bg, border, accent, badge, ytId, isShort, title, description }) => {
-  const [playing, setPlaying] = useState(false)
-  const embedUrl = isShort
-    ? `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
-    : `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1`
+  const youtubeUrl = isShort
+    ? `https://youtube.com/shorts/${ytId}`
+    : `https://www.youtube.com/watch?v=${ytId}`
 
   return (
     <div className={`bg-gradient-to-br ${bg} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
-      {!playing ? (
-        <div className="relative cursor-pointer group" onClick={() => setPlaying(true)}>
-          <img
-            src={videoThumb(ytId)}
-            alt={title}
-            className="w-full h-44 object-cover bg-gray-200"
-            loading="lazy"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none'
-              e.currentTarget.nextElementSibling.style.display = 'flex'
-            }}
-          />
-          <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2">
-            <span className="text-4xl">🎬</span>
-            <span className="text-xs text-gray-500">Click to play</span>
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
-            <div className="bg-red-600 group-hover:bg-red-700 rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              <span className="text-white text-xs font-bold">YouTube</span>
-            </div>
+      <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="relative cursor-pointer group block">
+        <img
+          src={videoThumb(ytId)}
+          alt={title}
+          className="w-full h-44 object-cover bg-gray-200"
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+            e.currentTarget.nextElementSibling.style.display = 'flex'
+          }}
+        />
+        <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2">
+          <span className="text-4xl">🎬</span>
+          <span className="text-xs text-gray-500">Watch on YouTube</span>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+          <div className="bg-red-600 group-hover:bg-red-700 rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
+            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <span className="text-white text-xs font-bold">Watch on YouTube</span>
           </div>
         </div>
-      ) : (
-        <div className="relative w-full h-44 bg-black">
-          <iframe
-            className="w-full h-44"
-            src={embedUrl}
-            title={title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        </div>
-      )}
+      </a>
       <div className="p-4 flex flex-col flex-1">
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{description}</p>
+        <a href={youtubeUrl} target="_blank" rel="noopener noreferrer"
+          className="mt-3 self-start text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1">
+          ▶ Watch on YouTube
+        </a>
       </div>
     </div>
   )
