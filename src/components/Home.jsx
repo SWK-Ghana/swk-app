@@ -55,10 +55,10 @@ const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
         <div className="relative w-full h-44 bg-black">
           <iframe
             className="w-full h-44"
-            src={`https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=1&rel=0&playsinline=1`}
             title={title}
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
         </div>
