@@ -198,11 +198,11 @@ const Home = () => {
   const [newsletterStatus, setNewsletterStatus] = useState('idle')
 
   const slides = useMemo(() => ([
-    { _path: 'v1773615456/photo_2026-03-15_22-55-40_tagra4.jpg', image: img('v1773615456/photo_2026-03-15_22-55-40_tagra4.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
-    { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
+    { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.' },
+    { _path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', image: img('v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.' },
     { _path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', image: img('v1760294683/SWK_at_Ga_West_n0c3fz.jpg', 1280), title: 'Building Resilient Communities', subtitle: 'Connecting young people across Ghana and Africa for lasting impact.' },
-    { _path: 'v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', image: img('v1773615455/photo_2026-03-15_22-57-02_hnphnv.jpg', 1280), title: 'Agribusiness Development', subtitle: 'Equipping youth with the knowledge and tools to thrive in agribusiness.' },
-    { _path: 'v1773660247/photo_2026-03-16_11-22-45_dx3age.jpg', image: img('v1773660247/photo_2026-03-16_11-22-45_dx3age.jpg', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
+    { _path: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', image: img('v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg', 1280), title: 'Agribusiness Development', subtitle: 'Equipping youth with the knowledge and tools to thrive in agribusiness.' },
+    { _path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', image: img('v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', 1280), title: 'Technology & Innovation', subtitle: 'Building digital skills and solutions for sustainable development.' },
   ]), [])
 
   useEffect(() => {
@@ -366,13 +366,13 @@ const Home = () => {
         <Section>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             {/* Image */}
-            <div className="overflow-hidden rounded-2xl order-2 lg:order-1">
+            <div className="overflow-hidden rounded-2xl order-2 lg:order-1 h-full">
               <img
                 src={img('v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', 900)}
                 srcSet={srcset('v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', [480, 768, 900])}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 alt="SWK Ghana team"
-                className="w-full h-72 sm:h-96 object-cover"
+                className="w-full h-full min-h-[400px] object-cover"
                 loading="lazy"
                 decoding="async"
               />
@@ -417,7 +417,7 @@ const Home = () => {
               { src: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
               { src: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy Initiatives', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
               { src: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
-              { src: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
+              { src: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
               { src: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action Projects', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
               { src: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
             ].map((item, i) => (
@@ -626,8 +626,8 @@ const Home = () => {
             <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="relative">
                 <img
-                  src={img('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg')}
-                  srcSet={cardSrcset('v1760551738/photo_2025-07-30_10-50-49_snxydg.jpg')}
+                  src={img('v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg')}
+                  srcSet={cardSrcset('v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg')}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt="SWK Ghana Annual Report 2025"
                   className="w-full h-48 object-cover"
@@ -725,10 +725,24 @@ const Home = () => {
 
         {/* ══ 12. PARTNERS ════════════════════════════════════════════════════ */}
         <Section>
-          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">Partners & Supporters</h2>
-          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 xs:gap-5 items-center">
-            {[1,2,3,4,5].map((n) => (
-              <img key={n} src={`https://dummyimage.com/200x80/edf2f7/a0aec0&text=Partner+${n}`} alt={`Partner ${n}`} className="mx-auto h-10 object-contain opacity-80 hover:opacity-100 transition" loading="lazy" />
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-10 text-center">Partners & Supporters</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 items-center">
+            {[
+              { src: 'v1773661462/AEQUITAS-08-1536x361_pcxgvy.png', alt: 'Aequitas Foundation' },
+              { src: 'v1773661462/1715875277298_tjdnsb.jpg', alt: 'Agribusiness e-Academy' },
+              { src: 'v1773661461/cropped-tglc-logo-q1ubu2o8mbbpktpnzd608sx1q4jd6s8hmd4b4yek8w_vilk2e.png', alt: 'The GracedLife Leadership Centre' },
+              { src: 'v1773661734/World-Inspiring-Network-Logo-1024x366_v8it3x.png', alt: 'World Inspiring Network' },
+              { src: 'v1773661462/311331075_3157445151233536_1506695373056214199_n_lqwu03.jpg', alt: 'Charter House Ghana' },
+            ].map(({ src, alt }) => (
+              <div key={alt} className="flex items-center justify-center p-3">
+                <img
+                  src={img(src, 300)}
+                  alt={alt}
+                  className="max-h-14 w-auto object-contain opacity-80 hover:opacity-100 transition grayscale hover:grayscale-0"
+                  loading="lazy"
+                  title={alt}
+                />
+              </div>
             ))}
           </div>
         </Section>
