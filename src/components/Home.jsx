@@ -18,27 +18,18 @@ const heroSrcset = (path) => srcset(path, [480, 768, 1024, 1280, 1920])
 // Card images — smaller breakpoints for thumbnails
 const cardSrcset = (path) => srcset(path, [300, 600, 900])
 
-const videoThumb = (publicId) => `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
-const videoUrl = (publicId, version) =>
-  `${CLD}/video/upload/f_auto,q_auto,vc_auto,br_800k/v${version}/${publicId}.mp4`
+const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
-// Video card with proper Cloudinary thumbnail + fallback
-const VideoCard = ({ bg, border, accent, badge, publicId, version, title, description }) => {
+// Video card using YouTube embed
+const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
   const [playing, setPlaying] = useState(false)
-  const [buffering, setBuffering] = useState(false)
-  const videoRef = React.useRef(null)
-
-  const handlePlay = () => {
-    setPlaying(true)
-    setBuffering(true)
-  }
 
   return (
     <div className={`bg-gradient-to-br ${bg} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
       {!playing ? (
-        <div className="relative cursor-pointer group" onClick={handlePlay}>
+        <div className="relative cursor-pointer group" onClick={() => setPlaying(true)}>
           <img
-            src={videoThumb(publicId)}
+            src={videoThumb(ytId)}
             alt={title}
             className="w-full h-44 object-cover bg-gray-200"
             loading="lazy"
@@ -51,42 +42,31 @@ const VideoCard = ({ bg, border, accent, badge, publicId, version, title, descri
             <span className="text-4xl">🎬</span>
             <span className="text-xs text-gray-500">Click to play</span>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
-            <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
-              <svg className="w-6 h-6 text-[#1E963C] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
+            <div className="bg-red-600 group-hover:bg-red-700 rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
+              <span className="text-white text-xs font-bold">YouTube</span>
             </div>
           </div>
         </div>
       ) : (
         <div className="relative w-full h-44 bg-black">
-          {buffering && (
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <svg className="animate-spin h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-              </svg>
-            </div>
-          )}
-          <video
-            ref={videoRef}
-            controls
-            autoPlay
-            preload="auto"
-            className="w-full h-44 bg-black"
-            onCanPlay={() => setBuffering(false)}
-            onWaiting={() => setBuffering(true)}
-            onPlaying={() => setBuffering(false)}
-          >
-            <source src={videoUrl(publicId, version)} type="video/mp4" />
-          </video>
+          <iframe
+            className="w-full h-44"
+            src={`https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`}
+            title={title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
       )}
       <div className="p-4 flex flex-col flex-1">
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
-        <p className="text-xs text-gray-600 leading-relaxed flex-1">{description}</p>
+        <p className="text-xs text-gray-800 leading-relaxed flex-1">{description}</p>
       </div>
     </div>
   )
@@ -268,10 +248,10 @@ const Home = () => {
   const resetPartner = () => { setPartnerOrg(''); setPartnerName(''); setPartnerEmail(''); setPartnerMessage(''); setPartnerStatus('idle') }
 
   const videoProjects = [
-    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', publicId: 'Taka_Kipawa_2_wdxkpo', version: '1760552758', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
-    { id: 'circular', bg: 'from-green-50 to-emerald-50', border: 'border-green-100', accent: 'bg-green-100 text-green-700', badge: 'Circular Economy', publicId: '1711018812883_mbddbv', version: '1760551740', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
-    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', publicId: 'Galamsey_1_iyyc25', version: '1760552757', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
-    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', publicId: '1727031150424_dx6ece', version: '1760554407', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
+    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', ytId: 'mqVJMGlINt4', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
+    { id: 'circular', bg: 'from-green-50 to-[#F2FAE8]', border: 'border-green-100', accent: 'bg-[#F2FAE8] text-[#1E963C]', badge: 'Circular Economy', ytId: '2SIXUJJppP4', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
+    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', ytId: 'GAE6AL3NWBo', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
+    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', ytId: 'zDywICh3Ay0', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
   ]
 
   const Section = ({ children, className = '' }) => (

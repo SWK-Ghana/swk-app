@@ -10,12 +10,7 @@ const img = (path, w = 600) =>
 
 // Video thumbnail: Cloudinary generates a JPEG from frame 0 of the video
 // The trick: use /video/upload/ path but request .jpg extension with so_0
-const videoThumb = (publicId) =>
-  `${CLD}/video/upload/so_0,w_640,f_jpg/${publicId}.jpg`
-
-// Video stream URL
-const videoUrl = (publicId, version) =>
-  `${CLD}/video/upload/f_auto,q_auto,vc_auto,br_800k/v${version}/${publicId}.mp4`
+const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const imageProjects = [
@@ -65,19 +60,17 @@ const videoProjects = [
     border: 'border-purple-100',
     accent: 'bg-purple-100 text-purple-700',
     badge: 'Innovation',
-    publicId: 'Taka_Kipawa_2_wdxkpo',
-    version: '1760552758',
+    ytId: 'mqVJMGlINt4',
     title: 'Taka Kipawa App',
     desc: 'Digital waste management solutions for a circular economy.',
   },
   {
     id: 'circular',
-    gradient: 'from-green-50 to-emerald-50',
+    gradient: 'from-green-50 to-[#F2FAE8]',
     border: 'border-green-100',
-    accent: 'bg-green-100 text-green-700',
+    accent: 'bg-[#F2FAE8] text-[#1E963C]',
     badge: 'Circular Economy',
-    publicId: '1711018812883_mbddbv',
-    version: '1760551740',
+    ytId: '2SIXUJJppP4',
     title: 'Circular Economy Innovation',
     desc: 'Youth-led solutions for sustainable consumption and waste reduction.',
   },
@@ -87,8 +80,7 @@ const videoProjects = [
     border: 'border-orange-100',
     accent: 'bg-orange-100 text-orange-700',
     badge: 'Climate Action',
-    publicId: 'Galamsey_1_iyyc25',
-    version: '1760552757',
+    ytId: 'GAE6AL3NWBo',
     title: 'Climate Action',
     desc: 'Children advocating for environmental protection and climate action.',
   },
@@ -98,62 +90,54 @@ const videoProjects = [
     border: 'border-red-100',
     accent: 'bg-red-100 text-red-700',
     badge: 'Advocacy',
-    publicId: '1727031150424_dx6ece',
-    version: '1760554407',
+    ytId: 'zDywICh3Ay0',
     title: 'Fight Against Galamsey',
     desc: "Youth voices against illegal mining to protect Ghana's natural resources.",
   },
 ]
 
 // ─── VideoCard ─────────────────────────────────────────────────────────────────
-const VideoCard = ({ gradient, border, accent, badge, publicId, version, title, desc }) => {
+const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
   const [playing, setPlaying] = useState(false)
-  const [buffering, setBuffering] = useState(false)
-  const thumb = videoThumb(publicId)
-  const src = videoUrl(publicId, version)
 
   return (
     <div className={`bg-gradient-to-br ${gradient} rounded-xl border ${border} overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col`}>
       {!playing ? (
         <div className="relative cursor-pointer group"
-          onClick={() => { setPlaying(true); setBuffering(true) }}
+          onClick={() => setPlaying(true)}
           role="button" aria-label={`Play video: ${title}`}>
-          <img src={thumb} alt={`${title} thumbnail`}
-            className="w-full h-44 object-cover bg-gray-200" loading="lazy"
-            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }} />
+          <img
+            src={videoThumb(ytId)}
+            alt={`${title} thumbnail`}
+            className="w-full h-44 object-cover bg-gray-200"
+            loading="lazy"
+            onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }}
+          />
           <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2" aria-hidden="true">
             <span className="text-4xl">🎬</span>
             <span className="text-xs text-gray-700 font-medium">Click to play</span>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/30 transition-colors">
-            <div className="bg-white/95 group-hover:bg-white rounded-full p-3 shadow-lg transition-all group-hover:scale-110">
-              <svg className="w-6 h-6 text-[#1E963C] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
+            <div className="bg-red-600 group-hover:bg-red-700 rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
+              <span className="text-white text-xs font-bold">YouTube</span>
             </div>
           </div>
         </div>
       ) : (
         <div className="relative w-full h-44 bg-black">
-          {buffering && (
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <svg className="animate-spin h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-              </svg>
-            </div>
-          )}
-          <video controls autoPlay preload="auto" className="w-full h-44 object-cover bg-black"
-            onCanPlay={() => setBuffering(false)}
-            onWaiting={() => setBuffering(true)}
-            onPlaying={() => setBuffering(false)}>
-            <source src={src} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            className="w-full h-44"
+            src={`https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`}
+            title={title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
       )}
-
-      {/* Text */}
       <div className="p-4 flex flex-col flex-1">
         <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>
           {badge}
