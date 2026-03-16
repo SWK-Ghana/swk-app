@@ -53,9 +53,9 @@ const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
           </div>
         </div>
       ) : (
-        <div className="relative w-full h-44 bg-black">
+        <div className="relative w-full bg-black" style={{ aspectRatio: '16/9' }}>
           <iframe
-            className="w-full h-44"
+            className="w-full h-full"
             src={embedUrl}
             title={title}
             frameBorder="0"
