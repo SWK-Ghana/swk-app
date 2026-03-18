@@ -48,7 +48,7 @@ const VendorPage = () => {
   )
 
   const vendorName = vendorProducts[0]?.business || ''
-  const vendorLocation = vendorProducts[0]?.location || ''
+  // Location kept private — not shown publicly to protect vendor privacy
 
   const openOrder = (product) => {
     setOrder({ ...emptyOrder, productId: product.id, productName: product.productName })
@@ -133,13 +133,8 @@ const VendorPage = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-2 mb-1">
                 {vendorName}
               </h1>
-              {vendorLocation && (
-                <p className="text-white/70 text-base">
-                  📍 {vendorLocation}
-                </p>
-              )}
               <p className="text-white/60 text-sm mt-1">
-                {vendorProducts.length} product{vendorProducts.length !== 1 ? 's' : ''} listed
+                {vendorProducts.length} product{vendorProducts.length !== 1 ? 's' : ''} listed on SWK Marketplace
               </p>
             </div>
           </div>
@@ -209,18 +204,33 @@ const VendorPage = () => {
           </div>
         )}
 
-        {/* ── Contact Vendor Banner ── */}
-        <div className="mt-12 bg-[#F2FAE8] border border-[#D4F0A0] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">Want to get in touch with {vendorName}?</h3>
-            <p className="text-gray-700 text-sm">Submit an order inquiry on any product and SWK Ghana will connect you with this vendor.</p>
+        {/* ── How to Order Banner ── */}
+        <div className="mt-12 bg-[#1E963C] rounded-2xl p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold text-white mb-1">How to order from {vendorName}</h3>
+              <p className="text-white/70 text-sm max-w-lg">
+                All orders are processed through <strong className="text-white">SWK Ghana</strong>. Click "Order Now" on any product, fill in your details, and our team will coordinate with the vendor on your behalf.
+              </p>
+            </div>
+            <button
+              onClick={() => vendorProducts[0] && openOrder(vendorProducts[0])}
+              className="bg-white text-[#1E963C] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors text-sm flex-shrink-0"
+            >
+              Place an Order
+            </button>
           </div>
-          <button
-            onClick={() => vendorProducts[0] && openOrder(vendorProducts[0])}
-            className="btn-gradient px-6 py-3 text-sm flex-shrink-0"
-          >
-            Contact Vendor
-          </button>
+        </div>
+
+        {/* ── SWK Ghana Intermediary Notice ── */}
+        <div className="mt-4 bg-[#F2FAE8] border border-[#D4F0A0] rounded-2xl p-4 sm:p-5 flex items-start gap-3">
+          <span className="text-2xl flex-shrink-0">🛡️</span>
+          <div>
+            <p className="text-sm font-bold text-[#1E963C] mb-1">All transactions are managed by SWK Ghana</p>
+            <p className="text-xs text-gray-700 leading-relaxed">
+              For your protection and to support our youth entrepreneurs, all orders on SWK Marketplace are coordinated by the SWK Ghana team. We verify every vendor, review every product, and facilitate all transactions. Do not attempt to contact vendors directly outside this platform.
+            </p>
+          </div>
         </div>
 
         {/* ── Browse More ── */}

@@ -110,13 +110,20 @@ const Marketplace = () => {
           <div className="text-center mb-8 xs:mb-10">
             <span className="inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 bg-[#F2FAE8] text-[#1E963C]">Youth Ventures</span>
             <h1 className="text-3xl xs:text-4xl sm:text-5xl font-bold text-gray-900 mb-3">SWK Marketplace</h1>
-            <p className="text-base xs:text-lg text-gray-800 max-w-2xl mx-auto mb-6">
+            <p className="text-base xs:text-lg text-gray-800 max-w-2xl mx-auto mb-4">
               Shop directly from Ghana's youth-led agribusiness and circular economy ventures. Every purchase supports a young entrepreneur.
             </p>
-            <button onClick={() => { setVendor({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' }); setVendorStatus('idle'); setAgreedToTerms(false); setVendorModal(true) }}
-              className="btn-gradient px-6 py-2.5 text-sm xs:text-base">
-              + List Your Product
-            </button>
+            {/* Intermediary notice */}
+            <div className="inline-flex items-center gap-2 bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl px-4 py-2.5 mb-5 text-xs sm:text-sm text-[#1E963C] font-medium max-w-lg mx-auto">
+              <span>🛡️</span>
+              <span>All orders are coordinated by <strong>SWK Ghana</strong> — your trusted marketplace manager.</span>
+            </div>
+            <div className="block">
+              <button onClick={() => { setVendor({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' }); setVendorStatus('idle'); setAgreedToTerms(false); setVendorModal(true) }}
+                className="btn-gradient px-6 py-2.5 text-sm xs:text-base">
+                + List Your Product
+              </button>
+            </div>
           </div>
 
           {/* Search + Filters */}
@@ -158,7 +165,6 @@ const Marketplace = () => {
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[product.category] || 'bg-gray-100 text-gray-800'}`}>
                         {product.category}
                       </span>
-                      {product.location && <span className="text-xs text-gray-400">📍 {product.location}</span>}
                     </div>
                     <h3 className="text-base font-bold text-gray-900 mb-1">{product.productName}</h3>
                     <p className="text-xs text-gray-700 mb-1">by <button onClick={() => navigate(`/marketplace/vendor/${toSlug(product.business)}`)} className="font-semibold text-[#78C31E] hover:text-[#1E963C] hover:underline transition-colors">{product.business}</button></p>
@@ -407,7 +413,7 @@ const Marketplace = () => {
                     <li>You are responsible for the accuracy of your product description, pricing, and availability.</li>
                     <li>You are responsible for the quality of your product. SWK Ghana acts solely as a marketplace intermediary.</li>
                     <li>SWK Ghana reserves the right to reject, remove, or unpublish any product at any time without notice.</li>
-                    <li>A commission fee may be introduced in the future. Vendors will be notified in advance.</li>
+                    <li>A commission fee will be charged on all sales facilitated through SWK Marketplace. The commission rate will be communicated to vendors upon onboarding and before any transaction is processed.</li>
                     <li>SWK Ghana is not liable for any disputes between vendors and buyers.</li>
                   </ol>
                 </div>
