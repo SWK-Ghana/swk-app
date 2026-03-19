@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: "Our Work", href: "/our-work" },
   { label: "Team", href: "/team" },
   { label: "Resources", href: "/resources" },
-  { label: "Reports", href: "/reports" },
+  { label: "Blog", href: "/blog" },
   { label: "Blog", href: "/blog" },
   { label: "Marketplace", href: "/marketplace" },
   { label: "Contact", href: "/contact" },

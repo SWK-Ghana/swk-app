@@ -6,6 +6,7 @@ import About from './components/About'
 import OurWork from './components/OurWork'
 import MeetTheTeam from './components/MeetTheTeam'
 import Resources from './components/Resources'
+import FAQ from './components/FAQ'
 import GetInvolved from './components/GetInvolved'
 import Contact from './components/Contact'
 import Donate from './components/Donate'
@@ -28,6 +29,7 @@ function App() {
         { path: 'our-work', element: <OurWork /> },
         { path: 'team', element: <MeetTheTeam /> },
         { path: 'resources', element: <Resources /> },
+        { path: 'faq', element: <FAQ /> },
         { path: 'get-involved', element: <GetInvolved /> },
         { path: 'contact', element: <Contact /> },
         { path: 'donate', element: <Donate /> },
