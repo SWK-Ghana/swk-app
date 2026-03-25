@@ -71,18 +71,25 @@ const GetInvolved = () => {
     e.preventDefault()
     setVolunteerStatus('sending')
     try {
-      await sendEmail({
-        _subject: `Volunteer Application — ${volunteerFullName}`,
-        name: volunteerFullName,
-        age: volunteerAge,
-        email: volunteerEmail,
-        role: volunteerRole || 'N/A',
-        hours_per_week: volunteerHours || 'N/A',
-        motivation: volunteerMotivation,
-        document_link: volunteerDocLink || 'N/A',
-        file_name: volunteerDocFile?.name || 'N/A',
-        form_type: 'Volunteer Application',
+      const formData = new FormData()
+      formData.append('_subject', `Volunteer Application — ${volunteerFullName}`)
+      formData.append('form_type', 'Volunteer Application')
+      formData.append('name', volunteerFullName)
+      formData.append('age', volunteerAge)
+      formData.append('email', volunteerEmail)
+      formData.append('role', volunteerRole || 'N/A')
+      formData.append('hours_per_week', volunteerHours || 'N/A')
+      formData.append('motivation', volunteerMotivation)
+      formData.append('document_link', volunteerDocLink || 'N/A')
+      if (volunteerDocFile) {
+        formData.append('cv', volunteerDocFile)
+      }
+      const res = await fetch('https://formspree.io/f/mvzwqozw', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
       })
+      if (!res.ok) throw new Error('Failed')
       setVolunteerStatus('success')
     } catch { setVolunteerStatus('error') }
   }
