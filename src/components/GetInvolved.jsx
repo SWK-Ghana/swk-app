@@ -20,6 +20,7 @@ const GetInvolved = () => {
   const [volunteerMotivation, setVolunteerMotivation] = useState('')
   const [volunteerDocLink, setVolunteerDocLink] = useState('')
   const [volunteerDocFile, setVolunteerDocFile] = useState(null)
+  const [volunteerDocError, setVolunteerDocError] = useState('')
   const [volunteerStatus, setVolunteerStatus] = useState('idle')
 
   const [donorFullName, setDonorFullName] = useState('')
@@ -47,9 +48,60 @@ const GetInvolved = () => {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const resetVolunteerForm = () => { setVolunteerFullName(''); setVolunteerAge(''); setVolunteerEmail(''); setVolunteerRole(''); setVolunteerHours(''); setVolunteerMotivation(''); setVolunteerDocLink(''); setVolunteerDocFile(null); setVolunteerStatus('idle') }
+  const resetVolunteerForm = () => {
+    setVolunteerFullName('')
+    setVolunteerAge('')
+    setVolunteerEmail('')
+    setVolunteerRole('')
+    setVolunteerHours('')
+    setVolunteerMotivation('')
+    setVolunteerDocLink('')
+    setVolunteerDocFile(null)
+    setVolunteerDocError('')
+    setVolunteerStatus('idle')
+  }
   const resetDonateForm = () => { setDonorFullName(''); setDonorEmail(''); setDonationAmount(''); setDonationCurrency('GHS'); setDonationMessage(''); setDonateStatus('idle') }
   const resetPartnerForm = () => { setPartnerOrgName(''); setPartnerContactName(''); setPartnerEmail(''); setPartnerMessage(''); setPartnerStatus('idle') }
+
+  // Accepted file types for CV upload
+  const ACCEPTED_TYPES = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.oasis.opendocument.text',
+    'text/plain',
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/webp',
+  ]
+  const ACCEPTED_EXTENSIONS = '.pdf, .doc, .docx, .odt, .txt, .jpg, .jpeg, .png, .webp'
+  const MAX_FILE_MB = 10
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0] || null
+    setVolunteerDocError('')
+    if (!file) { setVolunteerDocFile(null); return }
+
+    const sizeMB = file.size / (1024 * 1024)
+    if (sizeMB > MAX_FILE_MB) {
+      setVolunteerDocError(`File is too large (${sizeMB.toFixed(1)} MB). Maximum allowed is ${MAX_FILE_MB} MB.`)
+      setVolunteerDocFile(null)
+      e.target.value = ''
+      return
+    }
+
+    const isAccepted = ACCEPTED_TYPES.includes(file.type) ||
+      ACCEPTED_EXTENSIONS.split(', ').some(ext => file.name.toLowerCase().endsWith(ext.trim()))
+    if (!isAccepted) {
+      setVolunteerDocError('Unsupported file type. Please upload a PDF, Word document, image, or plain text file.')
+      setVolunteerDocFile(null)
+      e.target.value = ''
+      return
+    }
+
+    setVolunteerDocFile(file)
+  }
 
   const handleContactSubmit = async (e) => {
     e.preventDefault()
@@ -69,6 +121,7 @@ const GetInvolved = () => {
 
   const handleVolunteerSubmit = async (e) => {
     e.preventDefault()
+    if (volunteerDocError) return
     setVolunteerStatus('sending')
     try {
       const formData = new FormData()
@@ -82,7 +135,7 @@ const GetInvolved = () => {
       formData.append('motivation', volunteerMotivation)
       formData.append('document_link', volunteerDocLink || 'N/A')
       if (volunteerDocFile) {
-        formData.append('cv', volunteerDocFile)
+        formData.append('cv', volunteerDocFile, volunteerDocFile.name)
       }
       const res = await fetch('https://formspree.io/f/mvzwqozw', {
         method: 'POST',
@@ -259,23 +312,23 @@ const GetInvolved = () => {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Volunteer With Us</h3>
-              <button aria-label="Close" className="text-gray-700 hover:text-gray-700 text-xl" onClick={() => { setIsVolunteerOpen(false); resetVolunteerForm() }}>✕</button>
+              <button aria-label="Close volunteer form" className="text-gray-700 hover:text-gray-900 text-xl" onClick={() => { setIsVolunteerOpen(false); resetVolunteerForm() }}>✕</button>
             </div>
             {volunteerStatus === 'success' ? (
               <SuccessState name="Application Received!" message={`Thank you, ${volunteerFullName.split(' ')[0]}! We'll be in touch soon.`} onClose={() => { setIsVolunteerOpen(false); resetVolunteerForm() }} />
             ) : (
               <form className="space-y-4" onSubmit={handleVolunteerSubmit}>
                 <div>
-                  <label htmlFor="v-name" className="block text-sm font-medium text-gray-700 mb-1">Full name</label>
+                  <label htmlFor="v-name" className="block text-sm font-medium text-gray-700 mb-1">Full name *</label>
                   <input required id="v-name" type="text" value={volunteerFullName} onChange={(e) => setVolunteerFullName(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="Your full name" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="v-age" className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                    <label htmlFor="v-age" className="block text-sm font-medium text-gray-700 mb-1">Age *</label>
                     <input required id="v-age" type="number" min={10} max={120} value={volunteerAge} onChange={(e) => setVolunteerAge(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="e.g. 24" />
                   </div>
                   <div>
-                    <label htmlFor="v-email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <label htmlFor="v-email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
                     <input required id="v-email" type="email" value={volunteerEmail} onChange={(e) => setVolunteerEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="you@email.com" />
                   </div>
                 </div>
@@ -310,22 +363,67 @@ const GetInvolved = () => {
                   <label htmlFor="v-motivation" className="block text-sm font-medium text-gray-700 mb-1">Why do you want to volunteer? *</label>
                   <textarea required id="v-motivation" rows={3} value={volunteerMotivation} onChange={(e) => setVolunteerMotivation(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="Tell us about your passion and what you'd like to contribute…" />
                 </div>
-                <div className="space-y-2">
+
+                {/* CV / Resume Upload */}
+                <div className="space-y-3 bg-[#F2FAE8] rounded-xl p-4 border border-[#78C31E]/20">
+                  <p className="text-sm font-medium text-gray-700">CV / Resume <span className="font-normal text-gray-500">(optional — upload a file or paste a link)</span></p>
+
                   <div>
-                    <label htmlFor="v-file" className="block text-sm font-medium text-gray-700 mb-1">Upload CV / Resume <span className="text-gray-400 font-normal">(optional)</span></label>
-                    <input id="v-file" type="file" accept=".pdf,.doc,.docx" onChange={(e) => setVolunteerDocFile(e.target.files?.[0] || null)} className="w-full px-3 py-2 border rounded-lg bg-white text-sm" />
-                    <p className="text-xs text-gray-400 mt-0.5">PDF or Word document</p>
+                    <label htmlFor="v-file" className="block text-xs font-medium text-gray-600 mb-1">Upload file</label>
+                    <input
+                      id="v-file"
+                      type="file"
+                      accept=".pdf,.doc,.docx,.odt,.txt,.jpg,.jpeg,.png,.webp"
+                      onChange={handleFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-medium file:bg-[#78C31E] file:text-white hover:file:bg-[#1E963C] cursor-pointer"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Accepted: PDF, Word (.doc/.docx), OpenDocument (.odt), Plain text (.txt), Images (.jpg, .png, .webp) — Max 10 MB
+                    </p>
+                    {volunteerDocError && (
+                      <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                        {volunteerDocError}
+                      </p>
+                    )}
+                    {volunteerDocFile && !volunteerDocError && (
+                      <p className="text-xs text-[#1E963C] mt-1 flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {volunteerDocFile.name} ({(volunteerDocFile.size / (1024 * 1024)).toFixed(2)} MB) — ready to send
+                      </p>
+                    )}
                   </div>
+
+                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <div className="flex-1 h-px bg-gray-200" />
+                    <span>or</span>
+                    <div className="flex-1 h-px bg-gray-200" />
+                  </div>
+
                   <div>
-                    <label htmlFor="v-link" className="block text-sm font-medium text-gray-700 mb-1">Or paste a link <span className="text-gray-400 font-normal">(Google Drive, LinkedIn, etc.)</span></label>
-                    <input id="v-link" type="url" value={volunteerDocLink} onChange={(e) => setVolunteerDocLink(e.target.value)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E]" placeholder="https://drive.google.com/…" />
+                    <label htmlFor="v-link" className="block text-xs font-medium text-gray-600 mb-1">Paste a link <span className="font-normal text-gray-400">(Google Drive, LinkedIn, Dropbox, etc.)</span></label>
+                    <input
+                      id="v-link"
+                      type="url"
+                      value={volunteerDocLink}
+                      onChange={(e) => setVolunteerDocLink(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm"
+                      placeholder="https://drive.google.com/…"
+                    />
                   </div>
                 </div>
-                {volunteerStatus === 'error' && <p className="text-xs text-red-500">Something went wrong. Please try again.</p>}
+
+                {volunteerStatus === 'error' && (
+                  <p className="text-xs text-red-500">Something went wrong. Please try again or email us directly at info@swkghana.org</p>
+                )}
                 <div className="flex justify-end gap-3 pt-2">
                   <button type="button" className="px-4 py-2 rounded-lg border text-gray-700" onClick={() => { setIsVolunteerOpen(false); resetVolunteerForm() }}>Cancel</button>
-                  <button type="submit" disabled={volunteerStatus === 'sending'} className="btn-gradient px-5 py-2 disabled:opacity-60">
-                    {volunteerStatus === 'sending' ? 'Sending...' : 'Send Application'}
+                  <button type="submit" disabled={volunteerStatus === 'sending' || !!volunteerDocError} className="btn-gradient px-5 py-2 disabled:opacity-60">
+                    {volunteerStatus === 'sending' ? 'Sending…' : 'Send Application'}
                   </button>
                 </div>
               </form>
@@ -341,7 +439,7 @@ const GetInvolved = () => {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Make a Donation</h3>
-              <button aria-label="Close" className="text-gray-700 hover:text-gray-700 text-xl" onClick={() => { setIsDonateOpen(false); resetDonateForm() }}>✕</button>
+              <button aria-label="Close donation form" className="text-gray-700 hover:text-gray-900 text-xl" onClick={() => { setIsDonateOpen(false); resetDonateForm() }}>✕</button>
             </div>
             {donateStatus === 'success' ? (
               <SuccessState name="Thank You!" message="Your donation interest has been received. We'll reach out with payment details shortly." onClose={() => { setIsDonateOpen(false); resetDonateForm() }} />
@@ -391,7 +489,7 @@ const GetInvolved = () => {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold text-gray-900">Partner With Us</h3>
-              <button aria-label="Close" className="text-gray-700 hover:text-gray-700 text-xl" onClick={() => { setIsPartnerOpen(false); resetPartnerForm() }}>✕</button>
+              <button aria-label="Close partner form" className="text-gray-700 hover:text-gray-900 text-xl" onClick={() => { setIsPartnerOpen(false); resetPartnerForm() }}>✕</button>
             </div>
             {partnerStatus === 'success' ? (
               <SuccessState name="Inquiry Received!" message="Thank you for your interest in partnering with SWK Ghana. We'll be in touch soon." onClose={() => { setIsPartnerOpen(false); resetPartnerForm() }} />
