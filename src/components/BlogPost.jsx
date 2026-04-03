@@ -1,147 +1,192 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { client } from '../utils/sanityClient'
 
-const categoryColors = {
-  'Event Recap': 'bg-blue-100 text-blue-700',
-  'Program Update': 'bg-[#F2FAE8] text-[#1E963C]',
-  'Impact Story': 'bg-purple-100 text-purple-700',
-  'Opinion': 'bg-orange-100 text-orange-700',
-}
-
-const ShareButtons = ({ url, title }) => {
-  const encoded = encodeURIComponent(url)
-  const encodedTitle = encodeURIComponent(title)
-  const [copied, setCopied] = useState(false)
-
-  const copyLink = () => {
-    navigator.clipboard.writeText(url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+const ShareButton = ({ platform, url, title }) => {
+  const links = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`,
   }
-
-  const shares = [
-    {
-      label: 'Facebook',
-      color: 'bg-[#1877F2] hover:bg-[#166fe5]',
-      href: `https://www.facebook.com/sharer/sharer.php?u=${encoded}`,
-      icon: <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>,
-    },
-    {
-      label: 'X',
-      color: 'bg-black hover:bg-gray-800',
-      href: `https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`,
-      icon: <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>,
-    },
-    {
-      label: 'LinkedIn',
-      color: 'bg-[#0A66C2] hover:bg-[#095fb6]',
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`,
-      icon: <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>,
-    },
-    {
-      label: 'WhatsApp',
-      color: 'bg-[#25D366] hover:bg-[#1ebe5d]',
-      href: `https://wa.me/?text=${encodedTitle}%20${encoded}`,
-      icon: <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>,
-    },
-  ]
+  const labels = { facebook: 'Facebook', twitter: 'X', linkedin: 'LinkedIn', whatsapp: 'WhatsApp' }
+  const colors = { facebook: '#1877F2', twitter: '#000', linkedin: '#0A66C2', whatsapp: '#25D366' }
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="text-sm font-semibold text-gray-800">Share:</span>
-      {shares.map(({ label, color, href, icon }) => (
-        <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-          aria-label={`Share on ${label}`}
-          className={`${color} text-white rounded-lg p-2 transition-colors`}>
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
-        </a>
-      ))}
-      <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-3 py-2 rounded-lg transition-colors">
-        {copied ? '✓ Copied!' : '🔗 Copy link'}
-      </button>
-    </div>
+    <a
+      href={links[platform]}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold transition-opacity hover:opacity-80"
+      style={{ background: colors[platform] }}
+    >
+      {labels[platform]}
+    </a>
   )
+}
+
+// Render Sanity portable text blocks
+const renderBlock = (block, idx) => {
+  if (block._type === 'image') {
+    const ref = block.asset?._ref || ''
+    const url = `https://cdn.sanity.io/images/qaen86pl/production/${ref
+      .replace('image-', '')
+      .replace(/-(\w+)$/, '.$1')}`
+    return (
+      <img key={idx} src={url} alt={block.alt || ''} className="w-full rounded-xl my-6 shadow" />
+    )
+  }
+  if (block._type !== 'block') return null
+
+  const style = block.style || 'normal'
+  const text = block.children?.map((span) => {
+    let t = span.text
+    if (span.marks?.includes('strong')) t = <strong key={span._key}>{t}</strong>
+    if (span.marks?.includes('em')) t = <em key={span._key}>{t}</em>
+    if (span.marks?.includes('underline')) t = <u key={span._key}>{t}</u>
+    return t
+  })
+
+  const classMap = {
+    h1: 'text-3xl font-bold text-gray-900 mt-8 mb-4',
+    h2: 'text-2xl font-bold text-gray-900 mt-8 mb-3',
+    h3: 'text-xl font-bold text-gray-900 mt-6 mb-2',
+    normal: 'text-gray-700 leading-relaxed mb-4',
+    blockquote: 'border-l-4 pl-4 italic text-gray-600 my-4',
+  }
+
+  if (style === 'h1') return <h1 key={idx} className={classMap.h1}>{text}</h1>
+  if (style === 'h2') return <h2 key={idx} className={classMap.h2}>{text}</h2>
+  if (style === 'h3') return <h3 key={idx} className={classMap.h3}>{text}</h3>
+  if (style === 'blockquote') return <blockquote key={idx} className={classMap.blockquote}>{text}</blockquote>
+
+  if (block.listItem === 'bullet') return <li key={idx} className="text-gray-700 mb-1 ml-4 list-disc">{text}</li>
+  if (block.listItem === 'number') return <li key={idx} className="text-gray-700 mb-1 ml-4 list-decimal">{text}</li>
+
+  return <p key={idx} className={classMap.normal}>{text}</p>
 }
 
 const BlogPost = () => {
   const { slug } = useParams()
-  const navigate = useNavigate()
   const [post, setPost] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
+  const url = typeof window !== 'undefined' ? window.location.href : ''
 
   useEffect(() => {
-    const stored = localStorage.getItem('swk_blog_posts')
-    if (stored) {
-      const posts = JSON.parse(stored)
-      const found = posts.find(p => p.slug === slug && p.published)
-      setPost(found || null)
-    }
+    client
+      .fetch(
+        `*[_type == "post" && slug.current == $slug][0] {
+          _id, title, slug, category, excerpt,
+          publishedAt, coverImage, author, body
+        }`,
+        { slug }
+      )
+      .then((data) => {
+        if (!data) setNotFound(true)
+        else setPost(data)
+        setLoading(false)
+      })
+      .catch(() => { setNotFound(true); setLoading(false) })
   }, [slug])
 
-  if (!post) {
-    return (
-      <main className="min-h-screen bg-gradient-to-br from-white to-white flex items-center justify-center">
-        <div className="text-center bg-white rounded-2xl p-10 shadow-sm border border-gray-200">
-          <span className="text-5xl mb-4 block">🔍</span>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Post not found</h2>
-          <p className="text-gray-700 text-sm mb-5">This post may have been removed or doesn't exist.</p>
-          <button onClick={() => navigate('/blog')} className="btn-gradient px-6 py-2 text-sm">Back to Blog</button>
-        </div>
-      </main>
-    )
+  const formatDate = (dateStr) => {
+    if (!dateStr) return ''
+    return new Date(dateStr).toLocaleDateString('en-GB', {
+      day: 'numeric', month: 'long', year: 'numeric',
+    })
   }
 
-  const postUrl = `https://swkghana.org/blog/${post.slug}`
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="inline-block w-10 h-10 border-4 rounded-full animate-spin mb-4"
+          style={{ borderColor: '#78C31E', borderTopColor: 'transparent' }} />
+        <p className="text-gray-500">Loading post...</p>
+      </div>
+    </div>
+  )
+
+  if (notFound) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-6xl mb-4">📭</div>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Post not found</h2>
+        <Link to="/blog" className="font-semibold" style={{ color: '#78C31E' }}>← Back to Blog</Link>
+      </div>
+    </div>
+  )
+
+  const coverUrl = post.coverImage
+    ? `https://cdn.sanity.io/images/qaen86pl/production/${post.coverImage.asset._ref
+        .replace('image-', '')
+        .replace(/-(\w+)$/, '.$1')}`
+    : null
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-white">
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16">
-        <div className="max-w-3xl mx-auto">
-          {/* Back button */}
-          <button onClick={() => navigate('/blog')} className="flex items-center gap-2 text-sm text-[#78C31E] font-semibold mb-6 hover:underline">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Blog
-          </button>
+    <div className="min-h-screen bg-white">
+      {/* Hero */}
+      {coverUrl && (
+        <div className="w-full h-64 sm:h-80 md:h-96 overflow-hidden">
+          <img src={coverUrl} alt={post.title} className="w-full h-full object-cover" />
+        </div>
+      )}
 
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-            {post.coverImage && (
-              <img src={post.coverImage} alt={post.title} className="w-full h-56 sm:h-72 object-cover" />
-            )}
-            <div className="p-5 xs:p-6 sm:p-8 md:p-10">
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[post.category] || 'bg-gray-100 text-gray-800'}`}>
-                  {post.category}
-                </span>
-                <span className="text-xs text-gray-400">{post.date}</span>
-                {post.author && <span className="text-xs text-gray-400">by {post.author}</span>}
-              </div>
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 max-w-3xl">
+        {/* Back link */}
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold mb-6"
+          style={{ color: '#78C31E' }}>
+          ← Back to Blog
+        </Link>
 
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">{post.title}</h1>
+        {/* Meta */}
+        {post.category && (
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4"
+            style={{ background: '#F2FAE8', color: '#1E963C' }}>
+            {post.category}
+          </span>
+        )}
 
-              {/* Share buttons — top */}
-              <div className="mb-6 pb-6 border-b border-gray-100">
-                <ShareButtons url={postUrl} title={post.title} />
-              </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          {post.title}
+        </h1>
 
-              {/* Post content */}
-              <div
-                className="prose prose-emerald max-w-none text-gray-700 leading-relaxed text-sm xs:text-base [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:my-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:my-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_p]:my-3 [&_a]:text-[#78C31E] [&_a]:underline [&_img]:max-w-full [&_img]:rounded-lg [&_img]:my-4 [&_strong]:font-bold [&_em]:italic"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
+        <div className="flex items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-100">
+          <span>By <strong className="text-gray-700">{post.author || 'SWK Ghana'}</strong></span>
+          <span>·</span>
+          <span>{formatDate(post.publishedAt)}</span>
+        </div>
 
-              {/* Share buttons — bottom */}
-              <div className="mt-8 pt-6 border-t border-gray-100">
-                <p className="text-sm font-semibold text-gray-700 mb-3">Found this helpful? Share it:</p>
-                <ShareButtons url={postUrl} title={post.title} />
-              </div>
-            </div>
-          </div>
+        {/* Share buttons — top */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          <span className="text-sm font-semibold text-gray-500 self-center mr-1">Share:</span>
+          {['facebook', 'twitter', 'linkedin', 'whatsapp'].map((p) => (
+            <ShareButton key={p} platform={p} url={url} title={post.title} />
+          ))}
+        </div>
+
+        {/* Body */}
+        <article className="prose max-w-none">
+          {post.body?.map((block, idx) => renderBlock(block, idx))}
+        </article>
+
+        {/* Share buttons — bottom */}
+        <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-gray-100">
+          <span className="text-sm font-semibold text-gray-500 self-center mr-1">Share this post:</span>
+          {['facebook', 'twitter', 'linkedin', 'whatsapp'].map((p) => (
+            <ShareButton key={p} platform={p} url={url} title={post.title} />
+          ))}
+        </div>
+
+        <div className="mt-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 font-semibold"
+            style={{ color: '#78C31E' }}>
+            ← Back to Blog
+          </Link>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 
-export { ShareButtons }
 export default BlogPost
