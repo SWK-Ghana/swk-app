@@ -546,6 +546,77 @@ const Home = () => {
           </div>
         </Section>
 
+        {/* ══ 6b. DIGITAL SOLUTIONS ══════════════════════════════════════════════ */}
+        <Section>
+          <SectionHeader
+            badge="Digital Innovation"
+            badgeColor="bg-purple-100 text-purple-700"
+            title="Our Digital Solutions"
+            subtitle="Technology-driven tools built by SWK Ghana to solve real community challenges."
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left — app info */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center text-3xl shadow-inner">
+                  ♻️
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Taka Kipawa App</h3>
+                  <span className="text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-full">
+                    Live & Active
+                  </span>
+                </div>
+              </div>
+              <p className="text-base text-gray-500 font-light leading-relaxed mb-4">
+                Taka Kipawa — meaning <em>"Our Waste"</em> in Swahili — is SWK Ghana's waste management
+                platform connecting households, waste collectors, and recyclers across Ga West Municipality.
+              </p>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {[
+                  { icon: '🗺️', label: 'Waste Mapping' },
+                  { icon: '📅', label: 'Collection Scheduling' },
+                  { icon: '♻️', label: 'Recycler Network' },
+                  { icon: '📊', label: 'Impact Tracking' },
+                ].map(({ icon, label }) => (
+                  <div key={label} className="flex items-center gap-2 bg-purple-50 border border-purple-100 rounded-xl px-3 py-2.5">
+                    <span className="text-lg">{icon}</span>
+                    <span className="text-xs font-semibold text-purple-700">{label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://takakipawa.swkghana.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors"
+                >
+                  🚀 Visit App
+                </a>
+                <button
+                  className="inline-flex items-center gap-2 border-2 border-purple-600 text-purple-600 hover:bg-purple-50 font-bold text-sm px-6 py-3 rounded-xl transition-colors"
+                  onClick={() => navigate('/taka-kipawa')}
+                >
+                  Learn More →
+                </button>
+              </div>
+            </div>
+            {/* Right — video */}
+            <div className="rounded-2xl overflow-hidden shadow-md border border-purple-100">
+              <VideoCard
+                bg="from-purple-50 to-pink-50"
+                border="border-purple-100"
+                accent="bg-purple-100 text-purple-700"
+                badge="Watch Demo"
+                ytId="mqVJMGlINt4"
+                title="Taka Kipawa — Waste Management App"
+                description="See how the Taka Kipawa app is transforming waste management in Ga West Municipality."
+              />
+            </div>
+          </div>
+        </Section>
+
         {/* ══ 7. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Currently Active" title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />

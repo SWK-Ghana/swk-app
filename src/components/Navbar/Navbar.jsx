@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "Resources", href: "/resources" },
   { label: "Blog", href: "/blog" },
   { label: "Marketplace", href: "/marketplace" },
+  { label: "Taka Kipawa", href: "/taka-kipawa" },
   { label: "Contact", href: "/contact" },
   { label: "Get Involved", href: "/get-involved", cta: true },
   { label: "Donate", href: "/donate", cta: true },
@@ -36,7 +37,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         <div className="flex h-16 xs:h-18 sm:h-20 md:h-24 items-center justify-between">
-          {/* Logo — larger */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group" aria-label={logoAlt}>
             <img
               src={logoSrc}
@@ -64,7 +65,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[700px]" : "max-h-0"}`}>
+        <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[800px]" : "max-h-0"}`}>
           <ul className="py-3 space-y-1 border-t border-gray-100">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
