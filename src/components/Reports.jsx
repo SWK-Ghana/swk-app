@@ -50,7 +50,7 @@ const reports = [
       'Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways from the session.',
     date: 'May 2026',
     thumbnail:
-      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png',
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png',
     badgeText: 'Latest Report',
     driveLink: 'https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing',
     downloadLink: 'https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi',
