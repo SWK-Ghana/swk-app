@@ -472,8 +472,8 @@ const Home = () => {
             {[
               {
                 gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]', badge: 'Impact', accent: 'bg-[#F2FAE8] text-[#1E963C]',
-                path: 'v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png', title: 'Agribusiness Webinar Series',
-                desc: 'Three-edition webinar series on agriculture as a business for youth empowerment.', stat: '230+ Registrants',
+                path: 'v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png', title: 'Agribusiness Webinar Series',
+                desc: 'Latest edition: Strategic Partnerships — May 2026. An ongoing webinar series empowering youth with agribusiness knowledge and networks.', stat: '230+ Registrants',
               },
               {
                 gradient: 'from-blue-50 to-cyan-50', border: 'border-blue-100', badge: 'Learning', accent: 'bg-blue-100 text-blue-700',
@@ -693,24 +693,24 @@ const Home = () => {
           <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
 
-            {/* Report 1 — Agribusiness Impact Report (cover = webinar flyer) */}
+            {/* Report 1 — May 2026 Strategic Partnerships Webinar Report */}
             <div className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="relative">
                 <img
-                  src={img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
-                  srcSet={cardSrcset('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png')}
+                  src={img('v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png')}
+                  srcSet={cardSrcset('v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png')}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  alt="Agribusiness Impact Report 2025" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
+                  alt="Agribusiness Webinar Report: Strategic Partnerships — May 2026" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
                 <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
                 <span className="text-xs font-semibold text-[#78C31E] uppercase tracking-wide">Impact Report</span>
-                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar Series Impact Report 2025</h3>
-                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Three editions. 230+ verified registrants. Full impact metrics, SDG alignment, and demographic insights.</p>
+                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar: Strategic Partnerships — May 2026</h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways.</p>
                 <div className="flex gap-2">
-                  <a href="https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-white bg-[#78C31E] hover:bg-[#1E963C] px-3 py-2 rounded-lg transition-colors">📄 View</a>
-                  <a href="https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po" target="_blank" rel="noopener noreferrer"
+                  <a href="https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-[#78C31E] border border-[#78C31E] hover:bg-[#F2FAE8] px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>
