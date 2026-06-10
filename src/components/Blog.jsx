@@ -12,7 +12,7 @@ const Blog = () => {
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "post"] | order(publishedAt desc) {
+      .fetch(`*[_type == "post" && published != false] | order(publishedAt desc) {
         _id,
         title,
         slug,
@@ -20,6 +20,7 @@ const Blog = () => {
         excerpt,
         publishedAt,
         coverImage,
+        coverImageUrl,
         author
       }`)
       .then((data) => {
@@ -114,7 +115,13 @@ const Blog = () => {
                 to={`/blog/${post.slug?.current}`}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden group"
               >
-                {post.coverImage ? (
+                {post.coverImageUrl ? (
+                  <img
+                    src={post.coverImageUrl}
+                    alt={post.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : post.coverImage ? (
                   <img
                     src={`https://cdn.sanity.io/images/qaen86pl/production/${post.coverImage.asset._ref
                       .replace('image-', '')

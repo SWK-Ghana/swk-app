@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { client } from '../utils/sanityClient'
 
 const categoryColors = {
   'Agribusiness': 'bg-green-100 text-green-700',
@@ -32,8 +33,12 @@ const VendorPage = () => {
   const [orderStatus, setOrderStatus] = useState('idle')
 
   useEffect(() => {
-    const stored = localStorage.getItem('swk_marketplace_products')
-    if (stored) setProducts(JSON.parse(stored))
+    client
+      .fetch(`*[_type == "marketplaceProduct" && approved == true] | order(_createdAt desc) {
+        _id, productName, category, business, name, email, phone, location, description, price, unit, imageUrl, notes, approved
+      }`)
+      .then(data => setProducts(data))
+      .catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -51,7 +56,7 @@ const VendorPage = () => {
   // Location kept private — not shown publicly to protect vendor privacy
 
   const openOrder = (product) => {
-    setOrder({ ...emptyOrder, productId: product.id, productName: product.productName })
+    setOrder({ ...emptyOrder, productId: product._id, productName: product.productName })
     setOrderStatus('idle')
     setOrderModal(product)
   }
@@ -163,7 +168,7 @@ const VendorPage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
             {vendorProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col group">
+              <div key={product._id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col group">
                 {/* Product Image */}
                 {product.imageUrl ? (
                   <img src={product.imageUrl} alt={product.productName} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { client } from '../utils/sanityClient'
 
 const toSlug = (name) =>
   name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -38,8 +39,12 @@ const Marketplace = () => {
   const [agreedToTerms, setAgreedToTerms] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem('swk_marketplace_products')
-    if (stored) setProducts(JSON.parse(stored))
+    client
+      .fetch(`*[_type == "marketplaceProduct" && approved == true] | order(_createdAt desc) {
+        _id, productName, category, business, name, email, phone, location, description, price, unit, imageUrl, notes, approved
+      }`)
+      .then(data => setProducts(data))
+      .catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -56,7 +61,7 @@ const Marketplace = () => {
   })
 
   const openOrder = (product) => {
-    setOrder({ ...emptyOrder, productId: product.id, productName: product.productName })
+    setOrder({ ...emptyOrder, productId: product._id, productName: product.productName })
     setOrderStatus('idle')
     setOrderModal(product)
   }
@@ -152,7 +157,7 @@ const Marketplace = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xs:gap-6">
               {filtered.map(product => (
-                <div key={product.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+                <div key={product._id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
                   {product.imageUrl ? (
                     <img src={product.imageUrl} alt={product.productName} className="w-full h-48 object-cover" loading="lazy" />
                   ) : (

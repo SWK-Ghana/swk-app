@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { writeClient } from '../utils/sanityClient'
 
 const ADMIN_PASSWORD = 'SWKGhana@2024'
 const CATEGORIES = ['Event Recap', 'Program Update', 'Impact Stories', 'Opinion']
@@ -6,6 +7,11 @@ const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Cra
 
 const slugify = (text) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return ''
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+}
 
 const CLOUDINARY_CLOUD = 'dwgj3lovn'
 const CLOUDINARY_PRESET = 'wx7boz2b'
@@ -204,31 +210,48 @@ const MarketplaceAdmin = () => {
   const [editId, setEditId] = useState(null)
   const [saved, setSaved] = useState(false)
   const [uploadingImg, setUploadingImg] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem('swk_marketplace_products')
-    if (stored) setProducts(JSON.parse(stored))
+    writeClient
+      .fetch(`*[_type == "marketplaceProduct"] | order(_createdAt desc) {
+        _id, productName, category, business, name, email, phone, location, description, price, unit, imageUrl, notes, approved
+      }`)
+      .then(data => { setProducts(data); setLoading(false) })
+      .catch(() => setLoading(false))
   }, [])
 
-  const saveProducts = (updated) => {
-    setProducts(updated)
-    localStorage.setItem('swk_marketplace_products', JSON.stringify(updated))
-  }
-
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault()
-    if (editId) {
-      saveProducts(products.map(p => p.id === editId ? { ...p, ...form } : p))
-    } else {
-      saveProducts([{ ...form, id: Date.now(), submittedAt: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }, ...products])
-    }
-    setSaved(true)
-    setTimeout(() => { setSaved(false); setView('list'); setForm(emptyProduct); setEditId(null) }, 1200)
+    try {
+      if (editId) {
+        await writeClient.patch(editId).set({ ...form }).commit()
+        setProducts(products.map(p => p._id === editId ? { ...p, ...form } : p))
+      } else {
+        const doc = await writeClient.create({ _type: 'marketplaceProduct', ...form })
+        setProducts([doc, ...products])
+      }
+      setSaved(true)
+      setTimeout(() => { setSaved(false); setView('list'); setForm(emptyProduct); setEditId(null) }, 1200)
+    } catch (err) { alert('Save failed: ' + err.message) }
   }
 
-  const handleEdit = (product) => { setForm({ ...product }); setEditId(product.id); setView('edit') }
-  const handleDelete = (id) => { if (window.confirm('Delete this product?')) saveProducts(products.filter(p => p.id !== id)) }
-  const toggleApprove = (id) => saveProducts(products.map(p => p.id === id ? { ...p, approved: !p.approved } : p))
+  const handleEdit = (product) => {
+    setForm({ productName: product.productName, category: product.category, business: product.business, name: product.name || '', email: product.email || '', phone: product.phone || '', location: product.location, description: product.description, price: product.price, unit: product.unit, imageUrl: product.imageUrl || '', notes: product.notes || '', approved: product.approved || false })
+    setEditId(product._id)
+    setView('edit')
+  }
+  const handleDelete = async (id) => {
+    if (window.confirm('Delete this product?')) {
+      await writeClient.delete(id)
+      setProducts(products.filter(p => p._id !== id))
+    }
+  }
+  const toggleApprove = async (id) => {
+    const product = products.find(p => p._id === id)
+    await writeClient.patch(id).set({ approved: !product.approved }).commit()
+    setProducts(products.map(p => p._id === id ? { ...p, approved: !p.approved } : p))
+  }
 
   const handleImageUpload = async (e) => {
     const file = e.target.files?.[0]
@@ -362,7 +385,12 @@ const MarketplaceAdmin = () => {
           <button onClick={() => { setForm(emptyProduct); setView('new') }} className="btn-gradient px-5 py-2 text-sm">+ Add Product</button>
         </div>
       </div>
-      {products.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-12">
+          <div className="inline-block w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-3" />
+          <p className="text-sm text-gray-500">Loading products...</p>
+        </div>
+      ) : products.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
           <span className="text-5xl mb-4 block">🛒</span>
           <h3 className="text-lg font-semibold text-gray-800 mb-2">No products yet</h3>
@@ -372,7 +400,7 @@ const MarketplaceAdmin = () => {
       ) : (
         <div className="space-y-3">
           {products.map(product => (
-            <div key={product.id} className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+            <div key={product._id} className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
               {product.imageUrl && <img src={product.imageUrl} alt={product.productName} className="w-full sm:w-16 h-24 sm:h-12 object-cover rounded-lg flex-shrink-0" />}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -386,11 +414,11 @@ const MarketplaceAdmin = () => {
                 <p className="text-xs text-gray-500">by {product.business} · GHS {product.price} / {product.unit}</p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
-                <button onClick={() => toggleApprove(product.id)} className="text-xs px-3 py-1.5 border rounded-lg hover:bg-gray-50 text-gray-600">
+                <button onClick={() => toggleApprove(product._id)} className="text-xs px-3 py-1.5 border rounded-lg hover:bg-gray-50 text-gray-600">
                   {product.approved ? 'Unpublish' : 'Approve'}
                 </button>
                 <button onClick={() => handleEdit(product)} className="text-xs px-3 py-1.5 border border-emerald-300 text-emerald-600 rounded-lg hover:bg-emerald-50">Edit</button>
-                <button onClick={() => handleDelete(product.id)} className="text-xs px-3 py-1.5 border border-red-200 text-red-500 rounded-lg hover:bg-red-50">Delete</button>
+                <button onClick={() => handleDelete(product._id)} className="text-xs px-3 py-1.5 border border-red-200 text-red-500 rounded-lg hover:bg-red-50">Delete</button>
               </div>
             </div>
           ))}
@@ -406,6 +434,7 @@ const Admin = () => {
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState(false)
   const [posts, setPosts] = useState([])
+  const [postsLoading, setPostsLoading] = useState(false)
   const [view, setView] = useState('list')
   const [form, setForm] = useState(emptyForm)
   const [editId, setEditId] = useState(null)
@@ -413,15 +442,19 @@ const Admin = () => {
   const [uploadingCover, setUploadingCover] = useState(false)
   const [adminTab, setAdminTab] = useState('blog')
 
-  useEffect(() => {
-    const stored = localStorage.getItem('swk_blog_posts')
-    if (stored) setPosts(JSON.parse(stored))
+  const loadPosts = useCallback(() => {
+    setPostsLoading(true)
+    writeClient
+      .fetch(`*[_type == "post"] | order(_createdAt desc) {
+        _id, title, slug, category, excerpt, content, coverImageUrl, author, published, publishedAt, _createdAt
+      }`)
+      .then(data => { setPosts(data); setPostsLoading(false) })
+      .catch(() => setPostsLoading(false))
   }, [])
 
-  const savePosts = (updated) => {
-    setPosts(updated)
-    localStorage.setItem('swk_blog_posts', JSON.stringify(updated))
-  }
+  useEffect(() => {
+    if (authed) loadPosts()
+  }, [authed, loadPosts])
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -429,42 +462,69 @@ const Admin = () => {
     else setPasswordError(true)
   }
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault()
     if (!form.content || form.content === '<br>') {
       alert('Please add some content to the post.')
       return
     }
-    const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-    if (view === 'new') {
-      savePosts([{ ...form, id: Date.now(), slug: slugify(form.title), date: now }, ...posts])
-    } else {
-      savePosts(posts.map(p => p.id === editId ? { ...p, ...form } : p))
-    }
-    setSaved(true)
-    setTimeout(() => { setSaved(false); setView('list'); setForm(emptyForm); setEditId(null) }, 1200)
+    try {
+      if (view === 'new') {
+        const doc = await writeClient.create({
+          _type: 'post',
+          title: form.title,
+          slug: { _type: 'slug', current: slugify(form.title) },
+          category: form.category,
+          excerpt: form.excerpt,
+          content: form.content,
+          coverImageUrl: form.coverImage,
+          author: form.author,
+          published: form.published,
+          publishedAt: new Date().toISOString(),
+        })
+        setPosts([doc, ...posts])
+      } else {
+        await writeClient.patch(editId).set({
+          title: form.title,
+          category: form.category,
+          excerpt: form.excerpt,
+          content: form.content,
+          coverImageUrl: form.coverImage,
+          author: form.author,
+          published: form.published,
+        }).commit()
+        setPosts(posts.map(p => p._id === editId ? { ...p, ...form, coverImageUrl: form.coverImage } : p))
+      }
+      setSaved(true)
+      setTimeout(() => { setSaved(false); setView('list'); setForm(emptyForm); setEditId(null) }, 1200)
+    } catch (err) { alert('Save failed: ' + err.message) }
   }
 
   const handleEdit = (post) => {
     setForm({
       title: post.title,
       excerpt: post.excerpt,
-      content: post.content,
+      content: post.content || '',
       category: post.category,
-      coverImage: post.coverImage || '',
+      coverImage: post.coverImageUrl || '',
       author: post.author || 'SWK Ghana',
-      published: post.published,
+      published: post.published !== false,
     })
-    setEditId(post.id)
+    setEditId(post._id)
     setView('edit')
   }
 
-  const handleDelete = (id) => {
-    if (window.confirm('Delete this post?')) savePosts(posts.filter(p => p.id !== id))
+  const handleDelete = async (id) => {
+    if (window.confirm('Delete this post?')) {
+      await writeClient.delete(id)
+      setPosts(posts.filter(p => p._id !== id))
+    }
   }
 
-  const togglePublish = (id) => {
-    savePosts(posts.map(p => p.id === id ? { ...p, published: !p.published } : p))
+  const togglePublish = async (id) => {
+    const post = posts.find(p => p._id === id)
+    await writeClient.patch(id).set({ published: !post.published }).commit()
+    setPosts(posts.map(p => p._id === id ? { ...p, published: !p.published } : p))
   }
 
   const cancelForm = () => { setView('list'); setForm(emptyForm); setEditId(null) }
@@ -655,7 +715,12 @@ const Admin = () => {
           </div>
         </div>
 
-        {posts.length === 0 ? (
+        {postsLoading ? (
+          <div className="text-center py-12">
+            <div className="inline-block w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-3" />
+            <p className="text-sm text-gray-500">Loading posts...</p>
+          </div>
+        ) : posts.length === 0 ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
             <span className="text-5xl mb-4 block">📝</span>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">No posts yet</h3>
@@ -665,30 +730,30 @@ const Admin = () => {
         ) : (
           <div className="space-y-3">
             {posts.map(post => (
-              <div key={post.id} className="bg-white rounded-xl border border-gray-200 p-4 xs:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-                {post.coverImage && (
-                  <img src={post.coverImage} alt={post.title} className="w-full sm:w-20 h-32 sm:h-14 object-cover rounded-lg flex-shrink-0" />
+              <div key={post._id} className="bg-white rounded-xl border border-gray-200 p-4 xs:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                {post.coverImageUrl && (
+                  <img src={post.coverImageUrl} alt={post.title} className="w-full sm:w-20 h-32 sm:h-14 object-cover rounded-lg flex-shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="text-xs font-semibold text-emerald-600">{post.category}</span>
-                    <span className="text-xs text-gray-400">{post.date}</span>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${post.published ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
-                      {post.published ? 'Published' : 'Draft'}
+                    <span className="text-xs text-gray-400">{formatDate(post.publishedAt || post._createdAt)}</span>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${post.published !== false ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                      {post.published !== false ? 'Published' : 'Draft'}
                     </span>
                   </div>
                   <h3 className="text-sm font-semibold text-gray-900 truncate">{post.title}</h3>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  <button onClick={() => togglePublish(post.id)}
+                  <button onClick={() => togglePublish(post._id)}
                     className="text-xs px-3 py-1.5 border rounded-lg hover:bg-gray-50 text-gray-600">
-                    {post.published ? 'Unpublish' : 'Publish'}
+                    {post.published !== false ? 'Unpublish' : 'Publish'}
                   </button>
                   <button onClick={() => handleEdit(post)}
                     className="text-xs px-3 py-1.5 border border-emerald-300 text-emerald-600 rounded-lg hover:bg-emerald-50">
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(post.id)}
+                  <button onClick={() => handleDelete(post._id)}
                     className="text-xs px-3 py-1.5 border border-red-200 text-red-500 rounded-lg hover:bg-red-50">
                     Delete
                   </button>

@@ -78,7 +78,7 @@ const BlogPost = () => {
       .fetch(
         `*[_type == "post" && slug.current == $slug][0] {
           _id, title, slug, category, excerpt,
-          publishedAt, coverImage, author, body
+          publishedAt, coverImage, coverImageUrl, author, body, content
         }`,
         { slug }
       )
@@ -117,11 +117,13 @@ const BlogPost = () => {
     </div>
   )
 
-  const coverUrl = post.coverImage
-    ? `https://cdn.sanity.io/images/qaen86pl/production/${post.coverImage.asset._ref
-        .replace('image-', '')
-        .replace(/-(\w+)$/, '.$1')}`
-    : null
+  const coverUrl = post.coverImageUrl
+    ? post.coverImageUrl
+    : post.coverImage
+      ? `https://cdn.sanity.io/images/qaen86pl/production/${post.coverImage.asset._ref
+          .replace('image-', '')
+          .replace(/-(\w+)$/, '.$1')}`
+      : null
 
   return (
     <div className="min-h-screen bg-white">
@@ -165,9 +167,12 @@ const BlogPost = () => {
           ))}
         </div>
 
-        {/* Body */}
+        {/* Body — HTML (admin posts) or Portable Text (Sanity Studio posts) */}
         <article className="prose max-w-none">
-          {post.body?.map((block, idx) => renderBlock(block, idx))}
+          {post.content
+            ? <div dangerouslySetInnerHTML={{ __html: post.content }} className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:text-gray-700 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_li]:text-gray-700 [&_li]:mb-1 [&_a]:text-emerald-600 [&_a]:underline [&_img]:max-w-full [&_img]:rounded-xl [&_img]:my-6 [&_strong]:font-bold [&_em]:italic [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-600 [&_blockquote]:my-4" />
+            : post.body?.map((block, idx) => renderBlock(block, idx))
+          }
         </article>
 
         {/* Share buttons — bottom */}
