@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { writeClient } from '../utils/sanityClient'
 
 const ADMIN_PASSWORD = 'SWKGhana@2024'
-const CATEGORIES = ['Event Recap', 'Program Update', 'Impact Stories', 'Opinion']
+const CATEGORIES = ['Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion']
 const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
 
 const slugify = (text) =>

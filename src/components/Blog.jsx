@@ -12,13 +12,14 @@ const Blog = () => {
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "post" && published != false] | order(publishedAt desc) {
+      .fetch(`*[_type == "post" && (published == true || !defined(published))] | order(publishedAt desc, _createdAt desc) {
         _id,
         title,
         slug,
         category,
         excerpt,
         publishedAt,
+        _createdAt,
         coverImage,
         coverImageUrl,
         author
@@ -27,11 +28,21 @@ const Blog = () => {
         setPosts(data)
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch((err) => {
+        console.error('Blog fetch error:', err)
+        setLoading(false)
+      })
   }, [])
 
+  // Normalize category for matching — handles singular stored values from older posts
+  const normalizeCategory = (cat) =>
+    (cat || '').replace(/s$/i, '').toLowerCase().trim()
+
   const filtered = posts.filter((p) => {
-    const matchCat = activeCategory === 'All' || p.category === activeCategory
+    const matchCat =
+      activeCategory === 'All' ||
+      p.category === activeCategory ||
+      normalizeCategory(p.category) === normalizeCategory(activeCategory)
     const matchSearch =
       p.title?.toLowerCase().includes(search.toLowerCase()) ||
       p.excerpt?.toLowerCase().includes(search.toLowerCase())
@@ -152,7 +163,7 @@ const Blog = () => {
                   )}
                   <div className="flex items-center justify-between text-xs text-gray-400">
                     <span>{post.author || 'SWK Ghana'}</span>
-                    <span>{formatDate(post.publishedAt)}</span>
+                    <span>{formatDate(post.publishedAt || post._createdAt)}</span>
                   </div>
                 </div>
               </Link>
