@@ -128,7 +128,10 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-gray-800 mt-6 xs:mt-8 pt-6 xs:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs xs:text-sm text-gray-400">
           <p>&copy; 2026 SWK Ghana. All rights reserved.</p>
-          <p>Building resilient communities across Africa 🌍</p>
+          <div className="flex items-center gap-4">
+            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <p>Building resilient communities across Africa 🌍</p>
+          </div>
         </div>
       </div>
     </footer>

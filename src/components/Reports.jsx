@@ -38,6 +38,24 @@ const ShareButtons = ({ url, title }) => {
 // ─── Report data ───────────────────────────────────────────────────────────────
 const reports = [
   {
+    id: 5,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
+    gradient: 'from-[#F2FAE8] to-green-50',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
+    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
+    title: 'Agribusiness Webinar Report: Strategic Partnerships — May 2026',
+    description:
+      'Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways from the session.',
+    date: 'May 2026',
+    thumbnail:
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png',
+    badgeText: 'Latest Report',
+    driveLink: 'https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi',
+  },
+  {
     id: 1,
     category: 'Impact Report',
     categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
@@ -49,10 +67,9 @@ const reports = [
     description:
       'Three-edition webinar series (September–November 2025). 230+ verified registrants, demographic insights, SDG alignment, and full impact metrics.',
     date: 'November 2025',
-    // Using the webinar flyer from Cloudinary as the report cover
     thumbnail:
       'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png',
-    badgeText: 'Latest Report',
+    badgeText: null,
     driveLink: 'https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing',
     downloadLink: 'https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po',
   },
@@ -146,7 +163,7 @@ const Reports = () => {
 
       {/* ── Featured: two live reports side-by-side ── */}
       <div className="max-w-6xl mx-auto mb-6 xs:mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 xs:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
           {reports.filter((r) => r.driveLink).map((report) => (
             <div
               key={report.id}

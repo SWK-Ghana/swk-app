@@ -132,7 +132,7 @@ const imageProjects = [
     badge: 'Impact',
     thumb: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'),
     title: 'Agribusiness Webinar Series',
-    desc: 'A three-edition webinar series empowering youth with agribusiness knowledge, powered by Agribusiness e-Academy.',
+    desc: 'An ongoing webinar series empowering youth with agribusiness knowledge. Latest edition: Strategic Partnerships — May 2026, powered by Agribusiness e-Academy.',
     stat: '230+ Registrants',
   },
   {
