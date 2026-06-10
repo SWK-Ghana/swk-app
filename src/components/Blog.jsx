@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { client } from '../utils/sanityClient'
+import { writeClient as client } from '../utils/sanityClient'
 
 const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion']
 
