@@ -435,6 +435,7 @@ const Admin = () => {
   const [passwordError, setPasswordError] = useState(false)
   const [posts, setPosts] = useState([])
   const [postsLoading, setPostsLoading] = useState(false)
+  const [saveError, setSaveError] = useState('')
   const [view, setView] = useState('list')
   const [form, setForm] = useState(emptyForm)
   const [editId, setEditId] = useState(null)
@@ -464,8 +465,9 @@ const Admin = () => {
 
   const handleSave = async (e) => {
     e.preventDefault()
+    setSaveError('')
     if (!form.content || form.content === '<br>') {
-      alert('Please add some content to the post.')
+      setSaveError('Please add some content to the post.')
       return
     }
     try {
@@ -497,7 +499,12 @@ const Admin = () => {
       }
       setSaved(true)
       setTimeout(() => { setSaved(false); setView('list'); setForm(emptyForm); setEditId(null) }, 1200)
-    } catch (err) { alert('Save failed: ' + err.message) }
+    } catch (err) {
+      const detail = err?.response?.body?.error?.description || err?.message || 'Unknown error'
+      setSaveError(detail.includes('Insufficient permissions')
+        ? '⚠️ Permission denied — the Sanity API token is read-only. Go to sanity.io/manage → project qaen86pl → API → Tokens and create an Editor token, then update VITE_SANITY_TOKEN in Vercel.'
+        : '❌ Save failed: ' + detail)
+    }
   }
 
   const handleEdit = (post) => {
@@ -662,6 +669,12 @@ const Admin = () => {
                   className="w-4 h-4 accent-emerald-600" />
                 <label htmlFor="published" className="text-sm font-medium text-gray-700">Publish immediately</label>
               </div>
+
+              {saveError && (
+                <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700 leading-relaxed">
+                  {saveError}
+                </div>
+              )}
 
               <div className="flex gap-3 pt-2">
                 <button type="submit" className="btn-gradient px-6 py-2.5">
