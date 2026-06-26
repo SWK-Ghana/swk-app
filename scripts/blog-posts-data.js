@@ -503,7 +503,7 @@ export const posts = [
     author: 'SWK Ghana',
     published: true,
     publishedAt: '2026-05-10T08:00:00Z',
-    coverImageUrl: 'https://images.unsplash.com/photo-1610441489929-e76ea135dbce?w=1200&q=80',
+    coverImageUrl: 'https://images.unsplash.com/photo-1553775927-a071d5a6a39a?w=1200&q=80',
     content: `<p>Much of the discourse around youth and agriculture focuses on the problem: aging farmers, declining youth participation, persistent barriers to entry, structural disadvantages. That problem is real and urgent. But it exists alongside an opportunity that is equally real and equally urgent, and that opportunity is growing faster than most young Ghanaians have been told.</p>
 
 <p>Africa's food and agriculture market is projected to grow from USD 280 billion per year in 2023 to USD 1 trillion by 2030 (African Development Bank [AfDB], 2024). Ghana's own agribusiness sector is projected to grow at a compound annual growth rate of 2.7% through to 2028, reaching an annual value of USD 3.8 billion (Oxford Business Group, 2024). These are not speculative projections. They are based on measurable trends in population growth, urbanisation, rising incomes, and increasing food demand.</p>
@@ -560,7 +560,7 @@ export const posts = [
     author: 'SWK Ghana',
     published: true,
     publishedAt: '2026-05-17T08:00:00Z',
-    coverImageUrl: 'https://images.unsplash.com/photo-1612139831382-99576aab15ab?w=1200&q=80',
+    coverImageUrl: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1200&q=80',
     content: `<p>In January 2026, AfCFTA member states endorsed a comprehensive Agri-Food Trade Action Plan designed specifically to bridge the gap between agricultural production and market access across Africa (AfCFTA Secretariat, 2026). The plan was agreed upon by representatives of 54 nations. Its implementation will shape the commercial landscape in which Africa's next generation of farmers and agribusiness entrepreneurs builds their enterprises.</p>
 
 <p>For young Ghanaian agripreneurs, understanding AfCFTA is not optional. It is essential.</p>
