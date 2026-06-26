@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { writeClient as client } from '../utils/sanityClient'
 
-const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion']
+const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 
 const Blog = () => {
   const [posts, setPosts] = useState([])
