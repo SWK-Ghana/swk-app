@@ -63,7 +63,7 @@ for (const post of posts) {
   } catch (err) {
     const detail = err?.response?.body?.error?.description || err?.message || String(err)
     if (detail.toLowerCase().includes('permission')) {
-      console.error('\n Permission error — check that the token has Editor role.\n')
+      console.error('\n Permission error: check that the token has Editor role.\n')
       process.exit(1)
     }
     console.error(`✗  Failed: ${post.title}`)
@@ -72,4 +72,4 @@ for (const post of posts) {
   }
 }
 
-console.log(`\nDone — ${updated} updated, ${created} created, ${failed} failed.`)
+console.log(`\nDone: ${updated} updated, ${created} created, ${failed} failed.`)

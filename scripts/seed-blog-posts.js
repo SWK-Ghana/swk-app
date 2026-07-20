@@ -6,7 +6,7 @@ import { createClient } from '@sanity/client'
 import { readFileSync } from 'fs'
 import { posts } from './blog-posts-data.js'
 
-// Parse .env manually — works on any Node >= 18 without --env-file flag
+// Parse .env manually (works on any Node >= 18 without --env-file flag)
 const envPath = new URL('../.env', import.meta.url)
 const env = Object.fromEntries(
   readFileSync(envPath, 'utf8')
@@ -47,8 +47,8 @@ for (const post of posts) {
   } catch (err) {
     const detail = err?.response?.body?.error?.description || err?.message || String(err)
     if (detail.toLowerCase().includes('insufficient permissions') || detail.toLowerCase().includes('permission')) {
-      console.error('\n⚠️  PERMISSION ERROR — the token is read-only.')
-      console.error('   Go to sanity.io/manage → project qaen86pl → API → Tokens')
+      console.error('\n⚠️  PERMISSION ERROR: the token is read-only.')
+      console.error('   Go to sanity.io/manage, project qaen86pl, API, Tokens')
       console.error('   Create a new token with the "Editor" role, then update VITE_SANITY_TOKEN in .env\n')
       process.exit(1)
     }
@@ -58,7 +58,7 @@ for (const post of posts) {
   }
 }
 
-console.log(`\nDone — ${created} created, ${failed} failed.`)
+console.log(`\nDone: ${created} created, ${failed} failed.`)
 if (created > 0) {
   console.log('Posts will appear on swkghana.org/blog immediately (bypasses CDN).')
 }

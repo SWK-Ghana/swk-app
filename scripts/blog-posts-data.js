@@ -1,4 +1,4 @@
-// All 15 blog posts — SWK Ghana Research Brief on Youth in Agribusiness
+// All 15 blog posts: SWK Ghana Research Brief on Youth in Agribusiness
 // APA in-text citations throughout; References section at end of each post.
 // Cover images sourced from Unsplash (free under the Unsplash License).
 
