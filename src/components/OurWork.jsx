@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Seo from './Seo'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
@@ -352,6 +352,79 @@ const OurWork = () => {
                 <VideoCard key={v.id} {...v} />
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* ── Our Initiatives ── */}
+        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
+          <div className="text-center mb-6 xs:mb-8">
+            <span className="inline-block bg-purple-100 text-purple-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
+              Initiatives
+            </span>
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              Our Initiatives
+            </h2>
+            <p className="text-sm xs:text-base text-gray-800 max-w-2xl mx-auto">
+              Two flagship platforms putting our mission into action.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 xs:gap-6">
+            {[
+              {
+                href: '/taka-kipawa',
+                img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg',
+                icon: '♻️',
+                badge: 'Waste Management App',
+                badgeClass: 'bg-purple-600 text-white',
+                gradient: 'from-purple-50 to-pink-50',
+                border: 'border-purple-100',
+                title: 'Taka Kipawa',
+                desc: 'Our waste-management platform connecting households, waste collectors, and recyclers across Ga West Municipality for a cleaner, circular economy.',
+                cta: 'Explore Taka Kipawa',
+                linkClass: 'text-purple-700',
+              },
+              {
+                href: '/marketplace',
+                img: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg',
+                icon: '🛒',
+                badge: 'Youth-Led Marketplace',
+                badgeClass: 'bg-[#78C31E] text-white',
+                gradient: 'from-[#F2FAE8] to-green-50',
+                border: 'border-[#D4F0A0]',
+                title: 'SWK Marketplace',
+                desc: 'A marketplace for eco-friendly, youth-led products — supporting sustainable consumption and the circular economy in line with UN SDG 12.',
+                cta: 'Explore Marketplace',
+                linkClass: 'text-[#1E963C]',
+              },
+            ].map((card) => (
+              <Link
+                key={card.href}
+                to={card.href}
+                className={`group bg-gradient-to-br ${card.gradient} rounded-2xl border ${card.border} overflow-hidden hover:shadow-lg transition-all duration-200 flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]`}
+              >
+                <div className="relative">
+                  <img
+                    src={img(card.img)}
+                    alt={card.title}
+                    className="w-full h-48 sm:h-56 object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span className={`absolute top-3 left-3 ${card.badgeClass} text-xs font-bold px-2.5 py-1 rounded-full shadow`}>
+                    {card.badge}
+                  </span>
+                </div>
+                <div className="p-5 xs:p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl" aria-hidden="true">{card.icon}</span>
+                    <h3 className="text-lg xs:text-xl font-bold text-gray-900">{card.title}</h3>
+                  </div>
+                  <p className="text-sm text-gray-700 leading-relaxed flex-1 mb-4">{card.desc}</p>
+                  <span className={`self-start inline-flex items-center gap-1 text-sm font-bold ${card.linkClass} group-hover:gap-2 transition-all`}>
+                    {card.cta} <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 

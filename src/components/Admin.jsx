@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { writeClient } from '../utils/sanityClient'
+import { client } from '../utils/sanityClient'
+import { login as adminLogin, createDoc, patchDoc, deleteDoc, getSession, clearSession } from '../utils/adminApi'
 
-const ADMIN_PASSWORD = 'SWKGhana@2024'
 const CATEGORIES = ['Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
 
@@ -213,7 +213,7 @@ const MarketplaceAdmin = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    writeClient
+    client
       .fetch(`*[_type == "marketplaceProduct"] | order(_createdAt desc) {
         _id, productName, category, business, name, email, phone, location, description, price, unit, imageUrl, notes, approved
       }`)
@@ -225,10 +225,10 @@ const MarketplaceAdmin = () => {
     e.preventDefault()
     try {
       if (editId) {
-        await writeClient.patch(editId).set({ ...form }).commit()
+        await patchDoc(editId, { ...form })
         setProducts(products.map(p => p._id === editId ? { ...p, ...form } : p))
       } else {
-        const doc = await writeClient.create({ _type: 'marketplaceProduct', ...form })
+        const doc = await createDoc({ _type: 'marketplaceProduct', ...form })
         setProducts([doc, ...products])
       }
       setSaved(true)
@@ -243,14 +243,18 @@ const MarketplaceAdmin = () => {
   }
   const handleDelete = async (id) => {
     if (window.confirm('Delete this product?')) {
-      await writeClient.delete(id)
-      setProducts(products.filter(p => p._id !== id))
+      try {
+        await deleteDoc(id)
+        setProducts(products.filter(p => p._id !== id))
+      } catch (err) { alert('Delete failed: ' + err.message) }
     }
   }
   const toggleApprove = async (id) => {
     const product = products.find(p => p._id === id)
-    await writeClient.patch(id).set({ approved: !product.approved }).commit()
-    setProducts(products.map(p => p._id === id ? { ...p, approved: !p.approved } : p))
+    try {
+      await patchDoc(id, { approved: !product.approved })
+      setProducts(products.map(p => p._id === id ? { ...p, approved: !p.approved } : p))
+    } catch (err) { alert('Update failed: ' + err.message) }
   }
 
   const handleImageUpload = async (e) => {
@@ -445,7 +449,7 @@ const Admin = () => {
 
   const loadPosts = useCallback(() => {
     setPostsLoading(true)
-    writeClient
+    client
       .fetch(`*[_type == "post"] | order(_createdAt desc) {
         _id, title, slug, category, excerpt, content, coverImageUrl, author, published, publishedAt, _createdAt
       }`)
@@ -453,15 +457,32 @@ const Admin = () => {
       .catch(() => setPostsLoading(false))
   }, [])
 
+  // Restore an existing session on refresh (server enforces expiry).
+  useEffect(() => {
+    if (getSession()) setAuthed(true)
+  }, [])
+
   useEffect(() => {
     if (authed) loadPosts()
   }, [authed, loadPosts])
 
-  const handleLogin = (e) => {
+  const [loggingIn, setLoggingIn] = useState(false)
+  const handleLogin = async (e) => {
     e.preventDefault()
-    if (password === ADMIN_PASSWORD) { setAuthed(true); setPasswordError(false) }
-    else setPasswordError(true)
+    setLoggingIn(true)
+    setPasswordError(false)
+    try {
+      await adminLogin(password)
+      setAuthed(true)
+      setPassword('')
+    } catch {
+      setPasswordError(true)
+    } finally {
+      setLoggingIn(false)
+    }
   }
+
+  const handleLogout = () => { clearSession(); setAuthed(false) }
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -472,7 +493,7 @@ const Admin = () => {
     }
     try {
       if (view === 'new') {
-        const doc = await writeClient.create({
+        const doc = await createDoc({
           _type: 'post',
           title: form.title,
           slug: { _type: 'slug', current: slugify(form.title) },
@@ -486,7 +507,7 @@ const Admin = () => {
         })
         setPosts([doc, ...posts])
       } else {
-        await writeClient.patch(editId).set({
+        await patchDoc(editId, {
           title: form.title,
           category: form.category,
           excerpt: form.excerpt,
@@ -494,16 +515,20 @@ const Admin = () => {
           coverImageUrl: form.coverImage,
           author: form.author,
           published: form.published,
-        }).commit()
+        })
         setPosts(posts.map(p => p._id === editId ? { ...p, ...form, coverImageUrl: form.coverImage } : p))
       }
       setSaved(true)
       setTimeout(() => { setSaved(false); setView('list'); setForm(emptyForm); setEditId(null) }, 1200)
     } catch (err) {
-      const detail = err?.response?.body?.error?.description || err?.message || 'Unknown error'
-      setSaveError(detail.includes('Insufficient permissions')
-        ? '⚠️ Permission denied — the Sanity API token is read-only. Go to sanity.io/manage → project qaen86pl → API → Tokens and create an Editor token, then update VITE_SANITY_TOKEN in Vercel.'
-        : '❌ Save failed: ' + detail)
+      const detail = err?.message || 'Unknown error'
+      if (err?.status === 401) {
+        setSaveError('⚠️ Your session expired. Please log out and log in again.')
+      } else if (detail.includes('Insufficient permissions') || detail.includes('permission')) {
+        setSaveError('⚠️ Permission denied — the server\'s SANITY_TOKEN is read-only. In sanity.io/manage → project qaen86pl → API → Tokens, create an Editor token and set it as SANITY_TOKEN in Vercel.')
+      } else {
+        setSaveError('❌ Save failed: ' + detail)
+      }
     }
   }
 
@@ -523,15 +548,19 @@ const Admin = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Delete this post?')) {
-      await writeClient.delete(id)
-      setPosts(posts.filter(p => p._id !== id))
+      try {
+        await deleteDoc(id)
+        setPosts(posts.filter(p => p._id !== id))
+      } catch (err) { alert('Delete failed: ' + err.message) }
     }
   }
 
   const togglePublish = async (id) => {
     const post = posts.find(p => p._id === id)
-    await writeClient.patch(id).set({ published: !post.published }).commit()
-    setPosts(posts.map(p => p._id === id ? { ...p, published: !p.published } : p))
+    try {
+      await patchDoc(id, { published: !post.published })
+      setPosts(posts.map(p => p._id === id ? { ...p, published: !p.published } : p))
+    } catch (err) { alert('Update failed: ' + err.message) }
   }
 
   const cancelForm = () => { setView('list'); setForm(emptyForm); setEditId(null) }
@@ -555,7 +584,9 @@ const Admin = () => {
                 placeholder="Enter admin password" />
               {passwordError && <p className="text-xs text-red-500 mt-1">Incorrect password. Try again.</p>}
             </div>
-            <button type="submit" className="btn-gradient w-full py-2.5">Login</button>
+            <button type="submit" disabled={loggingIn} className="btn-gradient w-full py-2.5 disabled:opacity-60 disabled:cursor-not-allowed">
+              {loggingIn ? 'Signing in…' : 'Login'}
+            </button>
           </form>
         </div>
       </main>
@@ -698,7 +729,7 @@ const Admin = () => {
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 py-10 max-w-5xl">
 
         {/* Tab switcher */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex flex-wrap items-center gap-2 mb-6">
           <button onClick={() => setAdminTab('blog')}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${adminTab === 'blog' ? 'bg-emerald-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
             📝 Blog
@@ -706,6 +737,10 @@ const Admin = () => {
           <button onClick={() => setAdminTab('marketplace')}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-colors ${adminTab === 'marketplace' ? 'bg-emerald-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
             🛒 Marketplace
+          </button>
+          <button onClick={handleLogout}
+            className="ml-auto px-4 py-2 rounded-lg text-sm font-semibold bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors">
+            Log out
           </button>
         </div>
 

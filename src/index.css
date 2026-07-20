@@ -144,3 +144,17 @@
     @apply gap-4 sm:gap-6 md:gap-8;
   }
 }
+
+/* ── Navbar dropdown entrance ──────────────────────────────────────────────
+   Animates transform only (never opacity/visibility) so the menu is fully
+   visible even if the animation is throttled, paused, or reduced-motion. */
+@keyframes swk-dropdown-in {
+  from { transform: translateY(-4px); }
+  to   { transform: translateY(0); }
+}
+.animate-dropdown {
+  animation: swk-dropdown-in 150ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-dropdown { animation: none; }
+}
