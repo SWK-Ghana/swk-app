@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
+import Seo from './Seo'
 
 const ShareButton = ({ platform, url, title }) => {
   const links = {
@@ -127,6 +128,12 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title={`${post.title} | SWK Ghana Blog`}
+        description={post.excerpt || `Read "${post.title}" on the SWK Ghana blog — stories on youth empowerment and sustainable development.`}
+        path={`/blog/${post.slug?.current || slug}`}
+        image={coverUrl || undefined}
+      />
       {/* Hero */}
       {coverUrl && (
         <div className="w-full h-64 sm:h-80 md:h-96 overflow-hidden">

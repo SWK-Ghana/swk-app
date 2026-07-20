@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Seo from './Seo'
 
 const FAQS = [
   {
@@ -79,6 +80,11 @@ const FAQItem = ({ question, answer }) => {
 const FAQ = () => {
   return (
     <main className="min-h-screen bg-white">
+      <Seo
+        title="Frequently Asked Questions | SWK Ghana"
+        description="Answers to common questions about SWK Ghana — how to join, volunteer, partner, list products on our marketplace, and support our youth programs."
+        path="/faq"
+      />
 
       {/* Hero */}
       <div className="bg-[#1E963C] py-12 sm:py-16 px-4">

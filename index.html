@@ -8,13 +8,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SWK Ghana – Empowering Youth for Sustainable Change</title>
 
+  <!-- ─── Google Analytics 4 ───────────────────────────────────────────────
+       Replace G-XXXXXXXXXX below (in BOTH places) with your GA4 Measurement ID,
+       and set the same value in .env as VITE_GA_MEASUREMENT_ID.
+       Required for Google Ad Grants conversion tracking. Until a real ID is
+       set, this loads nothing and is a no-op. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // send_page_view:false — the SPA sends page_view manually on route change
+    gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
+  </script>
+
   <!-- Google Fonts: Ubuntu -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://swkghana.org/" />
+  <!-- Canonical + meta description are set PER PAGE by <Seo> (src/components/Seo.jsx).
+       They are intentionally NOT hardcoded here so each route gets its own
+       unique, correct canonical + description (SEO / Ad Grants best practice). -->
 
   <!-- Preload first hero image for faster LCP -->
   <link rel="preload" as="image"
@@ -22,12 +37,10 @@
     imagesrcset="https://res.cloudinary.com/dwgj3lovn/image/upload/w_768/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 768w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 1280w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1920/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 1920w"
     imagesizes="100vw">
 
-  <!-- SEO Meta -->
-  <meta name="description"
-    content="SWK Ghana empowers youth to lead sustainable change across Africa through development, climate action, circular economy, agribusiness, and innovation." />
+  <!-- SEO Meta (meta description is set per page by <Seo>) -->
   <meta name="keywords"
     content="SWK Ghana, youth empowerment Ghana, sustainable development Africa, climate action Ghana, agribusiness Ghana, youth nonprofit Ghana, circular economy Ghana" />
-  <meta name="robots" content="index, follow" />
+  <!-- robots is left to default (index, follow); <Seo noindex> overrides per page (e.g. 404) -->
   <meta name="author" content="SWK Ghana" />
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->

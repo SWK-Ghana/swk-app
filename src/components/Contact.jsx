@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { sendEmail } from '../utils/brevo'
+import Seo from './Seo'
+import { trackConversion } from '../utils/analytics'
 
 const Contact = () => {
   const [firstName, setFirstName] = useState('')
@@ -22,6 +24,7 @@ const Contact = () => {
         subject,
         message,
       })
+      trackConversion('contact_submit')
       setStatus('success')
       setFirstName('')
       setLastName('')
@@ -36,6 +39,11 @@ const Contact = () => {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-white">
+      <Seo
+        title="Contact SWK Ghana"
+        description="Get in touch with SWK Ghana. Reach our team in Accra, Ghana for partnerships, volunteering, media enquiries, or general questions about our youth programs."
+        path="/contact"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">

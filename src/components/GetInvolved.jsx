@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { sendEmail } from '../utils/brevo'
+import Seo from './Seo'
+import { trackConversion } from '../utils/analytics'
 
 const GetInvolved = () => {
   const [firstName, setFirstName] = useState('')
@@ -114,6 +116,7 @@ const GetInvolved = () => {
         message,
         form_type: 'Get in Touch',
       })
+      trackConversion('contact_submit', { source: 'get-involved' })
       setContactStatus('success')
       setFirstName(''); setLastName(''); setEmail(''); setMessage('')
     } catch { setContactStatus('error') }
@@ -143,6 +146,7 @@ const GetInvolved = () => {
         body: formData,
       })
       if (!res.ok) throw new Error('Failed')
+      trackConversion('volunteer_signup')
       setVolunteerStatus('success')
     } catch { setVolunteerStatus('error') }
   }
@@ -159,6 +163,7 @@ const GetInvolved = () => {
         message: donationMessage || 'N/A',
         form_type: 'Donation Interest',
       })
+      trackConversion('donate_interest')
       setDonateStatus('success')
     } catch { setDonateStatus('error') }
   }
@@ -175,6 +180,7 @@ const GetInvolved = () => {
         message: partnerMessage,
         form_type: 'Partnership Inquiry',
       })
+      trackConversion('partnership_inquiry')
       setPartnerStatus('success')
     } catch { setPartnerStatus('error') }
   }
@@ -194,6 +200,11 @@ const GetInvolved = () => {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-white">
+      <Seo
+        title="Get Involved – Volunteer & Partner | SWK Ghana"
+        description="Join SWK Ghana as a volunteer or partner. Help empower young people and build sustainable, resilient communities across Ghana and Africa."
+        path="/get-involved"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">

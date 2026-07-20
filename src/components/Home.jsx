@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
+import Seo from './Seo'
+import { trackConversion } from '../utils/analytics'
 
 // Cloudinary helpers
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -133,10 +135,12 @@ const Faqs = () => {
 }
 
 const Testimonials = () => {
+  // NOTE: These are representative community quotes. Replace with real,
+  // attributed testimonials (with consent) as you collect them.
   const items = [
-    { name: 'Alex Johnson', text: 'Volunteering with SWK has been incredibly rewarding. The impact is real.' },
-    { name: 'Maria Rodriguez', text: 'The programs helped me grow personally and professionally.' },
-    { name: 'Kofi Mensah', text: 'Community projects brought people together and created amazing opportunities.' },
+    { name: 'Agribusiness Webinar participant', text: 'The webinars gave me practical agribusiness knowledge and a network I could not have built on my own.' },
+    { name: 'SWK Ghana volunteer', text: 'Volunteering with SWK has been incredibly rewarding — the impact on young people is real and visible.' },
+    { name: 'Community program attendee', text: 'The community projects brought people together and created genuine opportunities for youth in our area.' },
   ]
   const [idx, setIdx] = useState(0)
   useEffect(() => {
@@ -217,6 +221,7 @@ const Home = () => {
         file_name: volunteerDocFile?.name || 'N/A',
         form_type: 'Volunteer Application',
       })
+      trackConversion('volunteer_signup', { role: volunteerRole || 'N/A' })
       setVolunteerStatus('success')
     } catch {
       setVolunteerStatus('error')
@@ -235,6 +240,7 @@ const Home = () => {
         message: partnerMessage,
         form_type: 'Partnership Inquiry',
       })
+      trackConversion('partnership_inquiry', { organisation: partnerOrg })
       setPartnerStatus('success')
     } catch {
       setPartnerStatus('error')
@@ -246,6 +252,7 @@ const Home = () => {
     setNewsletterStatus('sending')
     try {
       await subscribeContact(newsletterEmail)
+      trackConversion('newsletter_signup')
       setNewsletterStatus('success')
       setNewsletterEmail('')
     } catch {
@@ -279,6 +286,11 @@ const Home = () => {
 
   return (
     <main className="min-h-screen bg-white">
+      <Seo
+        title="SWK Ghana – Empowering Youth for Sustainable Change"
+        description="SWK Ghana is a youth-focused nonprofit empowering young people across Ghana and Africa through climate action, circular economy, agribusiness, technology, and community development."
+        path="/"
+      />
       <div className="px-0 pb-0">
 
         {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
@@ -299,7 +311,7 @@ const Home = () => {
 
           {/* Hero content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-[#F2FAE8]0/30 text-emerald-200 border border-emerald-400/40">
+            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
               Youth · Sustainability · Africa
             </span>
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl">

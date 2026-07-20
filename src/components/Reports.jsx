@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Seo from './Seo'
 
 // ─── Social Share Buttons ───────────────────────────────────────────────────────
 const ShareButtons = ({ url, title }) => {
@@ -147,6 +148,11 @@ const Reports = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-white px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
+      <Seo
+        title="Reports & Publications | SWK Ghana"
+        description="Read SWK Ghana's impact reports, annual reviews, and program publications documenting our work empowering youth and building sustainable communities across Ghana."
+        path="/reports"
+      />
 
       {/* ── Page header ── */}
       <div className="max-w-6xl mx-auto text-center mb-8 xs:mb-10 sm:mb-12">

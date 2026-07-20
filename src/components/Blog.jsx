@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { writeClient as client } from '../utils/sanityClient'
+import Seo from './Seo'
 
 const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 
@@ -58,6 +59,11 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Blog & Stories | SWK Ghana"
+        description="Stories, updates, and insights from SWK Ghana on youth empowerment, climate action, agribusiness, and sustainable development across Ghana and Africa."
+        path="/blog"
+      />
       {/* Hero */}
       <div className="py-16 md:py-20" style={{ background: 'linear-gradient(135deg, #1E963C 0%, #78C31E 100%)' }}>
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">

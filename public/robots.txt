@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
-Sitemap: https://www.swkghana.org/sitemap.xml
+Sitemap: https://swkghana.org/sitemap.xml

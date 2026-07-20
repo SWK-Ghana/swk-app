@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Seo from './Seo'
 
 const Resources = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Resources | SWK Ghana"
+        description="Access SWK Ghana's resources, guides, and educational materials on youth development, sustainability, climate action, agribusiness, and the circular economy."
+        path="/resources"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
 

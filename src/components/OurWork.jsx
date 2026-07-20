@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Seo from './Seo'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -276,6 +277,11 @@ const OurWork = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-white">
+      <Seo
+        title="Our Work – Programs & Impact | SWK Ghana"
+        description="Explore SWK Ghana's programs in youth development, climate action, circular economy, agribusiness, and technology, and the impact we're making across Ghana and Africa."
+        path="/our-work"
+      />
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
 
         {/* ── Page header ── */}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Seo from './Seo'
 
 const TakaKipawa = () => {
   const navigate = useNavigate()
@@ -29,6 +30,11 @@ const TakaKipawa = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Taka Kipawa – Waste Management App | SWK Ghana"
+        description="Taka Kipawa is SWK Ghana's waste management platform connecting households, waste collectors, and recyclers across Ga West Municipality for a cleaner, circular economy."
+        path="/taka-kipawa"
+      />
 
       {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1E963C 0%, #78C31E 100%)' }}>

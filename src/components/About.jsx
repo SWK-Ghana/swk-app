@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Seo from './Seo'
 
 const About = () => {
   const navigate = useNavigate()
@@ -11,6 +12,11 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-white">
+      <Seo
+        title="About SWK Ghana – Our Mission, Vision & Youth Programs"
+        description="Learn about SWK Ghana, a youth-focused nonprofit founded in Accra empowering young people aged 15–35 to lead sustainable change across Africa through climate action, agribusiness, and community development."
+        path="/about"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto">
           {/* Hero Section */}
@@ -170,7 +176,7 @@ const About = () => {
             </div>
 
             {/* Impact Stats */}
-            <div className="bg-gradient-to-br from-[#F2FAE8]0 to-[#78C31E] rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
+            <div className="bg-gradient-to-br from-[#1E963C] to-[#78C31E] rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
               <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6">Our Impact</h2>
               <div className="grid grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
                 <div className="text-center">

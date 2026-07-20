@@ -1,4 +1,5 @@
 import React from 'react'
+import Seo from './Seo'
 
 const teamMembers = [
   { 
@@ -8,7 +9,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618900/Gemini_Generated_Image_kon0jtkon0jtkon0_2_wreiep.png',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/frank-koomson-%F0%9F%87%AC%F0%9F%87%AD-b227901ba',
+      linkedin: 'https://www.linkedin.com/in/frank-koomson-%F0%9F%87%AC%F0%9F%87%AD-b227901ba',
       email: 'mailto:frank.koomson@localpathways.org'
     }
   },
@@ -19,7 +20,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760618901/WhatsApp_Image_2025-09-20_at_08.56.03_23333094_xrg9kn.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/thebenbrown',
+      linkedin: 'https://www.linkedin.com/in/thebenbrown',
       email: 'mailto:browntheben@gmail.com'
     }
   },
@@ -30,7 +31,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_500,h_500,f_auto,q_auto/v1762719821/Gemini_Generated_Image_xp3ul4xp3ul4xp3u_et6wsu.png',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/doreenlawuratubaidoo',
+      linkedin: 'https://www.linkedin.com/in/doreenlawuratubaidoo',
       email: 'mailto:lawuratubaidoo@gmail.com'
     }
   },
@@ -41,7 +42,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1760619065/WhatsApp_Image_2025-08-26_at_10.52.02_3ec2d7b6_uhih1r.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/ernestinagyamfi',
+      linkedin: 'https://www.linkedin.com/in/ernestinagyamfi',
       email: 'mailto:ernestinag215@gmail.com'
     }
   },
@@ -52,7 +53,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1762633599/WhatsApp_Image_2025-10-25_at_13.36.50_981a330d_fwjdgb.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/jessica-awuradjoa-asamoah',
+      linkedin: 'https://www.linkedin.com/in/jessica-awuradjoa-asamoah',
       email: 'mailto:jessicaasamoah903@gmail.com'
     }
   },
@@ -63,7 +64,7 @@ const teamMembers = [
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1772549398/IMG_9111_o3yibq.jpg',
     imagePosition: 'object-center',
     social: {
-      linkedin: 'http://linkedin.com/in/musah-hidir',
+      linkedin: 'https://www.linkedin.com/in/musah-hidir',
       email: 'mailto:musahmohammad00@gmail.com'
     }
   }
@@ -72,6 +73,11 @@ const teamMembers = [
 const MeetTheTeam = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+      <Seo
+        title="Meet the Team | SWK Ghana"
+        description="Meet the passionate team behind SWK Ghana working to empower youth and build resilient, sustainable communities across Ghana and Africa."
+        path="/team"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 xs:mb-10 sm:mb-12">

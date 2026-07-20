@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
+import Seo from './Seo'
 
 const toSlug = (name) =>
   name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -108,6 +109,11 @@ const Marketplace = () => {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-white">
+      <Seo
+        title="SWK Marketplace – Youth-Led Sustainable Products | SWK Ghana"
+        description="Discover eco-friendly, youth-led products on SWK Marketplace, supporting sustainable consumption and the circular economy in line with UN SDG 12."
+        path="/marketplace"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16">
         <div className="max-w-7xl mx-auto">
 

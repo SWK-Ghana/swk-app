@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Seo from './Seo'
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate()
@@ -122,6 +123,11 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Privacy Policy | SWK Ghana"
+        description="How SWK Ghana collects, uses, and protects your personal information across our website, forms, and programs."
+        path="/privacy-policy"
+      />
 
       {/* Hero */}
       <div className="py-16 md:py-20" style={{ background: 'linear-gradient(135deg, #F2FAE8 0%, #ffffff 100%)' }}>

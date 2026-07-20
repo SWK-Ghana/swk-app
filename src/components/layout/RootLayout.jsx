@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom'
+import { trackPageView } from '../../utils/analytics'
 
 const RootLayout = () => {
   const [showConsent, setShowConsent] = useState(false)
+  const location = useLocation()
+
   useEffect(() => {
     try {
       const accepted = localStorage.getItem('cookie-consent')
@@ -12,13 +15,24 @@ const RootLayout = () => {
     } catch {}
   }, [])
 
+  // GA4 does not auto-track SPA route changes — send a page_view on each nav.
+  useEffect(() => {
+    trackPageView(location.pathname + location.search, document.title)
+  }, [location.pathname, location.search])
+
   const acceptCookies = () => {
     try { localStorage.setItem('cookie-consent', 'accepted') } catch {}
     setShowConsent(false)
   }
 
+  const dismissCookies = () => {
+    try { localStorage.setItem('cookie-consent', 'dismissed') } catch {}
+    setShowConsent(false)
+  }
+
   return (
     <div>
+      <ScrollRestoration />
       <Navbar />
       <Outlet />
       <Footer />
@@ -30,7 +44,7 @@ const RootLayout = () => {
                 We use cookies for basic analytics to improve your experience. By clicking Accept, you agree to our use of cookies.
               </p>
               <div className="flex flex-col xs:flex-row gap-2 xs:gap-2 sm:gap-3 sm:mt-0 sm:justify-end">
-                <button className="px-3 xs:px-4 py-2 rounded-lg xs:rounded-xl border text-xs xs:text-sm" onClick={() => setShowConsent(false)}>Dismiss</button>
+                <button className="px-3 xs:px-4 py-2 rounded-lg xs:rounded-xl border text-xs xs:text-sm" onClick={dismissCookies}>Dismiss</button>
                 <button className="btn-gradient px-3 xs:px-4 py-2 rounded-lg xs:rounded-xl text-xs xs:text-sm" onClick={acceptCookies}>Accept</button>
               </div>
             </div>
