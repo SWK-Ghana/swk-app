@@ -5,6 +5,12 @@ import Seo from './Seo'
 
 const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 
+// Cloudinary hero image (SWK Ghana community photo), responsive + optimised.
+const CLD = 'https://res.cloudinary.com/dwgj3lovn/image/upload'
+const HERO_PATH = 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg'
+const heroSrc = (w) => `${CLD}/f_auto,q_auto,w_${w}/${HERO_PATH}`
+const heroSrcSet = [768, 1280, 1920, 2560].map((w) => `${heroSrc(w)} ${w}w`).join(', ')
+
 const Blog = () => {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -64,23 +70,61 @@ const Blog = () => {
         description="Stories, updates, and insights from SWK Ghana on youth empowerment, climate action, agribusiness, and sustainable development across Ghana and Africa."
         path="/blog"
       />
-      {/* Hero */}
-      <div className="py-16 md:py-20" style={{ background: 'linear-gradient(135deg, #1E963C 0%, #78C31E 100%)' }}>
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-bold text-white mb-4"
-            style={{ background: 'rgba(255,255,255,0.2)' }}>
-            SWK Ghana Blog
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-            Stories & Insights
-          </h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Updates, impact stories, and thought leadership from SWK Ghana's youth empowerment work.
-          </p>
-        </div>
-      </div>
+      {/* Hero — full height with blended background image */}
+      <section className="relative flex items-center justify-center overflow-hidden min-h-[88vh] md:min-h-[calc(100dvh-6rem)]">
+        {/* Background photo */}
+        <img
+          src={heroSrc(1920)}
+          srcSet={heroSrcSet}
+          sizes="100vw"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Blend layers: brand green multiply + depth + vignette for legible white text */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1E963C] via-[#1E963C]/70 to-[#0e3a1b] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/40" />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center py-24 anim-rise">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest text-white mb-6 border border-white/30 bg-white/10 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#A8E04A]" /> SWK Ghana Blog
+          </span>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] drop-shadow-sm">
+            Stories &amp; Insights
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed font-light">
+            Updates, impact stories, and thought leadership from SWK Ghana&apos;s work in
+            youth empowerment, climate action, circular economy, agribusiness, and technology.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <a href="#blog-posts" className="btn-gradient text-sm sm:text-base px-7 py-3.5 rounded-xl shadow-lg">
+              Read the Latest
+            </a>
+            <Link
+              to="/get-involved"
+              className="px-7 py-3.5 rounded-xl font-bold text-white text-sm sm:text-base border-2 border-white/70 hover:bg-white hover:text-[#1E963C] transition-colors"
+            >
+              Get Involved
+            </Link>
+          </div>
+        </div>
+
+        {/* Scroll cue */}
+        <a
+          href="#blog-posts"
+          aria-label="Scroll to blog posts"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/80 hover:text-white transition-colors"
+        >
+          <svg className="w-8 h-8 anim-bounce-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 5v14M19 12l-7 7-7-7" />
+          </svg>
+        </a>
+      </section>
+
+      <div id="blog-posts" className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 scroll-mt-24">
         {/* Search */}
         <div className="max-w-xl mx-auto mb-8">
           <input

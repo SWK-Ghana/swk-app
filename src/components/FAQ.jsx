@@ -49,7 +49,7 @@ const FAQS = [
   },
   {
     question: 'How can I support SWK Ghana financially?',
-    answer: 'You can support SWK Ghana through a donation via our website at swkghana.org/donate. Every contribution — no matter the size — directly funds our programmes, webinars, and community initiatives. You can also support us by sharing our work with your network, volunteering your time and skills, or becoming a programme sponsor.',
+    answer: 'You can support SWK Ghana through our Donate page at swkghana.org/donate — we accept card and Mobile Money payments, direct bank transfer (Fidelity Bank), Mobile Money transfer, and international card payments in USD, GBP, or EUR. Every contribution — no matter the size — directly funds our programmes, webinars, and community initiatives. You can also support us by sharing our work with your network, volunteering your time and skills, or becoming a programme sponsor.',
   },
 ]
 
