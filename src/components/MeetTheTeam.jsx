@@ -46,17 +46,6 @@ const teamMembers = [
       email: 'mailto:ernestinag215@gmail.com'
     }
   },
-  { 
-    name: 'Jessica Awurabena Asamoah', 
-    role: 'Communication and Media Lead', 
-    initials: 'JAA',
-    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400/v1762633599/WhatsApp_Image_2025-10-25_at_13.36.50_981a330d_fwjdgb.jpg',
-    imagePosition: 'object-center',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/jessica-awuradjoa-asamoah',
-      email: 'mailto:jessicaasamoah903@gmail.com'
-    }
-  },
   {
     name: 'Musah Hidir',
     role: 'Finance Officer & Climate Action Lead',
