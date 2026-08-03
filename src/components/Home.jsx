@@ -658,14 +658,25 @@ const Home = () => {
           <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
           <div className="space-y-4 xs:space-y-5 mb-8">
             {[
-              { tag: 'Webinar', tc: 'bg-green-100 text-green-700', title: 'Agribusiness Webinar Series — Next Edition', desc: 'Join us for the next edition of our popular Agribusiness Webinar Series. Details coming soon!', location: 'Google Meet (Online)' },
-              { tag: 'Workshop', tc: 'bg-yellow-100 text-yellow-700', title: 'Youth Leadership & Skills Training Workshop', desc: 'A hands-on workshop building leadership, entrepreneurship, and digital skills for young Ghanaians.', location: 'Accra, Ghana' },
-              { tag: 'Community', tc: 'bg-purple-100 text-purple-700', title: 'Community Outreach & Engagement Day', desc: "An outreach day bringing SWK Ghana's programs directly to communities across Greater Accra.", location: 'Greater Accra, Ghana' },
+              {
+                day: '27', month: 'AUG', year: '2026',
+                tag: 'Webinar', tc: 'bg-green-100 text-green-700',
+                title: 'How to Pitch Your Agribusiness Ideas',
+                desc: 'A practical training webinar on structuring and pitching a compelling agribusiness idea — for investors, partners, and grant reviewers.',
+                location: 'Online (Google Meet)',
+              },
+              {
+                day: '22', month: 'SEP', year: '2026',
+                tag: 'Summit', tc: 'bg-blue-100 text-blue-700',
+                title: 'From The Ground Up — Agribusiness Summit',
+                desc: 'A flagship summit bringing together young agripreneurs, mentors, and partners to build the next generation of Ghanaian agribusiness.',
+                location: 'Accra, Ghana',
+              },
             ].map((event, idx) => (
               <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-[#F2FAE8] to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-[#D4F0A0] hover:shadow-md transition-shadow">
-                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-[#C0E870] px-5 py-3 text-center gap-2 sm:gap-0">
-                  <span className="text-xl font-bold text-[#1E963C]">TBA</span>
-                  <span className="text-xs font-medium text-gray-400 uppercase">Soon</span>
+                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-[#C0E870] px-5 py-3 text-center gap-1 sm:gap-0">
+                  <span className="text-2xl font-bold text-[#1E963C] leading-none">{event.day}</span>
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{event.month} {event.year}</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-2">
@@ -676,7 +687,14 @@ const Home = () => {
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-3">{event.desc}</p>
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="text-xs text-gray-500">📍 {event.location}</span>
-                    <span className="text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1.5 rounded-lg">Registration Opening Soon</span>
+                    <a
+                      href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] hover:bg-[#e4f5cf] px-3 py-1.5 rounded-lg transition-colors"
+                    >
+                      Register via WhatsApp →
+                    </a>
                   </div>
                 </div>
               </div>
@@ -827,6 +845,52 @@ const Home = () => {
         <Section>
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">What People Say</h2>
           <Testimonials />
+        </Section>
+
+        {/* ══ 12b. WELCOME NEW VOLUNTEERS ═════════════════════════════════════ */}
+        <Section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 items-center">
+            {/* Flyer image */}
+            <div className="order-2 lg:order-1">
+              <img
+                src={img('v1785748363/SWK_Ghana_Vols_re2vg6.png', 900)}
+                srcSet={srcset('v1785748363/SWK_Ghana_Vols_re2vg6.png', [480, 768, 900])}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                alt="Welcome to the team — Moses B. Agyapong, Esther Antonio, and Prince Laar join SWK Ghana as volunteers"
+                className="w-full h-auto rounded-2xl shadow-md border border-gray-100"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            {/* Text */}
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
+                New Volunteers
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Welcome to the Team
+              </h2>
+              <p className="text-lg text-gray-500 font-light leading-relaxed mb-4">
+                We're thrilled to welcome <strong className="text-gray-800 font-semibold">Moses B. Agyapong</strong> (Research &amp; Development),{' '}
+                <strong className="text-gray-800 font-semibold">Esther Antonio</strong> (Communications &amp; Media), and{' '}
+                <strong className="text-gray-800 font-semibold">Prince Laar</strong> (Communications &amp; Media) as our newest volunteers.
+              </p>
+              <p className="text-lg text-gray-500 font-light leading-relaxed mb-8">
+                The mission grows stronger with every person who joins it — we're glad to be building this with you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <button className="btn-gradient text-base px-8 py-4" onClick={() => navigate('/team')}>
+                  Meet the Full Team →
+                </button>
+                <button
+                  className="border-2 border-[#78C31E] text-[#78C31E] hover:bg-[#78C31E] hover:text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200"
+                  onClick={() => setIsVolunteerOpen(true)}
+                >
+                  Become a Volunteer
+                </button>
+              </div>
+            </div>
+          </div>
         </Section>
 
         {/* ══ 13. PARTNERS ════════════════════════════════════════════════════ */}

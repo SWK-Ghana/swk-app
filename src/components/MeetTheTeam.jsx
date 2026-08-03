@@ -57,9 +57,9 @@ const teamMembers = [
       email: 'mailto:jessicaasamoah903@gmail.com'
     }
   },
-  { 
-    name: 'Musah Hidir', 
-    role: 'Finance Officer & Climate Action Lead', 
+  {
+    name: 'Musah Hidir',
+    role: 'Finance Officer & Climate Action Lead',
     initials: 'MH',
     photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1772549398/IMG_9111_o3yibq.jpg',
     imagePosition: 'object-center',
@@ -67,6 +67,30 @@ const teamMembers = [
       linkedin: 'https://www.linkedin.com/in/musah-hidir',
       email: 'mailto:musahmohammad00@gmail.com'
     }
+  },
+  {
+    name: 'Moses B. Agyapong',
+    role: 'Volunteer — Research & Development',
+    initials: 'MA',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1785748261/WhatsApp_Image_2026-05-22_at_15.35.55_j9fgnt.jpg',
+    imagePosition: 'object-center',
+    social: {}
+  },
+  {
+    name: 'Esther Antonio',
+    role: 'Volunteer — Communications & Media',
+    initials: 'EA',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1785748260/WhatsApp_Image_2026-05-22_at_15.36.21_lmb6rt.jpg',
+    imagePosition: 'object-center',
+    social: {}
+  },
+  {
+    name: 'Prince Laar',
+    role: 'Volunteer — Communications & Media',
+    initials: 'PL',
+    photo: 'https://res.cloudinary.com/dwgj3lovn/image/upload/c_fill,g_face,w_400,h_400,f_auto,q_auto/v1785748262/Prince1_yolqb9.png',
+    imagePosition: 'object-center',
+    social: {}
   }
 ]
 
@@ -143,11 +167,6 @@ const MeetTheTeam = () => {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="mt-12 xs:mt-14 sm:mt-16 px-4 xs:px-6 sm:px-0">
-            <h2 className="text-xl xs:text-2xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 xs:mb-4">Volunteers</h2>
-            <p className="text-sm xs:text-base text-gray-600">We'll showcase our amazing volunteers here as they join us.</p>
           </div>
 
           <div className="mt-12 xs:mt-14 sm:mt-16 text-center px-4 xs:px-6 sm:px-0">
