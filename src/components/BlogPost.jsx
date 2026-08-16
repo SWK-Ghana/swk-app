@@ -1,7 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import React from 'react'
+import { useParams, Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
+
+// Route loader — runs in the router (browser) AND in the build-time
+// prerenderer, so the full article text is baked into static HTML for SEO.
+// eslint-disable-next-line react-refresh/only-export-components
+export async function loader({ params }) {
+  try {
+    const post = await client.fetch(
+      `*[_type == "post" && slug.current == $slug][0] {
+        _id, title, slug, category, excerpt,
+        publishedAt, _updatedAt, coverImage, coverImageUrl, author, body, content
+      }`,
+      { slug: params.slug }
+    )
+    return post || null
+  } catch {
+    return null
+  }
+}
 
 const ShareButton = ({ platform, url, title }) => {
   const links = {
@@ -56,7 +74,11 @@ const renderBlock = (block, idx) => {
     blockquote: 'border-l-4 pl-4 italic text-gray-600 my-4',
   }
 
-  if (style === 'h1') return <h1 key={idx} className={classMap.h1}>{text}</h1>
+  // The page already has one <h1> (the post title, rendered above the
+  // article body). If an editor styles a body block as "Heading 1" in
+  // Sanity, demote it to <h2> here so the page never ends up with two
+  // <h1>s — duplicate h1s hurt SEO heading structure.
+  if (style === 'h1') return <h2 key={idx} className={classMap.h1}>{text}</h2>
   if (style === 'h2') return <h2 key={idx} className={classMap.h2}>{text}</h2>
   if (style === 'h3') return <h3 key={idx} className={classMap.h3}>{text}</h3>
   if (style === 'blockquote') return <blockquote key={idx} className={classMap.blockquote}>{text}</blockquote>
@@ -69,27 +91,9 @@ const renderBlock = (block, idx) => {
 
 const BlogPost = () => {
   const { slug } = useParams()
-  const [post, setPost] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
-  const url = typeof window !== 'undefined' ? window.location.href : ''
-
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "post" && slug.current == $slug][0] {
-          _id, title, slug, category, excerpt,
-          publishedAt, coverImage, coverImageUrl, author, body, content
-        }`,
-        { slug }
-      )
-      .then((data) => {
-        if (!data) setNotFound(true)
-        else setPost(data)
-        setLoading(false)
-      })
-      .catch(() => { setNotFound(true); setLoading(false) })
-  }, [slug])
+  const post = useLoaderData()
+  // Canonical URL — stable in both browser and prerender output.
+  const url = `https://swkghana.org/blog/${slug}`
 
   const formatDate = (dateStr) => {
     if (!dateStr) return ''
@@ -98,17 +102,7 @@ const BlogPost = () => {
     })
   }
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="inline-block w-10 h-10 border-4 rounded-full animate-spin mb-4"
-          style={{ borderColor: '#78C31E', borderTopColor: 'transparent' }} />
-        <p className="text-gray-500">Loading post...</p>
-      </div>
-    </div>
-  )
-
-  if (notFound) return (
+  if (!post) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <div className="text-6xl mb-4">📭</div>
@@ -133,6 +127,43 @@ const BlogPost = () => {
         description={post.excerpt || `Read "${post.title}" on the SWK Ghana blog — stories on youth empowerment and sustainable development.`}
         path={`/blog/${post.slug?.current || slug}`}
         image={coverUrl || undefined}
+      />
+      {/* Article + breadcrumb structured data for rich search results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Article',
+                headline: post.title,
+                description: post.excerpt || undefined,
+                image: coverUrl || undefined,
+                datePublished: post.publishedAt || undefined,
+                dateModified: post._updatedAt || post.publishedAt || undefined,
+                author: { '@type': 'Organization', name: post.author || 'SWK Ghana', url: 'https://swkghana.org/' },
+                publisher: {
+                  '@type': 'Organization',
+                  name: 'SWK Ghana',
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png',
+                  },
+                },
+                mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+              },
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swkghana.org/' },
+                  { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://swkghana.org/blog' },
+                  { '@type': 'ListItem', position: 3, name: post.title, item: url },
+                ],
+              },
+            ],
+          }),
+        }}
       />
       {/* Hero */}
       {coverUrl && (

@@ -1,7 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
+
+// Route loader — runs in the router (browser) AND in the build-time
+// prerenderer, so the post list is baked into the static HTML for SEO.
+// This is the React Router "route module" convention (loader + default
+// component in one file); the extra export is intentional, not a mistake,
+// so fast-refresh is disabled for this file only.
+// eslint-disable-next-line react-refresh/only-export-components
+export async function loader() {
+  try {
+    return await client.fetch(`*[_type == "post" && (published == true || !defined(published))] | order(publishedAt desc, _createdAt desc) {
+      _id,
+      title,
+      slug,
+      category,
+      excerpt,
+      publishedAt,
+      _createdAt,
+      coverImage,
+      coverImageUrl,
+      author
+    }`)
+  } catch (err) {
+    console.error('Blog fetch error:', err)
+    return []
+  }
+}
 
 const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 
@@ -12,34 +38,9 @@ const heroSrc = (w) => `${CLD}/f_auto,q_auto,w_${w}/${HERO_PATH}`
 const heroSrcSet = [768, 1280, 1920, 2560].map((w) => `${heroSrc(w)} ${w}w`).join(', ')
 
 const Blog = () => {
-  const [posts, setPosts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const posts = useLoaderData() || []
   const [activeCategory, setActiveCategory] = useState('All')
   const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    client
-      .fetch(`*[_type == "post" && (published == true || !defined(published))] | order(publishedAt desc, _createdAt desc) {
-        _id,
-        title,
-        slug,
-        category,
-        excerpt,
-        publishedAt,
-        _createdAt,
-        coverImage,
-        coverImageUrl,
-        author
-      }`)
-      .then((data) => {
-        setPosts(data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.error('Blog fetch error:', err)
-        setLoading(false)
-      })
-  }, [])
 
   // Normalize category for matching — handles singular stored values from older posts
   const normalizeCategory = (cat) =>
@@ -156,13 +157,7 @@ const Blog = () => {
         </div>
 
         {/* Posts grid */}
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block w-10 h-10 border-4 rounded-full animate-spin"
-              style={{ borderColor: '#78C31E', borderTopColor: 'transparent' }} />
-            <p className="mt-4 text-gray-500">Loading posts...</p>
-          </div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-5xl mb-4">✍️</div>
             <h3 className="text-2xl font-bold text-gray-800 mb-2">No posts yet</h3>
