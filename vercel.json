@@ -13,6 +13,10 @@
   ],
   "rewrites": [
     {
+      "source": "/summit",
+      "destination": "/summit-2026.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

@@ -653,6 +653,58 @@ const Home = () => {
           </div>
         </Section>
 
+        {/* ══ 7b. FEATURED: AGRIBUSINESS SUMMIT 2026 ══════════════════════════
+             Links to /summit, a static page outside the React router, so this
+             uses a plain <a> — a router <Link> would be intercepted and 404. */}
+        <div className="rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-gradient-to-br from-[#0C2E11] to-[#123D16] mb-10 sm:mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center">
+            <div className="p-6 xs:p-8 sm:p-10 md:p-12 order-2 md:order-1">
+              <span className="inline-block bg-[#78C31E] text-[#123D16] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg mb-4">
+                From the Ground Up
+              </span>
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white mb-3 leading-tight">
+                Agribusiness Summit 2026
+              </h2>
+              <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-5">
+                Our first in-person flagship event: a free, half-day summit for young people aged 15 to 35.
+                One morning, four phases — a keynote, a rapid-fire panel of working agribusiness voices,
+                a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
+              </p>
+              <ul className="space-y-2 mb-6 text-sm text-white/90">
+                <li className="flex items-center gap-2">
+                  <span aria-hidden="true">📅</span> Saturday, 7 November 2026 · 9:00 AM – 1:30 PM GMT
+                </li>
+                <li className="flex items-center gap-2">
+                  <span aria-hidden="true">📍</span> The GracedLife Leadership Centre, Ashaley Botwe, Accra
+                </li>
+                <li className="flex items-center gap-2">
+                  <span aria-hidden="true">🎟️</span> Free entry · Limited to 100 attendees
+                </li>
+              </ul>
+              <a
+                href="/summit"
+                className="inline-flex items-center gap-2 bg-[#78C31E] hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-6 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Explore the Summit <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div className="order-1 md:order-2 p-6 xs:p-8 sm:p-10 md:p-12 md:pl-0">
+              <a href="/summit" tabIndex={-1} aria-hidden="true">
+                <img
+                  src={img('v1788183692/SummitFlyer-selection_2_fyjuwm.png', 700)}
+                  srcSet={cardSrcset('v1788183692/SummitFlyer-selection_2_fyjuwm.png')}
+                  sizes="(min-width: 768px) 44vw, 90vw"
+                  alt=""
+                  width="2160"
+                  height="2160"
+                  loading="lazy"
+                  className="w-full h-auto rounded-xl shadow-2xl"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* ══ 8. UPCOMING EVENTS ══════════════════════════════════════════════ */}
         <Section>
           <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
@@ -671,6 +723,7 @@ const Home = () => {
                 title: 'From The Ground Up — Agribusiness Summit',
                 desc: 'A flagship summit bringing together young agripreneurs, mentors, and partners to build the next generation of Ghanaian agribusiness.',
                 location: 'Accra, Ghana',
+                page: '/summit',
               },
             ].map((event, idx) => (
               <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-[#F2FAE8] to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-[#D4F0A0] hover:shadow-md transition-shadow">
@@ -695,6 +748,15 @@ const Home = () => {
                     >
                       Register via WhatsApp →
                     </a>
+                    {/* Plain <a>: /summit is a static page outside the router. */}
+                    {event.page && (
+                      <a
+                        href={event.page}
+                        className="text-xs font-semibold text-[#1E963C] hover:underline underline-offset-4"
+                      >
+                        Event details →
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

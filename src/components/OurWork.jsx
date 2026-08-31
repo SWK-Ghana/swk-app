@@ -297,6 +297,51 @@ const OurWork = () => {
           </p>
         </div>
 
+        {/* ── Featured: Agribusiness Summit 2026 ──
+             /summit is a static page outside the React router, so this uses a
+             plain <a> throughout — a router <Link> would be intercepted and
+             render the SPA 404 instead. */}
+        <div className="rounded-xl xs:rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-gradient-to-br from-[#0C2E11] to-[#123D16] mb-8 xs:mb-10 sm:mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center">
+            <div className="p-5 xs:p-6 sm:p-8 md:p-10 order-2 md:order-1">
+              <span className="inline-block bg-[#78C31E] text-[#123D16] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg mb-3">
+                Flagship Event
+              </span>
+              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
+                Agribusiness Summit 2026
+              </h2>
+              <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
+                Our first in-person flagship event, growing out of a webinar series that has reached 300+
+                young people across 9+ countries. A free, half-day summit for ages 15 to 35: a keynote, a
+                rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
+              </p>
+              <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
+                <li>📅 Saturday, 7 November 2026 · 9:00 AM – 1:30 PM GMT</li>
+                <li>📍 The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
+                <li>🎟️ Free entry · Limited to 100 attendees</li>
+              </ul>
+              <a
+                href="/summit"
+                className="inline-flex items-center gap-1.5 bg-[#78C31E] hover:bg-[#8AD62B] text-[#123D16] text-sm font-bold px-5 py-2.5 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Explore the Summit <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <div className="order-1 md:order-2 p-5 xs:p-6 sm:p-8 md:p-10 md:pl-0">
+              <a href="/summit" tabIndex={-1} aria-hidden="true">
+                <img
+                  src={img('v1788183692/SummitFlyer-selection_2_fyjuwm.png', 700)}
+                  alt=""
+                  width="2160"
+                  height="2160"
+                  loading="lazy"
+                  className="w-full h-auto rounded-xl shadow-2xl"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* ── Projects & Impact ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
 
