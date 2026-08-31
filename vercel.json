@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/marketplace",
+      "destination": "https://marketplace.swkghana.org",
+      "permanent": false
+    },
+    {
+      "source": "/marketplace/:path*",
+      "destination": "https://marketplace.swkghana.org/:path*",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
