@@ -54,8 +54,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2">
             <h3 className="text-xl xs:text-2xl font-bold mb-3 xs:mb-4">SWK Ghana</h3>
-            <p className="text-sm xs:text-base text-gray-300 mb-4 xs:mb-5 max-w-md leading-relaxed">
+            <p className="text-sm xs:text-base text-gray-300 mb-3 xs:mb-4 max-w-md leading-relaxed">
               A youth-focused nonprofit organisation dedicated to holistic youth development as the foundation for resilient communities across Africa.
+            </p>
+            <p className="text-xs text-gray-500 mb-4 xs:mb-5">
+              Duly incorporated under the Companies Act, 2019 (Act 992) · Reg. No. CG024110426 · Office of the Registrar of Companies, Ghana
             </p>
             {/* Social icons */}
             <div className="flex flex-wrap gap-3">
