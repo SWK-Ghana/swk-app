@@ -1,454 +1,271 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { client } from '../utils/sanityClient'
+import React from 'react'
 import Seo from './Seo'
 
-const toSlug = (name) =>
-  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+/**
+ * Landing page for SWK Marketplace.
+ *
+ * This page used to be a standalone shop: products from Sanity, orders emailed
+ * to the team through Formspree, no accounts, no payment and no buyer
+ * protection. That existed as a placeholder while the real platform was built.
+ *
+ * The real platform now runs at marketplace.swkghana.org with vendor
+ * verification, escrow and payouts, so this page's job is to introduce it and
+ * hand people over. It deliberately wears the marketplace's own palette rather
+ * than the swkghana.org site styling, so visitors recognise the product when
+ * they arrive there.
+ */
 
-const CATEGORIES = ['All', 'Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
+const APP = 'https://marketplace.swkghana.org'
 
-const categoryColors = {
-  'Agribusiness': 'bg-green-100 text-green-700',
-  'Recycled & Upcycled': 'bg-blue-100 text-blue-700',
-  'Handmade Crafts': 'bg-purple-100 text-purple-700',
-  'Organic Produce': 'bg-[#F2FAE8] text-[#1E963C]',
-}
+const CATEGORIES = [
+  { name: 'Agribusiness',        blurb: 'Sustainably grown crops, farm produce and agro-processing', href: `${APP}/marketplace?category=agribusiness` },
+  { name: 'Recycled & Upcycled', blurb: 'Products made from reclaimed and repurposed materials',      href: `${APP}/marketplace?category=recycled_upcycled` },
+  { name: 'Handmade Crafts',     blurb: 'Hand-produced goods from young Ghanaian artisans',           href: `${APP}/marketplace?category=handmade_crafts` },
+  { name: 'Organic Produce',     blurb: 'Certified and locally grown organic food',                   href: `${APP}/marketplace?category=organic_produce` },
+]
 
-const emptyOrder = {
-  productId: null,
-  productName: '',
-  buyerName: '',
-  buyerEmail: '',
-  buyerPhone: '',
-  quantity: 1,
-  deliveryAddress: '',
-  notes: '',
-}
+const ESCROW_STEPS = [
+  { n: '1', title: 'You pay',            body: 'Your money goes to SWK Ghana, not straight to the vendor.' },
+  { n: '2', title: 'The vendor ships',   body: 'They confirm your order and send it out, knowing payment is secured.' },
+  { n: '3', title: 'You confirm',        body: 'Once the goods are in your hands, you confirm delivery.' },
+  { n: '4', title: 'The vendor is paid', body: 'Only then does SWK Ghana release the funds.' },
+]
 
-const Marketplace = () => {
-  const navigate = useNavigate()
-  const [products, setProducts] = useState([])
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [search, setSearch] = useState('')
-  const [orderModal, setOrderModal] = useState(null) // product object
-  const [order, setOrder] = useState(emptyOrder)
-  const [orderStatus, setOrderStatus] = useState('idle')
-  const [vendorModal, setVendorModal] = useState(false)
-  const [vendor, setVendor] = useState({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' })
-  const [vendorStatus, setVendorStatus] = useState('idle')
-  const [agreedToTerms, setAgreedToTerms] = useState(false)
+const VALUES = [
+  'Zero Waste', 'Organic', 'Plastic Free', 'Upcycled', 'Handmade',
+  'Women-Led', 'Youth-Led', 'Locally Sourced', 'Biodegradable', 'Fair Trade',
+]
 
-  useEffect(() => {
-    client
-      .fetch(`*[_type == "marketplaceProduct" && approved == true] | order(_createdAt desc) {
-        _id, productName, category, business, name, email, phone, location, description, price, unit, imageUrl, notes, approved
-      }`)
-      .then(data => setProducts(data))
-      .catch(() => {})
-  }, [])
+const ASSURANCES = [
+  { title: 'Every listing is checked',   body: 'Products are reviewed for SDG 12 alignment before they can be sold. Claims that cannot be supported are rejected.' },
+  { title: 'Every vendor is verified',   body: 'No one lists until SWK Ghana has reviewed their business and sustainability statement.' },
+  { title: 'Every payment is protected', body: 'Funds sit in escrow until you confirm delivery. Payouts are never automatic.' },
+  { title: 'Every review is earned',     body: 'Only a buyer with a delivered order can review that product.' },
+]
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') { setOrderModal(null); setVendorModal(false) } }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
-  const filtered = products.filter(p => {
-    if (!p.approved) return false
-    if (activeCategory !== 'All' && p.category !== activeCategory) return false
-    if (search && !p.productName.toLowerCase().includes(search.toLowerCase()) && !p.business.toLowerCase().includes(search.toLowerCase())) return false
-    return true
-  })
-
-  const openOrder = (product) => {
-    setOrder({ ...emptyOrder, productId: product._id, productName: product.productName })
-    setOrderStatus('idle')
-    setOrderModal(product)
-  }
-
-  const handleOrderSubmit = async (e) => {
-    e.preventDefault()
-    setOrderStatus('sending')
-    try {
-      await fetch('https://formspree.io/f/mvzwqozw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          _subject: `Marketplace Order — ${order.productName}`,
-          product: order.productName,
-          buyer_name: order.buyerName,
-          buyer_email: order.buyerEmail,
-          buyer_phone: order.buyerPhone,
-          quantity: order.quantity,
-          delivery_address: order.deliveryAddress,
-          notes: order.notes || 'N/A',
-          form_type: 'Marketplace Order',
-        }),
-      })
-      setOrderStatus('success')
-    } catch { setOrderStatus('error') }
-  }
-
-  const handleVendorSubmit = async (e) => {
-    e.preventDefault()
-    setVendorStatus('sending')
-    try {
-      await fetch('https://formspree.io/f/mvzwqozw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          _subject: `New Vendor Submission — ${vendor.productName}`,
-          ...vendor,
-          form_type: 'Vendor Product Submission',
-        }),
-      })
-      setVendorStatus('success')
-    } catch { setVendorStatus('error') }
-  }
-
+export default function Marketplace() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-white">
+    <div className="bg-mk-sand-50 font-sans">
       <Seo
-        title="SWK Marketplace – Youth-Led Sustainable Products | SWK Ghana"
-        description="Discover eco-friendly, youth-led products on SWK Marketplace, supporting sustainable consumption and the circular economy in line with UN SDG 12."
+        title="SWK Marketplace – Shop Verified Youth-Led Green Businesses | SWK Ghana"
+        description="Browse sustainable products from verified youth-led green entrepreneurs across Ghana. Every listing is SDG 12 checked and every payment is held in escrow until you confirm delivery."
         path="/marketplace"
       />
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16">
-        <div className="max-w-7xl mx-auto">
 
-          {/* Header */}
-          <div className="text-center mb-8 xs:mb-10">
-            <span className="inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 bg-[#F2FAE8] text-[#1E963C]">Youth Ventures</span>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl font-bold text-gray-900 mb-3">SWK Marketplace</h1>
-            <p className="text-base xs:text-lg text-gray-800 max-w-2xl mx-auto mb-4">
-              Shop directly from Ghana's youth-led agribusiness and circular economy ventures. Every purchase supports a young entrepreneur.
-            </p>
-            {/* Intermediary notice */}
-            <div className="inline-flex items-center gap-2 bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl px-4 py-2.5 mb-5 text-xs sm:text-sm text-[#1E963C] font-medium max-w-lg mx-auto">
-              <span>🛡️</span>
-              <span>All orders are coordinated by <strong>SWK Ghana</strong> — your trusted marketplace manager.</span>
-            </div>
-            <div className="block">
-              <button onClick={() => { setVendor({ name: '', email: '', phone: '', business: '', category: '', productName: '', description: '', price: '', unit: '', location: '', imageUrl: '', notes: '' }); setVendorStatus('idle'); setAgreedToTerms(false); setVendorModal(true) }}
-                className="btn-gradient px-6 py-2.5 text-sm xs:text-base">
-                + List Your Product
-              </button>
-            </div>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-white">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-mk-green-50 blur-3xl opacity-70" />
+          <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-mk-teal-50 blur-3xl opacity-70" />
+        </div>
+
+        <div className="relative container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <p className="inline-flex items-center gap-2 rounded-full border border-mk-green-100 bg-mk-green-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-mk-green-800">
+            SDG 12 Verified · Youth-Powered · Ghana
+          </p>
+
+          <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-[1.08] text-mk-sand-900 sm:text-5xl md:text-6xl">
+            Shop green.{' '}
+            <span className="text-mk-green">Support youth.</span>{' '}
+            Build Africa.
+          </h1>
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-mk-sand-700 sm:text-lg">
+            A marketplace of eco-friendly products from verified young entrepreneurs across Ghana.
+            Every purchase is escrow-protected, and every listing is checked before it goes live.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={`${APP}/marketplace`}
+              className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-mk-green px-7 text-base font-semibold text-white shadow-sm transition-colors hover:bg-mk-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+            >
+              Browse the marketplace
+            </a>
+            <a
+              href={`${APP}/vendor/apply`}
+              className="inline-flex min-h-[52px] items-center justify-center rounded-xl border-2 border-mk-sand-200 bg-white px-7 text-base font-semibold text-mk-sand-900 transition-colors hover:border-mk-green hover:bg-mk-green-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+            >
+              Sell your products
+            </a>
           </div>
 
-          {/* Search + Filters */}
-          <div className="mb-6 xs:mb-8">
-            <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              className="w-full max-w-md mx-auto block px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#78C31E] text-sm mb-4"
-              placeholder="Search products or vendors..." />
-            <div className="flex flex-wrap gap-2 justify-center">
-              {CATEGORIES.map(cat => (
-                <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${activeCategory === cat ? 'bg-[#78C31E] text-white' : 'bg-white text-gray-800 border border-gray-200 hover:border-[#78C31E]'}`}>
-                  {cat}
-                </button>
+          <p className="mt-6 inline-flex items-center gap-2 rounded-lg border border-mk-teal-50 bg-mk-teal-50 px-3 py-2 text-sm font-medium text-mk-teal">
+            Your money is held safely by SWK Ghana until you confirm delivery.
+          </p>
+        </div>
+      </section>
+
+      {/* ── What you can buy ── */}
+      <section className="border-t border-mk-sand-200 py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-mk-sand-900 sm:text-3xl">What you can buy</h2>
+          <p className="mt-2 max-w-xl text-mk-sand-600">
+            Four categories, all produced by young people building sustainable businesses in Ghana.
+          </p>
+
+          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {CATEGORIES.map(c => (
+              <li key={c.name}>
+                <a
+                  href={c.href}
+                  className="group flex h-full flex-col rounded-2xl border border-mk-sand-200 bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-mk-green hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+                >
+                  <span className="text-base font-semibold text-mk-sand-900 group-hover:text-mk-green-700">
+                    {c.name}
+                  </span>
+                  <span className="mt-2 text-sm leading-relaxed text-mk-sand-600">{c.blurb}</span>
+                  <span aria-hidden="true" className="mt-4 text-sm font-semibold text-mk-green">
+                    Browse →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── Escrow ── */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-mk-sand-900 sm:text-3xl">
+            Why you can buy with confidence
+          </h2>
+          <p className="mt-2 max-w-2xl text-mk-sand-600">
+            Buying from someone you have never met usually means one side has to take a risk.
+            Escrow removes it for both of you.
+          </p>
+
+          <ol className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {ESCROW_STEPS.map(s => (
+              <li key={s.n} className="rounded-2xl border border-mk-sand-200 bg-mk-sand-50 p-6">
+                <span
+                  aria-hidden="true"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-mk-green text-sm font-bold text-white"
+                >
+                  {s.n}
+                </span>
+                <h3 className="mt-4 text-base font-semibold text-mk-sand-900">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-mk-sand-600">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-6 text-sm italic text-mk-sand-600">
+            SWK Ghana holds the funds throughout. Payouts are never released automatically.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Assurances ── */}
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr),minmax(0,1.1fr)] lg:items-start">
+            <div>
+              <h2 className="text-2xl font-bold text-mk-sand-900 sm:text-3xl">
+                What &ldquo;verified&rdquo; actually means
+              </h2>
+              <p className="mt-3 max-w-md leading-relaxed text-mk-sand-600">
+                Anyone can call a product sustainable. On SWK Marketplace it is reviewed before
+                anyone can sell it, so the badge is a check rather than a claim.
+              </p>
+              <a
+                href={`${APP}/how-it-works`}
+                className="mt-6 inline-flex min-h-[44px] items-center text-base font-semibold text-mk-green underline underline-offset-4 hover:text-mk-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+              >
+                See how it works
+              </a>
+            </div>
+
+            <ul className="space-y-3">
+              {ASSURANCES.map(a => (
+                <li key={a.title} className="rounded-2xl border border-mk-sand-200 bg-white p-5">
+                  <h3 className="text-sm font-semibold text-mk-sand-900">{a.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-mk-sand-600">{a.body}</p>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
+        </div>
+      </section>
 
-          {/* Product Grid */}
-          {filtered.length === 0 ? (
-            <div className="text-center py-20 bg-white rounded-2xl border border-gray-200">
-              <span className="text-5xl mb-4 block">🛒</span>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">No products yet</h3>
-              <p className="text-gray-700 text-sm mb-5">Be the first to list your product on the SWK Marketplace!</p>
-              <button onClick={() => setVendorModal(true)} className="btn-gradient px-6 py-2.5 text-sm">List Your Product</button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 xs:gap-6">
-              {filtered.map(product => (
-                <div key={product._id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
-                  {product.imageUrl ? (
-                    <img src={product.imageUrl} alt={product.productName} className="w-full h-48 object-cover" loading="lazy" />
-                  ) : (
-                    <div className="w-full h-48 bg-gradient-to-br from-[#F2FAE8] to-[#E0F5C0] flex items-center justify-center">
-                      <span className="text-5xl">🌱</span>
-                    </div>
-                  )}
-                  <div className="p-4 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${categoryColors[product.category] || 'bg-gray-100 text-gray-800'}`}>
-                        {product.category}
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold text-gray-900 mb-1">{product.productName}</h3>
-                    <p className="text-xs text-gray-700 mb-1">by <button onClick={() => navigate(`/marketplace/vendor/${toSlug(product.business)}`)} className="font-semibold text-[#78C31E] hover:text-[#1E963C] hover:underline transition-colors">{product.business}</button></p>
-                    <p className="text-xs text-gray-800 leading-relaxed flex-1 mb-3 line-clamp-3">{product.description}</p>
-                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                      <div>
-                        <span className="text-lg font-bold text-[#1E963C]">
-                          {product.price ? `GHS ${product.price}` : 'Contact for price'}
-                        </span>
-                        {product.unit && <span className="text-xs text-gray-400 ml-1">/ {product.unit}</span>}
-                      </div>
-                      <button onClick={() => openOrder(product)}
-                        className="btn-gradient px-4 py-1.5 text-xs font-semibold rounded-lg">
-                        Order Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+      {/* ── Shop by values ── */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-mk-sand-900 sm:text-3xl">
+            Shop by what matters to you
+          </h2>
+          <p className="mt-2 max-w-xl text-mk-sand-600">
+            Filter the marketplace by the values behind each product.
+          </p>
+          <ul className="mt-7 flex flex-wrap gap-2.5">
+            {VALUES.map(v => (
+              <li key={v}>
+                <span className="inline-flex min-h-[44px] items-center rounded-full border border-mk-sand-200 bg-mk-sand-50 px-4 text-sm font-medium text-mk-sand-700">
+                  {v}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-          {/* Info banner */}
-          <div className="mt-10 bg-[#1E963C] rounded-2xl p-6 xs:p-8 text-white text-center">
-            <h2 className="text-xl xs:text-2xl font-bold mb-2">Are you a young entrepreneur?</h2>
-            <p className="text-white/70 text-sm xs:text-base mb-5 max-w-xl mx-auto">
-              List your agribusiness or circular economy product on SWK Marketplace and reach customers across Ghana. It's completely free.
+      {/* ── Vendor CTA ── */}
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-mk-green-800 px-6 py-12 sm:px-10 md:py-16">
+            <p className="text-xs font-semibold uppercase tracking-widest text-mk-green-100">
+              For young green entrepreneurs
             </p>
-            <button onClick={() => setVendorModal(true)} className="bg-white text-[#1E963C] font-semibold px-6 py-2.5 rounded-xl hover:bg-gray-100 transition-colors text-sm xs:text-base">
-              List Your Product →
-            </button>
+            <h2 className="mt-3 max-w-2xl text-2xl font-bold leading-snug text-white sm:text-3xl md:text-4xl">
+              You make it. We handle the shopfront, the buyers and the payment.
+            </h2>
+            <p className="mt-4 max-w-xl leading-relaxed text-mk-green-50">
+              A storefront of your own, buyers across all 16 regions, and payment you can rely on.
+              Free to join and free to list — SWK Ghana keeps 15% only when you make a sale,
+              and you keep 85%.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={`${APP}/vendor/apply`}
+                className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-white px-7 text-base font-semibold text-mk-green-800 transition-colors hover:bg-mk-green-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-mk-green-800"
+              >
+                Apply to sell
+              </a>
+              <a
+                href={`${APP}/signup`}
+                className="inline-flex min-h-[52px] items-center justify-center rounded-xl border-2 border-white/40 px-7 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-mk-green-800"
+              >
+                Create an account
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ORDER MODAL */}
-      {orderModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setOrderModal(null)} />
-          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-900">Place an Order</h3>
-              <button aria-label="Close" className="text-gray-700 hover:text-gray-700 text-xl" onClick={() => setOrderModal(null)}>✕</button>
-            </div>
-
-            {/* Product summary */}
-            <div className="flex items-center gap-3 bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl p-3 mb-5">
-              {orderModal.imageUrl ? (
-                <img src={orderModal.imageUrl} alt={orderModal.productName} className="w-14 h-14 object-cover rounded-lg flex-shrink-0" />
-              ) : (
-                <div className="w-14 h-14 bg-[#D4F0A0] rounded-lg flex items-center justify-center flex-shrink-0"><span className="text-2xl">🌱</span></div>
-              )}
-              <div>
-                <p className="font-semibold text-gray-900 text-sm">{orderModal.productName}</p>
-                <p className="text-xs text-gray-700">by {orderModal.business}</p>
-                <p className="text-sm font-bold text-[#1E963C]">{orderModal.price ? `GHS ${orderModal.price}` : 'Contact for price'}{orderModal.unit ? ` / ${orderModal.unit}` : ''}</p>
-              </div>
-            </div>
-
-            {orderStatus === 'success' ? (
-              <div className="flex flex-col items-center py-8 text-center">
-                <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Order Received!</h4>
-                <p className="text-sm text-gray-800 mb-5">Thank you, {order.buyerName.split(' ')[0]}! We'll contact you shortly to confirm your order and arrange delivery.</p>
-                <button onClick={() => setOrderModal(null)} className="btn-gradient px-6 py-2 text-sm">Close</button>
-              </div>
-            ) : (
-              <form className="space-y-4" onSubmit={handleOrderSubmit}>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Full name *</label>
-                    <input required type="text" value={order.buyerName} onChange={e => setOrder({ ...order, buyerName: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="Your name" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
-                    <input required type="tel" value={order.buyerPhone} onChange={e => setOrder({ ...order, buyerPhone: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="+233..." />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                  <input required type="email" value={order.buyerEmail} onChange={e => setOrder({ ...order, buyerEmail: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="your.email@example.com" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
-                  <input required type="number" min={1} value={order.quantity} onChange={e => setOrder({ ...order, quantity: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Delivery address *</label>
-                  <textarea required rows={2} value={order.deliveryAddress} onChange={e => setOrder({ ...order, deliveryAddress: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="Where should we deliver?" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Additional notes <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <textarea rows={2} value={order.notes} onChange={e => setOrder({ ...order, notes: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="Any special requests..." />
-                </div>
-                {orderStatus === 'error' && <p className="text-xs text-red-500">Something went wrong. Please try again.</p>}
-                <div className="flex gap-3 pt-2">
-                  <button type="button" onClick={() => setOrderModal(null)} className="px-4 py-2 border rounded-lg text-gray-800 text-sm">Cancel</button>
-                  <button type="submit" disabled={orderStatus === 'sending'} className="btn-gradient flex-1 py-2.5 disabled:opacity-60 text-sm">
-                    {orderStatus === 'sending' ? 'Sending...' : 'Submit Order'}
-                  </button>
-                </div>
-              </form>
-            )}
+      {/* ── Closing ── */}
+      <section className="border-t border-mk-sand-200 bg-white py-14">
+        <div className="container mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-mk-sand-900 sm:text-2xl">The marketplace is open</h2>
+          <p className="mx-auto mt-2 max-w-lg leading-relaxed text-mk-sand-600">
+            Browse verified products, or sign in to pick up where you left off.
+          </p>
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href={`${APP}/marketplace`}
+              className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-mk-green px-7 text-base font-semibold text-white transition-colors hover:bg-mk-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+            >
+              Start shopping
+            </a>
+            <a
+              href={`${APP}/login`}
+              className="inline-flex min-h-[52px] items-center justify-center rounded-xl border-2 border-mk-sand-200 px-7 text-base font-semibold text-mk-sand-900 transition-colors hover:border-mk-green hover:bg-mk-green-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mk-green focus-visible:ring-offset-2"
+            >
+              Sign in
+            </a>
           </div>
         </div>
-      )}
-
-      {/* VENDOR SUBMISSION MODAL */}
-      {vendorModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 xs:p-4" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setVendorModal(false)} />
-          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-xl mx-auto p-5 xs:p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-semibold text-gray-900">List Your Product</h3>
-              <button aria-label="Close" className="text-gray-700 hover:text-gray-700 text-xl" onClick={() => setVendorModal(false)}>✕</button>
-            </div>
-
-            {/* Sustainability notice */}
-            <div className="bg-[#F2FAE8] border border-[#C0E870] rounded-xl p-3 mb-5">
-              <div className="flex items-start gap-2">
-                <span className="text-[#78C31E] text-lg flex-shrink-0">🌱</span>
-                <div>
-                  <p className="text-sm font-semibold text-[#1E963C] mb-1">Sustainability Requirement</p>
-                  <p className="text-xs text-[#1E963C] leading-relaxed">
-                    All products listed on SWK Marketplace must align with <strong>UN SDG 12 — Responsible Consumption and Production</strong>. Products must be eco-friendly, sustainably sourced or made, and minimize environmental harm. SWK Ghana reserves the right to reject any product that does not meet these criteria.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-700 mb-5">Fill in your product details. Our team will review and publish it within 24–48 hours.</p>
-
-            {vendorStatus === 'success' ? (
-              <div className="flex flex-col items-center py-8 text-center">
-                <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Submission Received!</h4>
-                <p className="text-sm text-gray-800 mb-5">Thank you! We'll review your product and publish it within 24–48 hours. We'll notify you at {vendor.email}.</p>
-                <button onClick={() => setVendorModal(false)} className="btn-gradient px-6 py-2 text-sm">Close</button>
-              </div>
-            ) : (
-              <form className="space-y-4" onSubmit={handleVendorSubmit}>
-                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Your Details</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Full name *</label>
-                    <input required type="text" value={vendor.name} onChange={e => setVendor({ ...vendor, name: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="Your full name" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                    <input required type="email" value={vendor.email} onChange={e => setVendor({ ...vendor, email: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="you@email.com" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
-                    <input required type="tel" value={vendor.phone} onChange={e => setVendor({ ...vendor, phone: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="+233..." />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Business / Farm name *</label>
-                    <input required type="text" value={vendor.business} onChange={e => setVendor({ ...vendor, business: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="e.g. Kofi Farms" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Location *</label>
-                  <input required type="text" value={vendor.location} onChange={e => setVendor({ ...vendor, location: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="e.g. Accra, Kumasi..." />
-                </div>
-
-                <p className="text-xs font-semibold text-gray-700 uppercase tracking-wide pt-2">Product Details</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Product name *</label>
-                    <input required type="text" value={vendor.productName} onChange={e => setVendor({ ...vendor, productName: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="e.g. Organic Tomatoes" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-                    <select required value={vendor.category} onChange={e => setVendor({ ...vendor, category: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] bg-white text-sm">
-                      <option value="">— Select —</option>
-                      <option>Agribusiness</option>
-                      <option>Recycled & Upcycled</option>
-                      <option>Handmade Crafts</option>
-                      <option>Organic Produce</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                  <textarea required rows={3} value={vendor.description} onChange={e => setVendor({ ...vendor, description: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm"
-                    placeholder="Describe your product — what it is, how it's made, benefits..." />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Price (GHS) *</label>
-                    <input required type="number" min={0} step="0.01" value={vendor.price} onChange={e => setVendor({ ...vendor, price: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="e.g. 50" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Unit *</label>
-                    <input required type="text" value={vendor.unit} onChange={e => setVendor({ ...vendor, unit: e.target.value })}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="e.g. kg, bag, piece" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Product image URL <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <input type="url" value={vendor.imageUrl} onChange={e => setVendor({ ...vendor, imageUrl: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm" placeholder="https://..." />
-                  <p className="text-xs text-gray-400 mt-0.5">Paste a link to your product photo (Google Drive, WhatsApp, etc.)</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Additional notes <span className="text-gray-400 font-normal">(optional)</span></label>
-                  <textarea rows={2} value={vendor.notes} onChange={e => setVendor({ ...vendor, notes: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#78C31E] text-sm"
-                    placeholder="Minimum order, availability, delivery options..." />
-                </div>
-                {vendorStatus === 'error' && <p className="text-xs text-red-500">Something went wrong. Please try again.</p>}
-
-                {/* Terms & Conditions */}
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-800 leading-relaxed space-y-2">
-                  <p className="font-semibold text-gray-800 text-sm">Vendor Terms & Conditions</p>
-                  <p>By listing your product on SWK Marketplace, you agree to the following:</p>
-                  <ol className="list-decimal pl-4 space-y-1">
-                    <li>Your product must be eco-friendly and align with <strong>UN SDG 12</strong> — Responsible Consumption and Production.</li>
-                    <li>Products must be sustainably sourced, produced, or made with minimal environmental impact.</li>
-                    <li>No harmful chemicals, non-biodegradable materials, or environmentally damaging processes may be used.</li>
-                    <li>You are responsible for the accuracy of your product description, pricing, and availability.</li>
-                    <li>You are responsible for the quality of your product. SWK Ghana acts solely as a marketplace intermediary.</li>
-                    <li>SWK Ghana reserves the right to reject, remove, or unpublish any product at any time without notice.</li>
-                    <li>A commission fee will be charged on all sales facilitated through SWK Marketplace. The commission rate will be communicated to vendors upon onboarding and before any transaction is processed.</li>
-                    <li>SWK Ghana is not liable for any disputes between vendors and buyers.</li>
-                  </ol>
-                </div>
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" id="agree-terms" required checked={agreedToTerms} onChange={e => setAgreedToTerms(e.target.checked)}
-                    className="w-4 h-4 mt-0.5 accent-[#78C31E] flex-shrink-0" />
-                  <label htmlFor="agree-terms" className="text-xs text-gray-800 leading-relaxed">
-                    I have read and agree to the SWK Marketplace Vendor Terms & Conditions, and confirm that my product meets the sustainability criteria aligned with UN SDG 12.
-                  </label>
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button type="button" onClick={() => setVendorModal(false)} className="px-4 py-2 border rounded-lg text-gray-800 text-sm">Cancel</button>
-                  <button type="submit" disabled={vendorStatus === 'sending' || !agreedToTerms} className="btn-gradient flex-1 py-2.5 disabled:opacity-60 text-sm">
-                    {vendorStatus === 'sending' ? 'Submitting...' : 'Submit Product'}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
-    </main>
+      </section>
+    </div>
   )
 }
-
-export default Marketplace
