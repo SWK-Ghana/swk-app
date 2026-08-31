@@ -659,14 +659,14 @@ const Home = () => {
           <div className="space-y-4 xs:space-y-5 mb-8">
             {[
               {
-                day: '27', month: 'AUG', year: '2026',
+                day: '17', month: 'SEP', year: '2026',
                 tag: 'Webinar', tc: 'bg-green-100 text-green-700',
                 title: 'How to Pitch Your Agribusiness Ideas',
                 desc: 'A practical training webinar on structuring and pitching a compelling agribusiness idea — for investors, partners, and grant reviewers.',
                 location: 'Online (Google Meet)',
               },
               {
-                day: '22', month: 'SEP', year: '2026',
+                day: '7', month: 'NOV', year: '2026',
                 tag: 'Summit', tc: 'bg-blue-100 text-blue-700',
                 title: 'From The Ground Up — Agribusiness Summit',
                 desc: 'A flagship summit bringing together young agripreneurs, mentors, and partners to build the next generation of Ghanaian agribusiness.',
