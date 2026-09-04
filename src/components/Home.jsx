@@ -1,8 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
 import Seo from './Seo'
 import { trackConversion } from '../utils/analytics'
+
+// Lazy so the fluid simulation ships as its own chunk. It is only ever
+// requested on a pointer-capable desktop (see fluidAllowed below), so phones —
+// where the effect is inert anyway, having no hover — never download it.
+const FluidText = React.lazy(() => import('./FluidText'))
 
 // Cloudinary helpers
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -190,6 +195,36 @@ const Home = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterStatus, setNewsletterStatus] = useState('idle')
 
+  // Fluid headline gating.
+  //
+  // `fluidAllowed` — device qualifies: a wide viewport with a real hovering
+  //   pointer. The effect responds only to pointer movement, so on touch it
+  //   would burn CPU to render a static headline. Starts false, which is what
+  //   the prerenderer emits, so the static HTML keeps the plain <h1>.
+  // `fluidReady`   — a frame has actually been drawn. Only then is the <h1>
+  //   visually hidden, so the headline is never missing mid-load.
+  const [fluidAllowed, setFluidAllowed] = useState(false)
+  const [fluidReady, setFluidReady] = useState(false)
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return
+    const mq = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)')
+    const apply = () => {
+      setFluidAllowed(mq.matches)
+      if (!mq.matches) setFluidReady(false)
+    }
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [])
+
+  // 'unsupported' covers no WebGL, no float render targets, and
+  // prefers-reduced-motion — all handled inside FluidText.
+  const handleFluidStatus = useCallback((status) => {
+    if (status === 'ready') setFluidReady(true)
+    else if (status === 'unsupported') { setFluidAllowed(false); setFluidReady(false) }
+  }, [])
+
   const slides = useMemo(() => ([
     { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.', position: 'object-center' },
     { _path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', image: img('v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.', position: 'object-center' },
@@ -314,9 +349,37 @@ const Home = () => {
             <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
               Youth · Sustainability · Africa
             </span>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl">
+            {/* The fluid effect draws the headline into a WebGL canvas, which
+                crawlers and screen readers cannot read. So the real <h1> always
+                stays in the DOM: it is the visible headline until the canvas
+                reports a drawn frame, and only then becomes visually hidden.
+                If WebGL is missing or the visitor prefers reduced motion, the
+                canvas reports 'unsupported' and this simply stays visible. */}
+            <h1
+              className={
+                fluidReady
+                  ? 'sr-only'
+                  : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl'
+              }
+            >
               {slides[currentSlide].title}
             </h1>
+            {fluidAllowed && (
+              <div aria-hidden="true" className="w-full max-w-5xl h-[16rem] lg:h-[19rem] mb-6">
+                <Suspense fallback={null}>
+                  <FluidText
+                    text={slides[currentSlide].title}
+                    color="#FFFFFF"
+                    paletteColors={['#78C31E', '#A8E04A', '#1E963C', '#D4F0A0', '#2E7D32']}
+                    font={{ fontFamily: 'Ubuntu', fontWeight: 700, lineHeight: '1.05em', textAlign: 'center' }}
+                    minFontSize={40}
+                    maxFontSize={110}
+                    vwFontSize={0.085}
+                    onStatus={handleFluidStatus}
+                  />
+                </Suspense>
+              </div>
+            )}
             <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light leading-relaxed">
               {slides[currentSlide].subtitle}
             </p>
