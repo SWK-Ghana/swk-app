@@ -1150,6 +1150,94 @@
     }
 
     /* ═══ 7b. REGISTRATION FORM ═════════════════════════════════════════ */
+
+    /* The form lives in a modal. Jumping someone from the hero down past six
+       sections to reach it was a long, disorienting scroll; opening in place
+       keeps them where they were and lets them close back to the same spot.
+       <dialog> is used rather than a hand-rolled overlay because it brings
+       focus trapping, Esc-to-close and an inert background for free. */
+    .reg-modal {
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--cream-warm);
+      color: var(--ink);
+      width: min(880px, calc(100vw - 2rem));
+      max-width: none;
+      max-height: min(90vh, calc(100vh - 2rem));
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .75);
+    }
+
+    .reg-modal::backdrop {
+      background: rgba(6, 24, 9, .82);
+    }
+
+    .reg-modal__scroll {
+      max-height: min(90vh, calc(100vh - 2rem));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    /* Sits on the dialog, not inside the scroller, so it stays put. */
+    .reg-modal__close {
+      position: absolute;
+      top: .7rem;
+      right: .7rem;
+      z-index: 5;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(23, 112, 45, .25);
+      background: var(--white);
+      color: var(--green-text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+
+    .reg-modal__close:hover {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--green-deep);
+    }
+
+    .reg-modal__close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Inside the modal the section no longer needs full-page rhythm. */
+    .reg-modal .reg {
+      background: transparent;
+      padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    }
+
+    .reg-modal .reg__card {
+      box-shadow: none;
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    /* Full screen on phones — a centred card wastes space at this size. */
+    @media (max-width: 640px) {
+      .reg-modal {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      .reg-modal__scroll {
+        max-height: 100vh;
+      }
+    }
+
     .reg {
       background: var(--cream);
     }
@@ -1313,10 +1401,18 @@
       gap: .5rem;
     }
 
+    /* Flex rather than grid columns: `grid-auto-flow: column` with max-content
+       tracks can never wrap, so a three-option row like Female / Male / Prefer
+       not to say ran 16px past the right edge on a 375px screen. Flex keeps
+       them on one line where they fit and wraps them where they do not. */
     .choices--inline {
-      grid-auto-flow: column;
-      grid-auto-columns: max-content;
+      display: flex;
+      flex-wrap: wrap;
       gap: .75rem;
+    }
+
+    .choices--inline .choice {
+      flex: 0 1 auto;
     }
 
     .choice {
@@ -1723,6 +1819,11 @@
         stroke-linejoin="round">
         <path d="M5 12h14" />
         <path d="m12 5 7 7-7 7" />
+      </g>
+      <g id="i-close" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
       </g>
       <g id="i-mail" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
         stroke-linejoin="round">
@@ -2154,6 +2255,13 @@
          Posts JSON to a Google Apps Script web app, which appends a row to
          the summit registrations Sheet. Setup lives in
          docs/summit-registration.gs — paste ENDPOINT below once deployed. -->
+    <dialog class="reg-modal" id="reg-modal" aria-labelledby="reg-title">
+      <button class="reg-modal__close" type="button" data-reg-close aria-label="Close registration">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#i-close" />
+        </svg>
+      </button>
+      <div class="reg-modal__scroll">
     <section class="section reg" id="register-form" aria-labelledby="reg-title">
       <div class="shell">
         <div class="reg__head reveal">
@@ -2432,6 +2540,8 @@
         </div>
       </div>
     </section>
+      </div>
+    </dialog>
   </main>
 
   <!-- ═══════════════ 8. FOOTER ═════════════════════════════════════════ -->
@@ -2593,6 +2703,88 @@
         new IntersectionObserver(function (entries) {
           hero.classList.toggle('is-offscreen', !entries[0].isIntersecting);
         }, { threshold: 0 }).observe(hero);
+      }
+
+      // ── Registration modal ────────────────────────────────────────────
+      // Every "Register" control opens the form in place instead of scrolling
+      // the visitor down past the whole page to reach it.
+      var regModal = document.getElementById('reg-modal');
+      var canModal = !!(regModal && typeof regModal.showModal === 'function');
+
+      if (regModal && !canModal) {
+        // No <dialog> support: leave the form as a normal section on the page
+        // so the existing #register-form anchor links still work.
+        regModal.setAttribute('open', '');
+      }
+
+      function openReg() {
+        if (!canModal || regModal.open) return;
+
+        // The scroll-reveal observer never fires for these: a closed <dialog>
+        // has no layout, so they would open stuck at opacity 0. Reveal them
+        // outright — inside a modal there is nothing to scroll them into.
+        regModal.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.add('in');
+        });
+
+        regModal.showModal();
+        // showModal makes the background inert but does not stop it scrolling.
+        document.body.style.overflow = 'hidden';
+
+        // First real field — never the honeypot, which is tabindex="-1" and
+        // must stay untouched, and never a hidden step.
+        var first = null;
+        var candidates = regModal.querySelectorAll('input, select, textarea');
+        for (var i = 0; i < candidates.length; i++) {
+          var c = candidates[i];
+          if (c.tabIndex === -1 || c.closest('.hp') || c.type === 'hidden') continue;
+          if (!c.offsetParent) continue;
+          first = c;
+          break;
+        }
+        if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+      }
+
+      function closeReg() {
+        if (canModal && regModal.open) regModal.close();
+        document.body.style.overflow = '';
+      }
+
+      if (canModal) {
+        // Watch the open attribute rather than listening for 'close'. The
+        // close event proved unreliable here — it did not fire on close(),
+        // which left the page permanently scroll-locked behind the dismissed
+        // modal. The attribute always reflects reality, however it was closed:
+        // our button, Esc, or the backdrop.
+        if (typeof MutationObserver === 'function') {
+          new MutationObserver(function () {
+            document.body.style.overflow = regModal.open ? 'hidden' : '';
+          }).observe(regModal, { attributes: true, attributeFilter: ['open'] });
+        }
+
+        regModal.addEventListener('close', function () {
+          document.body.style.overflow = '';
+        });
+
+        // Click on the backdrop — the dialog element itself is the only thing
+        // behind the content, so a hit on it means outside the card.
+        regModal.addEventListener('click', function (e) {
+          if (e.target === regModal) closeReg();
+        });
+
+        document.querySelectorAll('[data-reg-close]').forEach(function (btn) {
+          btn.addEventListener('click', closeReg);
+        });
+
+        document.querySelectorAll('a[href="#register-form"], [data-register]').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            openReg();
+          });
+        });
+
+        // Deep links such as /summit#register-form should open it too.
+        if (window.location.hash === '#register-form') openReg();
       }
 
       // ── Current year in the footer ────────────────────────────────────
