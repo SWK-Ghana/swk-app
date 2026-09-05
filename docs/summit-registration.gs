@@ -6,20 +6,32 @@
  *
  * ─── SETUP (about 5 minutes, done once) ─────────────────────────────────────
  *
- *  1. Open the Sheet:
+ *  0. Sign in to Google as sustainabilitywithkoomson@gmail.com FIRST, and do
+ *     every step below while signed in as that account. Apps Script needs a
+ *     Google account; info@swkghana.org is free Zoho, so it cannot host this.
+ *     "Execute as: Me" in step 3 binds to whoever is signed in, so getting
+ *     this wrong ties the endpoint to the wrong person.
+ *
+ *  1. Open the Sheet (already shared with that account as an editor):
  *     https://docs.google.com/spreadsheets/d/1KvonhREA6cHcs2Roj2jd0mm49UWatykomSbJq6ObzzE/edit
+ *
+ *     Optional but recommended: have frankkoomson26@gmail.com transfer
+ *     ownership to sustainabilitywithkoomson@gmail.com, so registrant data
+ *     lives on the organisation account rather than a personal one.
+ *     Share → click the account → Transfer ownership.
  *
  *  2. Extensions → Apps Script. Delete whatever is in the editor and paste
  *     this entire file in. Save.
  *
  *  3. Deploy → New deployment → gear icon → Web app.
  *       Description:  Summit registration
- *       Execute as:   Me
+ *       Execute as:   Me                  <-- must read
+ *                                             sustainabilitywithkoomson@gmail.com
  *       Who has access: ANYONE            <-- must be "Anyone", not
  *                                             "Anyone with Google account",
  *                                             or the form gets a login page
  *     Deploy. Approve the permissions prompt (it is your own script writing
- *     to your own Sheet).
+ *     to a Sheet you can edit).
  *
  *  4. Copy the Web app URL. It looks like:
  *       https://script.google.com/macros/s/AKfycb..../exec
