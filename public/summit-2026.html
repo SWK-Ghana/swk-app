@@ -2336,10 +2336,18 @@
               <span class="reg__bar"><span id="reg-bar"></span></span>
             </div>
 
-            <!-- Honeypot -->
+            <!-- Honeypot. Deliberately NOT named "company", "organization" or
+                 anything else in the browsers' address-autofill vocabulary:
+                 Chrome ignores autocomplete="off" on address fields, so a
+                 field called "company" gets silently filled for anyone with an
+                 organisation saved in their profile. The endpoint treats a
+                 filled honeypot as a bot and discards the submission without
+                 error, so that autofill was quietly binning real registrations.
+                 collect() maps this to `company` on the way out, so the Apps
+                 Script side needs no change. -->
             <div class="hp" aria-hidden="true">
-              <label>Company (leave blank)
-                <input type="text" name="company" tabindex="-1" autocomplete="off" />
+              <label>Leave this field blank
+                <input type="text" name="swk_ref" tabindex="-1" autocomplete="off" />
               </label>
             </div>
 
@@ -3023,6 +3031,11 @@
           });
           // Checkbox groups must always arrive as an array for the sheet.
           if (data.gain && !Array.isArray(data.gain)) data.gain = [data.gain];
+          // Honeypot travels under the name the endpoint checks. Only a bot
+          // filling every field trips it; browser autofill no longer can,
+          // because nothing recognises "swk_ref" as an address field.
+          data.company = data.swk_ref || '';
+          delete data.swk_ref;
           data.source = window.location.href;
           return data;
         };
