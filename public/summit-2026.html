@@ -432,6 +432,57 @@
       padding: clamp(1rem, 2.5vw, 1.5rem) 0;
     }
 
+    /* Logos left, route back to the main site right. This page is reachable
+       from social links and shared URLs, so it needs its own visible way back
+       to swkghana.org — the logo alone is not a signpost most people read. */
+    .hero__bar .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+
+    .site-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      flex: none;
+      font-size: clamp(.7rem, .66rem + .2vw, .82rem);
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      padding: .6em 1em;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255, 255, 255, .38);
+      background: rgba(12, 46, 17, .4);
+      transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+    }
+
+    .site-link:hover {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--green-deep);
+      transform: translateY(-2px);
+    }
+
+    .site-link svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+    }
+
+    /* The domain is the clearer label, but it wraps awkwardly on narrow
+       phones, so shorten it there. */
+    .site-link__long { display: inline; }
+    .site-link__short { display: none; }
+
+    @media (max-width: 420px) {
+      .site-link__long { display: none; }
+      .site-link__short { display: inline; }
+    }
+
     .lockup {
       display: inline-flex;
       align-items: center;
@@ -1514,6 +1565,42 @@
       line-height: 1.6;
     }
 
+    /* The other way back, for anyone who has read to the end of the page
+       rather than looked at the header. */
+    .footer__cta {
+      display: flex;
+      justify-content: center;
+      padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+    }
+
+    .footer__back {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: .88rem;
+      font-weight: 800;
+      color: var(--lime);
+      text-decoration: none;
+      padding: .8rem 1.6rem;
+      border: 2px solid rgba(120, 195, 30, .5);
+      border-radius: 999px;
+      transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+    }
+
+    .footer__back:hover {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: var(--green-deep);
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+
+    .footer__back svg {
+      width: 17px;
+      height: 17px;
+      flex: none;
+    }
+
     .footer__bottom {
       padding-top: clamp(1.5rem, 3vw, 2rem);
       display: flex;
@@ -1686,6 +1773,14 @@
           <span class="lockup__rule" aria-hidden="true"></span>
           <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/h_96,q_auto,f_auto/v1788194384/TGLC_logo_l7cvup.webp"
             alt="The GracedLife Leadership Centre" width="48" height="48" />
+        </a>
+
+        <a class="site-link" href="https://www.swkghana.org">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-globe" />
+          </svg>
+          <span class="site-link__long">swkghana.org</span>
+          <span class="site-link__short">Website</span>
         </a>
       </div>
     </div>
@@ -2418,6 +2513,15 @@
             Instagram @swk.gh &middot; X @swk_gh &middot; YouTube @swkghana &middot; LinkedIn &middot; Facebook
           </p>
         </div>
+      </div>
+
+      <div class="footer__cta">
+        <a class="footer__back" href="https://www.swkghana.org">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-globe" />
+          </svg>
+          Back to SWK Ghana
+        </a>
       </div>
 
       <div class="footer__bottom">
