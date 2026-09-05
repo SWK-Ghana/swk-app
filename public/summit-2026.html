@@ -1098,6 +1098,316 @@
       color: rgba(18, 61, 22, .72);
     }
 
+    /* ═══ 7b. REGISTRATION FORM ═════════════════════════════════════════ */
+    .reg {
+      background: var(--cream);
+    }
+
+    .reg__head {
+      max-width: 44rem;
+      margin: 0 auto clamp(2rem, 5vw, 3rem);
+      text-align: center;
+    }
+
+    .reg__head .eyebrow {
+      justify-content: center;
+    }
+
+    .reg__card {
+      max-width: 46rem;
+      margin-inline: auto;
+      background: var(--white);
+      border: 1px solid rgba(23, 112, 45, .16);
+      border-radius: var(--radius);
+      padding: clamp(1.5rem, 4vw, 2.75rem);
+      box-shadow: 0 18px 50px -35px rgba(12, 46, 17, .5);
+    }
+
+    /* Progress */
+    .reg__progress {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: clamp(1.5rem, 3.5vw, 2rem);
+    }
+
+    .reg__bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(23, 112, 45, .14);
+      overflow: hidden;
+    }
+
+    .reg__bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--lime);
+      transition: width .4s var(--ease);
+    }
+
+    .reg__count {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      flex: none;
+    }
+
+    .reg__step {
+      display: none;
+    }
+
+    .reg__step.is-active {
+      display: block;
+    }
+
+    .reg__step h3 {
+      font-size: clamp(1.25rem, 1.1rem + .6vw, 1.6rem);
+      font-weight: 800;
+      color: var(--green-text);
+      margin-bottom: .4rem;
+    }
+
+    .reg__step > p {
+      color: var(--ink-soft);
+      font-size: .95rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field > label,
+    .field__legend {
+      display: block;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .45rem;
+    }
+
+    .field__hint {
+      display: block;
+      font-weight: 500;
+      font-size: .8rem;
+      color: var(--ink-soft);
+      margin-top: .15rem;
+    }
+
+    .req {
+      color: #B3261E;
+      margin-left: .15rem;
+    }
+
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="email"],
+    .field input[type="number"],
+    .field select,
+    .field textarea {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--white);
+      border: 1.5px solid rgba(23, 112, 45, .28);
+      border-radius: 10px;
+      padding: .8rem .9rem;
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+
+    .field textarea {
+      min-height: 6.5rem;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--lime);
+      box-shadow: 0 0 0 3px rgba(120, 195, 30, .25);
+    }
+
+    .field input[aria-invalid="true"],
+    .field select[aria-invalid="true"] {
+      border-color: #B3261E;
+    }
+
+    .field__error {
+      display: none;
+      margin-top: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #B3261E;
+    }
+
+    .field.has-error .field__error {
+      display: block;
+    }
+
+    fieldset.field {
+      border: 0;
+      padding: 0;
+      margin-inline: 0;
+    }
+
+    .choices {
+      display: grid;
+      gap: .5rem;
+    }
+
+    .choices--inline {
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: .75rem;
+    }
+
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      padding: .7rem .85rem;
+      border: 1.5px solid rgba(23, 112, 45, .22);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: .93rem;
+      line-height: 1.45;
+      transition: border-color .2s var(--ease), background-color .2s var(--ease);
+    }
+
+    .choice:hover {
+      border-color: var(--lime);
+      background: rgba(120, 195, 30, .06);
+    }
+
+    .choice input {
+      margin: .2rem 0 0;
+      accent-color: var(--lime);
+      flex: none;
+    }
+
+    .choice:has(input:checked) {
+      border-color: var(--lime);
+      background: rgba(120, 195, 30, .12);
+    }
+
+    .choice:has(input:focus-visible) {
+      outline: 3px solid var(--lime);
+      outline-offset: 2px;
+    }
+
+    /* Honeypot — hidden from people, visible to bots. Not display:none, which
+       some bots skip; off-screen and out of the tab order instead. */
+    .hp {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .reg__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: clamp(1.5rem, 3.5vw, 2rem);
+      padding-top: clamp(1.25rem, 3vw, 1.6rem);
+      border-top: 1px solid rgba(23, 112, 45, .14);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--green-text);
+      border: 1.5px solid rgba(23, 112, 45, .3);
+      padding: .85rem 1.6rem;
+      box-shadow: none;
+    }
+
+    .btn--ghost:hover {
+      background: rgba(120, 195, 30, .1);
+      border-color: var(--lime);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn[disabled] {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .reg__status {
+      margin-top: 1rem;
+      font-size: .92rem;
+      font-weight: 600;
+      min-height: 1.4em;
+    }
+
+    .reg__status.is-error {
+      color: #B3261E;
+    }
+
+    /* Success panel */
+    .reg__done {
+      display: none;
+      text-align: center;
+      padding: clamp(1rem, 3vw, 2rem) 0;
+    }
+
+    .reg__done.is-active {
+      display: block;
+    }
+
+    .reg__done .tick {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--lime);
+      color: var(--green-deep);
+    }
+
+    .reg__done .tick svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .reg__done h3 {
+      font-size: clamp(1.4rem, 1.2rem + .8vw, 1.9rem);
+      font-weight: 800;
+      color: var(--green-text);
+      margin-bottom: .6rem;
+    }
+
+    .reg__done p {
+      color: var(--ink-soft);
+      max-width: 34rem;
+      margin-inline: auto;
+    }
+
+    /* Shown only when no endpoint is configured yet. */
+    .reg__unconfigured {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1rem 1.15rem;
+      border-radius: 10px;
+      background: #FFF6E5;
+      border: 1.5px solid #E0A82E;
+      color: #6B4E12;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
     /* ═══ 8. FOOTER ═════════════════════════════════════════════════════ */
     .footer {
       background: var(--green-900);
@@ -1426,8 +1736,8 @@
             </ul>
 
             <div class="hero__cta reveal" style="--d:400ms">
-              <!-- PLACEHOLDER: swap href="#" for the live registration URL. -->
-              <a class="btn btn--lime btn--lg" href="#" data-register>
+              
+              <a class="btn btn--lime btn--lg" href="#register-form" data-register>
                 Register Now
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <use href="#i-arrow-right" />
@@ -1733,15 +2043,298 @@
           100 seats only
         </p>
         <div class="reveal" style="--d:200ms">
-          <!-- PLACEHOLDER: swap href="#" for the live registration URL. -->
-          <a class="btn btn--deep btn--lg" href="#" data-register>
+          
+          <a class="btn btn--deep btn--lg" href="#register-form" data-register>
             Register Now
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <use href="#i-arrow-right" />
             </svg>
           </a>
         </div>
-        <p class="register__note reveal" style="--d:260ms">Registration details coming soon.</p>
+        <p class="register__note reveal" style="--d:260ms">Takes about three minutes.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 7b. REGISTRATION FORM ═══════════════════════════
+         Posts JSON to a Google Apps Script web app, which appends a row to
+         the summit registrations Sheet. Setup lives in
+         docs/summit-registration.gs — paste ENDPOINT below once deployed. -->
+    <section class="section reg" id="register-form" aria-labelledby="reg-title">
+      <div class="shell">
+        <div class="reg__head reveal">
+          <p class="eyebrow">Registration</p>
+          <h2 class="section-title" id="reg-title" style="margin-inline:auto">Reserve your seat.</h2>
+          <p class="lede" style="margin-inline:auto">
+            Six short steps. Only a handful of fields are required &mdash; the rest help us shape the
+            programme around who is actually in the room.
+          </p>
+        </div>
+
+        <div class="reg__card reveal" style="--d:120ms">
+          <form id="reg-form" novalidate>
+            <div class="reg__progress" id="reg-progress">
+              <span class="reg__count"><span id="reg-step-num">1</span>&thinsp;/&thinsp;6</span>
+              <span class="reg__bar"><span id="reg-bar"></span></span>
+            </div>
+
+            <!-- Honeypot -->
+            <div class="hp" aria-hidden="true">
+              <label>Company (leave blank)
+                <input type="text" name="company" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+
+            <!-- ── Step 1 ── -->
+            <div class="reg__step is-active" data-step="1">
+              <h3>Personal information</h3>
+              <p>So we know who to expect and how to reach you.</p>
+
+              <div class="field">
+                <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-name" name="fullName" type="text" autocomplete="name" required />
+                <p class="field__error">Please enter your full name.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-age">Age <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-age" name="age" type="number" min="15" max="35" inputmode="numeric" required />
+                <p class="field__error">The summit is open to ages 15 to 35.</p>
+              </div>
+
+              <fieldset class="field">
+                <legend class="field__legend">Gender</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="gender" value="Female" /> Female</label>
+                  <label class="choice"><input type="radio" name="gender" value="Male" /> Male</label>
+                  <label class="choice"><input type="radio" name="gender" value="Prefer not to say" /> Prefer not to say</label>
+                </div>
+              </fieldset>
+
+              <div class="field">
+                <label for="f-phone">Phone number <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 024 123 4567" required />
+                <p class="field__error">Please enter a phone number we can reach you on.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-email">Email address <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-email" name="email" type="email" autocomplete="email" required />
+                <p class="field__error">Please enter a valid email address.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-location">Region / city of residence <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-location" name="location" type="text" placeholder="e.g. Accra, Greater Accra" required />
+                <p class="field__error">Please tell us where you are based.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-education">Highest level of education</label>
+                <select id="f-education" name="education">
+                  <option value="">Select&hellip;</option>
+                  <option>Junior High School</option>
+                  <option>Senior High School</option>
+                  <option>Technical / Vocational</option>
+                  <option>Diploma / HND</option>
+                  <option>Bachelor's degree</option>
+                  <option>Postgraduate</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ── Step 2 ── -->
+            <div class="reg__step" data-step="2">
+              <h3>Background &amp; current status</h3>
+              <p>Where you are right now, so sessions land at the right level.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">Current status <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="status" value="Student" required /> Student</label>
+                  <label class="choice"><input type="radio" name="status" value="Unemployed" /> Unemployed</label>
+                  <label class="choice"><input type="radio" name="status" value="Employed" /> Employed</label>
+                  <label class="choice"><input type="radio" name="status" value="Self-employed" /> Self-employed</label>
+                  <label class="choice"><input type="radio" name="status" value="Running a business" /> Running a business</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <div class="field" id="wrap-study" hidden>
+                <label for="f-study">If a student, what are you studying?</label>
+                <input id="f-study" name="study" type="text" />
+              </div>
+
+              <fieldset class="field">
+                <legend class="field__legend">Are you currently involved in agriculture or agribusiness?</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="inAgri" value="Yes" /> Yes</label>
+                  <label class="choice"><input type="radio" name="inAgri" value="No" /> No</label>
+                </div>
+              </fieldset>
+
+              <div class="field" id="wrap-agri" hidden>
+                <label for="f-agri">Briefly describe your involvement
+                  <span class="field__hint">Crop farming, livestock, agro-processing, agri-tech, trading, and so on.</span>
+                </label>
+                <textarea id="f-agri" name="agriDetails" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- ── Step 3 ── -->
+            <div class="reg__step" data-step="3">
+              <h3>Area of interest</h3>
+              <p>Which part of agribusiness pulls at you most?</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">Primary interest <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="interest" value="Crop production" required /> Crop production</label>
+                  <label class="choice"><input type="radio" name="interest" value="Livestock / poultry" /> Livestock / poultry</label>
+                  <label class="choice"><input type="radio" name="interest" value="Agro-processing &amp; value addition" /> Agro-processing &amp; value addition</label>
+                  <label class="choice"><input type="radio" name="interest" value="Agri-tech &amp; innovation" /> Agri-tech &amp; innovation</label>
+                  <label class="choice"><input type="radio" name="interest" value="Agribusiness finance / investment" /> Agribusiness finance / investment</label>
+                  <label class="choice"><input type="radio" name="interest" value="Marketing / sales / export" /> Marketing / sales / export</label>
+                  <label class="choice"><input type="radio" name="interest" value="Other" /> Other</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+            </div>
+
+            <!-- ── Step 4 ── -->
+            <div class="reg__step" data-step="4">
+              <h3>Motivation &amp; goals</h3>
+              <p>What you want out of the morning.</p>
+
+              <div class="field">
+                <label for="f-why">Why do you want to attend this summit? <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="f-why" name="why" rows="4" required></textarea>
+                <p class="field__error">A sentence or two is plenty.</p>
+              </div>
+
+              <fieldset class="field">
+                <legend class="field__legend">What do you hope to gain?
+                  <span class="field__hint">Choose as many as apply.</span>
+                </legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="gain" value="Business ideas" /> Business ideas</label>
+                  <label class="choice"><input type="checkbox" name="gain" value="Funding / investor connections" /> Funding / investor connections</label>
+                  <label class="choice"><input type="checkbox" name="gain" value="Networking" /> Networking</label>
+                  <label class="choice"><input type="checkbox" name="gain" value="Mentorship" /> Mentorship</label>
+                  <label class="choice"><input type="checkbox" name="gain" value="Practical skills" /> Practical skills</label>
+                  <label class="choice"><input type="checkbox" name="gain" value="Market linkages" /> Market linkages</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Do you have an agribusiness idea or venture you would like feedback on?</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="hasVenture" value="Yes" /> Yes</label>
+                  <label class="choice"><input type="radio" name="hasVenture" value="No" /> No</label>
+                </div>
+              </fieldset>
+
+              <div class="field" id="wrap-venture" hidden>
+                <label for="f-venture">Tell us about it briefly</label>
+                <textarea id="f-venture" name="ventureDetails" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- ── Step 5 ── -->
+            <div class="reg__step" data-step="5">
+              <h3>Logistics</h3>
+              <p>So the day works for you.</p>
+
+              <div class="field">
+                <label for="f-needs">Any dietary restrictions or accessibility needs?
+                  <span class="field__hint">Leave blank if none.</span>
+                </label>
+                <textarea id="f-needs" name="needs" rows="3"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="f-heard">How did you hear about the summit?</label>
+                <select id="f-heard" name="heard">
+                  <option value="">Select&hellip;</option>
+                  <option>Social media</option>
+                  <option>Friend / referral</option>
+                  <option>SWK newsletter</option>
+                  <option>Radio / TV</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ── Step 6 ── -->
+            <div class="reg__step" data-step="6">
+              <h3>Consent &amp; follow-up</h3>
+              <p>Your choices here are entirely up to you, and they do not affect your place.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">May we contact you about future SWK programmes?</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="consentContact" value="Yes" /> Yes</label>
+                  <label class="choice"><input type="radio" name="consentContact" value="No" /> No</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">
+                  May we use photos or video of you for promotion?
+                  <span class="req" aria-hidden="true">*</span>
+                  <span class="field__hint">We ask everyone explicitly, either answer is fine.</span>
+                </legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="consentPhotos" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="consentPhotos" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please let us know either way.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Would you like to join the SWK community newsletter?</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="consentNewsletter" value="Yes" /> Yes</label>
+                  <label class="choice"><input type="radio" name="consentNewsletter" value="No" /> No</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="reg__nav">
+              <button type="button" class="btn btn--ghost" id="reg-back" hidden>&larr; Back</button>
+              <span style="flex:1"></span>
+              <button type="button" class="btn btn--lime" id="reg-next">
+                Continue
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </button>
+              <button type="submit" class="btn btn--lime" id="reg-submit" hidden>
+                Submit registration
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </button>
+            </div>
+
+            <p class="reg__status" id="reg-status" role="status" aria-live="polite"></p>
+            <p class="reg__unconfigured" id="reg-unconfigured">
+              Registration is not live yet &mdash; the form is built but not yet connected.
+              In the meantime, email <a href="mailto:info@swkghana.org">info@swkghana.org</a> to reserve a seat.
+            </p>
+          </form>
+
+          <div class="reg__done" id="reg-done">
+            <div class="tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m20 6-11 11-5-5" />
+              </svg>
+            </div>
+            <h3>You&rsquo;re registered.</h3>
+            <p>
+              Thank you &mdash; your seat is reserved. We will email you closer to the date with
+              directions and the full running order. If anything changes, write to
+              <a href="mailto:info@swkghana.org" style="color:var(--green-text);font-weight:700">info@swkghana.org</a>.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -1902,14 +2495,197 @@
       var year = document.getElementById('year');
       if (year) year.textContent = new Date().getFullYear();
 
-      // ── Placeholder registration links ────────────────────────────────
-      // Until a real registration URL exists, stop the buttons jumping to the
-      // top of the page. Once href is replaced this guard is a no-op.
-      document.querySelectorAll('[data-register]').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          if (btn.getAttribute('href') === '#') e.preventDefault();
+      // ══ Registration form ═══════════════════════════════════════════════
+      //
+      // Paste the Apps Script Web app URL here once deployed. Setup steps are
+      // in docs/summit-registration.gs. While this is empty the form still
+      // works as a walkthrough but refuses to submit, and says so plainly
+      // rather than pretending a registration was recorded.
+      var ENDPOINT = '';
+
+      var form = document.getElementById('reg-form');
+      if (form) {
+        var TOTAL = 6;
+        var current = 1;
+        var steps = form.querySelectorAll('.reg__step');
+        var backBtn = document.getElementById('reg-back');
+        var nextBtn = document.getElementById('reg-next');
+        var submitBtn = document.getElementById('reg-submit');
+        var statusEl = document.getElementById('reg-status');
+        var bar = document.getElementById('reg-bar');
+        var stepNum = document.getElementById('reg-step-num');
+        var doneEl = document.getElementById('reg-done');
+        var unconfiguredEl = document.getElementById('reg-unconfigured');
+
+        var showStep = function (n) {
+          current = Math.min(TOTAL, Math.max(1, n));
+          steps.forEach(function (s) {
+            s.classList.toggle('is-active', Number(s.dataset.step) === current);
+          });
+          stepNum.textContent = current;
+          bar.style.width = (current / TOTAL) * 100 + '%';
+          backBtn.hidden = current === 1;
+          nextBtn.hidden = current === TOTAL;
+          submitBtn.hidden = current !== TOTAL;
+          statusEl.textContent = '';
+          statusEl.classList.remove('is-error');
+        };
+
+        // Mark the field (or fieldset) wrapping a control as errored.
+        var wrapOf = function (el) { return el.closest('.field'); };
+
+        var clearError = function (el) {
+          var w = wrapOf(el);
+          if (w) w.classList.remove('has-error');
+          el.removeAttribute('aria-invalid');
+        };
+
+        var markError = function (el) {
+          var w = wrapOf(el);
+          if (w) w.classList.add('has-error');
+          el.setAttribute('aria-invalid', 'true');
+        };
+
+        // Validates only the visible step. Radio groups are checked by name so
+        // a required radio counts as answered when ANY option is selected.
+        var validateStep = function () {
+          var step = form.querySelector('.reg__step[data-step="' + current + '"]');
+          var controls = step.querySelectorAll('input, select, textarea');
+          var seenRadio = {};
+          var firstBad = null;
+
+          controls.forEach(function (el) {
+            if (!el.required || el.disabled) return;
+
+            if (el.type === 'radio') {
+              if (seenRadio[el.name]) return;
+              seenRadio[el.name] = true;
+              var group = form.querySelectorAll('input[name="' + el.name + '"]');
+              var picked = Array.prototype.some.call(group, function (r) { return r.checked; });
+              if (!picked) { markError(el); if (!firstBad) firstBad = el; }
+              else clearError(el);
+              return;
+            }
+
+            var value = String(el.value || '').trim();
+            var ok = value !== '';
+            if (ok && el.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+            if (ok && el.type === 'tel') ok = value.replace(/\D/g, '').length >= 9;
+            if (ok && el.type === 'number') {
+              var n = Number(value);
+              ok = Number.isFinite(n) &&
+                (!el.min || n >= Number(el.min)) &&
+                (!el.max || n <= Number(el.max));
+            }
+            if (!ok) { markError(el); if (!firstBad) firstBad = el; }
+            else clearError(el);
+          });
+
+          if (firstBad) {
+            statusEl.textContent = 'Please check the highlighted field' +
+              (form.querySelectorAll('.has-error').length > 1 ? 's' : '') + '.';
+            statusEl.classList.add('is-error');
+            firstBad.focus({ preventScroll: false });
+            return false;
+          }
+          return true;
+        };
+
+        // Clear a field's error as soon as the visitor starts fixing it.
+        form.addEventListener('input', function (e) { clearError(e.target); });
+        form.addEventListener('change', function (e) { clearError(e.target); });
+
+        nextBtn.addEventListener('click', function () {
+          if (!validateStep()) return;
+          showStep(current + 1);
+          form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
         });
-      });
+
+        backBtn.addEventListener('click', function () {
+          showStep(current - 1);
+          form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
+        });
+
+        // Enter advances rather than submitting from step 1.
+        form.addEventListener('keydown', function (e) {
+          if (e.key !== 'Enter') return;
+          if (e.target.tagName === 'TEXTAREA') return;
+          if (current < TOTAL) { e.preventDefault(); nextBtn.click(); }
+        });
+
+        // Reveal the follow-up questions only when they apply.
+        var toggleFollowUp = function (name, value, wrapId) {
+          form.querySelectorAll('input[name="' + name + '"]').forEach(function (r) {
+            r.addEventListener('change', function () {
+              document.getElementById(wrapId).hidden = r.value !== value || !r.checked;
+            });
+          });
+        };
+        toggleFollowUp('inAgri', 'Yes', 'wrap-agri');
+        toggleFollowUp('hasVenture', 'Yes', 'wrap-venture');
+        form.querySelectorAll('input[name="status"]').forEach(function (r) {
+          r.addEventListener('change', function () {
+            document.getElementById('wrap-study').hidden = !(r.checked && r.value === 'Student');
+          });
+        });
+
+        var collect = function () {
+          var data = {};
+          var fd = new FormData(form);
+          fd.forEach(function (value, key) {
+            if (data[key] === undefined) data[key] = value;
+            else if (Array.isArray(data[key])) data[key].push(value);
+            else data[key] = [data[key], value];
+          });
+          // Checkbox groups must always arrive as an array for the sheet.
+          if (data.gain && !Array.isArray(data.gain)) data.gain = [data.gain];
+          data.source = window.location.href;
+          return data;
+        };
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!validateStep()) return;
+
+          if (!ENDPOINT) {
+            unconfiguredEl.style.display = 'block';
+            statusEl.textContent = '';
+            unconfiguredEl.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+            return;
+          }
+
+          submitBtn.disabled = true;
+          backBtn.disabled = true;
+          statusEl.classList.remove('is-error');
+          statusEl.textContent = 'Sending your registration…';
+
+          // text/plain keeps this a "simple" CORS request, so the browser
+          // sends no preflight — Apps Script cannot answer an OPTIONS probe.
+          fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(collect()),
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+              if (!res || res.ok !== true) throw new Error((res && res.error) || 'rejected');
+              form.style.display = 'none';
+              doneEl.classList.add('is-active');
+              doneEl.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+            })
+            .catch(function (err) {
+              submitBtn.disabled = false;
+              backBtn.disabled = false;
+              statusEl.classList.add('is-error');
+              statusEl.innerHTML =
+                'Sorry, that did not go through. Please try again, or email ' +
+                '<a href="mailto:info@swkghana.org" style="color:inherit">info@swkghana.org</a>.';
+              console.warn('Registration submit failed:', err);
+            });
+        });
+
+        showStep(1);
+      }
     })();
   </script>
 </body>
