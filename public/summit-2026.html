@@ -167,6 +167,14 @@
       display: block;
     }
 
+    /* The browser's own [hidden] rule is a UA style, so ANY author rule that
+       sets display wins over it — .btn { display: inline-flex } was quietly
+       overriding hidden, leaving Back and "Submit registration" on screen at
+       every step. Author-level and !important so the attribute always holds. */
+    [hidden] {
+      display: none !important;
+    }
+
     a {
       color: inherit;
     }
@@ -1486,6 +1494,34 @@
       border-top: 1px solid rgba(23, 112, 45, .14);
     }
 
+    /* On a phone the modal is full screen and a step can run past the fold, so
+       Continue would sit below it and have to be hunted for. Pinning the nav to
+       the bottom keeps the next action in reach at all times. The safe-area
+       inset keeps it clear of the iPhone home indicator. */
+    @media (max-width: 640px) {
+      .reg__nav {
+        position: sticky;
+        bottom: 0;
+        z-index: 3;
+        margin-inline: calc(var(--gutter) * -1);
+        padding: .9rem var(--gutter) max(.9rem, env(safe-area-inset-bottom));
+        margin-top: 1.25rem;
+        background: var(--cream-warm);
+        box-shadow: 0 -10px 22px -14px rgba(0, 0, 0, .45);
+      }
+
+      /* Share the row evenly rather than leaving a stranded gap. */
+      .reg__nav > span {
+        display: none;
+      }
+
+      .reg__nav .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding-inline: 1rem;
+      }
+    }
+
     .btn--ghost {
       background: transparent;
       color: var(--green-text);
@@ -1556,6 +1592,10 @@
       color: var(--ink-soft);
       max-width: 34rem;
       margin-inline: auto;
+    }
+
+    .reg__done .btn {
+      margin-top: clamp(1.5rem, 3.5vw, 2rem);
     }
 
     /* Shown only when no endpoint is configured yet. */
@@ -2552,6 +2592,9 @@
               directions and the full running order. If anything changes, write to
               <a href="mailto:info@swkghana.org" style="color:var(--green-text);font-weight:700">info@swkghana.org</a>.
             </p>
+            <button type="button" class="btn btn--lime btn--lg" id="reg-done-btn">
+              Done
+            </button>
           </div>
         </div>
       </div>
@@ -2907,15 +2950,28 @@
         form.addEventListener('input', function (e) { clearError(e.target); });
         form.addEventListener('change', function (e) { clearError(e.target); });
 
+        // Inside the modal the scrolling element is the dialog's own container,
+        // not the page, so scroll that. Landing mid-step after pressing
+        // Continue is disorienting, especially on a phone.
+        var toFormTop = function () {
+          var scroller = form.closest('.reg-modal__scroll');
+          if (scroller && scroller.scrollHeight > scroller.clientHeight) {
+            try { scroller.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }
+            catch (e) { scroller.scrollTop = 0; }
+            return;
+          }
+          form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
+        };
+
         nextBtn.addEventListener('click', function () {
           if (!validateStep()) return;
           showStep(current + 1);
-          form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
+          toFormTop();
         });
 
         backBtn.addEventListener('click', function () {
           showStep(current - 1);
-          form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
+          toFormTop();
         });
 
         // Enter advances rather than submitting from step 1.
@@ -2924,6 +2980,22 @@
           if (e.target.tagName === 'TEXTAREA') return;
           if (current < TOTAL) { e.preventDefault(); nextBtn.click(); }
         });
+
+        // "Done" on the success panel. Closes the modal where there is one;
+        // on the no-dialog fallback the form is a normal page section, so it
+        // returns the visitor to the top of the page instead.
+        var doneBtnEl = document.getElementById('reg-done-btn');
+        if (doneBtnEl) {
+          doneBtnEl.addEventListener('click', function () {
+            var dlg = document.getElementById('reg-modal');
+            if (dlg && typeof dlg.close === 'function' && dlg.open) {
+              dlg.close();
+              document.body.style.overflow = '';
+            } else {
+              window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+            }
+          });
+        }
 
         // Reveal the follow-up questions only when they apply.
         var toggleFollowUp = function (name, value, wrapId) {
@@ -2983,7 +3055,11 @@
               if (!res || res.ok !== true) throw new Error((res && res.error) || 'rejected');
               form.style.display = 'none';
               doneEl.classList.add('is-active');
-              doneEl.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+              toFormTop();
+              var doneBtn = document.getElementById('reg-done-btn');
+              if (doneBtn) {
+                try { doneBtn.focus({ preventScroll: true }); } catch (e) { doneBtn.focus(); }
+              }
             })
             .catch(function (err) {
               submitBtn.disabled = false;
