@@ -729,7 +729,7 @@ const Home = () => {
                 Agribusiness Summit 2026
               </h2>
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-5">
-                Our first in-person flagship event: a free, half-day summit for young people aged 15 to 35.
+                Our first in-person flagship event: a free, half-day summit for young people in Ghana.
                 One morning, four phases — a keynote, a rapid-fire panel of working agribusiness voices,
                 a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
               </p>

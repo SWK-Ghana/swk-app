@@ -312,7 +312,7 @@ const OurWork = () => {
               </h2>
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
                 Our first in-person flagship event, growing out of a webinar series that has reached 300+
-                young people across 9+ countries. A free, half-day summit for ages 15 to 35: a keynote, a
+                young people across 9+ countries. A free, half-day summit: a keynote, a
                 rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
               </p>
               <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">

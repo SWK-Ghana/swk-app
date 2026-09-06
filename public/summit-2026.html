@@ -78,7 +78,6 @@
     },
     "isAccessibleForFree": true,
     "maximumAttendeeCapacity": 100,
-    "typicalAgeRange": "15-35",
     "inLanguage": "en"
   }
   </script>
@@ -1983,7 +1982,7 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <use href="#i-users" />
                 </svg>
-                Ages 15&ndash;35
+                Open to all
               </li>
             </ul>
 
@@ -2039,7 +2038,7 @@
           <div class="about__copy reveal" style="--d:120ms">
             <p>
               The <strong>SWK Ghana Agribusiness Summit 2026</strong> is a free, half-day in-person activation for
-              young people aged 15 to 35 who are curious about agribusiness, already building in it, or looking for
+              young people who are curious about agribusiness, already building in it, or looking for
               the push that turns an idea into a plan. One morning, four phases, and a room full of people going
               the same way.
             </p>
@@ -2364,8 +2363,11 @@
 
               <div class="field">
                 <label for="f-age">Age <span class="req" aria-hidden="true">*</span></label>
-                <input id="f-age" name="age" type="number" min="15" max="35" inputmode="numeric" required />
-                <p class="field__error">The summit is open to ages 15 to 35.</p>
+                <!-- Wide bounds catch a typo without turning anyone away. The
+                     summit no longer advertises an age range, so the form must
+                     not enforce one silently. -->
+                <input id="f-age" name="age" type="number" min="10" max="120" inputmode="numeric" required />
+                <p class="field__error">Please enter your age.</p>
               </div>
 
               <fieldset class="field">
