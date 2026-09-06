@@ -1010,6 +1010,262 @@
       color: rgba(255, 255, 255, .5);
     }
 
+    /* ═══ 10. REGISTRATION FORM ═════════════════════════════════════════
+       Nine questions, so this is a single scroll rather than the summit's
+       six-step wizard — a progress bar on a short form is just friction. */
+    .reg-modal {
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      width: min(700px, calc(100vw - 2rem));
+      max-width: none;
+      max-height: min(90vh, calc(100vh - 2rem));
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .6);
+    }
+
+    .reg-modal::backdrop { background: rgba(9, 34, 16, .78); }
+
+    .reg-modal__scroll {
+      max-height: min(90vh, calc(100vh - 2rem));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    .reg-modal__close {
+      position: absolute;
+      top: .7rem; right: .7rem;
+      z-index: 5;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+      color: var(--g-700);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+
+    .reg-modal__close:hover {
+      background: var(--g-600);
+      border-color: var(--g-600);
+      color: #fff;
+    }
+
+    .reg-modal__close svg { width: 20px; height: 20px; }
+
+    @media (max-width: 640px) {
+      .reg-modal {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      .reg-modal__scroll { max-height: 100vh; }
+    }
+
+    .reg__head { margin-bottom: clamp(1.25rem, 3vw, 1.75rem); padding-right: 2.5rem; }
+
+    .reg__head h2 {
+      font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.1rem);
+      color: var(--g-700);
+    }
+
+    .reg__head p {
+      margin-top: .7rem;
+      color: var(--ink-soft);
+      font-size: .98rem;
+    }
+
+    .reg__meta {
+      margin-top: 1rem;
+      padding: .85rem 1.05rem;
+      background: var(--paper-2);
+      border-left: 3px solid var(--g-400);
+      border-radius: 8px;
+      font-size: .92rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .reg__meta strong { color: var(--g-700); }
+
+    .fields { display: grid; gap: clamp(1.1rem, 2.5vw, 1.4rem); }
+
+    /* Direct child only. ".field label" also matches the .choice labels nested
+       inside a fieldset, and at (0,1,1) it outranks ".choice" at (0,1,0) —
+       which silently stripped their display:flex and padding, collapsing the
+       radio pills to 31px-tall rows. */
+    .field > label,
+    .field legend {
+      display: block;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--ink);
+      margin-bottom: .45rem;
+      padding: 0;
+    }
+
+    .field .req { color: #C42B2B; }
+
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="email"],
+    .field select {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: .8rem .9rem;
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--g-500);
+      box-shadow: 0 0 0 3px rgba(69, 179, 84, .18);
+    }
+
+    .field fieldset { border: 0; margin: 0; padding: 0; }
+
+    .choices { display: grid; gap: .5rem; }
+
+    .choices--inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: .7rem .9rem;
+      cursor: pointer;
+      font-size: .96rem;
+      transition: border-color .2s var(--ease), background-color .2s var(--ease);
+    }
+
+    .choice:hover { border-color: var(--g-500); background: var(--paper-2); }
+    .choice input { accent-color: var(--g-600); width: 17px; height: 17px; flex: none; }
+
+    .choice--other { flex: 1 1 12rem; }
+
+    .other-input { margin-top: .5rem; }
+
+    .field.has-error input,
+    .field.has-error select { border-color: #C42B2B; }
+
+    .field__error {
+      display: none;
+      margin-top: .4rem;
+      font-size: .86rem;
+      color: #C42B2B;
+      font-weight: 600;
+    }
+
+    .field.has-error .field__error { display: block; }
+
+    /* Honeypot, parked off-canvas. */
+    .hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .reg__actions {
+      margin-top: clamp(1.4rem, 3vw, 1.9rem);
+      padding-top: clamp(1.1rem, 2.5vw, 1.5rem);
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reg__actions .btn { flex: 1 1 auto; justify-content: center; }
+
+    .reg__status {
+      margin-top: .9rem;
+      font-size: .92rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .reg__status.is-error { color: #C42B2B; }
+
+    .reg__unconfigured {
+      display: none;
+      margin-top: 1rem;
+      padding: .9rem 1.1rem;
+      border-radius: 10px;
+      background: #FFF7E3;
+      border: 1px solid #F0D8A0;
+      font-size: .92rem;
+      color: #6B5312;
+    }
+
+    .reg__done { display: none; text-align: center; padding: clamp(.5rem, 2vw, 1rem) 0; }
+    .reg__done.is-active { display: block; }
+
+    .reg__done .tick {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--g-600);
+      color: #fff;
+    }
+
+    .reg__done .tick svg { width: 32px; height: 32px; }
+
+    .reg__done h3 {
+      font-size: clamp(1.4rem, 1.2rem + .8vw, 1.9rem);
+      color: var(--g-700);
+      margin-bottom: .6rem;
+    }
+
+    .reg__done p { color: var(--ink-soft); max-width: 34rem; margin-inline: auto; }
+
+    /* The WhatsApp invite that section 2 of the Google Form used to serve. */
+    .wa-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: clamp(1.35rem, 3vw, 1.75rem);
+      background: #25D366;
+      color: #08331A;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 1rem 1.9rem;
+      border-radius: 999px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      box-shadow: 0 10px 26px -12px rgba(37, 211, 102, .9);
+    }
+
+    .wa-cta:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -14px rgba(37, 211, 102, 1); }
+    .wa-cta svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .reg__done .btn { margin-top: 1rem; }
+
     /* ── Scroll reveal ──────────────────────────────────────────────────── */
     .js .reveal {
       opacity: 0;
@@ -1085,6 +1341,13 @@
         <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
         <path d="M13 5v14" />
       </g>
+      <g id="i-close" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </g>
+      <path id="i-whatsapp"
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
       <path id="i-linkedin"
         d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
       <path id="i-instagram"
@@ -1491,9 +1754,168 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
           </a>
         </div>
-        <p class="register__note reveal" style="--d:260ms">Registration details coming soon.</p>
+        <p class="register__note reveal" style="--d:260ms">Takes about a minute.</p>
       </div>
     </section>
+
+    <!-- ═══════════════ 10. REGISTRATION FORM ═══════════════════════════
+         Deployment instructions live in docs/pitch-registration.gs — paste the
+         resulting /exec URL into ENDPOINT below. Separate script and Sheet
+         from the summit. -->
+    <dialog class="reg-modal" id="reg-modal" aria-labelledby="reg-title">
+      <button class="reg-modal__close" type="button" data-reg-close aria-label="Close registration">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+
+      <div class="reg-modal__scroll">
+        <div class="reg__head">
+          <h2 id="reg-title">Reserve your spot</h2>
+          <p>Free and open to all. We will send the Jitsi link and the pitch template by email.</p>
+          <p class="reg__meta">
+            <strong>Elevator Pitch Workshop</strong><br />
+            Thursday, 17 September 2026 &middot; 7:00 PM GMT &middot; 90 minutes<br />
+            Online on Jitsi
+          </p>
+        </div>
+
+        <form id="reg-form" novalidate>
+          <div class="fields">
+            <div class="field">
+              <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required />
+              <p class="field__error">Please enter your name.</p>
+            </div>
+
+            <div class="field">
+              <label for="f-email">Email address <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required />
+              <p class="field__error">Please enter a valid email address.</p>
+            </div>
+
+            <div class="field">
+              <label for="f-whatsapp">WhatsApp number <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-whatsapp" name="whatsapp" type="tel" autocomplete="tel"
+                placeholder="e.g. 024 123 4567" required />
+              <p class="field__error">Please enter your WhatsApp number.</p>
+            </div>
+
+            <div class="field">
+              <label for="f-country">Country <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-country" name="country" type="text" autocomplete="country-name"
+                placeholder="e.g. Ghana" required />
+              <p class="field__error">Please enter your country.</p>
+            </div>
+
+            <div class="field">
+              <fieldset>
+                <legend>Age group <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="ageGroup" value="15 to 25" required /> 15 to 25</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="26 to 35" required /> 26 to 35</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="36 and above" required /> 36 and above</label>
+                </div>
+              </fieldset>
+              <p class="field__error">Please choose your age group.</p>
+            </div>
+
+            <div class="field">
+              <fieldset>
+                <legend>Gender</legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="gender" value="Male" /> Male</label>
+                  <label class="choice"><input type="radio" name="gender" value="Female" /> Female</label>
+                  <label class="choice"><input type="radio" name="gender" value="Prefer not to say" /> Prefer not to say</label>
+                  <label class="choice choice--other"><input type="radio" name="gender" value="Other" data-other="gender-other" /> Other</label>
+                </div>
+                <input class="other-input" id="gender-other" name="genderOther" type="text"
+                  placeholder="Please specify" hidden />
+              </fieldset>
+            </div>
+
+            <div class="field">
+              <label for="f-occupation">Current occupation <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-occupation" name="occupation" type="text" autocomplete="organization-title"
+                placeholder="e.g. Founder, student, agronomist" required />
+              <p class="field__error">Please tell us your current occupation.</p>
+            </div>
+
+            <div class="field">
+              <fieldset>
+                <legend>How did you hear about this webinar? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="heard" value="WhatsApp" required /> WhatsApp</label>
+                  <label class="choice"><input type="radio" name="heard" value="Instagram" required /> Instagram</label>
+                  <label class="choice"><input type="radio" name="heard" value="LinkedIn" required /> LinkedIn</label>
+                  <label class="choice"><input type="radio" name="heard" value="X (Twitter)" required /> X (Twitter)</label>
+                  <label class="choice"><input type="radio" name="heard" value="Facebook" required /> Facebook</label>
+                  <label class="choice"><input type="radio" name="heard" value="Referred by a friend" required /> Referred by a friend</label>
+                  <label class="choice"><input type="radio" name="heard" value="Other" data-other="heard-other" required /> Other</label>
+                </div>
+                <input class="other-input" id="heard-other" name="heardOther" type="text"
+                  placeholder="Please specify" hidden />
+              </fieldset>
+              <p class="field__error">Please let us know how you heard about it.</p>
+            </div>
+
+            <div class="field">
+              <fieldset>
+                <legend>
+                  Would you like to be added to the SWK Ghana WhatsApp Community for updates and networking?
+                  <span class="req" aria-hidden="true">*</span>
+                </legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="joinCommunity" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="joinCommunity" value="No" required /> No</label>
+                </div>
+              </fieldset>
+              <p class="field__error">Please choose Yes or No.</p>
+            </div>
+          </div>
+
+          <!-- Honeypot. Deliberately NOT named "company" or "organization":
+               browsers autofill those even with autocomplete="off", and the
+               endpoint reads a filled honeypot as a bot, which would bin real
+               registrations silently. collect() maps this to `company`. -->
+          <div class="hp" aria-hidden="true">
+            <label>Leave this field blank
+              <input type="text" name="swk_ref" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="reg__actions">
+            <button type="submit" class="btn btn--green" id="reg-submit">
+              Complete registration
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </button>
+          </div>
+
+          <p class="reg__status" id="reg-status" role="status" aria-live="polite"></p>
+          <p class="reg__unconfigured" id="reg-unconfigured">
+            Registration is not live yet &mdash; the form is built but not yet connected.
+            In the meantime, email <a href="mailto:info@swkghana.org">info@swkghana.org</a> to reserve a spot.
+          </p>
+        </form>
+
+        <div class="reg__done" id="reg-done">
+          <div class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>
+          </div>
+          <h3>You&rsquo;re registered.</h3>
+          <p>
+            Thank you. We will email the Jitsi link and your pitch preparation template before the session.
+            If anything changes, write to
+            <a href="mailto:info@swkghana.org" style="color:var(--g-600);font-weight:700">info@swkghana.org</a>.
+          </p>
+          <a class="wa-cta" href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-whatsapp" /></svg>
+            Join the SWK Ghana community
+          </a>
+          <div>
+            <button type="button" class="btn btn--green" id="reg-done-btn">Done</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
   </main>
 
   <!-- ═══════════════ 9. FOOTER ═════════════════════════════════════════ -->
@@ -1603,12 +2025,176 @@
       var year = document.getElementById('year');
       if (year) year.textContent = new Date().getFullYear();
 
-      // Registration is not wired up yet; stop the placeholder links jumping
-      // to the top of the page. Replacing href makes this a no-op.
-      document.querySelectorAll('[data-register]').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          if (btn.getAttribute('href') === '#') e.preventDefault();
+      // ── Registration ──────────────────────────────────────────────────
+      // Paste the Apps Script /exec URL here. See docs/pitch-registration.gs.
+      var ENDPOINT = '';
+
+      var regModal = document.getElementById('reg-modal');
+      var form = document.getElementById('reg-form');
+      var submitBtn = document.getElementById('reg-submit');
+      var statusEl = document.getElementById('reg-status');
+      var doneEl = document.getElementById('reg-done');
+      var unconfiguredEl = document.getElementById('reg-unconfigured');
+      var canModal = !!(regModal && typeof regModal.showModal === 'function');
+
+      // No <dialog> support: leave the form on the page so it still works.
+      if (regModal && !canModal) regModal.setAttribute('open', '');
+
+      function openReg() {
+        if (!canModal || regModal.open) return;
+        regModal.showModal();
+        document.body.style.overflow = 'hidden';
+        var first = document.getElementById('f-name');
+        if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+      }
+
+      function closeReg() {
+        if (canModal && regModal.open) regModal.close();
+        document.body.style.overflow = '';
+      }
+
+      if (canModal) {
+        // Watch the open attribute rather than the close event — that event
+        // proved unreliable, which left the page scroll-locked behind a
+        // dismissed modal. The attribute always reflects reality.
+        if (typeof MutationObserver === 'function') {
+          new MutationObserver(function () {
+            document.body.style.overflow = regModal.open ? 'hidden' : '';
+          }).observe(regModal, { attributes: true, attributeFilter: ['open'] });
+        }
+
+        regModal.addEventListener('click', function (e) {
+          if (e.target === regModal) closeReg();
         });
+
+        document.querySelectorAll('[data-reg-close]').forEach(function (b) {
+          b.addEventListener('click', closeReg);
+        });
+
+        document.querySelectorAll('[data-register]').forEach(function (el) {
+          el.addEventListener('click', function (e) { e.preventDefault(); openReg(); });
+        });
+
+        if (window.location.hash === '#register-form') openReg();
+      }
+
+      var doneBtn = document.getElementById('reg-done-btn');
+      if (doneBtn) doneBtn.addEventListener('click', closeReg);
+
+      // "Other" radios reveal their free-text box.
+      form.querySelectorAll('input[type="radio"][data-other]').forEach(function (radio) {
+        var target = document.getElementById(radio.dataset.other);
+        form.querySelectorAll('input[name="' + radio.name + '"]').forEach(function (r) {
+          r.addEventListener('change', function () {
+            var show = radio.checked;
+            target.hidden = !show;
+            if (!show) target.value = '';
+          });
+        });
+      });
+
+      var wrapOf = function (el) { return el.closest('.field'); };
+      var markError = function (el) {
+        var w = wrapOf(el); if (w) w.classList.add('has-error');
+        el.setAttribute('aria-invalid', 'true');
+      };
+      var clearError = function (el) {
+        var w = wrapOf(el); if (w) w.classList.remove('has-error');
+        el.removeAttribute('aria-invalid');
+      };
+
+      form.addEventListener('input', function (e) { clearError(e.target); });
+      form.addEventListener('change', function (e) { clearError(e.target); });
+
+      function validate() {
+        var controls = form.querySelectorAll('input, select');
+        var seenRadio = {};
+        var firstBad = null;
+
+        controls.forEach(function (el) {
+          if (!el.required || el.disabled || el.closest('.hp')) return;
+
+          if (el.type === 'radio') {
+            if (seenRadio[el.name]) return;
+            seenRadio[el.name] = true;
+            var group = form.querySelectorAll('input[name="' + el.name + '"]');
+            var picked = Array.prototype.some.call(group, function (r) { return r.checked; });
+            if (!picked) { markError(el); if (!firstBad) firstBad = el; }
+            else clearError(el);
+            return;
+          }
+
+          var value = String(el.value || '').trim();
+          var ok = value !== '';
+          if (ok && el.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+          if (ok && el.type === 'tel') ok = value.replace(/\D/g, '').length >= 9;
+          if (!ok) { markError(el); if (!firstBad) firstBad = el; }
+          else clearError(el);
+        });
+
+        if (firstBad) {
+          statusEl.classList.add('is-error');
+          statusEl.textContent = 'Please check the highlighted field.';
+          try { firstBad.focus({ preventScroll: false }); } catch (e) { firstBad.focus(); }
+          return false;
+        }
+        statusEl.classList.remove('is-error');
+        statusEl.textContent = '';
+        return true;
+      }
+
+      function collect() {
+        var data = {};
+        new FormData(form).forEach(function (value, key) { data[key] = value; });
+        // Fold the "Other" free text into the answer the sheet stores.
+        if (data.gender === 'Other' && data.genderOther) data.gender = 'Other: ' + data.genderOther;
+        if (data.heard === 'Other' && data.heardOther) data.heard = 'Other: ' + data.heardOther;
+        delete data.genderOther;
+        delete data.heardOther;
+        // Honeypot travels under the name the endpoint checks.
+        data.company = data.swk_ref || '';
+        delete data.swk_ref;
+        data.source = window.location.href;
+        return data;
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validate()) return;
+
+        if (!ENDPOINT) {
+          unconfiguredEl.style.display = 'block';
+          statusEl.textContent = '';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        statusEl.classList.remove('is-error');
+        statusEl.textContent = 'Sending your registration…';
+
+        // text/plain keeps this a "simple" CORS request, so the browser sends
+        // no preflight — Apps Script cannot answer an OPTIONS probe.
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(collect()),
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (!res || res.ok !== true) throw new Error((res && res.error) || 'rejected');
+            form.style.display = 'none';
+            doneEl.classList.add('is-active');
+            var scroller = doneEl.closest('.reg-modal__scroll');
+            if (scroller) scroller.scrollTop = 0;
+            if (doneBtn) { try { doneBtn.focus({ preventScroll: true }); } catch (err) { doneBtn.focus(); } }
+          })
+          .catch(function () {
+            submitBtn.disabled = false;
+            statusEl.classList.add('is-error');
+            statusEl.innerHTML =
+              'Sorry, that did not go through. Please try again, or email ' +
+              '<a href="mailto:info@swkghana.org" style="color:inherit">info@swkghana.org</a>.';
+          });
       });
     })();
   </script>
