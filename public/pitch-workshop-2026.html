@@ -14,8 +14,8 @@
   <link rel="icon" type="image/png"
     href="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" />
 
-  <!-- Open Graph / Twitter.
-       TODO: swap for the workshop flyer once it is on Cloudinary. -->
+  <!-- Open Graph / Twitter: the flyer, padded onto white so the whole 4:5
+       artwork survives the 1.91:1 crop social platforms apply. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SWK Ghana" />
   <meta property="og:locale" content="en_GH" />
@@ -24,13 +24,13 @@
     content="Craft. Practise. Perfect your pitch in 60 seconds. Free 90-minute online workshop, Thursday 17 September 2026, 7:00 PM GMT." />
   <meta property="og:url" content="https://swkghana.org/epwwebinar" />
   <meta property="og:image"
-    content="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294683/SWK_at_Ga_West_n0c3fz.jpg" />
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_white,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pitch Ready: Elevator Pitch Workshop | SWK Ghana" />
   <meta name="twitter:description"
     content="Craft. Practise. Perfect your pitch in 60 seconds. Free 90-minute online workshop, 17 September 2026." />
   <meta name="twitter:image"
-    content="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294683/SWK_at_Ga_West_n0c3fz.jpg" />
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_white,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,6 +47,7 @@
     "endDate": "2026-09-17T20:30:00+00:00",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "image": "https://res.cloudinary.com/dwgj3lovn/image/upload/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png",
     "location": {
       "@type": "VirtualLocation",
       "name": "Jitsi",
@@ -358,23 +359,19 @@
       flex: none;
     }
 
-    /* Aequitas wordmark stands in until the real asset is available. */
-    .aequitas {
-      font-weight: 800;
-      font-size: clamp(.95rem, .85rem + .5vw, 1.35rem);
-      letter-spacing: -.02em;
-      color: var(--aequitas);
-      line-height: 1;
+    /* Aequitas wordmark is a wide 4.26:1 lockup, so it is sized by height and
+       left to find its own width. */
+    .lockup .aequitas-logo {
+      height: clamp(24px, 3.6vw, 34px);
+      width: auto;
     }
 
-    .aequitas small {
-      display: block;
-      font-size: .42em;
-      font-weight: 600;
-      letter-spacing: .04em;
-      color: var(--aequitas);
-      opacity: .85;
-      margin-top: .2em;
+    /* The footer sits on dark green and the Aequitas mark is blue on
+       transparent, so both logos get a white chip to stay legible. */
+    .lockup--chip {
+      background: #fff;
+      border-radius: 12px;
+      padding: .6rem .85rem;
     }
 
     .hero__body {
@@ -476,50 +473,34 @@
       color: var(--ink-soft);
     }
 
-    /* Facilitator card, mirroring the flyer's green band. */
-    .facil-card {
+    /* The flyer, shown as the poster it is. Portrait 4:5, unlike the summit's
+       square one, so the vh term is halved — height is 1.25x the width here,
+       and an rem-only cap would run past the bottom of the hero. */
+    .poster {
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      background: linear-gradient(135deg, var(--g-600) 0%, var(--g-400) 100%);
-      color: #fff;
-      padding: clamp(1.75rem, 4vw, 2.5rem);
-      max-width: 32rem;
+      /* width:100% matters — margin-inline:auto makes a grid item shrink-to-fit
+         rather than stretch, so without it the poster sat at its content width
+         and max-width was never the binding constraint. */
+      width: 100%;
+      max-width: min(32rem, 62vh);
       margin-inline: auto;
-      box-shadow: 0 30px 70px -34px rgba(15, 61, 28, .7);
+      box-shadow: 0 34px 74px -34px rgba(15, 61, 28, .6), 0 0 0 1px rgba(30, 122, 56, .1);
+      transform: rotate(-1deg);
+      transition: transform .5s var(--ease);
     }
 
-    .facil-card__label {
-      font-size: .8rem;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      opacity: .92;
+    .poster:hover { transform: rotate(0deg) translateY(-4px); }
+
+    .poster img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1080 / 1350;
     }
 
-    .facil-card__name {
-      margin-top: .9rem;
-      background: #fff;
-      color: var(--ink);
-      border-radius: 8px;
-      padding: .9rem 1.1rem;
-      font-size: clamp(1.15rem, 1rem + .7vw, 1.5rem);
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .facil-card__roles {
-      margin-top: .9rem;
-      font-size: clamp(.92rem, .88rem + .3vw, 1.08rem);
-      font-weight: 800;
-      letter-spacing: .01em;
-    }
-
-    .facil-card__org {
-      margin-top: .75rem;
-      font-size: .92rem;
-      font-weight: 600;
-      opacity: .95;
+    @media (max-width: 999px) {
+      .poster { transform: none; max-width: 20rem; }
     }
 
     .scroll-cue {
@@ -556,11 +537,22 @@
       .scroll-cue { display: none; }
     }
 
-    @media (min-width: 768px) and (max-height: 800px) {
-      .hero__title { font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
-      .hero__body { padding-block: .75rem; }
-      .hero__bar { padding-block: .6rem; }
-      .scroll-cue { padding-bottom: .6rem; }
+    /* Two tiers, because the copy column — not the poster — is the taller of
+       the two and drives the hero's height. A single 800px breakpoint left a
+       gap: at 820px tall the hero overran by 21px and pushed the cue off. */
+    @media (min-width: 768px) and (max-height: 900px) {
+      .hero__title { font-size: clamp(2.2rem, 4.8vw, 4rem); }
+      .hero__body { padding-block: 1rem; }
+      .hero__bar { padding-block: .7rem; }
+      .scroll-cue { padding-bottom: .7rem; }
+    }
+
+    @media (min-width: 768px) and (max-height: 780px) {
+      .hero__title { font-size: clamp(2rem, 4.2vw, 3.2rem); }
+      .hero__tagline { font-size: clamp(.95rem, .88rem + .4vw, 1.2rem); }
+      .hero__body { padding-block: .6rem; }
+      .hero__bar { padding-block: .5rem; }
+      .scroll-cue { padding-bottom: .5rem; }
     }
 
     /* ═══ 2. WHY IT MATTERS ═════════════════════════════════════════════ */
@@ -1374,10 +1366,10 @@
               alt="SWK Ghana" width="42" height="42" />
           </a>
           <span class="lockup__rule" aria-hidden="true"></span>
-          <!-- PLACEHOLDER: swap for the Aequitas logo once it is on Cloudinary. -->
-          <a class="aequitas" href="https://www.aequitasfoundation.org" rel="noopener">
-            Aequitas
-            <small>a fairer world</small>
+          <a href="https://www.aequitasfoundation.org" rel="noopener" aria-label="Aequitas Foundation">
+            <img class="aequitas-logo"
+              src="https://res.cloudinary.com/dwgj3lovn/image/upload/h_96,q_auto,f_auto/v1788709921/AEQUITAS-08_c5hpmd.png"
+              alt="Aequitas Foundation — a fairer world" width="409" height="96" />
           </a>
         </span>
       </div>
@@ -1412,7 +1404,7 @@
             </ul>
 
             <div class="hero__cta reveal" style="--d:270ms">
-              <!-- PLACEHOLDER: swap href="#" for the live registration URL. -->
+              <!-- Opens the registration modal; href="#" is the no-JS fallback anchor. -->
               <a class="btn btn--green btn--lg" href="#" data-register>
                 Register Now
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
@@ -1421,11 +1413,16 @@
             </div>
           </div>
 
-          <div class="facil-card reveal" style="--d:200ms">
-            <p class="facil-card__label">Facilitator</p>
-            <p class="facil-card__name">Rev&rsquo;d Akua Buabema Ofori-Boateng, PhD</p>
-            <p class="facil-card__roles">Engineer &nbsp;|&nbsp; Theologian &nbsp;|&nbsp; Strategist</p>
-            <p class="facil-card__org">Executive Director, Aequitas Foundation</p>
+          <!-- The flyer at full fidelity. Its text is baked into the artwork,
+               so it is shown as a poster rather than stretched behind the copy.
+               The facilitator gets her own section further down. -->
+          <div class="poster reveal" style="--d:200ms">
+            <img
+              src="https://res.cloudinary.com/dwgj3lovn/image/upload/w_900,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png"
+              srcset="https://res.cloudinary.com/dwgj3lovn/image/upload/w_600,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png 600w,
+                      https://res.cloudinary.com/dwgj3lovn/image/upload/w_900,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png 900w"
+              sizes="(min-width: 1000px) 32vw, 80vw" width="1080" height="1350" fetchpriority="high"
+              alt="Elevator Pitch Workshop flyer: Craft. Practise. Perfect your pitch in 60 seconds. Thursday 17 September 2026, 7:00 PM, on Jitsi. Facilitator Rev'd Akua Buabema Ofori-Boateng, PhD." />
           </div>
         </div>
       </div>
@@ -1748,7 +1745,7 @@
           Free &middot; Online on Jitsi
         </p>
         <div class="reveal" style="--d:200ms">
-          <!-- PLACEHOLDER: swap href="#" for the live registration URL. -->
+          <!-- Opens the registration modal; href="#" is the no-JS fallback anchor. -->
           <a class="btn btn--white btn--lg" href="#" data-register>
             Register Now
             <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
@@ -1923,12 +1920,13 @@
     <div class="shell">
       <div class="footer__top">
         <div class="footer__brand">
-          <span class="lockup">
+          <span class="lockup lockup--chip">
             <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png"
               alt="SWK Ghana" width="42" height="42" />
             <span class="lockup__rule" aria-hidden="true"></span>
-            <span class="aequitas" style="color:#fff">Aequitas<small style="color:#fff;opacity:.8">a fairer
-                world</small></span>
+            <img class="aequitas-logo"
+              src="https://res.cloudinary.com/dwgj3lovn/image/upload/h_96,q_auto,f_auto/v1788709921/AEQUITAS-08_c5hpmd.png"
+              alt="Aequitas Foundation" width="409" height="96" />
           </span>
           <p>
             A youth-focused nonprofit dedicated to holistic youth development as the foundation for resilient
