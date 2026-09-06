@@ -17,6 +17,10 @@
       "destination": "/summit-2026.html"
     },
     {
+      "source": "/pitch",
+      "destination": "/pitch-workshop-2026.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
