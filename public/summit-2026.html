@@ -1610,6 +1610,86 @@
       font-weight: 600;
     }
 
+    /* ═══ 7c. MORE FROM SWK GHANA ═══════════════════════════════════════
+       Shared as a standalone link, so it needs its own routes onward — to
+       the main site and to the other programmes. */
+    .more { background: var(--cream); }
+
+    .more__head { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+
+    .more__grid {
+      display: grid;
+      gap: clamp(1rem, 2.4vw, 1.5rem);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 780px) { .more__grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .more__card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid rgba(23, 112, 45, .16);
+      border-radius: var(--radius);
+      padding: clamp(1.5rem, 3.2vw, 2rem);
+      text-decoration: none;
+      color: inherit;
+      transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+
+    .more__card:hover {
+      transform: translateY(-4px);
+      border-color: var(--lime);
+      box-shadow: 0 22px 44px -26px rgba(12, 46, 17, .35);
+    }
+
+    .more__tag {
+      align-self: flex-start;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--green-text);
+      background: rgba(120, 195, 30, .18);
+      border-radius: 999px;
+      padding: .35rem .8rem;
+      margin-bottom: .9rem;
+    }
+
+    .more__card h3 {
+      font-size: clamp(1.2rem, 1.08rem + .55vw, 1.5rem);
+      font-weight: 800;
+      color: var(--green-text);
+      margin-bottom: .55rem;
+    }
+
+    .more__card p {
+      color: var(--ink-soft);
+      font-size: .96rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.1rem;
+    }
+
+    .more__go {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-weight: 800;
+      color: var(--green-text);
+      font-size: .95rem;
+    }
+
+    .more__go svg { width: 17px; height: 17px; }
+    .more__card:hover .more__go { gap: .75rem; }
+
+    /* i-mail is a stroke icon, and the socials row fills its brand marks —
+       without this the envelope renders as a solid blob. */
+    .socials a[href^="mailto:"] svg {
+      fill: none;
+      stroke: currentColor;
+    }
+
     /* ═══ 8. FOOTER ═════════════════════════════════════════════════════ */
     .footer {
       background: var(--green-900);
@@ -2306,6 +2386,44 @@
       </div>
     </section>
 
+    <!-- ═══════════════ 7c. MORE FROM SWK GHANA ═════════════════════════ -->
+    <section class="section more" id="more" aria-labelledby="more-title">
+      <div class="shell">
+        <div class="more__head reveal">
+          <p class="eyebrow">More from SWK Ghana</p>
+          <h2 class="section-title" id="more-title">This is one of several.</h2>
+        </div>
+
+        <div class="more__grid">
+          <a class="more__card reveal" href="https://swkghana.org/epwwebinar">
+            <span class="more__tag">Free webinar</span>
+            <h3>Elevator Pitch Workshop</h3>
+            <p>
+              Craft, practise and perfect your pitch in 60 seconds. A free 90-minute online workshop on
+              17 September with Aequitas Foundation, run as live practice rather than a lecture.
+            </p>
+            <span class="more__go">
+              Explore the workshop
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </span>
+          </a>
+
+          <a class="more__card reveal" style="--d:100ms" href="https://www.swkghana.org">
+            <span class="more__tag">The organisation</span>
+            <h3>swkghana.org</h3>
+            <p>
+              Everything else we do: youth development, circular economy, agribusiness, technology,
+              climate action and community engagement &mdash; plus how to volunteer or partner with us.
+            </p>
+            <span class="more__go">
+              Visit the main website
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════════ 7b. REGISTRATION FORM ═══════════════════════════
          Posts JSON to a Google Apps Script web app, which appends a row to
          the summit registrations Sheet. Setup lives in
@@ -2685,6 +2803,11 @@
             <a href="https://www.youtube.com/@swkghana" aria-label="SWK Ghana on YouTube" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#i-youtube" />
+              </svg>
+            </a>
+            <a href="mailto:info@swkghana.org" aria-label="Email SWK Ghana">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#i-mail" />
               </svg>
             </a>
           </div>

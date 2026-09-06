@@ -898,6 +898,85 @@
       color: rgba(255, 255, 255, .8);
     }
 
+    /* ═══ 8b. MORE FROM SWK GHANA ═══════════════════════════════════════
+       This page is shared as a standalone link, so it needs its own routes
+       onward — to the main site and to the other programmes. */
+    .more { background: var(--paper-2); }
+
+    .more__head { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+
+    .more__grid {
+      display: grid;
+      gap: clamp(1rem, 2.4vw, 1.5rem);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 780px) { .more__grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .more__card {
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1.5rem, 3.2vw, 2rem);
+      text-decoration: none;
+      color: inherit;
+      transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+
+    .more__card:hover {
+      transform: translateY(-4px);
+      border-color: var(--g-400);
+      box-shadow: 0 22px 44px -26px rgba(15, 61, 28, .4);
+    }
+
+    .more__tag {
+      align-self: flex-start;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--g-600);
+      background: rgba(108, 194, 74, .16);
+      border-radius: 999px;
+      padding: .35rem .8rem;
+      margin-bottom: .9rem;
+    }
+
+    .more__card h3 {
+      font-size: clamp(1.2rem, 1.08rem + .55vw, 1.5rem);
+      color: var(--g-700);
+      margin-bottom: .55rem;
+    }
+
+    .more__card p {
+      color: var(--ink-soft);
+      font-size: .96rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.1rem;
+    }
+
+    .more__go {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-weight: 800;
+      color: var(--g-600);
+      font-size: .95rem;
+    }
+
+    .more__go svg { width: 17px; height: 17px; }
+    .more__card:hover .more__go { gap: .75rem; }
+
+    /* i-mail is a stroke icon, and the socials row fills its brand marks —
+       without this the envelope renders as a solid blob. */
+    .socials a[href^="mailto:"] svg {
+      fill: none;
+      stroke: currentColor;
+    }
+
     /* ═══ 9. FOOTER ═════════════════════════════════════════════════════ */
     .footer {
       background: var(--g-900);
@@ -1755,6 +1834,44 @@
       </div>
     </section>
 
+    <!-- ═══════════════ 8b. MORE FROM SWK GHANA ═════════════════════════ -->
+    <section class="section more" id="more" aria-labelledby="more-title">
+      <div class="shell">
+        <div class="more__head reveal">
+          <p class="eyebrow">More from SWK Ghana</p>
+          <h2 class="section-title" id="more-title">This is one of several.</h2>
+        </div>
+
+        <div class="more__grid">
+          <a class="more__card reveal" href="https://swkghana.org/summit">
+            <span class="more__tag">Flagship event</span>
+            <h3>Agribusiness Summit 2026</h3>
+            <p>
+              Our first in-person flagship event. A free, half-day summit in Accra on 7 November: a keynote,
+              a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
+            </p>
+            <span class="more__go">
+              Explore the Summit
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </span>
+          </a>
+
+          <a class="more__card reveal" style="--d:100ms" href="https://www.swkghana.org">
+            <span class="more__tag">The organisation</span>
+            <h3>swkghana.org</h3>
+            <p>
+              Everything else we do: youth development, circular economy, agribusiness, technology,
+              climate action and community engagement &mdash; plus how to volunteer or partner with us.
+            </p>
+            <span class="more__go">
+              Visit the main website
+              <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════════ 10. REGISTRATION FORM ═══════════════════════════
          Deployment instructions live in docs/pitch-registration.gs — paste the
          resulting /exec URL into ENDPOINT below. Separate script and Sheet
@@ -1973,6 +2090,11 @@
             </a>
             <a href="https://www.youtube.com/@swkghana" aria-label="SWK Ghana on YouTube" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-youtube" /></svg>
+            </a>
+            <a href="mailto:info@swkghana.org" aria-label="Email SWK Ghana">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#i-mail" />
+              </svg>
             </a>
           </div>
         </div>
