@@ -24,6 +24,10 @@ const STATIC_ROUTES = [
   '/privacy-policy',
 ]
 
+// Static HTML pages served straight from public/ via vercel.json rewrites
+// (not React routes — never render()'d, only listed here for the sitemap).
+const EXTRA_SITEMAP_ROUTES = ['/summit', '/epwwebinar']
+
 // ── Fetch published blog slugs from Sanity (public dataset, no token) ────────
 async function fetchPosts() {
   const query = encodeURIComponent(
@@ -44,6 +48,9 @@ function buildSitemap(posts) {
   for (const route of STATIC_ROUTES) {
     const priority = route === '/' ? '1.0' : ['/our-work', '/donate'].includes(route) ? '0.9' : '0.8'
     urls.push(`  <url>\n    <loc>${SITE}${route === '/' ? '/' : route}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${priority}</priority>\n  </url>`)
+  }
+  for (const route of EXTRA_SITEMAP_ROUTES) {
+    urls.push(`  <url>\n    <loc>${SITE}${route}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>0.9</priority>\n  </url>`)
   }
   for (const p of posts) {
     const lastmod = (p._updatedAt || p.publishedAt || today).slice(0, 10)
