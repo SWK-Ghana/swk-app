@@ -58,7 +58,7 @@ const Footer = () => {
               A youth-focused nonprofit organisation dedicated to holistic youth development as the foundation for resilient communities across Africa.
             </p>
             <p className="text-xs text-gray-500 mb-4 xs:mb-5">
-              Duly incorporated under the Companies Act, 2019 (Act 992) · Reg. No. CG024110426 · Office of the Registrar of Companies, Ghana
+              Legally registered as <span className="text-gray-400">SWK Ghana LBG</span>, a Private Company Limited by Guarantee, duly incorporated under the Companies Act, 2019 (Act 992) · Reg. No. CG024110426 · Office of the Registrar of Companies, Ghana. <span className="text-gray-400">swkghana.org</span> is the official website of SWK Ghana LBG.
             </p>
             {/* Social icons */}
             <div className="flex flex-wrap gap-3">
@@ -130,7 +130,7 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-800 mt-6 xs:mt-8 pt-6 xs:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs xs:text-sm text-gray-400">
-          <p>&copy; 2026 SWK Ghana. All rights reserved.</p>
+          <p>&copy; 2026 SWK Ghana LBG. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
             <p>Building resilient communities across Africa 🌍</p>

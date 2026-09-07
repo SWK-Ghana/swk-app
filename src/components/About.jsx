@@ -222,6 +222,19 @@ const About = () => {
             </div>
           </div>
 
+          {/* Legal & Registration */}
+          <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">Legal Status &amp; Registration</h2>
+            <p className="text-base xs:text-lg text-gray-800 max-w-3xl mx-auto text-center leading-relaxed">
+              SWK Ghana is legally registered as <strong>SWK Ghana LBG</strong>, a Private Company Limited by Guarantee incorporated in Ghana under the Companies Act, 2019 (Act 992).
+              <br className="hidden sm:block" />
+              Registration No. <strong>CG024110426</strong> · TIN <strong>C0067142656</strong> · Office of the Registrar of Companies, Ghana.
+            </p>
+            <p className="text-sm text-gray-600 max-w-3xl mx-auto text-center mt-4">
+              <strong>swkghana.org</strong> is the official and primary website of SWK Ghana LBG. All programmes, donations, and correspondence referenced on this site are conducted on behalf of SWK Ghana LBG.
+            </p>
+          </div>
+
           {/* Call to Action */}
           <div className="bg-[#1E963C] rounded-xl xs:rounded-2xl p-6 xs:p-8 sm:p-10 md:p-12 text-center text-white">
             <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 xs:mb-4 sm:mb-5 px-2 xs:px-0">Ready to Make a Difference?</h2>
