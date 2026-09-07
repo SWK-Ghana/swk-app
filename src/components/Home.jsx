@@ -225,6 +225,34 @@ const Home = () => {
     else if (status === 'unsupported') { setFluidAllowed(false); setFluidReady(false) }
   }, [])
 
+  // Upcoming events, soonest first. These link to standalone static pages
+  // outside the React router, so they use plain <a> — a router <Link> would be
+  // intercepted client-side and land on the SPA 404.
+  const events = useMemo(() => ([
+    {
+      day: '17', month: 'Sep', year: '2026',
+      flag: 'Next up',
+      tag: 'Webinar',
+      tagClass: 'bg-[#78C31E] text-[#123D16]',
+      title: 'Elevator Pitch Workshop',
+      desc: 'Craft, practise and perfect your pitch in 60 seconds. A free 90-minute online workshop with Aequitas Foundation, run as live practice rather than a lecture.',
+      meta: '7:00 PM GMT · Online on Jitsi',
+      href: '/epwwebinar',
+      cta: 'Explore the workshop',
+    },
+    {
+      day: '7', month: 'Nov', year: '2026',
+      flag: null,
+      tag: 'Summit',
+      tagClass: 'bg-[#1E963C] text-white',
+      title: 'Agribusiness Summit 2026',
+      desc: 'Our first in-person flagship event. A free, half-day summit in Accra: a keynote, a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.',
+      meta: '9:00 AM – 1:30 PM GMT · Ashaley Botwe, Accra',
+      href: '/summit',
+      cta: 'Explore the Summit',
+    },
+  ]), [])
+
   const slides = useMemo(() => ([
     { _path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', image: img('v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', 1280), title: 'Empowering Youth for Sustainable Change', subtitle: 'Youth-focused programs driving resilient communities across Africa.', position: 'object-center' },
     { _path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', image: img('v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', 1280), title: 'Climate Action & Environmental Stewardship', subtitle: 'Youth-led initiatives protecting our planet for future generations.', position: 'object-center' },
@@ -409,14 +437,83 @@ const Home = () => {
 
         <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16">
 
+        {/* ══ 1b. UPCOMING EVENTS ═════════════════════════════════════════════
+             Top billing, directly under the hero: these are time-bound and are
+             the main thing we want a first-time visitor to act on. Replaces the
+             old featured-summit block and the events list further down, so
+             there is one authoritative place for what is coming up. */}
+        <div className="mb-10 sm:mb-16">
+          <div className="text-center mb-6 sm:mb-8">
+            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-3 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
+              Upcoming Events
+            </span>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Join us next
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 xs:gap-6">
+            {events.map((e) => (
+              <a
+                key={e.href}
+                href={e.href}
+                className="group relative flex flex-col bg-gradient-to-br from-[#0C2E11] to-[#123D16] rounded-2xl border border-[#78C31E]/40 p-6 xs:p-8 sm:p-10 no-underline hover:border-[#78C31E] hover:-translate-y-1 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]"
+              >
+                {e.flag && (
+                  <span className="absolute top-4 right-4 xs:top-6 xs:right-6 bg-[#78C31E] text-[#123D16] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                    {e.flag}
+                  </span>
+                )}
+
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-center">
+                    <span className="text-2xl xs:text-3xl font-bold text-white leading-none">{e.day}</span>
+                    <span className="text-[0.65rem] font-bold text-white/70 uppercase tracking-wide mt-1">
+                      {e.month} {e.year}
+                    </span>
+                  </div>
+                  <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${e.tagClass}`}>{e.tag}</span>
+                </div>
+
+                <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                  {e.title}
+                </h3>
+                <p className="text-sm xs:text-base text-white/75 leading-relaxed mb-4 flex-1">{e.desc}</p>
+                <p className="text-xs xs:text-sm text-[#A8E04A] font-semibold mb-5">{e.meta}</p>
+
+                <span className="self-start inline-flex items-center gap-2 bg-[#78C31E] group-hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-5 py-2.5 rounded-full transition-colors">
+                  {e.cta} <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/get-involved')}>
+              Get Notified About Events
+            </button>
+            <a
+              href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm xs:text-base font-semibold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl transition-colors"
+            >
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+              </svg>
+              Join our WhatsApp Community
+            </a>
+          </div>
+        </div>
+
         {/* ══ 2. IMPACT STATS ═════════════════════════════════════════════════ */}
         <div className="bg-[#1E963C] rounded-2xl p-8 sm:p-12 mb-10 sm:mb-16">
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 text-center">
             {[
-              { n: '230+', label: 'Webinar Registrants' },
-              { n: '236', label: 'Youth Empowered' },
-              { n: '72', label: 'Women Impacted' },
-              { n: '3', label: 'Program Editions' }
+              { n: '300+', label: 'People Impacted' },
+              { n: '223', label: 'WhatsApp Community' },
+              { n: '100+', label: 'Women Impacted' },
+              { n: '5', label: 'Program Editions' }
             ].map((s, i) => (
               <div key={i}>
                 <div className="text-4xl sm:text-5xl font-bold text-white mb-2">{s.n}</div>
@@ -713,133 +810,6 @@ const Home = () => {
                 <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{a.desc}</p>
               </div>
             ))}
-          </div>
-        </Section>
-
-        {/* ══ 7b. FEATURED: AGRIBUSINESS SUMMIT 2026 ══════════════════════════
-             Links to /summit, a static page outside the React router, so this
-             uses a plain <a> — a router <Link> would be intercepted and 404. */}
-        <div className="rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-gradient-to-br from-[#0C2E11] to-[#123D16] mb-10 sm:mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center">
-            <div className="p-6 xs:p-8 sm:p-10 md:p-12 order-2 md:order-1">
-              <span className="inline-block bg-[#78C31E] text-[#123D16] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg mb-4">
-                From the Ground Up
-              </span>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-white mb-3 leading-tight">
-                Agribusiness Summit 2026
-              </h2>
-              <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-5">
-                Our first in-person flagship event: a free, half-day summit for young people in Ghana.
-                One morning, four phases — a keynote, a rapid-fire panel of working agribusiness voices,
-                a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
-              </p>
-              <ul className="space-y-2 mb-6 text-sm text-white/90">
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true">📅</span> Saturday, 7 November 2026 · 9:00 AM – 1:30 PM GMT
-                </li>
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true">📍</span> The GracedLife Leadership Centre, Ashaley Botwe, Accra
-                </li>
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true">🎟️</span> Free entry · Limited to 100 attendees
-                </li>
-              </ul>
-              <a
-                href="/summit"
-                className="inline-flex items-center gap-2 bg-[#78C31E] hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-6 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                Explore the Summit <span aria-hidden="true">→</span>
-              </a>
-            </div>
-            <div className="order-1 md:order-2 p-6 xs:p-8 sm:p-10 md:p-12 md:pl-0">
-              <a href="/summit" tabIndex={-1} aria-hidden="true">
-                <img
-                  src={img('v1788183692/SummitFlyer-selection_2_fyjuwm.png', 700)}
-                  srcSet={cardSrcset('v1788183692/SummitFlyer-selection_2_fyjuwm.png')}
-                  sizes="(min-width: 768px) 44vw, 90vw"
-                  alt=""
-                  width="2160"
-                  height="2160"
-                  loading="lazy"
-                  className="w-full h-auto rounded-xl shadow-2xl"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* ══ 8. UPCOMING EVENTS ══════════════════════════════════════════════ */}
-        <Section>
-          <SectionHeader badge="Mark Your Calendar" badgeColor="bg-blue-100 text-blue-700" title="Upcoming Events" subtitle="Join us at our next events and be part of the movement for sustainable change." />
-          <div className="space-y-4 xs:space-y-5 mb-8">
-            {[
-              {
-                day: '17', month: 'SEP', year: '2026',
-                tag: 'Webinar', tc: 'bg-green-100 text-green-700',
-                title: 'How to Pitch Your Agribusiness Ideas',
-                desc: 'A practical training webinar on structuring and pitching a compelling agribusiness idea — for investors, partners, and grant reviewers.',
-                location: 'Online (Google Meet)',
-              },
-              {
-                day: '7', month: 'NOV', year: '2026',
-                tag: 'Summit', tc: 'bg-blue-100 text-blue-700',
-                title: 'From The Ground Up — Agribusiness Summit',
-                desc: 'A flagship summit bringing together young agripreneurs, mentors, and partners to build the next generation of Ghanaian agribusiness.',
-                location: 'Accra, Ghana',
-                page: '/summit',
-              },
-            ].map((event, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-gradient-to-r from-[#F2FAE8] to-blue-50 rounded-xl p-4 xs:p-5 sm:p-6 border border-[#D4F0A0] hover:shadow-md transition-shadow">
-                <div className="flex-shrink-0 flex sm:flex-col items-center justify-center bg-white rounded-xl border border-[#C0E870] px-5 py-3 text-center gap-1 sm:gap-0">
-                  <span className="text-2xl font-bold text-[#1E963C] leading-none">{event.day}</span>
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">{event.month} {event.year}</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${event.tc}`}>{event.tag}</span>
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F2FAE8] text-[#1E963C]">Free</span>
-                  </div>
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{event.title}</h3>
-                  <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-3">{event.desc}</p>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="text-xs text-gray-500">📍 {event.location}</span>
-                    <a
-                      href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] hover:bg-[#e4f5cf] px-3 py-1.5 rounded-lg transition-colors"
-                    >
-                      Register via WhatsApp →
-                    </a>
-                    {/* Plain <a>: /summit is a static page outside the router. */}
-                    {event.page && (
-                      <a
-                        href={event.page}
-                        className="text-xs font-semibold text-[#1E963C] hover:underline underline-offset-4"
-                      >
-                        Event details →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3" onClick={() => navigate('/get-involved')}>
-              Get Notified About Events
-            </button>
-            <a
-              href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm xs:text-base font-semibold text-white bg-[#25D366] hover:bg-[#1ebe5d] px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl transition-colors"
-            >
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-              </svg>
-              Join our WhatsApp Community
-            </a>
           </div>
         </Section>
 
