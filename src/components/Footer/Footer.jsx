@@ -89,6 +89,7 @@ const Footer = () => {
                 { label: 'Our Work', href: '/our-work' },
                 { label: 'Reports', href: '/reports' },
                 { label: 'Resources', href: '/resources' },
+                { label: 'FAQ', href: '/faq' },
                 { label: 'Get Involved', href: '/get-involved' },
                 { label: 'Donate', href: '/donate' },
               ].map(({ label, href }) => (
