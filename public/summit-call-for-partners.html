@@ -224,6 +224,22 @@
     .reg__done .btn { margin-top: clamp(1.5rem, 3.5vw, 2rem); }
     .reg__unconfigured { display: none; margin-top: 1.25rem; padding: 1rem 1.15rem; border-radius: 10px; background: #FFF6E5; border: 1.5px solid #E0A82E; color: #6B4E12; font-size: .9rem; font-weight: 600; }
 
+    /* ── Application modal ───────────────────────────────────────────────
+       <dialog> is used rather than a hand-rolled overlay because it brings
+       focus trapping, Esc-to-close and an inert background for free. */
+    .reg-modal { padding: 0; border: 0; border-radius: var(--radius); background: var(--cream-warm); color: var(--ink); width: min(880px, calc(100vw - 2rem)); max-width: none; max-height: min(90vh, calc(100vh - 2rem)); overflow: hidden; position: relative; box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .75); }
+    .reg-modal::backdrop { background: rgba(6, 24, 9, .82); }
+    .reg-modal__scroll { max-height: min(90vh, calc(100vh - 2rem)); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+    .reg-modal__close { position: absolute; top: .7rem; right: .7rem; z-index: 5; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid rgba(23, 112, 45, .25); background: var(--white); color: var(--green-text); display: grid; place-items: center; cursor: pointer; transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease); }
+    .reg-modal__close:hover { background: var(--lime); border-color: var(--lime); color: var(--green-deep); }
+    .reg-modal__close svg { width: 20px; height: 20px; }
+    .reg-modal .reg { background: transparent; padding-block: clamp(1.75rem, 4vw, 2.75rem); }
+    .reg-modal .reg__card { box-shadow: none; border: 0; background: transparent; padding: 0; }
+    @media (max-width: 640px) {
+      .reg-modal { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
+      .reg-modal__scroll { max-height: 100vh; }
+    }
+
     /* ── More from SWK Ghana ──────────────────────────────────────────── */
     .more { background: var(--white); }
     .more__head { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
@@ -279,6 +295,7 @@
       <g id="i-box" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></g>
       <g id="i-camera" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 10 1.5-2.5h3L15 10h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2Z" /><circle cx="12" cy="14.5" r="3" /></g>
       <g id="i-arrow-right" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></g>
+      <g id="i-close" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></g>
       <g id="i-mail" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></g>
       <g id="i-globe" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></g>
       <g id="i-handshake" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 3 3a1 1 0 0 0 3-3l-3.5-3.5" /><path d="m21 10-4.5-4.5a1 1 0 0 0-1.5 0L3 17" /><path d="M3 6h2l6.5 6.5" /></g>
@@ -323,7 +340,7 @@
             <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users" /></svg>50&ndash;100 young people expected</span>
           </div>
           <div class="hero__cta">
-            <a class="btn btn--lime" href="#apply-form">
+            <a class="btn btn--lime" href="#apply-form" data-register>
               Apply to partner with us
               <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
             </a>
@@ -410,6 +427,11 @@
          Posts JSON to a Google Apps Script web app, which appends a row to
          the partner applications Sheet. Setup lives in
          docs/partners-application.gs — paste ENDPOINT below once deployed. -->
+    <dialog class="reg-modal" id="reg-modal" aria-labelledby="reg-title">
+      <button class="reg-modal__close" type="button" data-reg-close aria-label="Close application">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+      <div class="reg-modal__scroll">
     <section class="section reg" id="apply-form" aria-labelledby="reg-title">
       <div class="shell">
         <div class="reg__head">
@@ -686,6 +708,8 @@
         </div>
       </div>
     </section>
+      </div>
+    </dialog>
   </main>
 
   <!-- ══ FOOTER ══ -->
@@ -744,6 +768,75 @@
       if (y) y.textContent = String(new Date().getFullYear());
 
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ── Application modal ─────────────────────────────────────────────
+      // Every "Apply" control opens the form in place instead of scrolling
+      // the visitor down past the whole page to reach it.
+      var regModal = document.getElementById('reg-modal');
+      var canModal = !!(regModal && typeof regModal.showModal === 'function');
+
+      if (regModal && !canModal) {
+        // No <dialog> support: leave the form as a normal section on the
+        // page so the #apply-form anchor links still work.
+        regModal.setAttribute('open', '');
+      }
+
+      function openReg() {
+        if (!canModal || regModal.open) return;
+        regModal.showModal();
+        // showModal makes the background inert but does not stop it scrolling.
+        document.body.style.overflow = 'hidden';
+
+        var first = null;
+        var candidates = regModal.querySelectorAll('input, select, textarea');
+        for (var i = 0; i < candidates.length; i++) {
+          var c = candidates[i];
+          if (c.tabIndex === -1 || c.closest('.hp') || c.type === 'hidden') continue;
+          if (!c.offsetParent) continue;
+          first = c;
+          break;
+        }
+        if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+      }
+
+      function closeReg() {
+        if (canModal && regModal.open) regModal.close();
+        document.body.style.overflow = '';
+      }
+
+      if (canModal) {
+        // Watch the open attribute rather than listening for 'close'. The
+        // close event proved unreliable — it did not always fire on close(),
+        // which left the page permanently scroll-locked behind the dismissed
+        // modal. The attribute always reflects reality, however it was
+        // closed: our button, Esc, or the backdrop.
+        if (typeof MutationObserver === 'function') {
+          new MutationObserver(function () {
+            document.body.style.overflow = regModal.open ? 'hidden' : '';
+          }).observe(regModal, { attributes: true, attributeFilter: ['open'] });
+        }
+
+        regModal.addEventListener('close', function () {
+          document.body.style.overflow = '';
+        });
+
+        regModal.addEventListener('click', function (e) {
+          if (e.target === regModal) closeReg();
+        });
+
+        document.querySelectorAll('[data-reg-close]').forEach(function (btn) {
+          btn.addEventListener('click', closeReg);
+        });
+
+        document.querySelectorAll('a[href="#apply-form"], [data-register]').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            openReg();
+          });
+        });
+
+        if (window.location.hash === '#apply-form') openReg();
+      }
 
       // ══ Partnership application form ═════════════════════════════════════
       //
@@ -833,7 +926,15 @@
         form.addEventListener('input', function (e) { clearError(e.target); });
         form.addEventListener('change', function (e) { clearError(e.target); });
 
+        // Inside the modal the scrolling element is the dialog's own
+        // container, not the page, so scroll that instead.
         var toFormTop = function () {
+          var scroller = form.closest('.reg-modal__scroll');
+          if (scroller && scroller.scrollHeight > scroller.clientHeight) {
+            try { scroller.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }
+            catch (e) { scroller.scrollTop = 0; }
+            return;
+          }
           form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
         };
 
@@ -857,7 +958,13 @@
         var doneBtnEl = document.getElementById('reg-done-btn');
         if (doneBtnEl) {
           doneBtnEl.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+            var dlg = document.getElementById('reg-modal');
+            if (dlg && typeof dlg.close === 'function' && dlg.open) {
+              dlg.close();
+              document.body.style.overflow = '';
+            } else {
+              window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+            }
           });
         }
 
