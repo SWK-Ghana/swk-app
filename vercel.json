@@ -25,6 +25,14 @@
       "destination": "/pitch-workshop-2026.html"
     },
     {
+      "source": "/volunteers",
+      "destination": "/summit-call-for-volunteers.html"
+    },
+    {
+      "source": "/partners",
+      "destination": "/summit-call-for-partners.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
