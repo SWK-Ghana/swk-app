@@ -67,8 +67,6 @@ var SHEET_ID = '1tvTvkSh4ObBWnRMsmrRQc0gigmXg9ClUAjCt9fpW9RA';
 // Order must match HEADER_ROW below and the form's field names.
 var ROW_FIELDS = [
   'fullName',
-  'dob',
-  'gender',
   'country',
   'region',
   'partyType',
@@ -95,8 +93,6 @@ var ROW_FIELDS = [
 var HEADER_ROW = [
   'Timestamp',
   'Full name',
-  'Date of birth',
-  'Gender',
   'Country of residence',
   'Region of residence',
   'Organization / Business / Individual',
