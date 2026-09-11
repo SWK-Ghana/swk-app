@@ -122,6 +122,26 @@ function json(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// Puts the header row back whenever it is missing — including when it was
+// deleted by accident with responses already in the sheet. In that case a
+// blank row is inserted ABOVE the existing responses and the headers are
+// written there. No response row is ever moved onto or overwritten.
+function ensureHeader(sheet) {
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(HEADER_ROW);
+    return;
+  }
+  if (String(sheet.getRange(1, 1).getValue()) === HEADER_ROW[0]) return;
+  sheet.insertRowBefore(1);
+  sheet.getRange(1, 1, 1, HEADER_ROW.length).setValues([HEADER_ROW]);
+}
+
+// Run this once by hand to restore the header immediately: pick
+// "restoreHeaderRow" in the toolbar dropdown, then click Run.
+function restoreHeaderRow() {
+  ensureHeader(SpreadsheetApp.openById(SHEET_ID).getSheets()[0]);
+}
+
 function doGet() {
   return json({ ok: true, status: 'ready', service: 'SWK Call for Partners — Summit 2026' });
 }
@@ -142,7 +162,6 @@ function doPost(e) {
     if (data.company) return json({ ok: true });
 
     var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
-    if (sheet.getLastRow() === 0) sheet.appendRow(HEADER_ROW);
 
     var row = [new Date()];
     for (var i = 0; i < ROW_FIELDS.length; i++) {
@@ -154,10 +173,11 @@ function doPost(e) {
     }
 
     // Serialise concurrent submissions so two people applying at the same
-    // moment cannot write to the same row.
+    // moment cannot write to the same row (or both try to add the header).
     var lock = LockService.getScriptLock();
     lock.waitLock(20000);
     try {
+      ensureHeader(sheet);
       sheet.appendRow(row);
     } finally {
       lock.releaseLock();
