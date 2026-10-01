@@ -230,23 +230,12 @@ const Home = () => {
   // intercepted client-side and land on the SPA 404.
   const events = useMemo(() => ([
     {
-      day: '17', month: 'Sep', year: '2026',
-      flag: 'Next up',
-      tag: 'Webinar',
-      tagClass: 'bg-[#78C31E] text-[#123D16]',
-      title: 'Elevator Pitch Workshop',
-      desc: 'Craft, practise and perfect your pitch in 60 seconds. A free 90-minute online workshop with Aequitas Foundation, run as live practice rather than a lecture.',
-      meta: '7:00 PM GMT · Online on Jitsi',
-      href: '/epwwebinar',
-      cta: 'Explore the workshop',
-    },
-    {
       day: '7', month: 'Nov', year: '2026',
-      flag: null,
+      flag: 'Next up',
       tag: 'Summit',
       tagClass: 'bg-[#1E963C] text-white',
       title: 'Agribusiness Summit 2026',
-      desc: 'Our first in-person flagship event. A free, half-day summit in Accra: a keynote, a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.',
+      desc: 'Our first in-person flagship event. A free, half-day summit in Accra: a keynote, a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, live demonstrations, and a youth pitch showcase.',
       meta: '9:00 AM – 1:30 PM GMT · Ashaley Botwe, Accra',
       href: '/summit',
       cta: 'Explore the Summit',
@@ -452,7 +441,7 @@ const Home = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 xs:gap-6">
+          <div className={`grid grid-cols-1 gap-5 xs:gap-6 ${events.length > 1 ? 'lg:grid-cols-2' : 'max-w-3xl mx-auto'}`}>
             {events.map((e) => (
               <a
                 key={e.href}

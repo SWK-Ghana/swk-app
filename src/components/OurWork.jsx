@@ -313,12 +313,14 @@ const OurWork = () => {
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
                 Our first in-person flagship event, growing out of a webinar series that has reached 300+
                 young people across 9+ countries. A free, half-day summit: a keynote, a
-                rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, and a youth pitch showcase.
+                rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, live demonstrations, and a
+                youth pitch showcase.
               </p>
               <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
                 <li>📅 Saturday, 7 November 2026 · 9:00 AM – 1:30 PM GMT</li>
                 <li>📍 The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
-                <li>🎟️ Free entry · Limited to 100 attendees</li>
+                <li>🤝 In partnership with TGLC, Agribusiness e-Academy, Calidad Farms &amp; The Food Discourse</li>
+                <li>🎟️ Free entry · Seats are filling fast</li>
               </ul>
               <a
                 href="/summit"
@@ -330,7 +332,7 @@ const OurWork = () => {
             <div className="order-1 md:order-2 p-5 xs:p-6 sm:p-8 md:p-10 md:pl-0">
               <a href="/summit" tabIndex={-1} aria-hidden="true">
                 <img
-                  src={img('v1788183692/SummitFlyer-selection_2_fyjuwm.png', 700)}
+                  src={img('v1790846227/SummitFlyer-selection_5_zshe0n.png', 700)}
                   alt=""
                   width="2160"
                   height="2160"
