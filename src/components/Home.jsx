@@ -20,6 +20,11 @@ const img = (path, w = 600) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path}
 const flyerLogo = (crop) =>
   `${CLD}/image/upload/${crop}/e_make_transparent:10/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png`
 
+// The Elevator Pitch Workshop thank-you poster is portrait; a wide card would
+// cut it mid-text, so cards show its "THANK YOU" header (top 45%). Relative
+// crop values, so the crop still holds after the w_ resize the helpers prepend.
+const EPW_POSTER_HEADER = 'c_crop,x_0,y_0,w_1.0,h_0.45/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png'
+
 // Responsive srcset — Cloudinary serves WebP/AVIF automatically via f_auto
 const srcset = (path, widths = [400, 800, 1200]) =>
   widths.map((w) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path} ${w}w`).join(', ')
@@ -638,8 +643,8 @@ const Home = () => {
             {[
               {
                 gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]', badge: 'Impact', accent: 'bg-[#F2FAE8] text-[#1E963C]',
-                path: 'v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png', title: 'Agribusiness Webinar Series',
-                desc: 'Latest edition: Strategic Partnerships — May 2026. An ongoing webinar series empowering youth with agribusiness knowledge and networks.', stat: '230+ Registrants',
+                path: EPW_POSTER_HEADER, title: 'Agribusiness Webinar Series',
+                desc: 'Latest edition: Elevator Pitch Workshop with Aequitas Foundation — September 2026. An ongoing webinar series empowering youth with agribusiness knowledge and networks.', stat: '230+ Registrants',
               },
               {
                 gradient: 'from-blue-50 to-cyan-50', border: 'border-blue-100', badge: 'Learning', accent: 'bg-blue-100 text-blue-700',
@@ -812,24 +817,24 @@ const Home = () => {
           <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
 
-            {/* Report 1 — May 2026 Strategic Partnerships Webinar Report */}
+            {/* Report 1 — September 2026 Elevator Pitch Workshop Report */}
             <div className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] overflow-hidden hover:shadow-md transition-shadow flex flex-col">
               <div className="relative">
                 <img
-                  src={img('v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png')}
-                  srcSet={cardSrcset('v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png')}
+                  src={img(EPW_POSTER_HEADER)}
+                  srcSet={cardSrcset(EPW_POSTER_HEADER)}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  alt="Agribusiness Webinar Report: Strategic Partnerships — May 2026" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
+                  alt="Webinar Report: Elevator Pitch Workshop — September 2026" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
                 <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
                 <span className="text-xs font-semibold text-[#78C31E] uppercase tracking-wide">Impact Report</span>
-                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Agribusiness Webinar: Strategic Partnerships — May 2026</h3>
-                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways.</p>
+                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Elevator Pitch Workshop — September 2026</h3>
+                <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.</p>
                 <div className="flex gap-2">
-                  <a href="https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+                  <a href="/reports/elevator-pitch-workshop-2026"
                     className="flex-1 text-center text-xs font-semibold text-white bg-[#78C31E] hover:bg-[#1E963C] px-3 py-2 rounded-lg transition-colors">📄 View</a>
-                  <a href="https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi" target="_blank" rel="noopener noreferrer"
+                  <a href="/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf" target="_blank" rel="noopener noreferrer"
                     className="flex-1 text-center text-xs font-semibold text-[#78C31E] border border-[#78C31E] hover:bg-[#F2FAE8] px-3 py-2 rounded-lg transition-colors">⬇️ PDF</a>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { client } from '../utils/sanityClient'
 import { login as adminLogin, createDoc, patchDoc, deleteDoc, getSession, clearSession } from '../utils/adminApi'
 
-const CATEGORIES = ['Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
+const CATEGORIES = ['News', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 const PRODUCT_CATEGORIES = ['Agribusiness', 'Recycled & Upcycled', 'Handmade Crafts', 'Organic Produce']
 
 const slugify = (text) =>

@@ -33,6 +33,10 @@
       "destination": "/summit-call-for-partners.html"
     },
     {
+      "source": "/reports/elevator-pitch-workshop-2026",
+      "destination": "/reports/elevator-pitch-workshop-2026.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

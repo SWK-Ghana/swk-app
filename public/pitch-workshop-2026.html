@@ -8,29 +8,30 @@
 
   <title>Pitch Ready: Elevator Pitch Workshop | SWK Ghana &amp; Aequitas Foundation</title>
   <meta name="description"
-    content="SWK Ghana's free online Elevator Pitch Workshop with Aequitas Foundation took place on Thursday 17 September 2026. Next up: the Agribusiness Summit 2026, Saturday 7 November in Accra." />
+    content="SWK Ghana's free online Elevator Pitch Workshop with Aequitas Foundation took place on Thursday 17 September 2026: 30+ joined live and 63 registered from four countries. Read the event report and recap." />
   <link rel="canonical" href="https://swkghana.org/epwwebinar" />
   <meta name="author" content="SWK Ghana" />
   <link rel="icon" type="image/png"
     href="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" />
 
-  <!-- Open Graph / Twitter: the flyer, padded onto white so the whole 4:5
-       artwork survives the 1.91:1 crop social platforms apply. -->
+  <!-- Open Graph / Twitter: the thank-you poster now the workshop is over,
+       padded onto its own grey so the whole 4:5 artwork survives the 1.91:1
+       crop social platforms apply. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SWK Ghana" />
   <meta property="og:locale" content="en_GH" />
   <meta property="og:title" content="Pitch Ready: Elevator Pitch Workshop | SWK Ghana" />
   <meta property="og:description"
-    content="This workshop took place on Thursday 17 September 2026 — thank you to everyone who pitched. Next up: the Agribusiness Summit 2026, 7 November, Accra." />
+    content="30+ joined us live on 17 September 2026 to craft, practise and perfect their pitch. Read the event report and recap. Next up: the Agribusiness Summit 2026, 7 November, Accra." />
   <meta property="og:url" content="https://swkghana.org/epwwebinar" />
   <meta property="og:image"
-    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_white,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png" />
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:EBEDEA,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pitch Ready: Elevator Pitch Workshop | SWK Ghana" />
   <meta name="twitter:description"
-    content="This workshop took place on 17 September 2026. Next up: the Agribusiness Summit 2026, 7 November, Accra." />
+    content="30+ joined us live on 17 September 2026. Read the event report and recap. Next up: the Agribusiness Summit 2026, 7 November, Accra." />
   <meta name="twitter:image"
-    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_white,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png" />
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:EBEDEA,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -626,6 +627,72 @@
       font-size: .72rem;
       color: var(--ink-soft);
       opacity: .75;
+    }
+
+    /* ═══ 1b. HIGHLIGHTS ════════════════════════════════════════════════
+       Added after the workshop: the first thing a visitor sees below the
+       hero is how it went, with routes to the report, recap and news. */
+    .recap { background: var(--g-900); color: #fff; }
+
+    .recap__grid {
+      display: grid;
+      gap: clamp(2.25rem, 5vw, 4rem);
+    }
+
+    @media (min-width: 940px) {
+      .recap__grid {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+        align-items: center;
+      }
+    }
+
+    .recap .lede { color: rgba(255, 255, 255, .78); }
+
+    .recap .stats {
+      background: rgba(255, 255, 255, .14);
+      border-color: rgba(255, 255, 255, .14);
+    }
+
+    .recap .stat { background: var(--g-900); }
+    .recap .stat__num { color: #fff; }
+    .recap .stat__label { color: rgba(255, 255, 255, .72); }
+
+    .recap__links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.6rem;
+      margin-top: clamp(2rem, 4.5vw, 2.75rem);
+    }
+
+    .recap__link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      text-underline-offset: 4px;
+    }
+
+    .recap__link:hover { text-decoration: underline; }
+    .recap__link svg { width: 17px; height: 17px; color: var(--g-400); }
+
+    .recap__poster {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 26rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 34px 74px -30px rgba(0, 0, 0, .65);
+      transform: rotate(1deg);
+    }
+
+    /* height:auto, or the height attribute wins and the poster stretches. */
+    .recap__poster img { width: 100%; height: auto; }
+
+    @media (max-width: 939px) {
+      .recap__poster { transform: none; max-width: 20rem; }
     }
 
     /* ═══ 3. THE THREE C'S ══════════════════════════════════════════════ */
@@ -1227,7 +1294,7 @@
               <p class="hero__ended">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>
                 <span>
-                  This workshop has ended &mdash; thank you to everyone who pitched. Next up: the
+                  This workshop has ended &mdash; thank you to the 30+ who joined us live. Next up: the
                   Agribusiness Summit 2026, Saturday 7 November in Accra.
                 </span>
               </p>
@@ -1254,14 +1321,80 @@
     </div>
 
     <div class="scroll-cue">
-      <a href="#why">
-        <span>Explore</span>
+      <a href="#highlights">
+        <span>Highlights</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-down" /></svg>
       </a>
     </div>
   </header>
 
   <main id="main">
+
+    <!-- ═══════════════ 1b. HIGHLIGHTS ══════════════════════════════════ -->
+    <section class="section recap" id="highlights" aria-labelledby="recap-title">
+      <div class="shell">
+        <div class="recap__grid">
+          <div>
+            <p class="eyebrow eyebrow--on-dark reveal">Workshop highlights</p>
+            <h2 class="section-title section-title--on-dark reveal" id="recap-title">
+              30+ joined us live to craft, practise and perfect their pitch.
+            </h2>
+            <p class="lede reveal" style="--d:80ms">
+              Rev&rsquo;d Akua Buabema Ofori-Boateng, PhD, led the session with Aequitas Foundation, and Ben Brown
+              moderated. Some participants dropped out because of network problems and technical issues with
+              Jitsi, so our report sets out what we will do differently next time.
+            </p>
+
+            <div class="stats reveal" style="--d:140ms">
+              <div class="stat">
+                <div class="stat__num">30<em>+</em></div>
+                <div class="stat__label">Joined live</div>
+              </div>
+              <div class="stat">
+                <div class="stat__num">63</div>
+                <div class="stat__label">Registered</div>
+              </div>
+              <div class="stat">
+                <div class="stat__num">4</div>
+                <div class="stat__label">Countries</div>
+              </div>
+              <div class="stat">
+                <div class="stat__num">87<em>%</em></div>
+                <div class="stat__label">Aged 15&ndash;35</div>
+              </div>
+            </div>
+
+            <div class="recap__links reveal" style="--d:200ms">
+              <a class="btn btn--white" href="https://swkghana.org/reports/elevator-pitch-workshop-2026">
+                Read the report
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </a>
+              <a class="recap__link" href="https://swkghana.org/blog/pitch-ready-inside-our-elevator-pitch-workshop">
+                Read the recap
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </a>
+              <a class="recap__link" href="https://swkghana.org/blog/elevator-pitch-workshop-30-join-swk-ghana-aequitas-foundation">
+                Read the news
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </a>
+              <a class="recap__link" href="https://swkghana.org/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf">
+                Download the PDF
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-down" /></svg>
+              </a>
+            </div>
+          </div>
+
+          <figure class="recap__poster reveal" style="--d:120ms">
+            <img
+              src="https://res.cloudinary.com/dwgj3lovn/image/upload/w_800,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png"
+              srcset="https://res.cloudinary.com/dwgj3lovn/image/upload/w_480,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png 480w,
+                      https://res.cloudinary.com/dwgj3lovn/image/upload/w_800,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png 800w"
+              sizes="(min-width: 940px) 26rem, 20rem" width="1080" height="1350" loading="lazy"
+              alt="Thank-you poster: Webinar recap. Thank you for joining our Elevator Pitch Workshop. 30+ people joined us live to craft, practise and perfect their pitch. Screenshots from the session on SWK Meet." />
+          </figure>
+        </div>
+      </div>
+    </section>
 
     <!-- ═══════════════ 2. WHY IT MATTERS ═══════════════════════════════ -->
     <section class="section why" id="why" aria-labelledby="why-title">
@@ -1562,8 +1695,8 @@
       <div class="shell">
         <h2 id="register-title" class="reveal">That&rsquo;s a wrap.</h2>
         <p class="register__body reveal" style="--d:100ms">
-          The Elevator Pitch Workshop took place on Thursday 17 September 2026. Thank you to everyone who joined,
-          practised, and pitched. Our next event is the Agribusiness Summit 2026 &mdash; free and in person,
+          The Elevator Pitch Workshop took place on Thursday 17 September 2026. Thank you to everyone who joined
+          and practised with us. Our next event is the Agribusiness Summit 2026 &mdash; free and in person,
           Saturday 7 November in Accra.
         </p>
         <div class="reveal" style="--d:200ms">
@@ -1573,6 +1706,7 @@
           </a>
         </div>
         <p class="register__note reveal" style="--d:260ms">
+          Missed part of it? <a href="https://swkghana.org/reports/elevator-pitch-workshop-2026">Read the event report</a>.
           Want to hear about the next workshop?
           <a href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu" rel="noopener">Join our WhatsApp community</a>.
         </p>

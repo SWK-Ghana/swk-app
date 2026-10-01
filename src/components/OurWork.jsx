@@ -15,6 +15,9 @@ const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
 // ─── Gallery photos ───────────────────────────────────────────────────────────
 const GALLERY_PHOTOS = [
+  { path: 'v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png', caption: 'Elevator Pitch Workshop — Thank You' },
+  { path: 'v1790859578/WhatsApp_Image_2026-09-18_at_12.04.53_vdrv2t.jpg', caption: 'Elevator Pitch Workshop — Rev’d Akua presents' },
+  { path: 'v1790859578/WhatsApp_Image_2026-09-18_at_12.04.54_1_cjoaes.jpg', caption: 'Elevator Pitch Workshop — In the room' },
   { path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', caption: 'Youth Empowerment Program' },
   { path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', caption: 'Climate Action Campaign' },
   { path: 'v1760294683/SWK_at_Ga_West_n0c3fz.jpg', caption: 'Community Engagement — Ga West' },
@@ -131,9 +134,10 @@ const imageProjects = [
     border: 'border-[#D4F0A0]',
     accent: 'bg-[#F2FAE8] text-[#1E963C]',
     badge: 'Impact',
-    thumb: img('v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png'),
+    // The poster's "THANK YOU" header (top 45%), so the wide thumbnail isn't cut mid-text.
+    thumb: img('c_crop,x_0,y_0,w_1.0,h_0.45/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png'),
     title: 'Agribusiness Webinar Series',
-    desc: 'An ongoing webinar series empowering youth with agribusiness knowledge. Latest edition: Strategic Partnerships — May 2026, powered by Agribusiness e-Academy.',
+    desc: 'An ongoing webinar series empowering youth with agribusiness knowledge. Latest edition: Elevator Pitch Workshop with Aequitas Foundation — September 2026, with 30+ joining live.',
     stat: '230+ Registrants',
   },
   {

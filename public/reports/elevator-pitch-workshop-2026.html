@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0C2E11" />
+
+  <title>Event Report: Elevator Pitch Workshop (September 2026) | SWK Ghana</title>
+  <meta name="description"
+    content="Event report for Pitch Ready, SWK Ghana's free online Elevator Pitch Workshop with Aequitas Foundation on 17 September 2026: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next." />
+  <link rel="canonical" href="https://swkghana.org/reports/elevator-pitch-workshop-2026" />
+  <meta name="author" content="SWK Ghana" />
+  <link rel="icon" type="image/png"
+    href="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="SWK Ghana" />
+  <meta property="og:locale" content="en_GH" />
+  <meta property="og:title" content="Event Report: Elevator Pitch Workshop — SWK Ghana × Aequitas Foundation" />
+  <meta property="og:description"
+    content="30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next." />
+  <meta property="og:url" content="https://swkghana.org/reports/elevator-pitch-workshop-2026" />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:EBEDEA,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Event Report: Elevator Pitch Workshop — SWK Ghana × Aequitas Foundation" />
+  <meta name="twitter:description"
+    content="30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next." />
+  <meta name="twitter:image"
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:EBEDEA,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,400..700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --lime: #78C31E;
+      --green-mid: #1E963C;
+      --green-text: #17702D;
+      --green-deep: #123D16;
+      --green-900: #0C2E11;
+      --cream: #F7FAF2;
+      --white: #FFFFFF;
+      --ink: #1C2118;
+      --ink-soft: #4A5346;
+      --ink-muted: #6B7466;
+      --line: rgba(23, 112, 45, .16);
+      --bar: #1E963C;
+      --font: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --radius: 14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -.02em; }
+    p { margin: 0; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--green-text); }
+    :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+    .shell { width: 100%; max-width: 960px; margin-inline: auto; padding-inline: clamp(1.1rem, 4vw, 2rem); }
+
+    /* ── Top bar (screen only) ─────────────────────────────────────────── */
+    .bar-top { background: var(--green-900); color: var(--white); }
+    .bar-top .shell { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .85rem; flex-wrap: wrap; }
+    .bar-top a { color: rgba(255, 255, 255, .85); text-decoration: none; font-weight: 700; font-size: .9rem; }
+    .bar-top a:hover { color: var(--lime); }
+    .bar-top__actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-pdf { display: inline-flex; align-items: center; gap: .45rem; background: var(--lime); color: var(--green-deep) !important; padding: .55rem 1.1rem; border-radius: 999px; }
+    .btn-pdf:hover { background: #8AD62B; }
+
+    /* Phones: two rows, not three. "All reports" and the PDF button share the
+       first; the two text links take the second. */
+    @media (max-width: 560px) {
+      .bar-top .shell { justify-content: flex-start; row-gap: .6rem; }
+      .bar-top__actions { display: contents; }
+      .bar-top .btn-pdf { order: 1; margin-left: auto; }
+      .bar-top__actions a:not(.btn-pdf) { order: 2; }
+    }
+
+    /* ── Cover ─────────────────────────────────────────────────────────── */
+    .cover { background: var(--white); border-bottom: 1px solid var(--line); }
+    .cover .shell { display: grid; gap: clamp(1.5rem, 4vw, 2.5rem); padding-block: clamp(2rem, 5vw, 3.25rem); align-items: center; }
+    @media (min-width: 760px) { .cover .shell { grid-template-columns: 1.25fr .75fr; } }
+    .logos { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+    .logos img:first-child { height: 60px; width: auto; }
+    .logos__rule { width: 1px; height: 34px; background: var(--line); }
+    .logos img:last-child { height: 30px; width: auto; }
+    .eyebrow { font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--green-text); margin-bottom: .7rem; }
+    .cover h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem); font-weight: 900; color: var(--green-deep); }
+    .cover__sub { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); color: var(--ink-soft); margin-top: .6rem; }
+    .cover__meta { margin-top: 1.4rem; display: grid; gap: .3rem; font-size: .95rem; }
+    .cover__meta strong { color: var(--ink); }
+    .cover__meta span { color: var(--ink-soft); }
+    .cover__poster { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 50px -28px rgba(12, 46, 17, .55); border: 1px solid var(--line); max-width: 340px; margin-inline: auto; }
+
+    /* ── Sections ──────────────────────────────────────────────────────── */
+    main { padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3.5rem); }
+    .block { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3.5vw, 2rem); margin-bottom: clamp(1rem, 2.5vw, 1.5rem); }
+    .block h2 { font-size: clamp(1.3rem, 1.15rem + .6vw, 1.6rem); color: var(--green-deep); margin-bottom: .9rem; display: flex; align-items: baseline; gap: .6rem; }
+    .block h2 .num { font-size: .8rem; font-weight: 800; color: var(--green-text); background: rgba(120, 195, 30, .18); border-radius: 999px; padding: .15rem .55rem; letter-spacing: .02em; }
+    .block h3 { font-size: 1.05rem; color: var(--ink); margin: 1.4rem 0 .5rem; }
+    .block p + p { margin-top: .8rem; }
+    .block p { color: var(--ink-soft); }
+    .block p strong { color: var(--ink); }
+    .note { font-size: .82rem; color: var(--ink-muted); margin-top: 1rem; }
+
+    /* ── At a glance ───────────────────────────────────────────────────── */
+    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, 1fr); } }
+    .tile { background: var(--white); padding: 1rem 1.1rem; }
+    .tile__value { font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.5rem); font-weight: 800; color: var(--green-text); line-height: 1.05; letter-spacing: -.02em; }
+    .tile__label { font-size: .86rem; color: var(--ink-soft); margin-top: .25rem; line-height: 1.35; }
+
+    /* ── People / framework / running order ───────────────────────────── */
+    .people { display: grid; gap: .8rem; margin-top: 1rem; }
+    @media (min-width: 640px) { .people { grid-template-columns: repeat(3, 1fr); } }
+    .person { background: var(--cream); border-radius: 10px; padding: .85rem 1rem; }
+    .person__role { font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--green-text); }
+    .person__name { font-weight: 800; color: var(--ink); margin-top: .2rem; line-height: 1.3; }
+    .person__bio { font-size: .85rem; color: var(--ink-soft); margin-top: .3rem; line-height: 1.45; }
+
+    .cs { display: grid; gap: .8rem; margin-top: .6rem; }
+    @media (min-width: 640px) { .cs { grid-template-columns: repeat(3, 1fr); } }
+    .c { border-left: 3px solid var(--lime); padding: .2rem 0 .2rem .9rem; }
+    .c strong { display: block; color: var(--ink); }
+    .c span { font-size: .9rem; color: var(--ink-soft); line-height: 1.5; }
+
+    table.runsheet { width: 100%; border-collapse: collapse; margin-top: .4rem; font-size: .92rem; }
+    .runsheet th, .runsheet td { text-align: left; padding: .5rem .6rem .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .runsheet th { font-weight: 700; color: var(--green-text); white-space: nowrap; width: 6.5rem; font-variant-numeric: tabular-nums; }
+    .runsheet td strong { color: var(--ink); }
+    .runsheet td span { color: var(--ink-soft); }
+    .runsheet tr:last-child th, .runsheet tr:last-child td { border-bottom: 0; }
+
+    /* ── Charts (each is a real table: the table view and the chart are one) ── */
+    .charts { display: grid; gap: 1.6rem 2rem; margin-top: 1.2rem; }
+    @media (min-width: 720px) { .charts { grid-template-columns: 1fr 1fr; } }
+    .chart { margin: 0; }
+    .chart--wide { grid-column: 1 / -1; }
+    .chart__title { font-weight: 800; color: var(--ink); font-size: .98rem; }
+    .chart__sub { font-size: .82rem; color: var(--ink-muted); margin-bottom: .6rem; }
+
+    table.bars { width: 100%; border-collapse: collapse; }
+    .bars th { text-align: left; font-weight: 600; font-size: .86rem; color: var(--ink); padding: .32rem .7rem .32rem 0; white-space: nowrap; width: 1%; }
+    .bars td { padding: .32rem 0; }
+    .bars__track { width: 100%; }
+    .bar { display: block; height: 14px; width: calc(var(--w) * 1%); min-width: 3px; background: var(--bar); border-radius: 0 4px 4px 0; }
+    .bars__val { white-space: nowrap; text-align: right; font-size: .86rem; font-weight: 700; color: var(--ink); padding-left: .7rem !important; font-variant-numeric: tabular-nums; width: 1%; }
+    .bars__val span { font-weight: 500; color: var(--ink-muted); margin-left: .35rem; }
+    @media (max-width: 560px) { .bars th { white-space: normal; width: 38%; line-height: 1.3; } }
+
+    .cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 6px; align-items: end; height: 170px; padding-top: 22px; border-bottom: 1px solid rgba(28, 33, 24, .2); }
+    .col { position: relative; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+    .col__bar { width: min(24px, 70%); height: calc(var(--h) * 1%); background: var(--bar); border-radius: 4px 4px 0 0; }
+    .col__val { position: absolute; left: 0; right: 0; text-align: center; bottom: calc(var(--h) * 1% + 4px); font-size: .8rem; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .cols__x { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 6px; margin-top: .35rem; text-align: center; font-size: .74rem; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+    .cols__note { font-size: .82rem; color: var(--ink-muted); margin-top: .5rem; }
+
+    .split { display: grid; gap: .8rem; margin-top: .3rem; }
+    @media (min-width: 560px) { .split { grid-template-columns: repeat(3, 1fr); } }
+    .split div { background: var(--cream); border-radius: 10px; padding: .8rem 1rem; }
+    .split strong { display: block; font-size: 1.5rem; color: var(--green-text); line-height: 1.1; }
+    .split span { font-size: .85rem; color: var(--ink-soft); }
+
+    /* ── Photos ────────────────────────────────────────────────────────── */
+    .shots { display: grid; gap: 1rem; margin-top: 1.1rem; }
+    @media (min-width: 640px) { .shots { grid-template-columns: repeat(3, 1fr); } }
+    .shot { margin: 0; }
+    .shot img { border-radius: 12px; border: 1px solid var(--line); width: 100%; height: auto; }
+    .shot figcaption { font-size: .82rem; color: var(--ink-soft); margin-top: .45rem; line-height: 1.45; }
+
+    /* ── Lessons ───────────────────────────────────────────────────────── */
+    .lessons { display: grid; gap: 1rem; margin-top: .6rem; }
+    .lesson { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem; }
+    .lesson h3 { margin: 0 0 .35rem; }
+    .lesson ul { margin: .5rem 0 0; padding-left: 1.15rem; color: var(--ink-soft); }
+    .lesson li { margin-top: .25rem; }
+
+    .next { display: grid; gap: .8rem; margin-top: .8rem; }
+    @media (min-width: 640px) { .next { grid-template-columns: repeat(3, 1fr); } }
+    .next a { display: block; text-decoration: none; background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: .9rem 1rem; color: inherit; }
+    .next a:hover { border-color: var(--lime); }
+    .next strong { display: block; color: var(--green-deep); }
+    .next span { font-size: .86rem; color: var(--ink-soft); }
+
+    /* ── Footer ────────────────────────────────────────────────────────── */
+    .foot { background: var(--green-900); color: rgba(255, 255, 255, .72); font-size: .86rem; }
+    .foot .shell { padding-block: 1.6rem; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+    .foot a { color: var(--white); }
+
+    /* ── Print / PDF ───────────────────────────────────────────────────── */
+    @page { size: A4; margin: 14mm 13mm; }
+    @media print {
+      html, body { background: var(--white); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { font-size: 10.5pt; line-height: 1.5; }
+      .bar-top { display: none; }
+      .shell { max-width: none; padding-inline: 0; }
+      .cover { border-bottom: 0; }
+      .cover .shell { grid-template-columns: 1.25fr .75fr; padding-block: 0 6mm; }
+      .cover__poster { box-shadow: none; max-width: 62mm; }
+      main { padding-block: 0; }
+      .block { border: 0; border-top: 1.5px solid var(--line); border-radius: 0; padding: 5mm 0 0; margin-bottom: 4mm; break-inside: auto; }
+      .block h2 { break-after: avoid; }
+      .tiles { grid-template-columns: repeat(3, 1fr); }
+      .people, .cs, .split, .next { grid-template-columns: repeat(3, 1fr); }
+      .charts { grid-template-columns: 1fr 1fr; }
+      .chart, .lesson, .person, .tile, .shot, .split, .next, table.runsheet tr { break-inside: avoid; }
+      .block h3 { break-after: avoid; }
+      .shots { grid-template-columns: repeat(3, 1fr); }
+      .shot img { max-height: 95mm; width: auto; margin-inline: auto; }
+      a { text-decoration: none; }
+      .foot { background: none; color: var(--ink-muted); border-top: 1.5px solid var(--line); margin-top: 4mm; }
+      .foot .shell { padding-block: 3mm 0; }
+      .foot a { color: var(--green-text); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bar-top">
+    <div class="shell">
+      <a href="https://swkghana.org/reports">&larr; All reports</a>
+      <div class="bar-top__actions">
+        <a href="https://swkghana.org/epwwebinar">About the workshop</a>
+        <a href="https://swkghana.org/blog/pitch-ready-inside-our-elevator-pitch-workshop">Read the recap</a>
+        <a class="btn-pdf" href="/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf">Download PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="cover">
+    <div class="shell">
+      <div>
+        <div class="logos">
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" alt="SWK Ghana"
+            width="46" height="46" />
+          <span class="logos__rule" aria-hidden="true"></span>
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/h_96,q_auto,f_auto/v1788709921/AEQUITAS-08_c5hpmd.png"
+            alt="Aequitas Foundation" width="128" height="30" />
+        </div>
+        <p class="eyebrow">Event report &middot; Webinar</p>
+        <h1>Pitch Ready: Elevator Pitch Workshop</h1>
+        <p class="cover__sub">Craft. Practise. Perfect your pitch in 60 seconds.</p>
+        <div class="cover__meta">
+          <p><strong>Thursday 17 September 2026</strong> <span>&middot; 7:00&ndash;8:30 PM GMT</span></p>
+          <p><span>Online on SWK Meet &middot; In partnership with Aequitas Foundation</span></p>
+          <p><span>Report published October 2026 by SWK Ghana LBG</span></p>
+        </div>
+      </div>
+      <div class="cover__poster">
+        <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/w_700,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png"
+          width="1080" height="1350"
+          alt="Thank-you poster: Webinar recap. Thank you for joining our Elevator Pitch Workshop. 30+ people joined us live to craft, practise and perfect their pitch. Facilitator Rev'd Akua Buabema Ofori-Boateng, PhD; partner Aequitas Foundation; moderator Ben Brown." />
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <section class="block" aria-labelledby="glance">
+      <h2 id="glance">At a glance</h2>
+      <div class="tiles">
+        <div class="tile"><div class="tile__value">30+</div><div class="tile__label">People joined the session live</div></div>
+        <div class="tile"><div class="tile__value">63</div><div class="tile__label">Registered over 12 days</div></div>
+        <div class="tile"><div class="tile__value">4</div><div class="tile__label">Countries: Ghana, South Sudan, the UK and Zambia</div></div>
+        <div class="tile"><div class="tile__value">87%</div><div class="tile__label">Of registrants aged 15&ndash;35</div></div>
+        <div class="tile"><div class="tile__value">35%</div><div class="tile__label">Of registrants were women</div></div>
+        <div class="tile"><div class="tile__value">95%</div><div class="tile__label">Opted into our WhatsApp community</div></div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="summary">
+      <h2 id="summary"><span class="num">1</span> Summary</h2>
+      <p>
+        On Thursday 17 September 2026, SWK Ghana and Aequitas Foundation hosted <strong>Pitch Ready</strong>, a free
+        90-minute online workshop on crafting and delivering an elevator pitch. It was the fifth edition of SWK Ghana's
+        programmes and our first workshop with Aequitas Foundation.
+      </p>
+      <p>
+        Sixty-three people registered over twelve days from four countries, and <strong>more than 30 joined the
+        session live</strong> on SWK Meet, our online meeting platform. Rev'd Akua Buabema Ofori-Boateng, PhD,
+        facilitated and Ben Brown moderated.
+      </p>
+      <p>
+        The session was built around one framework &mdash; <strong>Clear, Concise, Compelling</strong> &mdash; and
+        designed as practice rather than a lecture. Network problems and technical issues with the Jitsi app caused
+        some participants to drop out during the session. This report sets out who took part, what we learned, and
+        what we will do differently.
+      </p>
+    </section>
+
+    <section class="block" aria-labelledby="why">
+      <h2 id="why"><span class="num">2</span> Why this workshop</h2>
+      <p>
+        About one in five working-age Africans is starting a business (Brookings, 2024), yet capital and networks
+        stay out of reach for many young founders &mdash; often not for want of a good idea, but for want of a clear
+        one. Investors lean on credentialed trust, which creates a two-speed ecosystem. One practical lever narrows
+        that gap: the ability to explain what you do, clearly and credibly, in the time it takes to ride an
+        elevator.
+      </p>
+      <p>
+        The workshop treated the pitch as <strong>a skill you practise, not a talent you either have or
+        lack</strong> &mdash; for founders, agripreneurs, students, community leaders and anyone who has to make
+        someone care, fast.
+      </p>
+    </section>
+
+    <section class="block" aria-labelledby="session">
+      <h2 id="session"><span class="num">3</span> The session</h2>
+      <p>Free, 90 minutes, online on SWK Meet (meet.swkghana.org), open to everyone.</p>
+
+      <div class="people">
+        <div class="person">
+          <p class="person__role">Facilitator</p>
+          <p class="person__name">Rev'd Akua Buabema Ofori-Boateng, PhD</p>
+          <p class="person__bio">Anglican priest, engineer and strategist; Director of Programmes, Anglican Diocese
+            of Accra; founding Executive Director of Aequitas Foundation.</p>
+        </div>
+        <div class="person">
+          <p class="person__role">Partner</p>
+          <p class="person__name">Aequitas Foundation</p>
+          <p class="person__bio">A faith-based nonprofit in Accra working towards a fairer world through youth
+            development and skills-building.</p>
+        </div>
+        <div class="person">
+          <p class="person__role">Moderator</p>
+          <p class="person__name">Ben Brown</p>
+          <p class="person__bio">SWK Ghana.</p>
+        </div>
+      </div>
+
+      <h3>The framework: the Three C's</h3>
+      <div class="cs">
+        <div class="c"><strong>Clear</strong><span>Plain language, no jargon: who you are, what you do, and why it
+            matters.</span></div>
+        <div class="c"><strong>Concise</strong><span>Thirty to ninety seconds, carrying only what is genuinely
+            essential.</span></div>
+        <div class="c"><strong>Compelling</strong><span>A specific hook, a real story, or a blunt statement of the
+            problem you solve.</span></div>
+      </div>
+
+      <h3>The running order, as designed</h3>
+      <table class="runsheet">
+        <caption class="sr-only">Planned running order, times in GMT</caption>
+        <tbody>
+          <tr><th scope="row">7:00 PM</th><td><strong>Welcome &amp; introduction</strong> <span>&mdash; opening remarks from SWK Ghana</span></td></tr>
+          <tr><th scope="row">7:05 PM</th><td><strong>Why your pitch is your most powerful tool</strong> <span>&mdash; the African entrepreneurship landscape</span></td></tr>
+          <tr><th scope="row">7:15 PM</th><td><strong>Masterclass: building your elevator pitch</strong> <span>&mdash; the Three C's, common mistakes, model pitches</span></td></tr>
+          <tr><th scope="row">7:35 PM</th><td><strong>Individual writing time</strong> <span>&mdash; drafting against a structured template</span></td></tr>
+          <tr><th scope="row">7:40 PM</th><td><strong>Breakout practice</strong> <span>&mdash; small groups, feedback against a shared rubric</span></td></tr>
+          <tr><th scope="row">8:00 PM</th><td><strong>Showcase</strong> <span>&mdash; volunteer pitches to the full room</span></td></tr>
+          <tr><th scope="row">8:10 PM</th><td><strong>Refinement &amp; next steps</strong> <span>&mdash; tailoring for audiences, pitching in writing</span></td></tr>
+          <tr><th scope="row">8:20 PM</th><td><strong>Q&amp;A, closing &amp; community</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="block" aria-labelledby="who">
+      <h2 id="who"><span class="num">4</span> Who registered</h2>
+      <p>Registration ran from 6 to 17 September 2026 through the form on swkghana.org/epwwebinar.</p>
+
+      <div class="charts">
+        <figure class="chart chart--wide">
+          <figcaption>
+            <span class="chart__title">Registrations per day</span>
+            <span class="chart__sub" style="display:block">6&ndash;17 September 2026 &middot; 63 registrants</span>
+          </figcaption>
+          <div class="cols" aria-hidden="true">
+            <div class="col" style="--h:63.2" title="6 Sep: 12"><span class="col__val">12</span><span class="col__bar"></span></div>
+            <div class="col" style="--h:47.4" title="7 Sep: 9"><span class="col__bar"></span></div>
+            <div class="col" style="--h:100" title="8 Sep: 19"><span class="col__val">19</span><span class="col__bar"></span></div>
+            <div class="col" style="--h:15.8" title="9 Sep: 3"><span class="col__bar"></span></div>
+            <div class="col" style="--h:5.3" title="10 Sep: 1"><span class="col__bar"></span></div>
+            <div class="col" style="--h:10.5" title="11 Sep: 2"><span class="col__bar"></span></div>
+            <div class="col" style="--h:0" title="12 Sep: 0"></div>
+            <div class="col" style="--h:0" title="13 Sep: 0"></div>
+            <div class="col" style="--h:15.8" title="14 Sep: 3"><span class="col__bar"></span></div>
+            <div class="col" style="--h:21.1" title="15 Sep: 4"><span class="col__bar"></span></div>
+            <div class="col" style="--h:5.3" title="16 Sep: 1"><span class="col__bar"></span></div>
+            <div class="col" style="--h:47.4" title="17 Sep: 9"><span class="col__val">9</span><span class="col__bar"></span></div>
+          </div>
+          <div class="cols__x" aria-hidden="true">
+            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+          </div>
+          <p class="cols__note">Registration opened on 6 September (12 that day), peaked on 8 September (19), and 9 people
+            registered on the day of the session.</p>
+          <table class="sr-only">
+            <caption>Registrations per day, September 2026</caption>
+            <thead><tr><th scope="col">Date</th><th scope="col">Registrations</th></tr></thead>
+            <tbody>
+              <tr><td>6 Sep</td><td>12</td></tr><tr><td>7 Sep</td><td>9</td></tr><tr><td>8 Sep</td><td>19</td></tr>
+              <tr><td>9 Sep</td><td>3</td></tr><tr><td>10 Sep</td><td>1</td></tr><tr><td>11 Sep</td><td>2</td></tr>
+              <tr><td>12 Sep</td><td>0</td></tr><tr><td>13 Sep</td><td>0</td></tr><tr><td>14 Sep</td><td>3</td></tr>
+              <tr><td>15 Sep</td><td>4</td></tr><tr><td>16 Sep</td><td>1</td></tr><tr><td>17 Sep</td><td>9</td></tr>
+            </tbody>
+          </table>
+        </figure>
+
+        <figure class="chart">
+          <figcaption><span class="chart__title">Age group</span></figcaption>
+          <table class="bars">
+            <caption class="sr-only">Registrants by age group</caption>
+            <thead class="sr-only"><tr><th scope="col">Age group</th><th scope="col">Bar</th><th scope="col">Registrants</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">15&ndash;25</th><td class="bars__track"><span class="bar" style="--w:34.1" title="15–25: 14 (22%)"></span></td><td class="bars__val">14<span>22%</span></td></tr>
+              <tr><th scope="row">26&ndash;35</th><td class="bars__track"><span class="bar" style="--w:100" title="26–35: 41 (65%)"></span></td><td class="bars__val">41<span>65%</span></td></tr>
+              <tr><th scope="row">36 and above</th><td class="bars__track"><span class="bar" style="--w:19.5" title="36 and above: 8 (13%)"></span></td><td class="bars__val">8<span>13%</span></td></tr>
+            </tbody>
+          </table>
+        </figure>
+
+        <figure class="chart">
+          <figcaption><span class="chart__title">How they heard about it</span></figcaption>
+          <table class="bars">
+            <caption class="sr-only">Registrants by how they heard about the workshop</caption>
+            <thead class="sr-only"><tr><th scope="col">Channel</th><th scope="col">Bar</th><th scope="col">Registrants</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">WhatsApp</th><td class="bars__track"><span class="bar" style="--w:100" title="WhatsApp: 48 (76%)"></span></td><td class="bars__val">48<span>76%</span></td></tr>
+              <tr><th scope="row">LinkedIn</th><td class="bars__track"><span class="bar" style="--w:12.5" title="LinkedIn: 6 (10%)"></span></td><td class="bars__val">6<span>10%</span></td></tr>
+              <tr><th scope="row">A friend</th><td class="bars__track"><span class="bar" style="--w:12.5" title="Referred by a friend: 6 (10%)"></span></td><td class="bars__val">6<span>10%</span></td></tr>
+              <tr><th scope="row">Instagram</th><td class="bars__track"><span class="bar" style="--w:4.2" title="Instagram: 2 (3%)"></span></td><td class="bars__val">2<span>3%</span></td></tr>
+              <tr><th scope="row">Other</th><td class="bars__track"><span class="bar" style="--w:2.1" title="Other: 1 (2%)"></span></td><td class="bars__val">1<span>2%</span></td></tr>
+            </tbody>
+          </table>
+        </figure>
+
+        <figure class="chart chart--wide">
+          <figcaption><span class="chart__title">What they do</span>
+            <span class="chart__sub" style="display:block">Occupations as entered, grouped by SWK Ghana</span></figcaption>
+          <table class="bars">
+            <caption class="sr-only">Registrants by occupation group</caption>
+            <thead class="sr-only"><tr><th scope="col">Occupation group</th><th scope="col">Bar</th><th scope="col">Registrants</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Working professionals</th><td class="bars__track"><span class="bar" style="--w:100" title="Working professionals: 26 (41%)"></span></td><td class="bars__val">26<span>41%</span></td></tr>
+              <tr><th scope="row">Students &amp; recent graduates</th><td class="bars__track"><span class="bar" style="--w:50" title="Students & recent graduates: 13 (21%)"></span></td><td class="bars__val">13<span>21%</span></td></tr>
+              <tr><th scope="row">Founders, entrepreneurs &amp; traders</th><td class="bars__track"><span class="bar" style="--w:50" title="Founders, entrepreneurs & traders: 13 (21%)"></span></td><td class="bars__val">13<span>21%</span></td></tr>
+              <tr><th scope="row">Educators &amp; advisors</th><td class="bars__track"><span class="bar" style="--w:23.1" title="Educators & advisors: 6 (10%)"></span></td><td class="bars__val">6<span>10%</span></td></tr>
+              <tr><th scope="row">Farmers &amp; agro-processors</th><td class="bars__track"><span class="bar" style="--w:19.2" title="Farmers & agro-processors: 5 (8%)"></span></td><td class="bars__val">5<span>8%</span></td></tr>
+            </tbody>
+          </table>
+        </figure>
+      </div>
+
+      <h3>Gender, countries and community</h3>
+      <div class="split">
+        <div><strong>35% women</strong><span>22 women and 41 men</span></div>
+        <div><strong>4 countries</strong><span>Ghana 60 &middot; South Sudan 1 &middot; United Kingdom 1 &middot; Zambia 1</span></div>
+        <div><strong>60 of 63</strong><span>opted into the SWK Ghana WhatsApp community</span></div>
+      </div>
+
+      <p class="note">
+        Source: the online registration form (65 submissions). One duplicate submission and the facilitator's own
+        registration are excluded, leaving 63 unique registrants. Occupations were entered as free text and grouped by
+        SWK Ghana. Percentages are rounded and may not sum to 100.
+      </p>
+    </section>
+
+    <section class="block" aria-labelledby="room">
+      <h2 id="room"><span class="num">5</span> In the room</h2>
+      <p>
+        <strong>More than 30 people joined the session live.</strong> Rev'd Akua led the session on camera with
+        slides, Ben Brown moderated, and participants raised hands and used the chat to engage with the facilitator.
+      </p>
+      <div class="shots">
+        <figure class="shot">
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/q_auto,f_auto/v1790859578/WhatsApp_Image_2026-09-18_at_12.04.53_vdrv2t.jpg"
+            width="644" height="1080"
+            alt="Screenshot at 7:21 PM: Rev'd Akua Ofori-Boateng shares the Elevator Pitch Workshop title slide on SWK Meet." />
+          <figcaption>7:21 PM &mdash; Rev'd Akua shares her slides.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/q_auto,f_auto/v1790859578/WhatsApp_Image_2026-09-18_at_12.04.54_1_cjoaes.jpg"
+            width="764" height="1280"
+            alt="Screenshot at 7:20 PM: the gallery view, with Rev'd Akua Ofori-Boateng and Ben Brown on camera and participants in the call." />
+          <figcaption>7:20 PM &mdash; the gallery view, with the facilitator and moderator on camera.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/q_auto,f_auto/v1790859578/WhatsApp_Image_2026-09-18_at_12.04.54_s6p2r2.jpg"
+            width="644" height="1080"
+            alt="Screenshot at 7:14 PM: the participant list during the session." />
+          <figcaption>7:14 PM &mdash; the participant list.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="lessons">
+      <h2 id="lessons"><span class="num">6</span> Challenges and lessons</h2>
+      <div class="lessons">
+        <div class="lesson">
+          <h3>Connectivity and platform stability</h3>
+          <p>
+            Some participants dropped out because of network problems and technical issues with the Jitsi app. The
+            in-session counter showed 19 people connected around the 30-minute mark, below the 30+ who joined.
+          </p>
+          <ul>
+            <li>Send a short how-to-join guide and a backup link with the reminder.</li>
+            <li>Invite people on weak connections to join with video off.</li>
+            <li>Test the platform at the expected audience size before the day.</li>
+            <li>Record sessions so anyone who drops out can catch up.</li>
+          </ul>
+        </div>
+        <div class="lesson">
+          <h3>Turning registrations into attendance</h3>
+          <p>Roughly half of registrants joined live, and nine people registered on the day itself.</p>
+          <ul>
+            <li>Send WhatsApp reminders the day before and an hour before the start.</li>
+            <li>Keep registration open until the session begins.</li>
+          </ul>
+        </div>
+        <div class="lesson">
+          <h3>Where people come from</h3>
+          <p>
+            Our WhatsApp community brought in three in every four registrations (76%); LinkedIn and personal
+            referrals each brought one in ten.
+          </p>
+          <ul>
+            <li>Keep the community at the centre of promotion, and ask partners to share with their own networks.</li>
+          </ul>
+        </div>
+        <div class="lesson">
+          <h3>Reaching more women</h3>
+          <p>Women made up 35% of registrants.</p>
+          <ul>
+            <li>Plan targeted outreach through women-led groups and partners for future editions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="next">
+      <h2 id="next"><span class="num">7</span> What's next</h2>
+      <p>
+        Our next event is the <strong>SWK Ghana Agribusiness Summit 2026</strong> &mdash; free and in person on
+        Saturday 7 November 2026 at The GracedLife Leadership Centre, Ashaley Botwe, Accra.
+      </p>
+      <div class="next">
+        <a href="https://swkghana.org/summit"><strong>Register for the Summit</strong><span>swkghana.org/summit</span></a>
+        <a href="https://swkghana.org/volunteers"><strong>Volunteer with us</strong><span>swkghana.org/volunteers</span></a>
+        <a href="https://swkghana.org/partners"><strong>Partner with us</strong><span>swkghana.org/partners</span></a>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="thanks">
+      <h2 id="thanks"><span class="num">8</span> Acknowledgements</h2>
+      <p>
+        Thank you to Rev'd Akua Buabema Ofori-Boateng, PhD, for facilitating; to Aequitas Foundation for partnering
+        with us; to Ben Brown for moderating; and to everyone who registered, joined and practised with us. Keep
+        pitching &mdash; your idea deserves to be heard.
+      </p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="shell">
+      <p>&copy; 2026 SWK Ghana LBG &middot; Reg. No. CG024110426 &middot; Companies Act, 2019 (Act 992)</p>
+      <p><a href="https://swkghana.org">swkghana.org</a> &middot; <a href="mailto:info@swkghana.org">info@swkghana.org</a></p>
+    </div>
+  </footer>
+</body>
+
+</html>

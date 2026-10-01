@@ -39,6 +39,25 @@ const ShareButtons = ({ url, title }) => {
 // ─── Report data ───────────────────────────────────────────────────────────────
 const reports = [
   {
+    id: 6,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
+    gradient: 'from-[#F2FAE8] to-green-50',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
+    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
+    title: 'Webinar Report: Elevator Pitch Workshop — September 2026',
+    description:
+      'Event report from Pitch Ready, our Elevator Pitch Workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.',
+    date: 'September 2026',
+    thumbnail:
+      // The poster's "THANK YOU" header, so the wide cover isn't cut mid-text.
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/c_crop,x_0,y_0,w_1080,h_608/f_auto,q_auto,w_800/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png',
+    badgeText: 'Latest Report',
+    driveLink: 'https://swkghana.org/reports/elevator-pitch-workshop-2026',
+    downloadLink: 'https://swkghana.org/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf',
+  },
+  {
     id: 5,
     category: 'Impact Report',
     categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
@@ -52,7 +71,7 @@ const reports = [
     date: 'May 2026',
     thumbnail:
       'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png',
-    badgeText: 'Latest Report',
+    badgeText: null,
     driveLink: 'https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing',
     downloadLink: 'https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi',
   },
@@ -133,7 +152,28 @@ const reports = [
   },
 ]
 
-const articles = []
+const articles = [
+  {
+    id: 'epw-news',
+    category: 'News',
+    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
+    date: 'October 2026',
+    title: '30+ Join SWK Ghana and Aequitas Foundation’s Elevator Pitch Workshop',
+    description:
+      'Young founders, professionals and students from four countries practised the Three C’s of a strong pitch: Clear, Concise, Compelling.',
+    link: 'https://swkghana.org/blog/elevator-pitch-workshop-30-join-swk-ghana-aequitas-foundation',
+  },
+  {
+    id: 'epw-recap',
+    category: 'Event Recap',
+    categoryColor: 'bg-blue-100 text-blue-700',
+    date: 'October 2026',
+    title: 'Pitch Ready: Inside Our Elevator Pitch Workshop',
+    description:
+      'What happened, who came, what the Three C’s framework asks of a pitch, and what we are changing after the connection problems.',
+    link: 'https://swkghana.org/blog/pitch-ready-inside-our-elevator-pitch-workshop',
+  },
+]
 
 const categories = ['All', 'Impact Report', 'Annual Report', 'Program Summary', 'Research']
 

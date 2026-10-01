@@ -29,7 +29,7 @@ export async function loader() {
   }
 }
 
-const CATEGORIES = ['All', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
+const CATEGORIES = ['All', 'News', 'Event Recaps', 'Program Updates', 'Impact Stories', 'Opinion', 'Articles']
 
 // Cloudinary hero image (SWK Ghana community photo), responsive + optimised.
 const CLD = 'https://res.cloudinary.com/dwgj3lovn/image/upload'
