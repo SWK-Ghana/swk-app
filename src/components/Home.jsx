@@ -15,6 +15,11 @@ const CLD = 'https://res.cloudinary.com/dwgj3lovn'
 // Single-width optimised image (fallback src)
 const img = (path, w = 600) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path}`
 
+// Partner logos with no standalone upload yet: cut from the summit flyer, with
+// its #F7F7F4 ground knocked out so they sit cleanly on white.
+const flyerLogo = (crop) =>
+  `${CLD}/image/upload/${crop}/e_make_transparent:10/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png`
+
 // Responsive srcset — Cloudinary serves WebP/AVIF automatically via f_auto
 const srcset = (path, widths = [400, 800, 1200]) =>
   widths.map((w) => `${CLD}/image/upload/f_auto,q_auto,w_${w}/${path} ${w}w`).join(', ')
@@ -980,17 +985,19 @@ const Home = () => {
         {/* ══ 13. PARTNERS ════════════════════════════════════════════════════ */}
         <Section>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-10 text-center">Partners & Supporters</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 items-center">
+          <div className="flex flex-wrap justify-center items-center gap-y-6 sm:gap-y-8">
             {[
-              { src: 'v1773661462/AEQUITAS-08-1536x361_pcxgvy.png', alt: 'Aequitas Foundation' },
-              { src: 'v1773661462/1715875277298_tjdnsb.jpg', alt: 'Agribusiness e-Academy' },
-              { src: 'v1773661461/cropped-tglc-logo-q1ubu2o8mbbpktpnzd608sx1q4jd6s8hmd4b4yek8w_vilk2e.png', alt: 'The GracedLife Leadership Centre' },
-              { src: 'v1773661734/World-Inspiring-Network-Logo-1024x366_v8it3x.png', alt: 'World Inspiring Network' },
-              { src: 'v1773661462/311331075_3157445151233536_1506695373056214199_n_lqwu03.jpg', alt: 'Charter House Ghana' },
+              { src: img('v1773661462/AEQUITAS-08-1536x361_pcxgvy.png', 400), alt: 'Aequitas Foundation' },
+              { src: img('v1773661462/1715875277298_tjdnsb.jpg', 400), alt: 'Agribusiness e-Academy' },
+              { src: img('v1773661461/cropped-tglc-logo-q1ubu2o8mbbpktpnzd608sx1q4jd6s8hmd4b4yek8w_vilk2e.png', 400), alt: 'The GracedLife Leadership Centre' },
+              { src: img('v1773661734/World-Inspiring-Network-Logo-1024x366_v8it3x.png', 400), alt: 'World Inspiring Network' },
+              { src: img('v1773661462/311331075_3157445151233536_1506695373056214199_n_lqwu03.jpg', 400), alt: 'Charter House Ghana' },
+              { src: flyerLogo('c_crop,x_1538,y_150,w_305,h_106'), alt: 'Calidad Farms Ltd' },
+              { src: flyerLogo('c_crop,x_1888,y_122,w_160,h_160'), alt: 'The Food Discourse' },
             ].map(({ src, alt }) => (
-              <div key={alt} className="flex items-center justify-center p-3">
+              <div key={alt} className="basis-1/2 sm:basis-1/3 md:basis-1/4 flex items-center justify-center p-3">
                 <img
-                  src={img(src, 400)}
+                  src={src}
                   alt={alt}
                   className="max-h-20 w-auto object-contain opacity-90 hover:opacity-100 transition"
                   loading="lazy"
