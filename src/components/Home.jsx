@@ -183,6 +183,23 @@ const Testimonials = () => {
   )
 }
 
+// Section shells. Keep them at module scope: declared inside Home they were a
+// new component type on every render, so each slide change or keystroke
+// remounted every section, which dropped focus from the newsletter field.
+const Section = ({ children, className = '' }) => (
+  <div className={`bg-white rounded-2xl p-6 sm:p-10 md:p-14 shadow-sm border border-gray-100 mb-10 sm:mb-16 ${className}`}>
+    {children}
+  </div>
+)
+
+const SectionHeader = ({ badge, badgeColor = 'bg-[#F2FAE8] text-[#1E963C]', title, subtitle }) => (
+  <div className="text-center mb-10 sm:mb-14">
+    <span className={`inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest ${badgeColor}`}>{badge}</span>
+    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h2>
+    {subtitle && <p className="text-lg sm:text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
+  </div>
+)
+
 const Home = () => {
   const navigate = useNavigate()
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false)
@@ -333,20 +350,6 @@ const Home = () => {
     { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', ytId: 'GAE6AL3NWBo', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
     { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', ytId: 'zDywICh3Ay0', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
   ]
-
-  const Section = ({ children, className = '' }) => (
-    <div className={`bg-white rounded-2xl p-6 sm:p-10 md:p-14 shadow-sm border border-gray-100 mb-10 sm:mb-16 ${className}`}>
-      {children}
-    </div>
-  )
-
-  const SectionHeader = ({ badge, badgeColor = 'bg-[#F2FAE8] text-[#1E963C]', title, subtitle }) => (
-    <div className="text-center mb-10 sm:mb-14">
-      <span className={`inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest ${badgeColor}`}>{badge}</span>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h2>
-      {subtitle && <p className="text-lg sm:text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
-    </div>
-  )
 
   return (
     <main className="min-h-screen bg-white">
