@@ -160,7 +160,7 @@ const articles = [
     date: 'October 2026',
     title: '30+ Join SWK Ghana and Aequitas Foundation’s Elevator Pitch Workshop',
     description:
-      'Young founders, professionals and students from four countries practised the Three C’s of a strong pitch: Clear, Concise, Compelling.',
+      'Young founders, professionals and students from four countries learned a six-part structure for a 60-second pitch, from the hook to the ask.',
     link: 'https://swkghana.org/blog/elevator-pitch-workshop-30-join-swk-ghana-aequitas-foundation',
   },
   {
@@ -170,7 +170,7 @@ const articles = [
     date: 'October 2026',
     title: 'Pitch Ready: Inside Our Elevator Pitch Workshop',
     description:
-      'What happened, who came, what the Three C’s framework asks of a pitch, and what we are changing after the connection problems.',
+      'The six parts of a 60-second pitch, hooks that land, mistakes to avoid, who came, and what we are changing after the connection problems.',
     link: 'https://swkghana.org/blog/pitch-ready-inside-our-elevator-pitch-workshop',
   },
 ]

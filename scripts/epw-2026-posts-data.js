@@ -1,7 +1,8 @@
 // Elevator Pitch Workshop (17 September 2026) — the news item and the event
 // recap. Figures match the event report at /reports/elevator-pitch-workshop-2026
-// (registration sheet, deduplicated: 63 registrants). Covers are crops of the
-// official thank-you poster, so no new uploads are needed.
+// (registration sheet, deduplicated: 63 registrants). What was taught follows
+// Rev'd Akua's actual slide deck, summarised in our own words. Covers are crops
+// of the official thank-you poster, so no new uploads are needed.
 //
 // Seed with: node scripts/seed-epw-2026-posts.js
 
@@ -32,7 +33,7 @@ export const posts = [
     coverImageUrl: `${CLD}/c_crop,x_0,y_0,w_1080,h_608/f_auto,q_auto/${POSTER}`,
     content: `<p><strong>Accra, 1 October 2026.</strong> More than 30 people joined <strong>Pitch Ready</strong>, the free Elevator Pitch Workshop hosted by SWK Ghana and Aequitas Foundation, live online on Thursday 17 September 2026. Sixty-three people registered for the 90-minute session from four countries: Ghana, South Sudan, the United Kingdom and Zambia.</p>
 
-<p>The workshop was facilitated by Rev’d Akua Buabema Ofori-Boateng, PhD, Director of Programmes for the Anglican Diocese of Accra and founding Executive Director of Aequitas Foundation, and moderated by Ben Brown of SWK Ghana. It was built around the Three C’s of a strong pitch: clear, concise and compelling.</p>
+<p>The workshop was facilitated by Rev’d Akua Buabema Ofori-Boateng, PhD, Director of Programmes for the Anglican Diocese of Accra and founding Executive Director of Aequitas Foundation, and moderated by Ben Brown of SWK Ghana. The session taught a six-part structure for a 60-second pitch (hook, who you are, the problem, your solution, the value and the ask) and built in two rounds of practice: drafting a pitch from a five-part template, then delivering it to a partner for feedback before refining it.</p>
 
 <p>The audience was young: 87% of registrants were aged 15 to 35. Working professionals, students and recent graduates, and founders, entrepreneurs and traders made up most of the room, alongside educators, advisors, farmers and agro-processors.</p>
 
@@ -65,7 +66,7 @@ export const posts = [
     title: 'Pitch Ready: Inside Our Elevator Pitch Workshop',
     slug: { _type: 'slug', current: 'pitch-ready-inside-our-elevator-pitch-workshop' },
     category: 'Event Recaps',
-    excerpt: 'On 17 September, more than 30 people joined us and Aequitas Foundation online to learn how to explain an idea clearly, concisely and compellingly in 60 seconds. What the session covered, who signed up, and what we are changing next time.',
+    excerpt: 'On 17 September, more than 30 people joined us and Aequitas Foundation online to learn how to build a 60-second pitch, part by part. What the session taught, who signed up, and what we are changing next time.',
     author: 'SWK Ghana',
     published: true,
     publishedAt: '2026-10-01T13:00:00Z',
@@ -73,25 +74,54 @@ export const posts = [
     coverImageUrl: `${CLD}/c_crop,x_0,y_395,w_1080,h_558/f_auto,q_auto/${POSTER}`,
     content: `<p>The idea is not the hard part. Being understood is. That was the starting point for <strong>Pitch Ready</strong>, the Elevator Pitch Workshop we hosted with <a href="https://www.aequitasfoundation.org">Aequitas Foundation</a> on Thursday 17 September 2026.</p>
 
-<p>For 90 minutes, more than 30 people joined us live on SWK Meet, our online meeting platform, to work on one skill: explaining who you are, what you do and why it matters, in about the time it takes to ride an elevator.</p>
+<p>For 90 minutes, more than 30 people joined us live on SWK Meet, our online meeting platform, to learn how to say who they are, what they offer and why it matters, in about a minute. Our facilitator, Rev’d Akua Buabema Ofori-Boateng, PhD, took the session from why a pitch matters, through a clear framework, into practice.</p>
 
-<h2>Why a pitch workshop?</h2>
+<p>Rev’d Akua is an engineer, theologian and strategist, Director of Programmes for the Anglican Diocese of Accra, and the founding Executive Director of Aequitas Foundation.</p>
 
-<p>About one in five working-age Africans is starting a business (Brookings, 2024). Yet capital and networks remain out of reach for many young founders, often not for want of a good idea but for want of a clear one. When a funder, partner or customer gives you a minute to make your case, explaining your work clearly and credibly becomes one of the most practical skills you can have.</p>
+<h2>Why it matters</h2>
 
-<p>So we treated the pitch as a skill you practise, not a talent you either have or lack. The session was free and open to everyone: founders and agripreneurs, students, community leaders, and anyone who has to make someone care, fast.</p>
+<p>An elevator pitch is a short, clear summary of who you are and what you offer, brief enough to finish before the lift doors open. Rev’d Akua showed where it earns its keep: first conversations at conferences and community events, the “tell me about yourself” moment in a job interview, funding and partnership talks with people who decide quickly, and every time someone asks what you do.</p>
 
-<h2>The framework: the Three C’s</h2>
+<p>Her case for getting it right came in three parts. People trust what they can repeat back to you. A steady pitch shows that you know your own value. And keeping it brief respects the listener’s time, which is part of why they remember you.</p>
 
-<p>Our facilitator, Rev’d Akua Buabema Ofori-Boateng, PhD, built the session around three tests every pitch has to pass:</p>
+<p>For young founders the stakes are real. About one in five working-age Africans is starting a business (Brookings, 2024), yet capital and networks stay out of reach for many, often not for want of a good idea but for want of a clear one.</p>
+
+<h2>A great pitch, in six parts</h2>
+
+<p>The heart of the session was a six-part structure, with a rough time budget for each part of a 60-second pitch:</p>
+
+<ol>
+<li><strong>Hook (about 8 seconds):</strong> win attention with your very first line.</li>
+<li><strong>Who you are (7 seconds):</strong> your name and role, kept brief.</li>
+<li><strong>The problem (10 seconds):</strong> the gap or need you address.</li>
+<li><strong>Your solution (15 seconds):</strong> what you do about it.</li>
+<li><strong>The value (10 seconds):</strong> why it matters, or a quick proof point.</li>
+<li><strong>The ask (10 seconds):</strong> the one thing you would like to happen next.</li>
+</ol>
+
+<p>Spoken naturally, about 150 words fills a minute. The advice was to time yourself out loud until the rhythm feels familiar, not memorised.</p>
+
+<h2>Hooks that land, and mistakes to avoid</h2>
+
+<p>A first line can do its job in several ways: ask a question that reframes the listener’s problem, make a bold statement, share a surprising insight, or tell a short story.</p>
+
+<p>The ways pitches go wrong were just as clear. Too much detail or jargon, when a stranger should be able to repeat your one key sentence. No clear ask, when you should end on exactly one next step. Rambling without structure. Talking at people rather than with them. And being forgettable, when one vivid word or image would give your listener something to hold on to.</p>
+
+<h2>From template to practice</h2>
+
+<p>Rev’d Akua then turned the framework into a fill-in-the-blank template with five parts: who you help, what you help them do, the benefit they get, how you differ from the alternative, and a call to action. Example pitches showed it at work, from an agri-tech founder linking smallholder farmers in the Eastern Region with buyers in Accra, to a recent graduate and a freelance consultant.</p>
+
+<p>The session then built in two rounds of practice:</p>
 
 <ul>
-<li><strong>Clear:</strong> plain language and no jargon. Who you are, what you do, and why it matters.</li>
-<li><strong>Concise:</strong> thirty to ninety seconds, carrying only what is genuinely essential.</li>
-<li><strong>Compelling:</strong> a specific hook, a real story, or a blunt statement of the problem you solve.</li>
+<li><strong>Craft:</strong> five minutes alone, writing one honest sentence for each part of the template, without polishing.</li>
+<li><strong>Pair up and present:</strong> partners take turns to pitch for 60 seconds while the other keeps time, then share one thing that landed and one thing to sharpen.</li>
+<li><strong>Round two:</strong> rewrite the pitch using that feedback, then deliver it again to a new partner, aiming for confident and clear rather than perfect.</li>
 </ul>
 
-<p>Rev’d Akua brings an unusual range to the subject. She is an Anglican priest, engineer and strategist, Director of Programmes for the Anglican Diocese of Accra, and the founding Executive Director of Aequitas Foundation, with twenty years in the corporate sector behind her.</p>
+<p>Feedback followed a five-point check: clarity (could a stranger say back what you do?), the hook, the structure, confidence (a steady pace, eye contact, no filler words) and a single clear call to action.</p>
+
+<p>The delivery tips were practical: practise out loud, not just in your head; look at your listener, or at the camera when you are online; slow down and pause after your hook; match your energy to your message; and smile, because confidence can be heard.</p>
 
 <h2>In the room</h2>
 
@@ -118,6 +148,10 @@ ${caption('Rev’d Akua presents the workshop’s opening slide on SWK Meet.')}
 <li>Test the platform at the expected audience size before the day.</li>
 <li>Record sessions so that anyone who drops out can catch up.</li>
 </ul>
+
+<h2>Four things to remember</h2>
+
+<p>Rev’d Akua closed with four takeaways: be clear rather than clever; focus on one idea, not everything; always end with an ask; and practise until your pitch sounds natural. Her challenge for the week after was to practise daily, out loud and against a timer, and to try the pitch on three people, noticing which line makes them lean in.</p>
 
 <h2>Thank you</h2>
 

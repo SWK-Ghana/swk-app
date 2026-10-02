@@ -135,18 +135,32 @@
     .person__name { font-weight: 800; color: var(--ink); margin-top: .2rem; line-height: 1.3; }
     .person__bio { font-size: .85rem; color: var(--ink-soft); margin-top: .3rem; line-height: 1.45; }
 
-    .cs { display: grid; gap: .8rem; margin-top: .6rem; }
-    @media (min-width: 640px) { .cs { grid-template-columns: repeat(3, 1fr); } }
-    .c { border-left: 3px solid var(--lime); padding: .2rem 0 .2rem .9rem; }
-    .c strong { display: block; color: var(--ink); }
-    .c span { font-size: .9rem; color: var(--ink-soft); line-height: 1.5; }
+    .agenda { list-style: none; margin: .5rem 0 0; padding: 0; counter-reset: step; display: grid; gap: .55rem; }
+    .agenda li { counter-increment: step; position: relative; padding-left: 2.1rem; color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
+    .agenda li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; font-weight: 800; color: var(--green-text); font-variant-numeric: tabular-nums; }
+    .agenda strong { color: var(--ink); }
 
-    table.runsheet { width: 100%; border-collapse: collapse; margin-top: .4rem; font-size: .92rem; }
-    .runsheet th, .runsheet td { text-align: left; padding: .5rem .6rem .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-    .runsheet th { font-weight: 700; color: var(--green-text); white-space: nowrap; width: 6.5rem; font-variant-numeric: tabular-nums; }
-    .runsheet td strong { color: var(--ink); }
-    .runsheet td span { color: var(--ink-soft); }
-    .runsheet tr:last-child th, .runsheet tr:last-child td { border-bottom: 0; }
+    .anatomy { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .7rem; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 640px) { .anatomy { grid-template-columns: repeat(3, 1fr); } }
+    .part { background: var(--cream); border-radius: 10px; padding: .75rem .9rem; }
+    .part__meta { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+    .part__step { font-size: .8rem; font-weight: 800; color: var(--green-text); }
+    .part__time { font-size: .74rem; font-weight: 800; color: var(--green-text); background: rgba(120, 195, 30, .18); border-radius: 999px; padding: .08rem .5rem; font-variant-numeric: tabular-nums; }
+    .part strong { display: block; color: var(--ink); margin-top: .3rem; line-height: 1.3; }
+    .block .part p { font-size: .86rem; line-height: 1.45; margin-top: .2rem; }
+
+    .cs { display: grid; gap: .8rem; margin-top: .6rem; }
+    @media (min-width: 640px) { .cs { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 820px) { .cs--4 { grid-template-columns: repeat(4, 1fr); } }
+    .c { border-left: 3px solid var(--lime); padding: .2rem 0 .2rem .9rem; }
+    .c strong { display: block; color: var(--ink); line-height: 1.35; }
+    .block .cs + p { margin-top: 1rem; }
+
+    table.rubric { width: 100%; border-collapse: collapse; margin-top: .4rem; font-size: .92rem; }
+    .rubric th, .rubric td { text-align: left; padding: .5rem .6rem .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .rubric th { font-weight: 700; color: var(--green-text); white-space: nowrap; width: 8rem; }
+    .rubric td { color: var(--ink-soft); }
+    .rubric tr:last-child th, .rubric tr:last-child td { border-bottom: 0; }
 
     /* ── Charts (each is a real table: the table view and the chart are one) ── */
     .charts { display: grid; gap: 1.6rem 2rem; margin-top: 1.2rem; }
@@ -217,10 +231,14 @@
       main { padding-block: 0; }
       .block { border: 0; border-top: 1.5px solid var(--line); border-radius: 0; padding: 5mm 0 0; margin-bottom: 4mm; break-inside: auto; }
       .block h2 { break-after: avoid; }
+      /* Starts a fresh page, so a heading is never left at the foot of one
+         while its charts (which won't split) move to the next. */
+      .block--page { break-before: page; }
       .tiles { grid-template-columns: repeat(3, 1fr); }
-      .people, .cs, .split, .next { grid-template-columns: repeat(3, 1fr); }
+      .people, .anatomy, .split, .next { grid-template-columns: repeat(3, 1fr); }
+      .cs--4 { grid-template-columns: repeat(4, 1fr); }
       .charts { grid-template-columns: 1fr 1fr; }
-      .chart, .lesson, .person, .tile, .shot, .split, .next, table.runsheet tr { break-inside: avoid; }
+      .chart, .lesson, .person, .tile, .shot, .split, .next, .part, .agenda li, table.rubric tr { break-inside: avoid; }
       .block h3 { break-after: avoid; }
       .shots { grid-template-columns: repeat(3, 1fr); }
       .shot img { max-height: 95mm; width: auto; margin-inline: auto; }
@@ -298,10 +316,12 @@
         facilitated and Ben Brown moderated.
       </p>
       <p>
-        The session was built around one framework &mdash; <strong>Clear, Concise, Compelling</strong> &mdash; and
-        designed as practice rather than a lecture. Network problems and technical issues with the Jitsi app caused
-        some participants to drop out during the session. This report sets out who took part, what we learned, and
-        what we will do differently.
+        The session taught <strong>a six-part structure for a 60-second pitch</strong> &mdash; hook, who you are,
+        the problem, your solution, the value and the ask &mdash; and was designed as practice rather than a lecture,
+        with two rounds built in: drafting a pitch from a template, then delivering it to a partner for feedback
+        before refining it. Network problems and technical issues with the Jitsi app caused some participants to
+        drop out during the session. This report sets out who took part, what was taught, what we learned, and what
+        we will do differently.
       </p>
     </section>
 
@@ -323,14 +343,17 @@
 
     <section class="block" aria-labelledby="session">
       <h2 id="session"><span class="num">3</span> The session</h2>
-      <p>Free, 90 minutes, online on SWK Meet (meet.swkghana.org), open to everyone.</p>
+      <p>
+        Free, 90 minutes, online on SWK Meet (meet.swkghana.org), open to everyone. Rev'd Akua's session moved from
+        why a pitch matters, through a six-part framework, into two rounds of practice.
+      </p>
 
       <div class="people">
         <div class="person">
           <p class="person__role">Facilitator</p>
           <p class="person__name">Rev'd Akua Buabema Ofori-Boateng, PhD</p>
-          <p class="person__bio">Anglican priest, engineer and strategist; Director of Programmes, Anglican Diocese
-            of Accra; founding Executive Director of Aequitas Foundation.</p>
+          <p class="person__bio">Anglican priest, engineer, theologian and strategist; Director of Programmes,
+            Anglican Diocese of Accra; founding Executive Director of Aequitas Foundation.</p>
         </div>
         <div class="person">
           <p class="person__role">Partner</p>
@@ -345,33 +368,86 @@
         </div>
       </div>
 
-      <h3>The framework: the Three C's</h3>
-      <div class="cs">
-        <div class="c"><strong>Clear</strong><span>Plain language, no jargon: who you are, what you do, and why it
-            matters.</span></div>
-        <div class="c"><strong>Concise</strong><span>Thirty to ninety seconds, carrying only what is genuinely
-            essential.</span></div>
-        <div class="c"><strong>Compelling</strong><span>A specific hook, a real story, or a blunt statement of the
-            problem you solve.</span></div>
-      </div>
+      <h3>What the session covered</h3>
+      <ol class="agenda">
+        <li><strong>Why the elevator pitch matters.</strong> A short, clear summary of who you are and what you
+          offer, for networking events, job interviews, funding and partnership talks, and every &ldquo;so what do
+          you do?&rdquo;. Clarity builds trust, a steady pitch shows you know your value, and brevity respects the
+          listener's time.</li>
+        <li><strong>Anatomy of a great pitch.</strong> Six parts in 60 seconds, set out below.</li>
+        <li><strong>Mistakes to avoid and hooks that land.</strong> Five common mistakes, four ways to open, and
+          example pitches from an agri-tech founder, a recent graduate and a freelance consultant.</li>
+        <li><strong>Exercise 1: craft your pitch.</strong> Five minutes alone with a five-part template: who you
+          help, what you help them do, the benefit, how you differ from the alternative, and a call to action.</li>
+        <li><strong>Exercise 2: pair up and present.</strong> Sixty seconds each, timed by a partner, then one thing
+          that landed and one thing to sharpen.</li>
+        <li><strong>Delivery tips and round two.</strong> Rewrite the pitch with that feedback and deliver it again
+          to a new partner, aiming for confident and clear rather than perfect.</li>
+        <li><strong>Takeaways, next steps and Q&amp;A.</strong></li>
+      </ol>
 
-      <h3>The running order, as designed</h3>
-      <table class="runsheet">
-        <caption class="sr-only">Planned running order, times in GMT</caption>
+      <h3>The framework: six parts in 60 seconds</h3>
+      <ol class="anatomy">
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">1</span><span class="part__time">8 sec</span></div>
+          <strong>Hook</strong>
+          <p>Win attention with the first line.</p>
+        </li>
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">2</span><span class="part__time">7 sec</span></div>
+          <strong>Who you are</strong>
+          <p>Your name and role, briefly.</p>
+        </li>
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">3</span><span class="part__time">10 sec</span></div>
+          <strong>The problem</strong>
+          <p>The gap or need you address.</p>
+        </li>
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">4</span><span class="part__time">15 sec</span></div>
+          <strong>Your solution</strong>
+          <p>What you do about it.</p>
+        </li>
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">5</span><span class="part__time">10 sec</span></div>
+          <strong>The value</strong>
+          <p>Why it matters, or a quick proof point.</p>
+        </li>
+        <li class="part">
+          <div class="part__meta"><span class="part__step" aria-hidden="true">6</span><span class="part__time">10 sec</span></div>
+          <strong>The ask</strong>
+          <p>The one next step you want.</p>
+        </li>
+      </ol>
+      <p class="note">About 150 words, spoken naturally, fills a minute. Rehearse out loud until it feels familiar
+        rather than memorised.</p>
+
+      <h3>How partners gave feedback</h3>
+      <table class="rubric">
+        <caption class="sr-only">Feedback checklist used in the pair exercise</caption>
         <tbody>
-          <tr><th scope="row">7:00 PM</th><td><strong>Welcome &amp; introduction</strong> <span>&mdash; opening remarks from SWK Ghana</span></td></tr>
-          <tr><th scope="row">7:05 PM</th><td><strong>Why your pitch is your most powerful tool</strong> <span>&mdash; the African entrepreneurship landscape</span></td></tr>
-          <tr><th scope="row">7:15 PM</th><td><strong>Masterclass: building your elevator pitch</strong> <span>&mdash; the Three C's, common mistakes, model pitches</span></td></tr>
-          <tr><th scope="row">7:35 PM</th><td><strong>Individual writing time</strong> <span>&mdash; drafting against a structured template</span></td></tr>
-          <tr><th scope="row">7:40 PM</th><td><strong>Breakout practice</strong> <span>&mdash; small groups, feedback against a shared rubric</span></td></tr>
-          <tr><th scope="row">8:00 PM</th><td><strong>Showcase</strong> <span>&mdash; volunteer pitches to the full room</span></td></tr>
-          <tr><th scope="row">8:10 PM</th><td><strong>Refinement &amp; next steps</strong> <span>&mdash; tailoring for audiences, pitching in writing</span></td></tr>
-          <tr><th scope="row">8:20 PM</th><td><strong>Q&amp;A, closing &amp; community</strong></td></tr>
+          <tr><th scope="row">Clarity</th><td>Could a stranger say back what you do?</td></tr>
+          <tr><th scope="row">Hook</th><td>Did the opening line earn attention?</td></tr>
+          <tr><th scope="row">Structure</th><td>Did it move from who you are to the problem, the solution and the ask?</td></tr>
+          <tr><th scope="row">Confidence</th><td>A steady pace, eye contact and no filler words?</td></tr>
+          <tr><th scope="row">Call to action</th><td>Was there exactly one clear next step?</td></tr>
         </tbody>
       </table>
+
+      <h3>What to remember</h3>
+      <div class="cs cs--4">
+        <div class="c"><strong>Clear beats clever.</strong></div>
+        <div class="c"><strong>One idea, not everything.</strong></div>
+        <div class="c"><strong>Always end with an ask.</strong></div>
+        <div class="c"><strong>Practice makes it sound natural.</strong></div>
+      </div>
+      <p>
+        For the week after, participants were asked to practise daily, out loud and against a timer, and to try
+        their pitch on three people, noticing which line makes them lean in.
+      </p>
     </section>
 
-    <section class="block" aria-labelledby="who">
+    <section class="block block--page" aria-labelledby="who">
       <h2 id="who"><span class="num">4</span> Who registered</h2>
       <p>Registration ran from 6 to 17 September 2026 through the form on swkghana.org/epwwebinar.</p>
 
