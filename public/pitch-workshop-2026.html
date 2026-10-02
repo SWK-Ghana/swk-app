@@ -43,7 +43,7 @@
     "@context": "https://schema.org",
     "@type": "Event",
     "name": "Pitch Ready: The SWK Ghana Elevator Pitch Workshop",
-    "description": "A free 90-minute online workshop for entrepreneurs, founders, community leaders and changemakers. Build a clear, concise and compelling elevator pitch, then practise it live with structured peer feedback.",
+    "description": "A free 90-minute online workshop for entrepreneurs, founders, community leaders and changemakers on building a 60-second elevator pitch in six parts, with two rounds of practice and partner feedback.",
     "startDate": "2026-09-17T19:00:00+00:00",
     "endDate": "2026-09-17T20:30:00+00:00",
     "eventStatus": "https://schema.org/EventScheduled",
@@ -695,40 +695,46 @@
       .recap__poster { transform: none; max-width: 20rem; }
     }
 
-    /* ═══ 3. THE THREE C'S ══════════════════════════════════════════════ */
-    .threec { background: var(--g-900); color: #fff; }
+    /* ═══ 3. THE FRAMEWORK ═══════════════════════════════════════════════
+       The six parts of a 60-second pitch, as Rev'd Akua taught them. */
+    .frame { background: var(--g-900); color: #fff; }
 
-    .threec__head { max-width: 46rem; margin-bottom: clamp(2.25rem, 5vw, 3.25rem); }
-    .threec__head .lede { color: rgba(255, 255, 255, .78); }
+    .frame__head { max-width: 46rem; margin-bottom: clamp(2.25rem, 5vw, 3.25rem); }
+    .frame__head .lede { color: rgba(255, 255, 255, .78); }
 
-    .cs {
+    .parts {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: grid;
       gap: clamp(1rem, 2.2vw, 1.5rem);
       grid-template-columns: 1fr;
     }
 
-    @media (min-width: 780px) { .cs { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 600px) { .parts { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .parts { grid-template-columns: repeat(3, 1fr); } }
 
-    .c {
+    .part {
       position: relative;
       overflow: hidden;
       background: rgba(255, 255, 255, .05);
       border: 1px solid rgba(108, 194, 74, .3);
       border-radius: var(--radius);
-      padding: clamp(1.6rem, 3vw, 2rem);
+      padding: clamp(1.4rem, 2.8vw, 1.8rem);
       transition: transform .35s var(--ease), border-color .35s var(--ease), background-color .35s var(--ease);
     }
 
-    .c:hover {
+    .part:hover {
       transform: translateY(-6px);
       border-color: var(--g-400);
       background: rgba(108, 194, 74, .1);
     }
 
-    .c__letter {
+    /* The step number, oversized and faint in the corner. */
+    .part__num {
       position: absolute;
-      right: -.3rem; bottom: -2.4rem;
-      font-size: 8rem;
+      right: .2rem; bottom: -2.2rem;
+      font-size: 7.5rem;
       font-weight: 900;
       line-height: 1;
       color: rgba(108, 194, 74, .1);
@@ -736,19 +742,40 @@
       user-select: none;
     }
 
-    .c__title {
-      font-size: clamp(1.3rem, 1.15rem + .5vw, 1.6rem);
+    .part__time {
+      display: inline-block;
+      font-size: .78rem;
       font-weight: 800;
-      color: var(--g-400);
-      margin-bottom: .6rem;
+      letter-spacing: .06em;
+      color: var(--g-900);
+      background: var(--g-400);
+      border-radius: 999px;
+      padding: .2rem .65rem;
+      margin-bottom: .8rem;
+      font-variant-numeric: tabular-nums;
     }
 
-    .c__desc {
+    .part__title {
+      font-size: clamp(1.25rem, 1.1rem + .5vw, 1.5rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: .45rem;
+    }
+
+    .part__desc {
       font-size: .98rem;
-      line-height: 1.65;
+      line-height: 1.6;
       color: rgba(255, 255, 255, .78);
       position: relative;
     }
+
+    .frame__note {
+      margin-top: clamp(1.5rem, 3.5vw, 2rem);
+      max-width: 60ch;
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .frame__note strong { color: var(--g-400); }
 
     /* ═══ 4. PROGRAMME ══════════════════════════════════════════════════ */
     .prog { background: var(--paper-2); }
@@ -1166,7 +1193,7 @@
       html { scroll-behavior: auto; }
       .js .reveal { opacity: 1; transform: none; transition: none; }
       .scroll-cue svg { animation: none !important; }
-      .btn, .c, .socials a, .footer__back { transition: none; }
+      .btn, .part, .socials a, .footer__back { transition: none; }
     }
   </style>
 </head>
@@ -1340,9 +1367,10 @@
               30+ joined us live to craft, practise and perfect their pitch.
             </h2>
             <p class="lede reveal" style="--d:80ms">
-              Rev&rsquo;d Akua Buabema Ofori-Boateng, PhD, led the session with Aequitas Foundation, and Ben Brown
-              moderated. Some participants dropped out because of network problems and technical issues with
-              Jitsi, so our report sets out what we will do differently next time.
+              Rev&rsquo;d Akua Buabema Ofori-Boateng, PhD, taught a six-part, 60-second pitch and built in two
+              rounds of practice; Ben Brown moderated for SWK Ghana. Some participants dropped out because of
+              network problems and technical issues with Jitsi, so our report sets out what we will do
+              differently next time.
             </p>
 
             <div class="stats reveal" style="--d:140ms">
@@ -1419,7 +1447,7 @@
             </p>
             <p>
               The research is blunt about it. Pitch quality measurably shifts investment decisions &mdash; and
-              not only the content, but the delivery: tone, expression, word choice. This workshop treats the
+              not only the content, but the delivery: tone, expression, word choice. This workshop treated the
               pitch as a <strong>skill you practise</strong>, not a talent you either have or lack.
             </p>
           </div>
@@ -1450,46 +1478,66 @@
       </div>
     </section>
 
-    <!-- ═══════════════ 3. THE THREE C'S ════════════════════════════════ -->
-    <section class="section threec" id="framework" aria-labelledby="threec-title">
+    <!-- ═══════════════ 3. THE FRAMEWORK ═════════════════════════════════ -->
+    <section class="section frame" id="framework" aria-labelledby="frame-title">
       <div class="shell">
-        <div class="threec__head reveal">
+        <div class="frame__head reveal">
           <p class="eyebrow eyebrow--on-dark">The framework</p>
-          <h2 class="section-title section-title--on-dark" id="threec-title">Clear. Concise. Compelling.</h2>
+          <h2 class="section-title section-title--on-dark" id="frame-title">Six parts. Sixty seconds.</h2>
           <p class="lede">
-            The session's backbone is the Three C&rsquo;s. You will build your pitch against them live, then
-            test it on people who will tell you honestly whether it landed.
+            The heart of Rev&rsquo;d Akua&rsquo;s session was the anatomy of a great pitch: six parts, each with
+            a rough time budget, so the whole thing fits in a minute.
           </p>
         </div>
 
-        <div class="cs">
-          <article class="c reveal">
-            <span class="c__letter" aria-hidden="true">C</span>
-            <h3 class="c__title">Clear</h3>
-            <p class="c__desc">
-              Plain language, no jargon. Who you are, what you do, and why it matters &mdash; with nothing left
-              for the listener to decode.
-            </p>
-          </article>
+        <ol class="parts">
+          <li class="part reveal">
+            <span class="part__num" aria-hidden="true">1</span>
+            <span class="part__time">8 sec</span>
+            <h3 class="part__title">Hook</h3>
+            <p class="part__desc">Win attention with your very first line.</p>
+          </li>
 
-          <article class="c reveal" style="--d:100ms">
-            <span class="c__letter" aria-hidden="true">C</span>
-            <h3 class="c__title">Concise</h3>
-            <p class="c__desc">
-              Brevity is not rushing; it is ruthless prioritisation. Thirty to ninety seconds, carrying only
-              what is genuinely essential.
-            </p>
-          </article>
+          <li class="part reveal" style="--d:60ms">
+            <span class="part__num" aria-hidden="true">2</span>
+            <span class="part__time">7 sec</span>
+            <h3 class="part__title">Who you are</h3>
+            <p class="part__desc">Your name and role, kept brief.</p>
+          </li>
 
-          <article class="c reveal" style="--d:200ms">
-            <span class="c__letter" aria-hidden="true">C</span>
-            <h3 class="c__title">Compelling</h3>
-            <p class="c__desc">
-              It has to leave them wanting more. A specific hook, a real story, or a blunt statement of the
-              problem you are solving.
-            </p>
-          </article>
-        </div>
+          <li class="part reveal" style="--d:120ms">
+            <span class="part__num" aria-hidden="true">3</span>
+            <span class="part__time">10 sec</span>
+            <h3 class="part__title">The problem</h3>
+            <p class="part__desc">The gap or need you address.</p>
+          </li>
+
+          <li class="part reveal" style="--d:180ms">
+            <span class="part__num" aria-hidden="true">4</span>
+            <span class="part__time">15 sec</span>
+            <h3 class="part__title">Your solution</h3>
+            <p class="part__desc">What you do about it.</p>
+          </li>
+
+          <li class="part reveal" style="--d:240ms">
+            <span class="part__num" aria-hidden="true">5</span>
+            <span class="part__time">10 sec</span>
+            <h3 class="part__title">The value</h3>
+            <p class="part__desc">Why it matters, or a quick proof point.</p>
+          </li>
+
+          <li class="part reveal" style="--d:300ms">
+            <span class="part__num" aria-hidden="true">6</span>
+            <span class="part__time">10 sec</span>
+            <h3 class="part__title">The ask</h3>
+            <p class="part__desc">The one thing you would like to happen next.</p>
+          </li>
+        </ol>
+
+        <p class="frame__note reveal">
+          About <strong>150 words</strong>, spoken naturally, fills a minute. Time yourself out loud until the
+          rhythm feels familiar, not memorised.
+        </p>
       </div>
     </section>
 
@@ -1498,84 +1546,89 @@
       <div class="shell">
         <div class="prog__head reveal">
           <p class="eyebrow">The 90 minutes</p>
-          <h2 class="section-title" id="prog-title">You will not be watching slides.</h2>
+          <h2 class="section-title" id="prog-title">From framework to practice.</h2>
           <p class="lede">
-            This runs as an active workshop: you write, you pitch, and you get feedback inside the session.
-            All times GMT.
+            The session was built as a workshop, not a lecture: the framework first, then two rounds of
+            writing, pitching and feedback.
           </p>
         </div>
 
         <div class="runsheet">
           <div class="slot reveal">
-            <div class="slot__time">7:00 PM<small>5 mins</small></div>
+            <div class="slot__time">01<small>Foundations</small></div>
             <div>
-              <p class="slot__title">Welcome &amp; introduction</p>
-              <p class="slot__desc">Opening remarks from SWK Ghana.</p>
+              <p class="slot__title">Why the elevator pitch matters</p>
+              <p class="slot__desc">
+                What a pitch is and where it earns its keep: networking events, job interviews, funding and
+                partnership talks, and every &ldquo;so what do you do?&rdquo;. Clarity builds trust, a steady
+                pitch shows you know your value, and brevity respects the listener&rsquo;s time.
+              </p>
             </div>
           </div>
 
           <div class="slot reveal" style="--d:60ms">
-            <div class="slot__time">7:05 PM<small>10 mins</small></div>
+            <div class="slot__time">02<small>Framework</small></div>
             <div>
-              <p class="slot__title">Why your pitch is your most powerful tool</p>
-              <p class="slot__desc">Context and data on the African entrepreneurship landscape.</p>
+              <p class="slot__title">Anatomy of a great pitch</p>
+              <p class="slot__desc">The six parts above, piece by piece, and how to time them.</p>
             </div>
           </div>
 
           <div class="slot reveal" style="--d:120ms">
-            <div class="slot__time">7:15 PM<small>20 mins</small></div>
+            <div class="slot__time">03<small>Craft</small></div>
             <div>
-              <p class="slot__title">Masterclass: building your elevator pitch</p>
+              <p class="slot__title">Mistakes to avoid, hooks that land</p>
               <p class="slot__desc">
-                The Three C&rsquo;s framework, the mistakes that sink most pitches, and live model pitches from
-                the facilitator.
+                Five common mistakes, from jargon to having no clear ask; four ways to open (a question, a bold
+                statement, a surprising insight or a short story); a fill-in-the-blank template; and example
+                pitches, including an agri-tech founder linking smallholder farmers with buyers.
               </p>
             </div>
           </div>
 
           <div class="slot reveal" style="--d:180ms">
-            <div class="slot__time">7:35 PM<small>5 mins</small></div>
+            <div class="slot__time">04<small>5 min &middot; solo</small></div>
             <div>
-              <p class="slot__title">Individual writing time</p>
-              <p class="slot__desc">Draft your own pitch against a structured template.</p>
+              <p class="slot__title">Exercise 1: craft your pitch</p>
+              <p class="slot__desc">
+                One honest sentence for each part of the template: who you help, what you help them do, the
+                benefit, how you differ from the alternative, and a call to action. No polishing yet.
+              </p>
             </div>
           </div>
 
           <div class="slot reveal" style="--d:240ms">
-            <div class="slot__time">7:40 PM<small>20 mins</small></div>
+            <div class="slot__time">05<small>2 &times; 60 sec &middot; pairs</small></div>
             <div>
-              <p class="slot__title">Breakout practice</p>
+              <p class="slot__title">Exercise 2: pair up &amp; present</p>
               <p class="slot__desc">
-                Groups of five or six. Everyone delivers their pitch and gets structured feedback against a
-                shared rubric.
+                One partner pitches while the other keeps time, then shares one thing that landed and one thing
+                to sharpen, using a five-point check: clarity, hook, structure, confidence and call to action.
+                Then swap.
               </p>
             </div>
           </div>
 
           <div class="slot reveal" style="--d:300ms">
-            <div class="slot__time">8:00 PM<small>10 mins</small></div>
+            <div class="slot__time">06<small>60 sec &middot; new partner</small></div>
             <div>
-              <p class="slot__title">Showcase: volunteer pitches</p>
-              <p class="slot__desc">Three or four participants pitch to the full room, with live panel feedback.</p>
-            </div>
-          </div>
-
-          <div class="slot reveal" style="--d:360ms">
-            <div class="slot__time">8:10 PM<small>10 mins</small></div>
-            <div>
-              <p class="slot__title">Refinement &amp; next steps</p>
+              <p class="slot__title">Delivery tips &amp; round two</p>
               <p class="slot__desc">
-                Tailoring the pitch for different audiences, and pitching in writing &mdash; LinkedIn, email,
-                events.
+                Practise out loud, look at your listener or the camera, pause after your hook, match your energy
+                to your message, and smile. Then rewrite the pitch with the feedback and deliver it to a new
+                partner: confident and clear, not perfect.
               </p>
             </div>
           </div>
 
-          <div class="slot reveal" style="--d:420ms">
-            <div class="slot__time">8:20 PM<small>10 mins</small></div>
+          <div class="slot reveal" style="--d:360ms">
+            <div class="slot__time">07<small>Close</small></div>
             <div>
-              <p class="slot__title">Q&amp;A, closing &amp; community</p>
-              <p class="slot__desc">Questions, resources, and an invitation into the SWK Ghana community.</p>
+              <p class="slot__title">Takeaways, next steps &amp; Q&amp;A</p>
+              <p class="slot__desc">
+                Clear beats clever. One idea, not everything. Always end with an ask. Practice makes it sound
+                natural. Then a week of daily practice, and the pitch tried on three people.
+              </p>
             </div>
           </div>
         </div>
@@ -1589,8 +1642,8 @@
           <p class="eyebrow">Who it&rsquo;s for</p>
           <h2 class="section-title" id="who-title">Anyone who has to make someone care, fast.</h2>
           <p class="lede">
-            Registration is open to everyone. You do not need a company, a product, or a funding round to get
-            something out of this.
+            Registration was open to everyone. You did not need a company, a product, or a funding round to get
+            something out of it.
           </p>
         </div>
 
@@ -1654,19 +1707,21 @@
     <!-- ═══════════════ 7. PARTNER + WHAT YOU GET ═══════════════════════ -->
     <section class="section extras" aria-labelledby="extras-title">
       <div class="shell">
-        <h2 class="sr-only" id="extras-title">Partner and what you receive</h2>
+        <h2 class="sr-only" id="extras-title">Partner and takeaways</h2>
         <div class="extras__grid">
           <div class="card reveal">
-            <h3>What you&rsquo;ll walk away with</h3>
+            <h3>What participants took away</h3>
             <ul>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A pitch preparation
-                template and a short read on the Three C&rsquo;s, before the session</li>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A drafted, practised
-                pitch tailored to your own context</li>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>At least one round of
-                structured peer feedback against a rubric</li>
-              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>The session recording
-                and a pitch refinement guide afterwards</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A six-part structure for
+                a 60-second pitch, with a time budget for each part</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A fill-in-the-blank
+                template to draft any pitch from</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>Four ways to open a
+                pitch, and five mistakes to avoid</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A five-point check for
+                giving and getting feedback</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>A plan for the week
+                after: practise daily, out loud, and try the pitch on three people</li>
               <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg>An onward route into the
                 SWK Agribusiness Fellowship and the 2026 Summit</li>
             </ul>

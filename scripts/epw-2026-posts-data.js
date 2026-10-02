@@ -14,6 +14,11 @@ const REPORT = 'https://swkghana.org/reports/elevator-pitch-workshop-2026'
 const REPORT_PDF = 'https://swkghana.org/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf'
 const RECAP = 'https://swkghana.org/blog/pitch-ready-inside-our-elevator-pitch-workshop'
 
+// Covers are built for the post page's short, full-width banner (about 4:1 on
+// a laptop, 1.5:1 on a phone): the artwork is shown whole, never enlarged,
+// centred on SWK dark green, and sized to stay clear of every crop.
+const WIDE = 'c_lpad,w_2880,h_640,b_rgb:0C2E11'
+
 const caption = (text) =>
   `<p style="text-align:center;font-size:.875rem;color:#6b7280;margin-top:-.75rem">${text}</p>`
 
@@ -29,8 +34,8 @@ export const posts = [
     author: 'SWK Ghana',
     published: true,
     publishedAt: '2026-10-01T13:05:00Z',
-    // The "THANK YOU" header of the poster.
-    coverImageUrl: `${CLD}/c_crop,x_0,y_0,w_1080,h_608/f_auto,q_auto/${POSTER}`,
+    // The whole thank-you poster.
+    coverImageUrl: `${CLD}/c_scale,h_540/${WIDE}/f_auto,q_auto/${POSTER}`,
     content: `<p><strong>Accra, 1 October 2026.</strong> More than 30 people joined <strong>Pitch Ready</strong>, the free Elevator Pitch Workshop hosted by SWK Ghana and Aequitas Foundation, live online on Thursday 17 September 2026. Sixty-three people registered for the 90-minute session from four countries: Ghana, South Sudan, the United Kingdom and Zambia.</p>
 
 <p>The workshop was facilitated by Rev’d Akua Buabema Ofori-Boateng, PhD, Director of Programmes for the Anglican Diocese of Accra and founding Executive Director of Aequitas Foundation, and moderated by Ben Brown of SWK Ghana. The session taught a six-part structure for a 60-second pitch (hook, who you are, the problem, your solution, the value and the ask) and built in two rounds of practice: drafting a pitch from a five-part template, then delivering it to a partner for feedback before refining it.</p>
@@ -70,8 +75,8 @@ export const posts = [
     author: 'SWK Ghana',
     published: true,
     publishedAt: '2026-10-01T13:00:00Z',
-    // The three in-session screenshots from the poster.
-    coverImageUrl: `${CLD}/c_crop,x_0,y_395,w_1080,h_558/f_auto,q_auto/${POSTER}`,
+    // The poster's three in-session screenshots, as a rounded card.
+    coverImageUrl: `${CLD}/c_crop,x_0,y_395,w_1080,h_558/c_scale,w_900,r_32,b_rgb:0C2E11/${WIDE}/f_auto,q_auto/${POSTER}`,
     content: `<p>The idea is not the hard part. Being understood is. That was the starting point for <strong>Pitch Ready</strong>, the Elevator Pitch Workshop we hosted with <a href="https://www.aequitasfoundation.org">Aequitas Foundation</a> on Thursday 17 September 2026.</p>
 
 <p>For 90 minutes, more than 30 people joined us live on SWK Meet, our online meeting platform, to learn how to say who they are, what they offer and why it matters, in about a minute. Our facilitator, Rev’d Akua Buabema Ofori-Boateng, PhD, took the session from why a pitch matters, through a clear framework, into practice.</p>
