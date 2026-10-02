@@ -249,6 +249,8 @@ const Home = () => {
       meta: '9:00 AM – 1:30 PM GMT · Ashaley Botwe, Accra',
       href: '/summit',
       cta: 'Explore the Summit',
+      // Square (2160×2160), shown whole: never cropped or stretched.
+      flyer: 'v1790846227/SummitFlyer-selection_5_zshe0n.png',
     },
   ]), [])
 
@@ -451,40 +453,62 @@ const Home = () => {
             </h2>
           </div>
 
-          <div className={`grid grid-cols-1 gap-5 xs:gap-6 ${events.length > 1 ? 'lg:grid-cols-2' : 'max-w-3xl mx-auto'}`}>
-            {events.map((e) => (
-              <a
-                key={e.href}
-                href={e.href}
-                className="group relative flex flex-col bg-gradient-to-br from-[#0C2E11] to-[#123D16] rounded-2xl border border-[#78C31E]/40 p-6 xs:p-8 sm:p-10 no-underline hover:border-[#78C31E] hover:-translate-y-1 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]"
-              >
-                {e.flag && (
-                  <span className="absolute top-4 right-4 xs:top-6 xs:right-6 bg-[#78C31E] text-[#123D16] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                    {e.flag}
-                  </span>
-                )}
+          {/* A lone event with a flyer gets the wide layout: the flyer beside
+              the details on large screens, above them on small ones. */}
+          <div className={`grid grid-cols-1 gap-5 xs:gap-6 ${events.length > 1 ? 'lg:grid-cols-2' : events[0]?.flyer ? 'max-w-5xl mx-auto' : 'max-w-3xl mx-auto'}`}>
+            {events.map((e) => {
+              const wide = e.flyer && events.length === 1
+              return (
+                <a
+                  key={e.href}
+                  href={e.href}
+                  className={`group flex flex-col ${wide ? 'lg:grid lg:grid-cols-2 lg:items-center lg:gap-10' : ''} bg-gradient-to-br from-[#0C2E11] to-[#123D16] rounded-2xl border border-[#78C31E]/40 p-6 xs:p-8 sm:p-10 no-underline hover:border-[#78C31E] hover:-translate-y-1 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]`}
+                >
+                  {e.flyer && (
+                    <img
+                      src={img(e.flyer, 800)}
+                      srcSet={srcset(e.flyer, [480, 800, 1200])}
+                      sizes={wide ? '(min-width: 1024px) 452px, (min-width: 640px) 512px, calc(100vw - 80px)' : '(min-width: 1024px) 480px, calc(100vw - 80px)'}
+                      width="2160"
+                      height="2160"
+                      alt={`${e.title} flyer`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-full h-auto max-w-lg mx-auto mb-6 rounded-xl shadow-xl shadow-black/30 ${wide ? 'lg:max-w-none lg:mb-0' : ''}`}
+                    />
+                  )}
 
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-center">
-                    <span className="text-2xl xs:text-3xl font-bold text-white leading-none">{e.day}</span>
-                    <span className="text-[0.65rem] font-bold text-white/70 uppercase tracking-wide mt-1">
-                      {e.month} {e.year}
+                  <div className="flex flex-col flex-1">
+                    {/* The flag sits in the date row rather than the card's
+                        corner, where it would cover the flyer's partner logos. */}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+                      <div className="flex-shrink-0 flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-center">
+                        <span className="text-2xl xs:text-3xl font-bold text-white leading-none">{e.day}</span>
+                        <span className="text-[0.65rem] font-bold text-white/70 uppercase tracking-wide mt-1">
+                          {e.month} {e.year}
+                        </span>
+                      </div>
+                      <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${e.tagClass}`}>{e.tag}</span>
+                      {e.flag && (
+                        <span className="ml-auto bg-[#78C31E] text-[#123D16] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                          {e.flag}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                      {e.title}
+                    </h3>
+                    <p className="text-sm xs:text-base text-white/75 leading-relaxed mb-4 flex-1">{e.desc}</p>
+                    <p className="text-xs xs:text-sm text-[#A8E04A] font-semibold mb-5">{e.meta}</p>
+
+                    <span className="self-start inline-flex items-center gap-2 bg-[#78C31E] group-hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-5 py-2.5 rounded-full transition-colors">
+                      {e.cta} <span aria-hidden="true">→</span>
                     </span>
                   </div>
-                  <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${e.tagClass}`}>{e.tag}</span>
-                </div>
-
-                <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
-                  {e.title}
-                </h3>
-                <p className="text-sm xs:text-base text-white/75 leading-relaxed mb-4 flex-1">{e.desc}</p>
-                <p className="text-xs xs:text-sm text-[#A8E04A] font-semibold mb-5">{e.meta}</p>
-
-                <span className="self-start inline-flex items-center gap-2 bg-[#78C31E] group-hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-5 py-2.5 rounded-full transition-colors">
-                  {e.cta} <span aria-hidden="true">→</span>
-                </span>
-              </a>
-            ))}
+                </a>
+              )
+            })}
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
