@@ -246,7 +246,7 @@ const Home = () => {
       tagClass: 'bg-[#1E963C] text-white',
       title: 'Agribusiness Summit 2026',
       desc: 'Our first in-person flagship event. A free, half-day summit in Accra: a keynote, a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, live demonstrations, and a youth pitch showcase.',
-      meta: '9:00 AM – 1:30 PM GMT · Ashaley Botwe, Accra',
+      meta: '9:00 AM – 2:00 PM GMT · Ashaley Botwe, Accra',
       href: '/summit',
       cta: 'Explore the Summit',
       // Square (2160×2160), shown whole: never cropped or stretched.

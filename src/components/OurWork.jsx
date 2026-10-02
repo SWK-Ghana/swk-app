@@ -321,7 +321,7 @@ const OurWork = () => {
                 youth pitch showcase.
               </p>
               <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
-                <li>📅 Saturday, 7 November 2026 · 9:00 AM – 1:30 PM GMT</li>
+                <li>📅 Saturday, 7 November 2026 · 9:00 AM – 2:00 PM GMT</li>
                 <li>📍 The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
                 <li>🤝 In partnership with TGLC, Agribusiness e-Academy, Calidad Farms &amp; The Food Discourse</li>
                 <li>🎟️ Free entry · Seats are filling fast</li>
