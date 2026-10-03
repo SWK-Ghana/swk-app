@@ -19,7 +19,7 @@ const dist = join(root, 'dist')
 const SITE = 'https://swkghana.org'
 
 const STATIC_ROUTES = [
-  '/', '/about', '/our-work', '/team', '/resources', '/faq', '/get-involved',
+  '/', '/about', '/our-work', '/team', '/resources', '/faq', '/support', '/get-involved',
   '/contact', '/donate', '/reports', '/blog', '/taka-kipawa',
   '/privacy-policy',
 ]

@@ -28,6 +28,7 @@ export const routes = [
       { path: 'team', lazy: page(() => import('./components/MeetTheTeam')) },
       { path: 'resources', lazy: page(() => import('./components/Resources')) },
       { path: 'faq', lazy: page(() => import('./components/FAQ')) },
+      { path: 'support', lazy: page(() => import('./components/Support')) },
       { path: 'get-involved', lazy: page(() => import('./components/GetInvolved')) },
       { path: 'contact', lazy: page(() => import('./components/Contact')) },
       { path: 'donate', lazy: page(() => import('./components/Donate')) },

@@ -1,0 +1,188 @@
+/* SWK Ghana NGO Support Toolkit — shared print stylesheet.
+   Each document in this folder is an A4 HTML page rendered to PDF by
+   scripts/build-toolkit.mjs. Same visual family as the event reports. */
+
+/* Figtree (SIL Open Font License), bundled so every render uses it: a web
+   font loaded at print time can lose the race and fall back silently. */
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 300 900;
+  src: url('fonts/Figtree-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: italic;
+  font-weight: 300 900;
+  src: url('fonts/Figtree-latin-italic.woff2') format('woff2');
+}
+
+:root {
+  --lime: #78C31E;
+  --green-mid: #1E963C;
+  --green-text: #17702D;
+  --green-deep: #123D16;
+  --green-900: #0C2E11;
+  --cream: #F7FAF2;
+  --cream-2: #EEF5E6;
+  --ink: #1C2118;
+  --ink-soft: #4A5346;
+  --ink-muted: #6B7466;
+  --line: #DCE5D5;
+  --white: #FFFFFF;
+}
+
+@page { size: A4; margin: 15mm 14mm 14mm; }
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Figtree', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 10.4pt;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
+p { margin: 0; }
+p + p { margin-top: 2.2mm; }
+a { color: var(--green-text); text-decoration: none; }
+strong { color: var(--ink); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* On screen, show the document as a page on a grey desk. */
+@media screen {
+  html { background: #E7EBE3; }
+  body { max-width: 210mm; margin: 8mm auto; padding: 15mm 14mm; box-shadow: 0 10px 40px -20px rgba(0,0,0,.35); }
+}
+
+/* ── Cover ─────────────────────────────────────────────────────────────── */
+.cover {
+  position: relative;
+  overflow: hidden;
+  background: var(--green-900);
+  color: var(--white);
+  border-radius: 5mm;
+  padding: 9mm 10mm 9mm;
+  margin-bottom: 7mm;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  right: -28mm; top: -28mm;
+  width: 80mm; height: 80mm;
+  border-radius: 50%;
+  border: 9mm solid rgba(120, 195, 30, .22);
+}
+.cover__top { display: flex; align-items: center; gap: 4mm; position: relative; z-index: 1; }
+.cover__logo { height: 16mm; width: auto; background: var(--white); border-radius: 2.5mm; padding: .8mm 1.6mm; }
+.cover__kicker { font-size: 8pt; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #A8E04A; }
+.cover h1 { position: relative; z-index: 1; font-size: 25pt; font-weight: 900; letter-spacing: -.02em; margin-top: 7mm; max-width: 150mm; }
+.cover__lede { position: relative; z-index: 1; font-size: 11.5pt; color: rgba(255, 255, 255, .82); margin-top: 3mm; max-width: 150mm; }
+.cover__meta { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 2mm 6mm; margin-top: 6mm; font-size: 8.5pt; color: rgba(255, 255, 255, .7); }
+.cover__meta b { color: var(--white); font-weight: 700; }
+
+/* ── How to use ────────────────────────────────────────────────────────── */
+.intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 6mm; }
+.intro > div { background: var(--cream); border-radius: 3mm; padding: 4mm 4.5mm; }
+.intro h4 { font-size: 9pt; text-transform: uppercase; letter-spacing: .12em; color: var(--green-text); margin-bottom: 1.5mm; }
+.intro p, .intro li { font-size: 9.6pt; color: var(--ink-soft); }
+.intro ul { margin: 0; padding-left: 4.5mm; }
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+.section { margin-top: 6.5mm; }
+.section h2 {
+  display: flex; align-items: baseline; gap: 3mm;
+  font-size: 15pt; font-weight: 800; color: var(--green-deep);
+  padding-bottom: 2mm; border-bottom: 1.5px solid var(--line); margin-bottom: 3.5mm;
+  break-after: avoid;
+}
+.section h2 .num {
+  font-size: 9pt; font-weight: 800; color: var(--green-text);
+  background: rgba(120, 195, 30, .2); border-radius: 99px; padding: .4mm 2.4mm;
+}
+.section h3 { font-size: 11pt; font-weight: 800; color: var(--ink); margin: 4mm 0 1.5mm; break-after: avoid; }
+.section > p, .lead { color: var(--ink-soft); }
+.lead { margin-bottom: 3mm; }
+
+/* ── Checklists ────────────────────────────────────────────────────────── */
+.check { list-style: none; margin: 0; padding: 0; display: grid; gap: 2mm; }
+.check li {
+  position: relative; padding-left: 7.5mm; color: var(--ink-soft); break-inside: avoid;
+}
+.check li::before {
+  content: ""; position: absolute; left: 0; top: .6mm;
+  width: 4mm; height: 4mm; border: 1.5px solid var(--green-mid); border-radius: 1mm; background: var(--white);
+}
+.check li strong { color: var(--ink); }
+
+ul.plain, ol.plain { margin: 0; padding-left: 5mm; color: var(--ink-soft); }
+ul.plain li, ol.plain li { margin-top: 1.2mm; }
+
+/* ── Prompts (a heading, guidance and space to write) ──────────────────── */
+.prompt { border: 1px solid var(--line); border-radius: 3mm; padding: 3.5mm 4.5mm; margin-top: 3mm; break-inside: avoid; }
+.prompt h3 { margin: 0 0 1mm; display: flex; justify-content: space-between; gap: 4mm; }
+.prompt h3 small { font-size: 8.4pt; font-weight: 700; color: var(--ink-muted); white-space: nowrap; }
+.prompt p { font-size: 9.6pt; color: var(--ink-soft); }
+.prompt ul { margin: 1.5mm 0 0; padding-left: 4.5mm; font-size: 9.6pt; color: var(--ink-soft); }
+.lines { margin-top: 3mm; }
+.lines span { display: block; height: 7mm; border-bottom: 1px dashed #C5D2BC; }
+
+/* ── Tables to fill in ─────────────────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 2.5mm; }
+th, td { border: 1px solid var(--line); padding: 2mm 2.4mm; text-align: left; vertical-align: top; }
+thead th { background: var(--green-deep); color: var(--white); font-weight: 700; border-color: var(--green-deep); }
+tbody th { background: var(--cream); color: var(--ink); font-weight: 700; }
+td.blank { height: 8mm; }
+tr { break-inside: avoid; }
+.table-note { font-size: 8.4pt; color: var(--ink-muted); margin-top: 1.5mm; }
+
+/* ── Callouts ──────────────────────────────────────────────────────────── */
+.tip, .warn {
+  border-radius: 3mm; padding: 3.5mm 4.5mm; margin-top: 3.5mm; break-inside: avoid; font-size: 9.6pt;
+}
+.tip { background: var(--cream-2); border-left: 1.2mm solid var(--lime); color: var(--ink-soft); }
+.warn { background: #FFF7E8; border-left: 1.2mm solid #E0A21B; color: #5A4A23; }
+.tip strong, .warn strong { color: var(--ink); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+.card { background: var(--cream); border-radius: 3mm; padding: 3.5mm 4mm; break-inside: avoid; }
+.card h4 { font-size: 10pt; color: var(--green-deep); margin-bottom: 1mm; }
+.card p, .card li { font-size: 9.3pt; color: var(--ink-soft); }
+.card ul { margin: 1mm 0 0; padding-left: 4.2mm; }
+
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2.5mm; margin-top: 3mm; }
+.flow div { background: var(--cream); border-radius: 3mm; padding: 3mm; min-height: 30mm; position: relative; break-inside: avoid; }
+.flow b { display: block; font-size: 8.4pt; text-transform: uppercase; letter-spacing: .1em; color: var(--green-text); margin-bottom: 1mm; }
+.flow span { font-size: 8.8pt; color: var(--ink-soft); }
+
+.sig { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-top: 4mm; }
+.sig div { border-top: 1.5px solid var(--ink); padding-top: 2mm; font-size: 9pt; color: var(--ink-soft); min-height: 22mm; }
+
+.placeholder { background: #FFF6D9; border-radius: 1mm; padding: 0 1mm; color: #6B5214; font-weight: 600; }
+
+/* ── Links and closing ─────────────────────────────────────────────────── */
+.links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 6mm; }
+.links li { font-size: 9.2pt; color: var(--ink-soft); break-inside: avoid; }
+.links b { color: var(--ink); display: block; }
+
+.closing {
+  margin-top: 8mm; padding-top: 4mm; border-top: 1.5px solid var(--line);
+  display: flex; justify-content: space-between; gap: 6mm; font-size: 8.4pt; color: var(--ink-muted);
+  break-inside: avoid;
+}
+.closing b { color: var(--ink); }
+.closing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 3mm 8mm; margin-top: 6mm; }
+.closing__left { display: grid; gap: 2.2mm; align-content: start; }
+.closing__follow { display: flex; align-items: center; gap: 2.5mm; font-weight: 700; color: var(--ink); }
+.closing .socials { display: flex; gap: 1.4mm; }
+.closing .socials a { display: grid; place-items: center; width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--cream-2); color: var(--green-text); }
+.closing .socials svg { width: 3mm; height: 3mm; }
+
+.page-break { break-before: page; }
+.keep { break-inside: avoid; }

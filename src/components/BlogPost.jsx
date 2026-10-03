@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
+import SocialLinks from './SocialLinks'
 
 // Route loader — runs in the router (browser) AND in the build-time
 // prerenderer, so the full article text is baked into static HTML for SEO.
@@ -219,6 +220,15 @@ const BlogPost = () => {
           {['facebook', 'twitter', 'linkedin', 'whatsapp'].map((p) => (
             <ShareButton key={p} platform={p} url={url} title={post.title} />
           ))}
+        </div>
+
+        {/* Follow — every story ends with a route to more of them */}
+        <div className="mt-10 rounded-2xl border border-[#D4F0A0] bg-[#F2FAE8] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="text-lg font-bold text-gray-900">Follow SWK Ghana</p>
+            <p className="text-sm text-gray-600">New stories, events and opportunities, wherever you are.</p>
+          </div>
+          <SocialLinks tone="light" size="md" className="[&_a]:bg-white" />
         </div>
 
         <div className="mt-8">

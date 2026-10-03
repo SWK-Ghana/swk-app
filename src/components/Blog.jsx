@@ -72,7 +72,7 @@ const Blog = () => {
         path="/blog"
       />
       {/* Hero — full height with blended background image */}
-      <section className="relative flex items-center justify-center overflow-hidden min-h-[88vh] md:min-h-[calc(100dvh-6rem)]">
+      <section className="relative flex items-center justify-center overflow-hidden min-h-[88vh] md:min-h-[calc(100dvh-8.25rem)]">
         {/* Background photo */}
         <img
           src={heroSrc(1920)}

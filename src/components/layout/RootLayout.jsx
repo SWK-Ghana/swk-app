@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import TopBar from '../TopBar'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom'
@@ -33,6 +34,7 @@ const RootLayout = () => {
   return (
     <div>
       <ScrollRestoration />
+      <TopBar />
       <Navbar />
       <Outlet />
       <Footer />

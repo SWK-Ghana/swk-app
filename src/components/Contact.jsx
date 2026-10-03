@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { sendEmail } from '../utils/brevo'
 import Seo from './Seo'
+import SocialLinks from './SocialLinks'
 import { trackConversion } from '../utils/analytics'
 
 const Contact = () => {
@@ -111,21 +112,8 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Follow Us</h3>
-                    <div className="flex flex-wrap gap-3 xs:gap-4">
-                      {[
-                        { label: 'LinkedIn', href: 'https://www.linkedin.com/company/100929740' },
-                        { label: 'Instagram', href: 'https://www.instagram.com/swk.gh/' },
-                        { label: 'X', href: 'https://x.com/swk_gh' },
-                        { label: 'Facebook', href: 'https://web.facebook.com/profile.php?id=61560213077945' },
-                        { label: 'YouTube', href: 'https://www.youtube.com/@swkghana' },
-                      ].map(({ label, href }) => (
-                        <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                          className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors">
-                          {label}
-                        </a>
-                      ))}
-                    </div>
+                    <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">Follow Us</h3>
+                    <SocialLinks tone="light" size="md" />
                   </div>
                 </div>
               </div>

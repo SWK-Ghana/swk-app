@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/sync-socials.mjs",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build:toolkit": "node scripts/build-toolkit.mjs",
+    "sync:socials": "node scripts/sync-socials.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

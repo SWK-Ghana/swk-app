@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import SocialLinks from "../SocialLinks";
 
+// `children` makes a dropdown (hover or click on desktop, accordion on
+// mobile); `desc` is the one-line hint under each item; `footer` adds a
+// "see everything" link at the bottom of the menu.
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -8,13 +12,22 @@ const NAV_LINKS = [
     label: "Our Work",
     href: "/our-work",
     children: [
-      { label: "Overview", href: "/our-work" },
-      { label: "Taka Kipawa", href: "/taka-kipawa" },
-      { label: "Marketplace", href: "/marketplace" },
+      { label: "Overview", href: "/our-work", desc: "Our programmes and their impact" },
+      { label: "Taka Kipawa", href: "/taka-kipawa", desc: "Turning waste into a cleaner Ga West" },
+      { label: "Marketplace", href: "/marketplace", desc: "Shop youth-led green businesses" },
     ],
   },
   { label: "Team", href: "/team" },
-  { label: "Resources", href: "/resources" },
+  {
+    label: "Resources",
+    href: "/resources",
+    children: [
+      { label: "Reports", href: "/reports", desc: "Impact, event and annual reports" },
+      { label: "FAQ", href: "/faq", desc: "Answers about our work and how to join" },
+      { label: "Support", href: "/support", desc: "Free toolkits and resources for NGOs" },
+    ],
+    footer: { label: "All resources", href: "/resources" },
+  },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
   { label: "Get Involved", href: "/get-involved", cta: true },
@@ -50,6 +63,9 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
     link.children
       ? isActive(link.href) || link.children.some((c) => isActive(c.href))
       : isActive(link.href);
+
+  // Mobile accordion entries: the children, plus the footer link if any.
+  const mobileChildren = (link) => (link.footer ? [...link.children, link.footer] : link.children);
 
   // Close all menus whenever the route changes.
   useEffect(() => {
@@ -118,7 +134,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[900px]" : "max-h-0"}`}>
+        <div className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[1200px]" : "max-h-0"}`}>
           <ul className="py-3 space-y-1 border-t border-gray-100">
             {NAV_LINKS.map((link) => {
               // Grouped item → accordion
@@ -136,9 +152,9 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                       <span>{link.label}</span>
                       <Chevron open={expanded} />
                     </button>
-                    <div className={`overflow-hidden transition-[max-height] duration-300 ${expanded ? "max-h-72" : "max-h-0"}`}>
+                    <div className={`overflow-hidden transition-[max-height] duration-300 ${expanded ? "max-h-80" : "max-h-0"}`}>
                       <ul className="mt-1 ml-3 pl-3 border-l border-gray-100 space-y-1">
-                        {link.children.map((c) => (
+                        {mobileChildren(link).map((c) => (
                           <li key={c.href}>
                             <Link
                               to={c.href}
@@ -190,6 +206,10 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
               );
             })}
           </ul>
+          <div className="flex flex-col items-center gap-3 border-t border-gray-100 px-4 pt-4 pb-5">
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">Follow us</span>
+            <SocialLinks tone="light" size="md" className="justify-center" />
+          </div>
         </div>
       </nav>
     </header>
@@ -227,22 +247,40 @@ const DropdownItem = ({ link, open, active, isChildActive, onOpen, onClose, onTo
         <ul
           role="menu"
           aria-label={link.label}
-          className="animate-dropdown absolute left-0 top-full min-w-[210px] rounded-xl border border-gray-100 bg-white shadow-lg py-2 z-50"
+          className="animate-dropdown absolute left-0 top-full w-72 rounded-2xl border border-gray-100 bg-white p-2 shadow-xl shadow-black/5 z-50"
         >
-          {link.children.map((c) => (
-            <li key={c.href} role="none">
+          {link.children.map((c) => {
+            const current = isChildActive(c.href);
+            return (
+              <li key={c.href} role="none">
+                <Link
+                  role="menuitem"
+                  to={c.href}
+                  onClick={onClose}
+                  aria-current={current ? "page" : undefined}
+                  className={`flex flex-col rounded-xl px-3.5 py-2.5 transition-colors hover:bg-[#F2FAE8] ${current ? "bg-[#F2FAE8]" : ""}`}
+                >
+                  <span className="text-sm font-semibold" style={{ color: current ? "#1E963C" : "#1A1A1A" }}>
+                    {c.label}
+                  </span>
+                  {c.desc && <span className="mt-0.5 text-xs leading-snug text-gray-500">{c.desc}</span>}
+                </Link>
+              </li>
+            );
+          })}
+          {link.footer && (
+            <li role="none" className="mt-1 border-t border-gray-100 pt-1">
               <Link
                 role="menuitem"
-                to={c.href}
+                to={link.footer.href}
                 onClick={onClose}
-                aria-current={isChildActive(c.href) ? "page" : undefined}
-                className="block px-4 py-2.5 text-sm font-medium hover:bg-[#F2FAE8] transition-colors"
-                style={{ color: isChildActive(c.href) ? "#78C31E" : "#1A1A1A" }}
+                className="flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1E963C] transition-colors hover:bg-[#F2FAE8]"
               >
-                {c.label}
+                {link.footer.label}
+                <span aria-hidden="true">&rarr;</span>
               </Link>
             </li>
-          ))}
+          )}
         </ul>
       )}
     </li>
