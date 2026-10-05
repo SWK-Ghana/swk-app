@@ -15,12 +15,22 @@ const About = () => {
         path="/about"
       />
       <PageHero
-        eyebrow="Who we are"
         title="About SWK Ghana"
-        lede="A youth-focused nonprofit organisation founded in Ghana, with a vision to scale across Africa. We believe holistic youth development is the foundation for resilient communities."
-        pattern="unity"
+        hideTitle
+        layout="center"
+        image={{ path: 'v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', alt: 'The SWK Ghana team', position: '50% 38%' }}
+        lede={
+          <>
+            <p className="text-2xl font-semibold leading-snug text-white sm:text-3xl lg:text-[2.5rem] lg:leading-tight">
+              A youth-focused nonprofit organisation founded in Ghana, with a vision to scale across Africa.
+            </p>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+              We believe holistic youth development is the foundation for resilient communities.
+            </p>
+          </>
+        }
       >
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button
             onClick={() => navigate('/get-involved')}
             className="inline-flex items-center gap-2 rounded-xl bg-[#78C31E] px-6 py-3.5 text-sm font-bold text-[#0C2E11] transition-colors hover:bg-[#8AD62B] sm:text-base"

@@ -25,7 +25,6 @@ const NotFound = () => {
         eyebrow="Error 404"
         title="Page not found"
         lede="Sorry, the page you are looking for doesn't exist or may have moved."
-        pattern="unity"
       />
       <div className="container mx-auto px-4 py-14 sm:py-20 text-center max-w-2xl">
         <p className="text-gray-700 mb-8">

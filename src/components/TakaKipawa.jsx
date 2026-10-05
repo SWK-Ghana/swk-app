@@ -41,7 +41,7 @@ const TakaKipawa = () => {
         eyebrow="Digital Innovation · SWK Ghana"
         title="Taka Kipawa"
         lede="Ghana's youth-powered waste management app: a digital platform connecting communities, vendors, and waste collectors to build a cleaner, circular economy across Ghana and Africa."
-        pattern="wax"
+        image={{ path: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', alt: 'Young people sorting plastic bottles for recycling at a community clean-up', position: '50% 55%' }}
       >
         <div className="mt-8 flex flex-wrap gap-3">
           <a

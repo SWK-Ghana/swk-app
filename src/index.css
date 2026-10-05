@@ -170,6 +170,12 @@
   background: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .93) 42%, rgba(12, 46, 17, .74) 100%);
 }
 
+/* Even veil for centred heroes: darkest behind the copy, the pattern
+   showing at the edges. */
+.swk-veil-center {
+  background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .92) 55%, rgba(12, 46, 17, .76) 100%);
+}
+
 /* Veil for bold green call-to-action panels. */
 .swk-veil-green {
   background: linear-gradient(110deg, rgba(23, 112, 45, .95) 0%, rgba(30, 150, 60, .88) 50%, rgba(30, 150, 60, .62) 100%);

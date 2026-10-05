@@ -50,7 +50,7 @@ const Contact = () => {
         eyebrow="Contact us"
         title="Contact SWK Ghana"
         lede="Get in touch with our team and learn how you can support youth empowerment and sustainable development in Ghana."
-        pattern="rosette"
+        image={{ path: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', alt: 'Two young people working together on a laptop at an SWK Ghana session', position: '50% 30%', aspect: 'lg:aspect-[4/5]', frame: 'max-w-xl lg:max-w-md' }}
       />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">

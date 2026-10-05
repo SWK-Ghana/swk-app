@@ -1,8 +1,9 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
 import Seo from './Seo'
 import { FlowPanel, FlowStrip } from './Patterns'
+import { PARTNERSHIPS } from '../data/partnerships'
 import { trackConversion } from '../utils/analytics'
 
 // Lazy so the fluid simulation ships as its own chunk. It is only ever
@@ -669,18 +670,14 @@ const Home = () => {
         <Section>
           <SectionHeader badge="Impact" badgeColor="bg-blue-100 text-blue-700" title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
 
-          {/* Image projects */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
+          {/* The webinar series, then our partnerships (src/data/partnerships.js),
+              each linking to its full story on Our Work. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xs:gap-6 mb-8">
             {[
               {
                 gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]', badge: 'Impact', accent: 'bg-[#F2FAE8] text-[#1E963C]',
                 path: EPW_POSTER_HEADER, title: 'Agribusiness Webinar Series',
                 desc: 'Latest edition: Elevator Pitch Workshop with Aequitas Foundation — September 2026. An ongoing webinar series empowering youth with agribusiness knowledge and networks.', stat: '230+ Registrants',
-              },
-              {
-                gradient: 'from-blue-50 to-cyan-50', border: 'border-blue-100', badge: 'Learning', accent: 'bg-blue-100 text-blue-700',
-                path: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'e-Academy Courses',
-                desc: 'Online learning platform for agribusiness and sustainable farming practices.', stat: 'Online',
               },
             ].map((p, i) => (
               <div key={i} className={`bg-gradient-to-br ${p.gradient} rounded-xl border ${p.border} overflow-hidden hover:shadow-md transition-shadow flex flex-col`}>
@@ -714,27 +711,33 @@ const Home = () => {
                 </div>
               </div>
             ))}
-            {/* Ambassador — dual image */}
-            <div className="bg-gradient-to-br from-[#F2FAE8] to-blue-50 rounded-xl border border-[#D4F0A0] overflow-hidden hover:shadow-md transition-shadow flex flex-col">
-              <div className="grid grid-cols-2 gap-0.5">
-                <img
-                  src={img('v1760551738/1752658915453_atc9oo.jpg', 400)}
-                  srcSet={cardSrcset('v1760551738/1752658915453_atc9oo.jpg')}
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 17vw"
-                  alt="Founder Ambassador" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
-                <img
-                  src={img('v1760551737/1752658914512_k1zf9t.jpg', 400)}
-                  srcSet={cardSrcset('v1760551737/1752658914512_k1zf9t.jpg')}
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 17vw"
-                  alt="Ambassador" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
-              </div>
-              <div className="p-4 xs:p-5 flex flex-col flex-1">
-                <span className="self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 bg-purple-100 text-purple-700">Recognition</span>
-                <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Ambassador Recognition</h3>
-                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.</p>
-                <span className="self-start text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 py-1 rounded-full">Partnership</span>
-              </div>
-            </div>
+            {PARTNERSHIPS.map((p) => {
+              const cover = p.photos.find((ph) => !ph.poster)
+              return (
+                <Link
+                  key={p.id}
+                  to={`/our-work#${p.id}`}
+                  className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md hover:border-[#78C31E] transition-all flex flex-col"
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={img(cover.path)}
+                      srcSet={cardSrcset(cover.path)}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      alt={cover.alt}
+                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="p-4 xs:p-5 flex flex-col flex-1">
+                    <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
+                    <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.short}</p>
+                    <span className="text-sm font-bold text-[#17702D] group-hover:text-[#1E963C]">Read the story →</span>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
 
           {/* Video stories */}

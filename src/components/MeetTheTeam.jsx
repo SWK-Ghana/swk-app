@@ -96,7 +96,6 @@ const MeetTheTeam = () => {
         eyebrow="Our people"
         title="Meet the Team"
         lede="The people behind SWK Ghana who are dedicated to empowering youth and building resilient communities."
-        pattern="unity"
       />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">

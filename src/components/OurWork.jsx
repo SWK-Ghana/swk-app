@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import Seo from './Seo'
 import PageHero from './PageHero'
 import { FlowBackdrop, FlowPanel } from './Patterns'
+import Partnerships from './Partnerships'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -56,12 +57,12 @@ const GALLERY_PHOTOS = [
   { path: 'v1773683849/photo_2026-03-08_22-45-22_jzkq3l.jpg', caption: 'SWK Ghana Event' },
   { path: 'v1773683847/photo_2026-03-08_22-45-27_ordh1o.jpg', caption: 'Youth Development' },
   { path: 'v1773683845/photo_2026-03-08_22-45-36_vjfgdy.jpg', caption: 'Community Impact' },
-  { path: 'v1773683844/3_wwiftd.jpg', caption: 'SWK Ghana in Action' },
-  { path: 'v1773683841/4b_zctshh.jpg', caption: 'Program Highlights' },
-  { path: 'v1773683840/4a_rebxgd.jpg', caption: 'Youth Engagement' },
-  { path: 'v1773683838/5a_ommc5e.jpg', caption: 'Sustainability Initiative' },
-  { path: 'v1773683836/5b_rv4pam.jpg', caption: 'Climate Action' },
-  { path: 'v1773683835/6a_mq5i28.jpg', caption: 'Community Outreach' },
+  { path: 'v1773683844/3_wwiftd.jpg', caption: 'Pitching our poultry business with DelDee Foods, Gastro Feastival 2025' },
+  { path: 'v1773683841/4b_zctshh.jpg', caption: 'With fellow members of the YoGSEC consortium' },
+  { path: 'v1773683840/4a_rebxgd.jpg', caption: 'A YoGSEC consortium meeting' },
+  { path: 'v1773683838/5a_ommc5e.jpg', caption: 'Agribusiness e-Academy ambassadors and partners' },
+  { path: 'v1773683836/5b_rv4pam.jpg', caption: 'With fellow Agribusiness e-Academy ambassadors' },
+  { path: 'v1773683835/6a_mq5i28.jpg', caption: 'Meet the Agribusiness e-Academy ambassadors' },
   { path: 'v1773683835/1753866861461_aouzvh.jpg', caption: 'SWK Ghana Programs' },
 ]
 
@@ -292,7 +293,7 @@ const OurWork = () => {
         eyebrow="Programs & Impact"
         title="Our Work"
         lede="From agribusiness webinars to climate action films: explore the full breadth of SWK Ghana's programs and impact."
-        pattern="wax"
+        image={{ path: 'v1773660844/photo_2026-03-16_11-33-50_wn3lbm.jpg', alt: 'A speaker addressing young people at an SWK Ghana programme', position: '50% 22%', aspect: 'lg:aspect-[4/5]', frame: 'max-w-xl lg:max-w-md' }}
       />
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
 
@@ -343,6 +344,9 @@ const OurWork = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Partnerships and milestones (src/data/partnerships.js) ── */}
+        <Partnerships />
 
         {/* ── Projects & Impact ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">

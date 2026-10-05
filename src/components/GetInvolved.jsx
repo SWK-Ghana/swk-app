@@ -210,7 +210,7 @@ const GetInvolved = () => {
         eyebrow="Get involved"
         title="Join the SWK Movement"
         lede="Join SWK Ghana and help us build a more sustainable and equitable Ghana. Together, we can empower young people, transform communities, and protect our planet."
-        pattern="rosette"
+        image={{ path: 'v1773663233/photo_4_2026-03-16_12-13-08_ox4qsx.jpg', alt: 'Young volunteers planting trees', position: '50% 50%' }}
       />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">

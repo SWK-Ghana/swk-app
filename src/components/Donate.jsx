@@ -208,7 +208,7 @@ const Donate = () => {
         eyebrow="Support our mission"
         title="Donate to SWK Ghana"
         lede="Every contribution funds youth programs, climate action, agribusiness training, and community initiatives across Ghana. Give from anywhere in the world."
-        pattern="rosette"
+        image={{ path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', alt: 'Young people working on laptops at an SWK Ghana skills workshop', position: '50% 45%', aspect: 'lg:aspect-[3/2]' }}
       />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-3xl mx-auto">
