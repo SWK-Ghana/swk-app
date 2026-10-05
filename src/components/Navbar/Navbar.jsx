@@ -122,7 +122,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
 
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition focus:outline-none"
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1E963C]"
             aria-expanded={open}
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}

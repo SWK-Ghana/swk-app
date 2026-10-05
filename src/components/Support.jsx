@@ -253,7 +253,7 @@ const Support = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search, e.g. grants, survey, tax"
-                className="w-full rounded-xl border-2 border-gray-200 bg-white py-3 pl-11 pr-4 text-gray-800 transition-colors focus:border-[#78C31E] focus:outline-none"
+                className="w-full rounded-xl border-2 border-gray-200 bg-white py-3 pl-11 pr-4 text-gray-800 transition-colors focus:border-[#1E963C] focus:outline-none focus:ring-4 focus:ring-[#78C31E]/25"
               />
             </label>
           </div>

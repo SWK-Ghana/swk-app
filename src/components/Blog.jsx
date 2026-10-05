@@ -135,8 +135,7 @@ const Blog = () => {
             placeholder="Search posts..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none text-gray-800"
-            style={{ '--tw-ring-color': '#78C31E' }}
+            className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 text-gray-800 transition-colors focus:border-[#1E963C] focus:outline-none focus:ring-4 focus:ring-[#78C31E]/25"
           />
         </div>
 
