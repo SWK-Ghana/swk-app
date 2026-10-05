@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
+import { FlowStrip, PatternBand } from './Patterns'
 
 // Route loader — runs in the router (browser) AND in the build-time
 // prerenderer, so the post list is baked into the static HTML for SEO.
@@ -65,7 +66,7 @@ const Blog = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Blog & Stories | SWK Ghana"
         description="Stories, updates, and insights from SWK Ghana on youth empowerment, climate action, agribusiness, and sustainable development across Ghana and Africa."
@@ -87,6 +88,9 @@ const Blog = () => {
         {/* Blend layers: brand green multiply + depth + vignette for legible white text */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#1E963C] via-[#1E963C]/70 to-[#0e3a1b] mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/40" />
+        {/* Flow, the signature pattern, woven faintly into the photo */}
+        <div className="swk-flow absolute inset-0 opacity-30 mix-blend-soft-light" aria-hidden="true" />
+        <FlowStrip className="absolute inset-x-0 bottom-0 z-10 h-2.5" />
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center py-24 anim-rise">
@@ -188,10 +192,7 @@ const Blog = () => {
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-48 flex items-center justify-center text-4xl"
-                    style={{ background: '#F2FAE8' }}>
-                    📝
-                  </div>
+                  <PatternBand name="arcs" size="220px" className="w-full h-48" />
                 )}
                 <div className="p-5">
                   {post.category && (

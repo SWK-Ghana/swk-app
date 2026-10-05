@@ -107,7 +107,18 @@
     .cover__meta { margin-top: 1.4rem; display: grid; gap: .3rem; font-size: .95rem; }
     .cover__meta strong { color: var(--ink); }
     .cover__meta span { color: var(--ink-soft); }
-    .cover__poster { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 50px -28px rgba(12, 46, 17, .55); border: 1px solid var(--line); max-width: 340px; margin-inline: auto; }
+    .cover__poster { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 50px -28px rgba(12, 46, 17, .55); border: 1px solid var(--line); }
+
+    /* ── Brand patterns (../patterns, drawn by scripts/build-patterns.mjs) ──
+       Weave behind the cover; the workshop's arches frame the poster (the
+       box is sized to the drawing: 136% of the poster's width, 16% above
+       and 4% below it); a ribbon of Flow, SWK's signature, under the cover
+       and Flow through the footer. Relative URLs, so the PDF render from
+       the file picks them up too. */
+    .cover { overflow: hidden; background-color: var(--cream); background-image: url('../patterns/weave.svg'); background-size: 480px; }
+    .cover__art { position: relative; isolation: isolate; width: 100%; max-width: 340px; margin-inline: auto; }
+    .cover__art::before { content: ""; position: absolute; z-index: -1; left: -18%; right: -18%; top: -16%; bottom: -4%; background: url('../patterns/arches.svg') center top / 100% 100% no-repeat; pointer-events: none; }
+    .swk-strip { height: 10px; background: #78C31E url('../patterns/flow.svg') 0 38% / 320px auto; }
 
     /* ── Sections ──────────────────────────────────────────────────────── */
     main { padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3.5rem); }
@@ -214,7 +225,7 @@
     .next span { font-size: .86rem; color: var(--ink-soft); }
 
     /* ── Footer ────────────────────────────────────────────────────────── */
-    .foot { background: var(--green-900); color: rgba(255, 255, 255, .72); font-size: .86rem; }
+    .foot { background-color: var(--green-900); background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('../patterns/flow.svg'); background-size: auto, 640px auto; color: rgba(255, 255, 255, .72); font-size: .86rem; }
     .foot .shell { padding-block: 1.6rem; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
     .foot a { color: var(--white); }
     .foot .socials { display: flex; flex-wrap: wrap; gap: .45rem; width: 100%; }
@@ -229,9 +240,12 @@
       body { font-size: 10.5pt; line-height: 1.5; }
       .bar-top { display: none; }
       .shell { max-width: none; padding-inline: 0; }
-      .cover { border-bottom: 0; }
+      .cover { border-bottom: 0; background: none; overflow: visible; }
+      .cover__art { max-width: 62mm; }
+      /* The Flow ribbon would add ~1 MB to the PDF; print a plain lime rule. */
+      .swk-strip { height: 1.6mm; background: var(--lime); }
       .cover .shell { grid-template-columns: 1.25fr .75fr; padding-block: 0 6mm; }
-      .cover__poster { box-shadow: none; max-width: 62mm; }
+      .cover__poster { box-shadow: none; }
       main { padding-block: 0; }
       .block { border: 0; border-top: 1.5px solid var(--line); border-radius: 0; padding: 5mm 0 0; margin-bottom: 4mm; break-inside: auto; }
       .block h2 { break-after: avoid; }
@@ -325,13 +339,16 @@
           <p><span>Report published October 2026 by SWK Ghana LBG</span></p>
         </div>
       </div>
+      <div class="cover__art">
       <div class="cover__poster">
         <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/w_700,q_auto,f_auto/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png"
           width="1080" height="1350"
           alt="Thank-you poster: Webinar recap. Thank you for joining our Elevator Pitch Workshop. 30+ people joined us live to craft, practise and perfect their pitch. Facilitator Rev'd Akua Buabema Ofori-Boateng, PhD; partner Aequitas Foundation; moderator Ben Brown." />
       </div>
+      </div>
     </div>
   </header>
+  <div class="swk-strip" aria-hidden="true"></div>
 
   <main class="shell">
 

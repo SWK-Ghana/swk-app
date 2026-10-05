@@ -1,52 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
+import { FlowBackdrop } from './Patterns'
 
 const About = () => {
   const navigate = useNavigate()
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-white">
+    <div className="min-h-screen bg-white">
       <Seo
         title="About SWK Ghana – Our Mission, Vision & Youth Programs"
         description="Learn about SWK Ghana, a youth-focused nonprofit founded in Accra empowering young people aged 15–35 to lead sustainable change across Africa through climate action, agribusiness, and community development."
         path="/about"
       />
+      <PageHero
+        eyebrow="Who we are"
+        title="About SWK Ghana"
+        lede="A youth-focused nonprofit organisation founded in Ghana, with a vision to scale across Africa. We believe holistic youth development is the foundation for resilient communities."
+        pattern="unity"
+      >
+        <div className="mt-8 flex flex-wrap gap-3">
+          <button
+            onClick={() => navigate('/get-involved')}
+            className="inline-flex items-center gap-2 rounded-xl bg-[#78C31E] px-6 py-3.5 text-sm font-bold text-[#0C2E11] transition-colors hover:bg-[#8AD62B] sm:text-base"
+          >
+            Get Involved
+          </button>
+          <button
+            onClick={() => navigate('/our-work')}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:text-base"
+          >
+            Our Programs
+          </button>
+        </div>
+      </PageHero>
+
+      <div className="swk-weave">
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className={`text-center mb-12 xs:mb-16 sm:mb-18 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-[#1E963C] px-2 xs:px-0">
-              About SWK Ghana
-            </h1>
-            <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-800 mb-6 xs:mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed px-4 xs:px-6 sm:px-0">
-              A youth-focused nonprofit organisation founded in Ghana, with a vision to scale across Africa. 
-              We believe holistic youth development is the foundation for resilient communities.
-            </p>
-            <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl italic text-gray-700 bg-white p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl shadow-lg border-l-4 border-[#78C31E] max-w-4xl mx-auto px-4 xs:px-6 sm:px-8 md:px-10">
-              "The power of youth is the common wealth for the entire world. The faces of young people are the faces of our past, our present and our future. No segment in society can match with the power, idealism, enthusiasm and courage of the young people."
-              <footer className="mt-3 xs:mt-4 sm:mt-5 text-xs xs:text-sm sm:text-base text-gray-800 font-semibold">— Kailash Satyarthi (Nobel Peace Prize laureate, 2014)</footer>
-            </blockquote>
-            <div className="mt-6 xs:mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 xs:gap-4 justify-center px-4 xs:px-0">
-              <button 
-                onClick={() => navigate('/get-involved')}
-                className="btn-gradient text-lg px-8 py-3 rounded-xl hover:scale-105 transition-transform duration-200"
-              >
-                Get Involved
-              </button>
-              <button 
-                onClick={() => navigate('/our-work')}
-                className="border-2 border-[#78C31E] text-[#78C31E] hover:bg-[#78C31E] hover:text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200"
-              >
-                Our Programs
-              </button>
-            </div>
-          </div>
+          <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl italic text-gray-700 bg-white p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl shadow-lg border-l-4 border-[#78C31E] max-w-4xl mx-auto mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
+            "The power of youth is the common wealth for the entire world. The faces of young people are the faces of our past, our present and our future. No segment in society can match with the power, idealism, enthusiasm and courage of the young people."
+            <footer className="mt-3 xs:mt-4 sm:mt-5 text-xs xs:text-sm sm:text-base text-gray-800 font-semibold not-italic">— Kailash Satyarthi (Nobel Peace Prize laureate, 2014)</footer>
+          </blockquote>
 
           {/* Mission, Vision & Values */}
           <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg border border-gray-200 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
@@ -176,19 +172,20 @@ const About = () => {
             </div>
 
             {/* Impact Stats */}
-            <div className="bg-gradient-to-br from-[#1E963C] to-[#78C31E] rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
-              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6">Our Impact</h2>
+            <div className="relative isolate overflow-hidden rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
+              <FlowBackdrop veil="swk-veil-green" />
+              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6 text-white">Our Impact</h2>
               <div className="grid grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">236</div>
-                  <div className="text-white/70">Youth empowered</div>
+                  <div className="text-white/80">Youth empowered</div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">72</div>
-                  <div className="text-white/70">Women impacted</div>
+                  <div className="text-white/80">Women impacted</div>
                 </div>
               </div>
-              <button onClick={() => navigate('/our-work')} className="w-full mt-6 bg-white text-[#78C31E] font-semibold py-3 rounded-xl hover:bg-gray-100 transition-colors duration-200">
+              <button onClick={() => navigate('/our-work')} className="w-full mt-6 bg-white text-[#17702D] font-semibold py-3 rounded-xl hover:bg-gray-100 transition-colors duration-200">
                 See Our Programs
               </button>
             </div>
@@ -236,21 +233,23 @@ const About = () => {
           </div>
 
           {/* Call to Action */}
-          <div className="bg-[#1E963C] rounded-xl xs:rounded-2xl p-6 xs:p-8 sm:p-10 md:p-12 text-center text-white">
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 xs:mb-4 sm:mb-5 px-2 xs:px-0">Ready to Make a Difference?</h2>
-            <p className="text-base xs:text-lg sm:text-xl mb-6 xs:mb-8 sm:mb-10 max-w-2xl mx-auto px-4 xs:px-6 sm:px-0">
+          <div className="relative isolate overflow-hidden rounded-xl xs:rounded-2xl p-6 xs:p-8 sm:p-10 md:p-12 text-center text-white">
+            <FlowBackdrop veil="swk-veil-green" />
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 xs:mb-4 sm:mb-5 px-2 xs:px-0 text-white">Ready to Make a Difference?</h2>
+            <p className="text-base xs:text-lg sm:text-xl mb-6 xs:mb-8 sm:mb-10 max-w-2xl mx-auto px-4 xs:px-6 sm:px-0 text-white/90">
               Join us in empowering youth and building sustainable communities across Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-4 justify-center px-4 xs:px-6 sm:px-0">
-              <button onClick={() => navigate('/get-involved')} className="bg-white text-[#78C31E] font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-gray-100 transition-colors duration-200 hover:scale-105 transform text-sm xs:text-base sm:text-lg">
+              <button onClick={() => navigate('/get-involved')} className="bg-white text-[#17702D] font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-gray-100 transition-colors duration-200 hover:scale-105 transform text-sm xs:text-base sm:text-lg">
                 Get Involved Today
               </button>
-              <button onClick={() => navigate('/contact')} className="border-2 border-white text-white font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-white hover:text-[#78C31E] transition-all duration-200 text-sm xs:text-base sm:text-lg">
+              <button onClick={() => navigate('/contact')} className="border-2 border-white text-white font-semibold px-6 xs:px-8 sm:px-10 py-3 xs:py-3.5 sm:py-4 rounded-lg xs:rounded-xl hover:bg-white hover:text-[#17702D] transition-all duration-200 text-sm xs:text-base sm:text-lg">
                 Contact Us
               </button>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

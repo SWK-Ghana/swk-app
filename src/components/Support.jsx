@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import Seo from './Seo'
 import SocialLinks from './SocialLinks'
+import { FlowBackdrop, FlowStrip } from './Patterns'
 import { TOOLKIT, CATEGORIES, RESOURCES } from '../data/support'
 import { CONTACT, SOCIALS } from '../data/socials'
 
@@ -130,12 +131,8 @@ const Support = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ══ Hero ══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#0C2E11] text-white">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-90"
-          style={{ background: 'radial-gradient(60% 80% at 85% 10%, rgba(120,195,30,.22), transparent 60%), radial-gradient(50% 60% at 0% 100%, rgba(30,150,60,.25), transparent 60%)' }}
-          aria-hidden="true"
-        />
+      <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
+        <FlowBackdrop />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 md:px-8 lg:grid-cols-[1.15fr_1fr] lg:px-10 lg:py-24 xl:px-12">
           <div className="anim-rise">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#A8E04A]">
@@ -195,10 +192,11 @@ const Support = () => {
             ))}
           </dl>
         </div>
+        <FlowStrip />
       </section>
 
       {/* ══ Toolkit ═══════════════════════════════════════════════════════ */}
-      <section id="toolkit" className="scroll-mt-28 bg-[#F7FAF2] py-16 sm:py-20">
+      <section id="toolkit" className="scroll-mt-28 swk-weave py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1E963C]">The SWK NGO Toolkit</p>
@@ -340,8 +338,8 @@ const Support = () => {
 
       {/* ══ Suggest + follow ══════════════════════════════════════════════ */}
       <section className="px-4 pb-16 sm:px-6 sm:pb-20 md:px-8 lg:px-10 xl:px-12">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-[#0C2E11] px-6 py-12 text-white sm:px-10 lg:px-14">
-          <span className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full border-[28px] border-[#78C31E]/20" aria-hidden="true" />
+        <div className="relative isolate mx-auto max-w-7xl overflow-hidden rounded-3xl bg-[#0C2E11] px-6 py-12 text-white sm:px-10 lg:px-14">
+          <FlowBackdrop />
           <div className="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
             <div>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">What would help your organisation next?</h2>
@@ -370,7 +368,7 @@ const Support = () => {
       </section>
 
       {/* ══ FAQ ═══════════════════════════════════════════════════════════ */}
-      <section className="border-t border-gray-100 bg-[#F7FAF2] py-16 sm:py-20">
+      <section className="border-t border-gray-100 swk-weave py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <h2 className="text-center text-3xl font-bold text-gray-900">Questions</h2>
           <div className="mt-8 divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">

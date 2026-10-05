@@ -37,6 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,400..700&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="/patterns/patterns.css" />
 
   <link rel="preload" as="image"
     href="https://res.cloudinary.com/dwgj3lovn/image/upload/w_900,q_auto,f_auto/v1788959600/2_no6jby.png" />
@@ -145,7 +146,22 @@
     .topbar__links svg { width: 16px; height: 16px; }
 
     /* ── Hero (banner poster) ─────────────────────────────────────────── */
-    .hero { background: linear-gradient(180deg, var(--green-900), #0A2610); color: var(--white); padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+    /* Flow, SWK's signature pattern, under a deep green veil; kente ribbons,
+       the Summit's own pattern, cross behind the poster (public/patterns). */
+    .hero {
+      position: relative; isolation: isolate; overflow: hidden;
+      background-color: var(--green-900);
+      background-image: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .9) 45%, rgba(12, 46, 17, .72) 100%), url('/patterns/flow.svg');
+      background-size: auto, 640px auto;
+      color: var(--white); padding-block: clamp(2.5rem, 6vw, 4.5rem);
+    }
+    .hero::before {
+      content: ""; position: absolute; z-index: -1; top: 0; right: 0; pointer-events: none;
+      width: min(54vw, 760px); aspect-ratio: 4 / 3;
+      background: url('/patterns/kente.svg') right top / contain no-repeat;
+    }
+    @media (max-width: 899px) { .hero::before { width: 90vw; opacity: .3; } }
+    @media print { .hero::before { display: none; } }
     .hero__grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; grid-template-columns: 1fr; }
     @media (min-width: 900px) { .hero__grid { grid-template-columns: 1.05fr .95fr; } }
     .hero__eyebrow { color: var(--lime); }
@@ -258,7 +274,7 @@
     .more__card:hover .more__go { gap: .75rem; }
 
     /* ── Footer ───────────────────────────────────────────────────────── */
-    .footer { background: var(--green-900); color: rgba(255, 255, 255, .72); padding-block: clamp(3rem, 7vw, 4.5rem) clamp(1.75rem, 4vw, 2.5rem); font-size: .95rem; }
+    .footer { background-color: var(--green-900); background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('/patterns/flow.svg'); background-size: auto, 640px auto; color: rgba(255, 255, 255, .72); padding-block: clamp(3rem, 7vw, 4.5rem) clamp(1.75rem, 4vw, 2.5rem); font-size: .95rem; }
     .footer__top { display: grid; gap: clamp(2rem, 5vw, 3rem); padding-bottom: clamp(2rem, 5vw, 3rem); border-bottom: 1px solid rgba(255, 255, 255, .12); }
     @media (min-width: 820px) { .footer__top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); } }
     .footer h2 { color: var(--white); font-size: 1rem; margin-bottom: 1rem; }
@@ -391,6 +407,7 @@
         </div>
       </div>
     </header>
+    <div class="swk-strip" aria-hidden="true"></div>
 
     <!-- ══ ABOUT / ROLES ══ -->
     <section class="section about" aria-labelledby="about-title">
@@ -807,6 +824,7 @@
   </main>
 
   <!-- ══ FOOTER ══ -->
+  <div class="swk-strip" aria-hidden="true"></div>
   <footer class="footer">
     <div class="shell">
       <div class="footer__top">

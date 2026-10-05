@@ -145,6 +145,54 @@
   }
 }
 
+/* ── Brand patterns ─────────────────────────────────────────────────────────
+   Drawn by scripts/build-patterns.mjs into public/patterns/. Two run through
+   every page so the site reads as one family:
+     Flow   the signature: on dark sections under a deep green veil, and in
+            full colour on strips and medallions.
+     Weave  a quiet line patchwork behind light sections.
+   Each page family adds its own pattern in the hero arch (see Patterns.jsx). */
+.swk-flow {
+  background-image: url('/patterns/flow.svg');
+  background-size: 640px auto;
+}
+
+/* Deep green surface with Flow showing through, evenly (footer, bands). */
+.swk-flow-deep {
+  background-color: #0C2E11;
+  background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('/patterns/flow.svg');
+  background-size: auto, 640px auto;
+}
+
+/* Veil over Flow on heroes: darkest where the text sits, lighter to the
+   right so the pattern shows. Text on it stays above 7:1 (AA and AAA). */
+.swk-veil {
+  background: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .93) 42%, rgba(12, 46, 17, .74) 100%);
+}
+
+/* Veil for bold green call-to-action panels. */
+.swk-veil-green {
+  background: linear-gradient(110deg, rgba(23, 112, 45, .95) 0%, rgba(30, 150, 60, .88) 50%, rgba(30, 150, 60, .62) 100%);
+}
+
+/* A ribbon of full-colour Flow, like the selvage of a cloth. */
+.swk-flow-strip {
+  background-color: #78C31E;
+  background-image: url('/patterns/flow.svg');
+  background-size: 320px auto;
+  background-position: 0 38%;
+}
+
+.swk-weave {
+  background-color: #F7FAF2;
+  background-image: url('/patterns/weave.svg');
+  background-size: 480px;
+}
+
+@media print {
+  .swk-flow, .swk-flow-deep, .swk-flow-strip, .swk-weave { background-image: none; }
+}
+
 /* ── Navbar dropdown entrance ──────────────────────────────────────────────
    Animates transform only (never opacity/visibility) so the menu is fully
    visible even if the animation is throttled, paused, or reduced-motion. */

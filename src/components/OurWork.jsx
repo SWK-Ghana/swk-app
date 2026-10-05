@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
+import { FlowBackdrop, FlowPanel } from './Patterns'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -280,32 +282,26 @@ const OurWork = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-white">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Our Work – Programs & Impact | SWK Ghana"
         description="Explore SWK Ghana's programs in youth development, climate action, circular economy, agribusiness, and technology, and the impact we're making across Ghana and Africa."
         path="/our-work"
       />
+      <PageHero
+        eyebrow="Programs & Impact"
+        title="Our Work"
+        lede="From agribusiness webinars to climate action films: explore the full breadth of SWK Ghana's programs and impact."
+        pattern="wax"
+      />
       <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
-
-        {/* ── Page header ── */}
-        <div className="text-center mb-10 xs:mb-12 sm:mb-14">
-          <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-            Programs & Impact
-          </span>
-          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-            Our Work
-          </h1>
-          <p className="text-sm xs:text-base sm:text-lg text-gray-800 max-w-2xl mx-auto">
-            From agribusiness webinars to climate action films — explore the full breadth of SWK Ghana's programs and impact.
-          </p>
-        </div>
 
         {/* ── Featured: Agribusiness Summit 2026 ──
              /summit is a static page outside the React router, so this uses a
              plain <a> throughout — a router <Link> would be intercepted and
              render the SPA 404 instead. */}
-        <div className="rounded-xl xs:rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-gradient-to-br from-[#0C2E11] to-[#123D16] mb-8 xs:mb-10 sm:mb-12">
+        <div className="relative isolate rounded-xl xs:rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-[#0C2E11] mb-8 xs:mb-10 sm:mb-12">
+          <FlowBackdrop />
           <div className="grid grid-cols-1 md:grid-cols-2 items-center">
             <div className="p-5 xs:p-6 sm:p-8 md:p-10 order-2 md:order-1">
               <span className="inline-block bg-[#78C31E] text-[#123D16] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg mb-3">
@@ -566,28 +562,28 @@ const OurWork = () => {
         </div>
 
         {/* ── CTA ── */}
-        <div className="text-center py-6 xs:py-8">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+        <FlowPanel className="px-6 py-10 text-center sm:px-12 sm:py-14">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-3">
             Want to Be Part of Our Work?
           </h2>
-          <p className="text-sm xs:text-base text-gray-800 mb-6 max-w-xl mx-auto">
+          <p className="text-sm xs:text-base text-white/90 mb-6 max-w-xl mx-auto">
             Join SWK Ghana as a volunteer, partner, or supporter and help us scale impact across Africa.
           </p>
           <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 justify-center">
             <button
-              className="btn-gradient text-sm xs:text-base px-6 xs:px-8 py-2.5 xs:py-3"
+              className="rounded-xl bg-white px-6 xs:px-8 py-2.5 xs:py-3 text-sm xs:text-base font-bold text-[#17702D] transition-colors hover:bg-gray-100"
               onClick={() => navigate('/get-involved')}
             >
               Get Involved
             </button>
             <button
-              className="border-2 border-[#78C31E] text-[#78C31E] hover:bg-[#78C31E] hover:text-white px-6 xs:px-8 py-2.5 xs:py-3 rounded-xl font-semibold transition-colors text-sm xs:text-base"
+              className="rounded-xl border-2 border-white px-6 xs:px-8 py-2.5 xs:py-3 text-sm xs:text-base font-bold text-white transition-colors hover:bg-white hover:text-[#17702D]"
               onClick={() => navigate('/donate')}
             >
               Donate Now
             </button>
           </div>
-        </div>
+        </FlowPanel>
 
       </div>
     </div>

@@ -1,32 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
+import { FlowPanel } from './Patterns'
 import { TOOLKIT, RESOURCES } from '../data/support'
 
 const Resources = () => {
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Resources | SWK Ghana"
         description="Access SWK Ghana's resources, guides, and educational materials on youth development, sustainability, climate action, agribusiness, and the circular economy."
         path="/resources"
       />
+      <PageHero
+        eyebrow="Help & Resources"
+        title="Resources"
+        lede="Everything you need to learn about SWK Ghana, get answers, and connect with our team."
+        pattern="keys"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-
-          {/* Header */}
-          <div className="text-center mb-10 sm:mb-14">
-            <span className="inline-block text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3 bg-[#F2FAE8] text-[#1E963C]">
-              Help & Resources
-            </span>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-              Resources
-            </h1>
-            <p className="text-base xs:text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
-              Everything you need to learn about SWK Ghana, get answers, and connect with our team.
-            </p>
-          </div>
 
           {/* Active Resources */}
           <h2 className="text-lg font-bold text-gray-900 mb-4 uppercase tracking-wide text-sm">Available Now</h2>
@@ -152,22 +147,22 @@ const Resources = () => {
           </div>
 
           {/* WhatsApp CTA */}
-          <div className="bg-[#1E963C] rounded-2xl p-6 sm:p-8 text-center">
+          <FlowPanel className="p-6 sm:p-10 text-center">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
               Join our WhatsApp Community
             </h3>
-            <p className="text-white/70 text-sm sm:text-base mb-5 max-w-xl mx-auto">
+            <p className="text-white/90 text-sm sm:text-base mb-5 max-w-xl mx-auto">
               Get the latest programme updates, resources, and announcements directly on WhatsApp. Over 100 members already inside.
             </p>
             <a
               href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-white text-[#1E963C] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors text-sm sm:text-base"
+              className="inline-block bg-white text-[#17702D] hover:text-[#17702D] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors text-sm sm:text-base"
             >
               Join Now →
             </a>
-          </div>
+          </FlowPanel>
 
         </div>
       </div>

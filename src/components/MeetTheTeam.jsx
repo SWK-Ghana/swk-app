@@ -1,5 +1,6 @@
 import React from 'react'
 import Seo from './Seo'
+import PageHero from './PageHero'
 
 const teamMembers = [
   { 
@@ -85,20 +86,20 @@ const teamMembers = [
 
 const MeetTheTeam = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Meet the Team | SWK Ghana"
         description="Meet the passionate team behind SWK Ghana working to empower youth and build resilient, sustainable communities across Ghana and Africa."
         path="/team"
       />
+      <PageHero
+        eyebrow="Our people"
+        title="Meet the Team"
+        lede="The people behind SWK Ghana who are dedicated to empowering youth and building resilient communities."
+        pattern="unity"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 xs:mb-10 sm:mb-12">
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-3 xs:mb-4 px-2 xs:px-0">Meet the Team</h1>
-            <p className="text-base xs:text-lg sm:text-lg text-gray-600 max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
-              The people behind SWK Ghana who are dedicated to empowering youth and building resilient communities.
-            </p>
-          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8">
             {teamMembers.map((member) => (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { sendEmail } from '../utils/brevo'
 import Seo from './Seo'
+import PageHero from './PageHero'
 import { trackConversion } from '../utils/analytics'
 
 const GetInvolved = () => {
@@ -199,20 +200,20 @@ const GetInvolved = () => {
   )
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-white">
+    <main className="min-h-screen swk-weave">
       <Seo
         title="Get Involved – Volunteer & Partner | SWK Ghana"
         description="Join SWK Ghana as a volunteer or partner. Help empower young people and build sustainable, resilient communities across Ghana and Africa."
         path="/get-involved"
       />
+      <PageHero
+        eyebrow="Get involved"
+        title="Join the SWK Movement"
+        lede="Join SWK Ghana and help us build a more sustainable and equitable Ghana. Together, we can empower young people, transform communities, and protect our planet."
+        pattern="rosette"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">
-            Join the SWK Movement
-          </h1>
-          <p className="text-base xs:text-lg sm:text-xl text-gray-800 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
-            Join SWK Ghana and help us build a more sustainable and equitable Ghana. Together, we can empower young people, transform communities, and protect our planet.
-          </p>
 
           {/* Ways to Get Involved */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">

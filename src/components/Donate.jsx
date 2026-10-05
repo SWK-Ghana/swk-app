@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Seo from './Seo'
+import PageHero from './PageHero'
 import { trackConversion, trackEvent } from '../utils/analytics'
 import { loadPaystack, loadFlutterwave } from '../utils/payments'
 
@@ -197,26 +198,20 @@ const Donate = () => {
   )}`
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Donate to SWK Ghana – Support Youth-Led Sustainable Change"
         description="Support SWK Ghana by card, Mobile Money, bank transfer, or international payment in USD, GBP or EUR. Every gift funds youth programs, climate action, and community initiatives across Ghana."
         path="/donate"
       />
+      <PageHero
+        eyebrow="Support our mission"
+        title="Donate to SWK Ghana"
+        lede="Every contribution funds youth programs, climate action, agribusiness training, and community initiatives across Ghana. Give from anywhere in the world."
+        pattern="rosette"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-3xl mx-auto">
-
-          {/* Header */}
-          <div className="text-center mb-8">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-white text-[#1E963C] border border-[#D4F0A0]">
-              Support Our Mission
-            </span>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl font-bold text-gray-900 mb-3">Donate to SWK Ghana</h1>
-            <p className="text-sm xs:text-base text-gray-700 max-w-2xl mx-auto leading-relaxed">
-              Every contribution funds youth programs, climate action, agribusiness training, and
-              community initiatives across Ghana. Give from anywhere in the world.
-            </p>
-          </div>
 
           {/* Impact statements */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">

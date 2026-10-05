@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate()
@@ -129,43 +130,36 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
         path="/privacy-policy"
       />
 
-      {/* Hero */}
-      <div className="py-16 md:py-20" style={{ background: 'linear-gradient(135deg, #F2FAE8 0%, #ffffff 100%)' }}>
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center">
-          <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
-            Legal
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: '#1A1A1A', fontFamily: 'Ubuntu, sans-serif' }}>
-            Privacy Policy
-          </h1>
-          <p className="text-gray-500 text-lg font-light max-w-xl mx-auto mb-3">
-            How SWK Ghana collects, uses, and protects your personal information.
-          </p>
-          <p className="text-sm text-gray-400">Last updated: {lastUpdated}</p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Legal"
+        title="Privacy Policy"
+        lede="How SWK Ghana collects, uses, and protects your personal information."
+        pattern="keys"
+      >
+        <p className="mt-4 text-sm text-white/65">Last updated: {lastUpdated}</p>
+      </PageHero>
 
       {/* Registration info bar */}
-      <div className="bg-[#1A1A1A] py-4">
+      <div className="bg-[#0C2E11] py-4">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="flex flex-wrap justify-center gap-6 text-center">
             <div>
-              <span className="text-xs text-white/40 uppercase tracking-widest block mb-0.5">Organisation</span>
+              <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">Organisation</span>
               <span className="text-sm font-semibold text-white">SWK Ghana LBG</span>
             </div>
             <div className="hidden sm:block w-px bg-white/10" />
             <div>
-              <span className="text-xs text-white/40 uppercase tracking-widest block mb-0.5">Reg No.</span>
+              <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">Reg No.</span>
               <span className="text-sm font-semibold text-[#78C31E]">CG024110426</span>
             </div>
             <div className="hidden sm:block w-px bg-white/10" />
             <div>
-              <span className="text-xs text-white/40 uppercase tracking-widest block mb-0.5">TIN</span>
+              <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">TIN</span>
               <span className="text-sm font-semibold text-[#78C31E]">C0067142656</span>
             </div>
             <div className="hidden sm:block w-px bg-white/10" />
             <div>
-              <span className="text-xs text-white/40 uppercase tracking-widest block mb-0.5">Incorporated</span>
+              <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">Incorporated</span>
               <span className="text-sm font-semibold text-white">14 April 2026 · Ghana</span>
             </div>
           </div>

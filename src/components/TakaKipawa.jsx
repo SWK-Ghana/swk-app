@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
 
 const TakaKipawa = () => {
   const navigate = useNavigate()
@@ -36,59 +37,38 @@ const TakaKipawa = () => {
         path="/taka-kipawa"
       />
 
-      {/* Hero */}
-      <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1E963C 0%, #78C31E 100%)' }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-white" />
-          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-white" />
-          <div className="absolute top-1/2 left-1/2 w-32 h-32 rounded-full bg-white" />
+      <PageHero
+        eyebrow="Digital Innovation · SWK Ghana"
+        title="Taka Kipawa"
+        lede="Ghana's youth-powered waste management app: a digital platform connecting communities, vendors, and waste collectors to build a cleaner, circular economy across Ghana and Africa."
+        pattern="wax"
+      >
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://takakipawa.swkghana.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#78C31E] px-6 py-3.5 text-sm font-bold text-[#0C2E11] transition-colors hover:bg-[#8AD62B] hover:text-[#0C2E11] sm:text-base"
+          >
+            🚀 Launch App
+          </a>
+          <button
+            onClick={() => navigate('/contact')}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:text-base"
+          >
+            Get In Touch
+          </button>
         </div>
-        <div className="relative container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-20 md:py-28 text-center">
-          <span className="inline-block bg-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest border border-white/30">
-            Digital Innovation · SWK Ghana
-          </span>
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center shadow-xl">
-              <span className="text-5xl">♻️</span>
-            </div>
-          </div>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-tight"
-            style={{ fontFamily: 'Ubuntu, sans-serif' }}>
-            Taka Kipawa
-          </h1>
-          <p className="text-xl sm:text-2xl text-white/80 font-light mb-4 max-w-2xl mx-auto">
-            Ghana's Youth-Powered Waste Management App
-          </p>
-          <p className="text-base text-white/70 mb-10 max-w-xl mx-auto leading-relaxed">
-            A digital platform connecting communities, vendors, and waste collectors to build a cleaner, circular economy across Ghana and Africa.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://takakipawa.swkghana.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-[#1E963C] font-bold text-base px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              🚀 Launch App
-            </a>
-            <button
-              onClick={() => navigate('/contact')}
-              className="border-2 border-white text-white hover:bg-white hover:text-[#1E963C] px-8 py-4 rounded-xl font-bold transition-all text-base"
-            >
-              Get In Touch
-            </button>
-          </div>
-        </div>
-      </div>
+      </PageHero>
 
       {/* Stats */}
-      <div className="bg-[#1A1A1A] py-10">
+      <div className="swk-flow-deep py-10">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <div key={i}>
                 <div className="text-3xl sm:text-4xl font-bold text-[#78C31E] mb-1">{s.n}</div>
-                <div className="text-sm text-white/60 font-light">{s.label}</div>
+                <div className="text-sm text-white/75 font-light">{s.label}</div>
               </div>
             ))}
           </div>
@@ -165,7 +145,7 @@ const TakaKipawa = () => {
         </div>
 
         {/* SDG Alignment */}
-        <div className="bg-[#1A1A1A] rounded-2xl p-8 sm:p-12 mb-16 md:mb-20">
+        <div className="swk-flow-deep rounded-2xl p-8 sm:p-12 mb-16 md:mb-20">
           <div className="text-center mb-8">
             <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-[#78C31E]/20 text-[#78C31E] border border-[#78C31E]/30">
               Global Goals
@@ -174,7 +154,7 @@ const TakaKipawa = () => {
               style={{ fontFamily: 'Ubuntu, sans-serif' }}>
               SDG Alignment
             </h2>
-            <p className="text-white/60 font-light">Taka Kipawa directly contributes to four UN Sustainable Development Goals.</p>
+            <p className="text-white/75 font-light">Taka Kipawa directly contributes to four UN Sustainable Development Goals.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {sdgs.map((g, i) => (

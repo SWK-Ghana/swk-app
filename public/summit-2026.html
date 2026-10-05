@@ -40,6 +40,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,400..700&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="/patterns/patterns.css" />
 
   <!-- The flyer poster is the hero's LCP element. -->
   <link rel="preload" as="image"
@@ -1956,6 +1957,46 @@
       .poster,
       .socials a { transition: none; }
     }
+
+    /* ═══ Brand patterns ════════════════════════════════════════════════
+       Flow, SWK's signature (public/patterns/patterns.css), runs under the
+       hero, the pledge and the footer. Kente ribbons, the Summit's own
+       pattern, cross the hero behind the flyer. */
+    .hero__flow {
+      z-index: -3;
+      opacity: .55;
+    }
+
+    .hero__kente {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      width: min(54vw, 780px);
+      aspect-ratio: 4 / 3;
+      background: url('/patterns/kente.svg') right top / contain no-repeat;
+      pointer-events: none;
+    }
+
+    .hero > .swk-strip { margin-top: auto; }
+
+    /* The website pill sits over the ribbons: give it a solid ground. */
+    .hero .site-link:not(:hover) { background: rgba(12, 46, 17, .88); }
+
+    .pledge,
+    .footer {
+      background-color: var(--green-900);
+      background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('/patterns/flow.svg');
+      background-size: auto, 640px auto;
+    }
+
+    @media (max-width: 899px) {
+      .hero__kente { width: 82vw; opacity: .35; }
+    }
+
+    @media print {
+      .hero__kente { display: none; }
+    }
   </style>
 </head>
 
@@ -2110,7 +2151,9 @@
   <!-- ═══════════════ 1. HERO ═══════════════════════════════════════════ -->
   <header class="hero">
     <div class="hero__ambient" aria-hidden="true"></div>
+    <div class="swk-flow-layer hero__flow" aria-hidden="true"></div>
     <div class="hero__wash" aria-hidden="true"></div>
+    <div class="hero__kente" aria-hidden="true"></div>
     <div class="seeds" id="seeds" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
 
@@ -2214,6 +2257,7 @@
         </svg>
       </a>
     </div>
+    <div class="swk-strip" aria-hidden="true"></div>
   </header>
 
   <main id="main">
@@ -2884,6 +2928,7 @@
   </main>
 
   <!-- ═══════════════ 8. FOOTER ═════════════════════════════════════════ -->
+  <div class="swk-strip" aria-hidden="true"></div>
   <footer class="footer">
     <div class="shell">
       <div class="footer__top">

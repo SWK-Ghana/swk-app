@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Seo from './Seo'
+import PageHero from './PageHero'
 
 // ─── Social Share Buttons ───────────────────────────────────────────────────────
 const ShareButtons = ({ url, title }) => {
@@ -187,25 +188,19 @@ const Reports = () => {
       : reports.filter((r) => r.category === activeCategory)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-white px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
+    <div className="min-h-screen swk-weave">
       <Seo
         title="Reports & Publications | SWK Ghana"
         description="Read SWK Ghana's impact reports, annual reviews, and program publications documenting our work empowering youth and building sustainable communities across Ghana."
         path="/reports"
       />
-
-      {/* ── Page header ── */}
-      <div className="max-w-6xl mx-auto text-center mb-8 xs:mb-10 sm:mb-12">
-        <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-          Publications
-        </span>
-        <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-          Reports & Publications
-        </h1>
-        <p className="text-sm xs:text-base sm:text-lg text-gray-800 max-w-2xl mx-auto">
-          Access SWK Ghana's impact reports, annual reviews, program summaries, research findings, and latest articles.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Publications"
+        title="Reports & Publications"
+        lede="Access SWK Ghana's impact reports, annual reviews, program summaries, research findings, and latest articles."
+        pattern="keys"
+      />
+      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
 
       {/* ── Featured: two live reports side-by-side ── */}
       <div className="max-w-6xl mx-auto mb-6 xs:mb-8">
@@ -409,6 +404,7 @@ const Reports = () => {
         )}
       </div>
 
+      </div>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { useParams, Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
 import SocialLinks from './SocialLinks'
+import { FlowStrip, PatternBand } from './Patterns'
 
 // Route loader — runs in the router (browser) AND in the build-time
 // prerenderer, so the full article text is baked into static HTML for SEO.
@@ -166,12 +167,15 @@ const BlogPost = () => {
           }),
         }}
       />
-      {/* Hero */}
-      {coverUrl && (
+      {/* Hero: the cover, or the blog's arcs pattern when a post has none */}
+      {coverUrl ? (
         <div className="w-full h-64 sm:h-80 md:h-96 overflow-hidden">
           <img src={coverUrl} alt={post.title} className="w-full h-full object-cover" />
         </div>
+      ) : (
+        <PatternBand name="arcs" size="260px" className="w-full h-40 sm:h-52" />
       )}
+      <FlowStrip />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 max-w-3xl">
         {/* Back link */}
@@ -223,12 +227,15 @@ const BlogPost = () => {
         </div>
 
         {/* Follow — every story ends with a route to more of them */}
-        <div className="mt-10 rounded-2xl border border-[#D4F0A0] bg-[#F2FAE8] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <p className="text-lg font-bold text-gray-900">Follow SWK Ghana</p>
-            <p className="text-sm text-gray-600">New stories, events and opportunities, wherever you are.</p>
+        <div className="mt-10 overflow-hidden rounded-2xl border border-[#D4F0A0] bg-[#F2FAE8] flex flex-col sm:flex-row">
+          <PatternBand name="arcs" size="200px" className="h-16 sm:h-auto sm:w-24 shrink-0" />
+          <div className="flex flex-1 flex-col gap-4 p-6 sm:p-7 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-lg font-bold text-gray-900">Follow SWK Ghana</p>
+              <p className="text-sm text-gray-600">New stories, events and opportunities, wherever you are.</p>
+            </div>
+            <SocialLinks tone="light" size="md" className="[&_a]:bg-white" />
           </div>
-          <SocialLinks tone="light" size="md" className="[&_a]:bg-white" />
         </div>
 
         <div className="mt-8">

@@ -31,7 +31,7 @@ export default function Marketplace() {
   }, [])
 
   return (
-    <div className="flex min-h-[60vh] items-center justify-center px-4 py-20">
+    <div className="swk-weave flex min-h-[60vh] items-center justify-center px-4 py-20">
       <Seo
         title="SWK Marketplace | SWK Ghana"
         description="SWK Marketplace has moved to marketplace.swkghana.org — shop verified youth-led green businesses across Ghana."

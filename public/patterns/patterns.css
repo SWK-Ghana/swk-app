@@ -1,0 +1,38 @@
+/* SWK Ghana brand patterns for the standalone pages in public/. The React
+   site uses the same rules (src/index.css). The SVGs are drawn by
+   scripts/build-patterns.mjs.
+
+   Flow, the signature, runs through every page: a ribbon of it in full
+   colour along hero and footer edges, and a deep green surface with Flow
+   showing through. Weave is the quiet texture for light sections. */
+
+.swk-strip {
+  display: block;
+  height: 10px;
+  background: #78C31E url('/patterns/flow.svg') 0 38% / 320px auto;
+}
+
+.swk-flow-deep {
+  background-color: #0C2E11;
+  background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('/patterns/flow.svg');
+  background-size: auto, 640px auto;
+}
+
+/* Flow as a layer inside a positioned section; veil it with the section's own wash. */
+.swk-flow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/patterns/flow.svg') 0 0 / 640px auto;
+}
+
+.swk-weave {
+  background-color: #F7FAF2;
+  background-image: url('/patterns/weave.svg');
+  background-size: 480px;
+}
+
+@media print {
+  .swk-strip, .swk-flow-layer { display: none; }
+  .swk-flow-deep, .swk-weave { background-image: none; }
+}

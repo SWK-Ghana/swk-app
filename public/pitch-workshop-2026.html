@@ -37,6 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,400..700&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="/patterns/patterns.css" />
 
   <script type="application/ld+json">
   {
@@ -1195,6 +1196,51 @@
       .scroll-cue svg { animation: none !important; }
       .btn, .part, .socials a, .footer__back { transition: none; }
     }
+
+    /* ═══ Brand patterns ════════════════════════════════════════════════
+       Flow, SWK's signature (public/patterns/patterns.css), runs under the
+       dark sections and the footer. This workshop's own pattern, nested
+       arches with a sun and a heavy quarter-ring (arches.svg), frames the
+       flyer, echoing its quarter-ring. The frame box is sized to match the
+       drawing: 136% of the poster's width, 16% above and 4% below it. */
+    .poster-frame {
+      position: relative;
+      width: 100%;
+      max-width: min(32rem, 62vh);
+      margin-inline: auto;
+    }
+
+    .poster-frame .poster { max-width: none; }
+
+    .poster-frame::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: -18%;
+      right: -18%;
+      top: -16%;
+      bottom: -4%;
+      background: url('/patterns/arches.svg') center top / 100% 100% no-repeat;
+      pointer-events: none;
+    }
+
+    .hero > .swk-strip { margin-top: auto; position: relative; z-index: 1; }
+
+    .recap,
+    .frame,
+    .footer {
+      background-color: var(--g-900);
+      background-image: linear-gradient(rgba(15, 61, 28, .9), rgba(15, 61, 28, .9)), url('/patterns/flow.svg');
+      background-size: auto, 640px auto;
+    }
+
+    @media (max-width: 999px) {
+      .poster-frame { max-width: 20rem; }
+    }
+
+    @media print {
+      .poster-frame::before { display: none; }
+    }
   </style>
 </head>
 
@@ -1373,13 +1419,15 @@
           <!-- The flyer at full fidelity. Its text is baked into the artwork,
                so it is shown as a poster rather than stretched behind the copy.
                The facilitator gets her own section further down. -->
-          <div class="poster reveal" style="--d:200ms">
+          <div class="poster-frame reveal" style="--d:200ms">
+          <div class="poster">
             <img
               src="https://res.cloudinary.com/dwgj3lovn/image/upload/w_900,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png"
               srcset="https://res.cloudinary.com/dwgj3lovn/image/upload/w_600,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png 600w,
                       https://res.cloudinary.com/dwgj3lovn/image/upload/w_900,q_auto,f_auto/v1788709908/SWK_Ghana_EPW_Webinar_Flyer_jah0nn.png 900w"
               sizes="(min-width: 1000px) 32vw, 80vw" width="1080" height="1350" fetchpriority="high"
               alt="Elevator Pitch Workshop flyer: Craft. Practise. Perfect your pitch in 60 seconds. Thursday 17 September 2026, 7:00 PM, on Jitsi. Facilitator Rev'd Akua Buabema Ofori-Boateng, PhD." />
+          </div>
           </div>
         </div>
       </div>
@@ -1391,6 +1439,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-down" /></svg>
       </a>
     </div>
+    <div class="swk-strip" aria-hidden="true"></div>
   </header>
 
   <main id="main">
@@ -1874,6 +1923,7 @@
   </main>
 
   <!-- ═══════════════ 9. FOOTER ═════════════════════════════════════════ -->
+  <div class="swk-strip" aria-hidden="true"></div>
   <footer class="footer">
     <div class="shell">
       <div class="footer__top">

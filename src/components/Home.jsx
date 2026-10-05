@@ -2,6 +2,7 @@ import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'reac
 import { useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
 import Seo from './Seo'
+import { FlowPanel, FlowStrip } from './Patterns'
 import { trackConversion } from '../utils/analytics'
 
 // Lazy so the fluid simulation ships as its own chunk. It is only ever
@@ -352,7 +353,7 @@ const Home = () => {
   ]
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen swk-weave">
       <Seo
         title="SWK Ghana – Empowering Youth for Sustainable Change"
         description="SWK Ghana is a youth-focused nonprofit empowering young people across Ghana and Africa through climate action, circular economy, agribusiness, technology, and community development."
@@ -437,6 +438,9 @@ const Home = () => {
               </button>
             ))}
           </div>
+
+          {/* Flow, the signature pattern, as a ribbon along the hero's edge */}
+          <FlowStrip className="absolute inset-x-0 bottom-0 h-2.5" />
         </div>
 
         <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16">
@@ -533,7 +537,7 @@ const Home = () => {
         </div>
 
         {/* ══ 2. IMPACT STATS ═════════════════════════════════════════════════ */}
-        <div className="bg-[#1E963C] rounded-2xl p-8 sm:p-12 mb-10 sm:mb-16">
+        <FlowPanel className="p-8 sm:p-12 mb-10 sm:mb-16">
           <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 text-center">
             {[
               { n: '300+', label: 'People Impacted' },
@@ -543,11 +547,11 @@ const Home = () => {
             ].map((s, i) => (
               <div key={i}>
                 <div className="text-4xl sm:text-5xl font-bold text-white mb-2">{s.n}</div>
-                <div className="text-sm sm:text-base text-white/70 font-light">{s.label}</div>
+                <div className="text-sm sm:text-base text-white/85 font-light">{s.label}</div>
               </div>
             ))}
           </div>
-        </div>
+        </FlowPanel>
 
         {/* ══ 3. ABOUT US SNAPSHOT ════════════════════════════════════════════ */}
         <Section>
@@ -1072,9 +1076,9 @@ const Home = () => {
         </Section>
 
         {/* ══ 15. CTA ═════════════════════════════════════════════════════════ */}
-        <div className="text-center py-10 sm:py-16 bg-[#1E963C] rounded-2xl mb-10 sm:mb-16 px-6 sm:px-12">
+        <FlowPanel className="text-center py-10 sm:py-16 mb-10 sm:mb-16 px-6 sm:px-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Join the Movement</h2>
-          <p className="text-lg sm:text-xl text-white/70 font-light mb-10 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
+          <p className="text-lg sm:text-xl text-white/90 font-light mb-10 max-w-2xl mx-auto">Together, we can empower young people, transform communities, and protect our planet.</p>
           <div className="flex flex-col gap-4 justify-center items-stretch max-w-xs mx-auto sm:max-w-none sm:flex-row sm:items-center">
             <button className="bg-white text-[#1E963C] font-bold text-base px-8 py-4 rounded-xl hover:bg-gray-100 transition-colors w-full sm:w-auto" onClick={() => setIsVolunteerOpen(true)}>Volunteer Today</button>
             <button className="border-2 border-white text-white hover:bg-white hover:text-[#1E963C] px-8 py-4 rounded-xl font-bold transition-colors text-base w-full sm:w-auto" onClick={() => setIsPartnerOpen(true)}>Partner With Us</button>
@@ -1090,7 +1094,7 @@ const Home = () => {
               Join our WhatsApp Community
             </a>
           </div>
-        </div>
+        </FlowPanel>
 
         </div>{/* end inner padding div */}
 

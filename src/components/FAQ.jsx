@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from './Seo'
+import PageHero from './PageHero'
+import { FlowPanel } from './Patterns'
 
 const FAQS = [
   {
@@ -56,7 +58,7 @@ const FAQS = [
 const FAQItem = ({ question, answer }) => {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden">
+    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-[#F2FAE8] transition-colors"
@@ -79,27 +81,19 @@ const FAQItem = ({ question, answer }) => {
 
 const FAQ = () => {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen swk-weave">
       <Seo
         title="Frequently Asked Questions | SWK Ghana"
         description="Answers to common questions about SWK Ghana — how to join, volunteer, partner, list products on our marketplace, and support our youth programs."
         path="/faq"
       />
 
-      {/* Hero */}
-      <div className="bg-[#1E963C] py-12 sm:py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-block bg-[#78C31E] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4">
-            Help Centre
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto">
-            Answers to the most common questions about SWK Ghana, our programmes, the marketplace, and how to get involved.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Help Centre"
+        title="Frequently Asked Questions"
+        lede="Answers to the most common questions about SWK Ghana, our programmes, the marketplace, and how to get involved."
+        pattern="keys"
+      />
 
       {/* FAQ List */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -110,25 +104,25 @@ const FAQ = () => {
         </div>
 
         {/* Still have questions */}
-        <div className="mt-12 bg-[#F2FAE8] border border-[#D4F0A0] rounded-2xl p-6 sm:p-8 text-center">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">Still have a question?</h3>
-          <p className="text-gray-700 text-sm mb-5">
+        <FlowPanel className="mt-12 p-6 sm:p-10 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Still have a question?</h3>
+          <p className="text-white/90 text-sm sm:text-base mb-5">
             Can't find what you're looking for? Our team is happy to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/contact" className="btn-gradient px-6 py-2.5 text-sm font-semibold rounded-xl">
+            <Link to="/contact" className="rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-[#17702D] transition-colors hover:bg-gray-100 hover:text-[#17702D]">
               Contact Us
             </Link>
             <a
               href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 text-sm font-semibold rounded-xl border-2 border-[#78C31E] text-[#1E963C] hover:bg-[#F2FAE8] transition-colors"
+              className="rounded-xl border-2 border-white px-6 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white hover:text-[#17702D]"
             >
               Join WhatsApp Community
             </a>
           </div>
-        </div>
+        </FlowPanel>
 
         {/* Back to Resources */}
         <div className="mt-6 text-center">

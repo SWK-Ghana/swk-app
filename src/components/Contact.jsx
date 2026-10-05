@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { sendEmail } from '../utils/brevo'
 import Seo from './Seo'
+import PageHero from './PageHero'
 import SocialLinks from './SocialLinks'
 import { trackConversion } from '../utils/analytics'
 
@@ -39,24 +40,24 @@ const Contact = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-white">
+    <main className="min-h-screen swk-weave">
       <Seo
         title="Contact SWK Ghana"
         description="Get in touch with SWK Ghana. Reach our team in Accra, Ghana for partnerships, volunteering, media enquiries, or general questions about our youth programs."
         path="/contact"
       />
+      <PageHero
+        eyebrow="Contact us"
+        title="Contact SWK Ghana"
+        lede="Get in touch with our team and learn how you can support youth empowerment and sustainable development in Ghana."
+        pattern="rosette"
+      />
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6 text-center px-2 xs:px-0">
-            Contact SWK Ghana
-          </h1>
-          <p className="text-base xs:text-lg sm:text-xl text-gray-800 mb-8 xs:mb-10 sm:mb-12 text-center max-w-3xl mx-auto px-4 xs:px-6 sm:px-0">
-            Get in touch with our team and learn how you can support youth empowerment and sustainable development in Ghana.
-          </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xs:gap-10 sm:gap-12">
             {/* Contact Information */}
-            <div>
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200">
               <h2 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-6 xs:mb-7 sm:mb-8">Get in Touch</h2>
               <div className="space-y-5 xs:space-y-6 sm:space-y-7">
                 {/* Email */}
