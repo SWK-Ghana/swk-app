@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom'
 import { client } from '../utils/sanityClient'
 import Seo from './Seo'
 import { FlowStrip, PatternBand } from './Patterns'
+import { LuPencilLine } from 'react-icons/lu'
 
 // Route loader — runs in the router (browser) AND in the build-time
 // prerenderer, so the post list is baked into the static HTML for SEO.
@@ -148,7 +149,7 @@ const Blog = () => {
               className="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all"
               style={
                 activeCategory === cat
-                  ? { background: '#78C31E', borderColor: '#78C31E', color: '#fff' }
+                  ? { background: '#78C31E', borderColor: '#78C31E', color: '#0C2E11' }
                   : { background: '#fff', borderColor: '#e5e7eb', color: '#3C3C2D' }
               }
             >
@@ -160,7 +161,7 @@ const Blog = () => {
         {/* Posts grid */}
         {filtered.length === 0 ? (
           <div className="text-center py-20">
-            <div className="text-5xl mb-4">✍️</div>
+            <LuPencilLine className="mx-auto mb-4 h-12 w-12 text-[#17702D]" aria-hidden="true" />
             <h3 className="text-2xl font-bold text-gray-800 mb-2">No posts yet</h3>
             <p className="text-gray-500">Check back soon for updates from SWK Ghana.</p>
           </div>
@@ -194,17 +195,17 @@ const Blog = () => {
                 <div className="p-5">
                   {post.category && (
                     <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3"
-                      style={{ background: '#F2FAE8', color: '#1E963C' }}>
+                      style={{ background: '#F2FAE8', color: '#17702D' }}>
                       {post.category}
                     </span>
                   )}
-                  <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors line-clamp-2">
+                  <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#0F5A24] transition-colors line-clamp-2">
                     {post.title}
                   </h2>
                   {post.excerpt && (
                     <p className="text-sm text-gray-600 line-clamp-3 mb-4">{post.excerpt}</p>
                   )}
-                  <div className="flex items-center justify-between text-xs text-gray-400">
+                  <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{post.author || 'SWK Ghana'}</span>
                     <span>{formatDate(post.publishedAt || post._createdAt)}</span>
                   </div>

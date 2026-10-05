@@ -64,7 +64,7 @@ const FAQItem = ({ question, answer }) => {
         className="w-full flex items-center justify-between px-5 py-4 text-left bg-white hover:bg-[#F2FAE8] transition-colors"
       >
         <span className="font-semibold text-gray-900 text-sm xs:text-base pr-4">{question}</span>
-        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${open ? 'bg-[#78C31E] text-white rotate-45' : 'bg-[#F2FAE8] text-[#78C31E]'}`}>
+        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${open ? 'bg-[#78C31E] text-[#0C2E11] rotate-45' : 'bg-[#F2FAE8] text-[#17702D]'}`}>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
           </svg>

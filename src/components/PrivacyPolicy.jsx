@@ -149,12 +149,12 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
             <div className="hidden sm:block w-px bg-white/10" />
             <div>
               <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">Reg No.</span>
-              <span className="text-sm font-semibold text-[#78C31E]">CG024110426</span>
+              <span className="text-sm font-semibold text-[#A8E04A]">CG024110426</span>
             </div>
             <div className="hidden sm:block w-px bg-white/10" />
             <div>
               <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">TIN</span>
-              <span className="text-sm font-semibold text-[#78C31E]">C0067142656</span>
+              <span className="text-sm font-semibold text-[#A8E04A]">C0067142656</span>
             </div>
             <div className="hidden sm:block w-px bg-white/10" />
             <div>

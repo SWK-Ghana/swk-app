@@ -3,6 +3,7 @@ import Seo from './Seo'
 import PageHero from './PageHero'
 import { trackConversion, trackEvent } from '../utils/analytics'
 import { loadPaystack, loadFlutterwave } from '../utils/payments'
+import { LuGlobe, LuLandmark, LuSmartphone } from 'react-icons/lu'
 
 // ─── Payment configuration ────────────────────────────────────────────────────
 // Public keys only (safe in the browser). Set in .env / Vercel:
@@ -27,9 +28,9 @@ const CURRENCIES = {
 }
 
 const METHODS = [
-  { id: 'paystack', icon: '🇬🇭', label: 'Card & Mobile Money', sub: 'Ghana · GH₵' },
-  { id: 'intl', icon: '🌍', label: 'International', sub: 'USD · GBP · EUR' },
-  { id: 'transfer', icon: '🏦', label: 'Bank / MoMo Transfer', sub: 'Direct transfer' },
+  { id: 'paystack', icon: LuSmartphone, label: 'Card & Mobile Money', sub: 'Ghana · GH₵' },
+  { id: 'intl', icon: LuGlobe, label: 'International', sub: 'USD · GBP · EUR' },
+  { id: 'transfer', icon: LuLandmark, label: 'Bank / MoMo Transfer', sub: 'Direct transfer' },
 ]
 
 // ─── Copy-to-clipboard field for the transfer tab ─────────────────────────────
@@ -56,7 +57,7 @@ const CopyField = ({ label, value, copyValue, event }) => {
         onClick={copy}
         className={`flex-shrink-0 text-xs font-semibold px-3 py-2 rounded-lg border transition-colors ${
           copied
-            ? 'bg-[#F2FAE8] border-[#C0E870] text-[#1E963C]'
+            ? 'bg-[#F2FAE8] border-[#C0E870] text-[#17702D]'
             : 'border-gray-300 text-gray-600 hover:bg-gray-50'
         }`}
       >
@@ -246,9 +247,9 @@ const Donate = () => {
                     : 'border-transparent bg-white/60 hover:bg-white hover:border-[#C0E870]'
                 }`}
               >
-                <span className="text-2xl" aria-hidden="true">{m.icon}</span>
+                <m.icon className="h-6 w-6 flex-none text-[#17702D]" aria-hidden="true" />
                 <span>
-                  <span className={`block text-sm font-bold ${method === m.id ? 'text-[#1E963C]' : 'text-gray-800'}`}>{m.label}</span>
+                  <span className={`block text-sm font-bold ${method === m.id ? 'text-[#17702D]' : 'text-gray-800'}`}>{m.label}</span>
                   <span className="block text-xs text-gray-500">{m.sub}</span>
                 </span>
               </button>
@@ -261,11 +262,11 @@ const Donate = () => {
             {status === 'success' ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 bg-[#F2FAE8] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 mb-2">Thank You! 🌱</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Thank you!</h2>
                 <p className="text-sm text-gray-600 max-w-md mx-auto mb-6">{message}</p>
                 <button
                   onClick={() => { setStatus('idle'); setMessage(''); setAmount(''); setSelectedPreset(null); setName(''); setEmail('') }}
@@ -299,13 +300,13 @@ const Donate = () => {
 
                 <div className="bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl p-4 text-sm text-gray-700 leading-relaxed">
                   After transferring, please{' '}
-                  <a href={receiptMailto} className="font-bold text-[#1E963C] hover:underline">email us at {DONATE_EMAIL}</a>{' '}
+                  <a href={receiptMailto} className="font-bold text-[#17702D] hover:underline">email us at {DONATE_EMAIL}</a>{' '}
                   with your name and amount so we can acknowledge your gift and send you a receipt.
                 </div>
 
                 <p className="text-xs text-gray-500 text-center">
                   Donating from outside Ghana? International cards are accepted on the{' '}
-                  <button type="button" onClick={() => switchMethod('intl')} className="font-semibold text-[#1E963C] hover:underline">International</button> option.
+                  <button type="button" onClick={() => switchMethod('intl')} className="font-semibold text-[#17702D] hover:underline">International</button> option.
                 </p>
               </div>
 
@@ -326,7 +327,7 @@ const Donate = () => {
                           aria-pressed={currency === c}
                           className={`py-2.5 rounded-xl text-sm font-semibold border-2 transition-colors ${
                             currency === c
-                              ? 'border-[#78C31E] bg-[#F2FAE8] text-[#1E963C]'
+                              ? 'border-[#78C31E] bg-[#F2FAE8] text-[#17702D]'
                               : 'border-gray-200 text-gray-600 hover:border-[#C0E870]'
                           }`}
                         >
@@ -349,7 +350,7 @@ const Donate = () => {
                         aria-pressed={selectedPreset === v}
                         className={`py-2.5 xs:py-3 rounded-xl text-sm font-semibold border-2 transition-colors ${
                           selectedPreset === v
-                            ? 'border-[#78C31E] bg-[#F2FAE8] text-[#1E963C]'
+                            ? 'border-[#78C31E] bg-[#F2FAE8] text-[#17702D]'
                             : 'border-gray-200 text-gray-700 hover:border-[#C0E870]'
                         }`}
                       >
@@ -367,7 +368,7 @@ const Donate = () => {
                       inputMode="decimal"
                       value={amount}
                       onChange={onAmountChange}
-                      className="w-full pl-12 pr-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-emerald-500"
+                      className="w-full pl-12 pr-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="Enter a custom amount"
                     />
                   </div>
@@ -376,13 +377,13 @@ const Donate = () => {
                 {/* Donor details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="donate-name" className="block text-sm font-semibold text-gray-800 mb-1">Name <span className="text-gray-400 font-normal">(optional)</span></label>
+                    <label htmlFor="donate-name" className="block text-sm font-semibold text-gray-800 mb-1">Name <span className="text-gray-500 font-normal">(optional)</span></label>
                     <input
                       id="donate-name"
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-emerald-500"
+                      className="w-full px-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="Your name"
                     />
                   </div>
@@ -394,7 +395,7 @@ const Donate = () => {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-emerald-500"
+                      className="w-full px-3 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#78C31E] focus:border-[#78C31E]"
                       placeholder="you@example.com"
                     />
                   </div>
@@ -406,7 +407,7 @@ const Donate = () => {
                     <button
                       type="button"
                       onClick={() => switchMethod('transfer')}
-                      className="text-sm font-bold text-[#1E963C] hover:underline"
+                      className="text-sm font-bold text-[#17702D] hover:underline"
                     >
                       → Use Bank / MoMo Transfer instead
                     </button>
@@ -429,7 +430,7 @@ const Donate = () => {
                 </button>
 
                 <p className="text-center text-xs text-gray-500 flex items-center justify-center gap-1.5">
-                  <svg className="w-4 h-4 text-[#1E963C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg className="w-4 h-4 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                   {method === 'paystack'

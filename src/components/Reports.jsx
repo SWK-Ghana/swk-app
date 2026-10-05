@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Seo from './Seo'
 import PageHero from './PageHero'
+import { LuClipboardList, LuDownload, LuFileText, LuMicroscope, LuPencilLine } from 'react-icons/lu'
 
 // ─── Social Share Buttons ───────────────────────────────────────────────────────
 const ShareButtons = ({ url, title }) => {
@@ -31,7 +32,7 @@ const ShareButtons = ({ url, title }) => {
         </a>
       ))}
       <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs px-2.5 py-1.5 rounded-lg transition-colors">
-        {copied ? '✓ Copied!' : '🔗 Copy'}
+        {copied ? 'Copied!' : 'Copy link'}
       </button>
     </div>
   )
@@ -42,11 +43,11 @@ const reports = [
   {
     id: 6,
     category: 'Impact Report',
-    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
-    gradient: 'from-[#F2FAE8] to-green-50',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
     border: 'border-[#D4F0A0]',
-    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
-    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
     title: 'Webinar Report: Elevator Pitch Workshop — September 2026',
     description:
       'Event report from Pitch Ready, our Elevator Pitch Workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.',
@@ -61,11 +62,11 @@ const reports = [
   {
     id: 5,
     category: 'Impact Report',
-    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
-    gradient: 'from-[#F2FAE8] to-green-50',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
     border: 'border-[#D4F0A0]',
-    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
-    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
     title: 'Agribusiness Webinar Report: Strategic Partnerships — May 2026',
     description:
       'Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways from the session.',
@@ -79,11 +80,11 @@ const reports = [
   {
     id: 1,
     category: 'Impact Report',
-    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
-    gradient: 'from-[#F2FAE8] to-green-50',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
     border: 'border-[#D4F0A0]',
-    btnColor: 'bg-[#78C31E] hover:bg-[#1E963C]',
-    btnBorder: 'border-[#78C31E] text-[#78C31E] hover:bg-[#F2FAE8]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
     title: 'Agribusiness Webinar Series Impact Report 2025',
     description:
       'Three-edition webinar series (September–November 2025). 230+ verified registrants, demographic insights, SDG alignment, and full impact metrics.',
@@ -97,11 +98,11 @@ const reports = [
   {
     id: 2,
     category: 'Annual Report',
-    categoryColor: 'bg-blue-100 text-blue-700',
-    gradient: 'from-blue-50 to-cyan-50',
-    border: 'border-blue-100',
-    btnColor: 'bg-blue-600 hover:bg-blue-700',
-    btnBorder: 'border-blue-600 text-blue-600 hover:bg-blue-50',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
     title: 'SWK Ghana Annual Report 2025',
     description:
       "Our annual review of programs, partnerships, community impact, and organizational milestones for the year 2025.",
@@ -116,9 +117,9 @@ const reports = [
   {
     id: 3,
     category: 'Program Summary',
-    categoryColor: 'bg-purple-100 text-purple-700',
-    gradient: 'from-purple-50 to-pink-50',
-    border: 'border-purple-100',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     btnColor: null,
     btnBorder: null,
     title: 'Youth Development Program Summary',
@@ -126,8 +127,8 @@ const reports = [
       "A comprehensive summary of SWK Ghana's youth development programs, geographic reach, and outcomes across Ghana.",
     date: 'Coming Soon',
     thumbnail: null,
-    thumbEmoji: '📋',
-    thumbBg: 'from-purple-200 to-pink-200',
+    thumbIcon: LuClipboardList,
+    thumbBg: 'from-[#D4F0A0] to-[#F2FAE8]',
     badgeText: null,
     driveLink: null,
     downloadLink: null,
@@ -135,9 +136,9 @@ const reports = [
   {
     id: 4,
     category: 'Research',
-    categoryColor: 'bg-yellow-100 text-yellow-700',
-    gradient: 'from-yellow-50 to-orange-50',
-    border: 'border-yellow-100',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     btnColor: null,
     btnBorder: null,
     title: 'Youth & Sustainable Agriculture in Ghana',
@@ -145,8 +146,8 @@ const reports = [
       'Research findings on the role of youth in advancing sustainable agriculture and agribusiness value chains across Ghana.',
     date: 'Coming Soon',
     thumbnail: null,
-    thumbEmoji: '🔬',
-    thumbBg: 'from-yellow-200 to-orange-200',
+    thumbIcon: LuMicroscope,
+    thumbBg: 'from-[#D4F0A0] to-[#F2FAE8]',
     badgeText: null,
     driveLink: null,
     downloadLink: null,
@@ -157,7 +158,7 @@ const articles = [
   {
     id: 'epw-news',
     category: 'News',
-    categoryColor: 'bg-[#F2FAE8] text-[#1E963C]',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
     date: 'October 2026',
     title: '30+ Join SWK Ghana and Aequitas Foundation’s Elevator Pitch Workshop',
     description:
@@ -167,7 +168,7 @@ const articles = [
   {
     id: 'epw-recap',
     category: 'Event Recap',
-    categoryColor: 'bg-blue-100 text-blue-700',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
     date: 'October 2026',
     title: 'Pitch Ready: Inside Our Elevator Pitch Workshop',
     description:
@@ -234,7 +235,7 @@ const Reports = () => {
                     rel="noopener noreferrer"
                     className={`flex-1 text-center text-xs font-semibold text-white ${report.btnColor} px-3 py-2.5 rounded-lg transition-colors`}
                   >
-                    📄 View Report
+                    <LuFileText className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />View report
                   </a>
                   <a
                     href={report.downloadLink}
@@ -242,7 +243,7 @@ const Reports = () => {
                     rel="noopener noreferrer"
                     className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-3 py-2.5 rounded-lg transition-colors`}
                   >
-                    ⬇️ Download PDF
+                    <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />Download PDF
                   </a>
                 </div>
                 <ShareButtons url={report.driveLink} title={report.title} />
@@ -266,8 +267,8 @@ const Reports = () => {
                 onClick={() => setActiveCategory(cat)}
                 className={`text-xs xs:text-sm font-semibold px-3 xs:px-4 py-1.5 rounded-full border transition-colors ${
                   activeCategory === cat
-                    ? 'bg-[#78C31E] text-white border-[#78C31E]'
-                    : 'bg-white text-gray-800 border-gray-300 hover:border-[#78C31E] hover:text-[#78C31E]'
+                    ? 'bg-[#78C31E] text-[#0C2E11] border-[#78C31E]'
+                    : 'bg-white text-gray-800 border-gray-300 hover:border-[#78C31E] hover:text-[#1E963C]'
                 }`}
               >
                 {cat}
@@ -292,14 +293,14 @@ const Reports = () => {
                     loading="lazy"
                   />
                   {report.driveLink && (
-                    <span className="absolute top-2 right-2 bg-white/90 text-xs font-semibold text-[#1E963C] px-2 py-0.5 rounded-full">
+                    <span className="absolute top-2 right-2 bg-white/90 text-xs font-semibold text-[#17702D] px-2 py-0.5 rounded-full">
                       Available
                     </span>
                   )}
                 </div>
               ) : (
                 <div className={`h-40 bg-gradient-to-br ${report.thumbBg} flex flex-col items-center justify-center gap-1`}>
-                  <span className="text-4xl">{report.thumbEmoji}</span>
+                  {report.thumbIcon && <report.thumbIcon className="h-10 w-10 text-[#17702D]" aria-hidden="true" />}
                   <span className="text-xs font-semibold text-gray-800">Coming Soon</span>
                 </div>
               )}
@@ -320,7 +321,7 @@ const Reports = () => {
                       rel="noopener noreferrer"
                       className={`flex-1 text-center text-xs font-semibold text-white ${report.btnColor} px-2 py-1.5 rounded-lg transition-colors`}
                     >
-                      📄 View
+                      <LuFileText className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />View
                     </a>
                     <a
                       href={report.downloadLink}
@@ -328,11 +329,11 @@ const Reports = () => {
                       rel="noopener noreferrer"
                       className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-2 py-1.5 rounded-lg transition-colors`}
                     >
-                      ⬇️ PDF
+                      <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />PDF
                     </a>
                   </div>
                 ) : (
-                  <span className="text-xs font-semibold text-gray-400 bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg text-center">
+                  <span className="text-xs font-semibold text-gray-600 bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg text-center">
                     Coming Soon
                   </span>
                 )}
@@ -352,7 +353,7 @@ const Reports = () => {
             {articles.map((article) => (
               <div
                 key={article.id}
-                className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] p-4 xs:p-5 hover:shadow-md transition-shadow"
+                className="bg-gradient-to-br from-[#F2FAE8] to-white rounded-xl border border-[#D4F0A0] p-4 xs:p-5 hover:shadow-md transition-shadow"
               >
                 <p className="text-xs text-gray-700 mb-3">{article.date}</p>
                 <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-2 leading-snug">
@@ -366,7 +367,7 @@ const Reports = () => {
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs xs:text-sm font-semibold text-[#78C31E] hover:text-[#1E963C]"
+                    className="text-xs xs:text-sm font-semibold text-[#17702D] hover:text-[#1E963C]"
                   >
                     Read Article →
                   </a>
@@ -376,7 +377,7 @@ const Reports = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center text-center py-14 border-2 border-dashed border-gray-200 rounded-xl">
-            <span className="text-4xl mb-4">✍️</span>
+            <LuPencilLine className="mb-4 h-10 w-10 text-[#17702D]" aria-hidden="true" />
             <h3 className="text-base xs:text-lg font-semibold text-gray-700 mb-2">Articles Coming Soon</h3>
             <p className="text-xs xs:text-sm text-gray-700 max-w-sm">
               We're working on new articles and thought leadership content. Check back soon!

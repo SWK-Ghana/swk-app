@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Seo from './Seo'
 import PageHero from './PageHero'
 import { FlowBackdrop } from './Patterns'
+import { LuChartColumn, LuGraduationCap, LuHandshake, LuHouse, LuLightbulb, LuMegaphone, LuScale, LuShieldCheck, LuSprout, LuUsers } from 'react-icons/lu'
 
 const About = () => {
   const navigate = useNavigate()
@@ -61,7 +62,7 @@ const About = () => {
               {/* Vision — FIRST */}
               <div className="text-center">
                 <div className="w-20 h-20 bg-[#F2FAE8] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
@@ -74,8 +75,8 @@ const About = () => {
 
               {/* Mission — SECOND */}
               <div className="text-center">
-                <div className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 bg-blue-100 rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
-                  <svg className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 bg-[#EAF6DC] rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
+                  <svg className="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
@@ -87,23 +88,23 @@ const About = () => {
 
               {/* Values */}
               <div className="text-center">
-                <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-20 h-20 bg-[#EAF6DC] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h2>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { name: 'Youth Leadership', icon: '👥' },
-                    { name: 'Sustainability', icon: '🌱' },
-                    { name: 'Innovation', icon: '💡' },
-                    { name: 'Collaboration', icon: '🤝' },
-                    { name: 'Equity', icon: '⚖️' },
-                    { name: 'Integrity', icon: '✅' }
+                    { name: 'Youth Leadership', icon: LuUsers },
+                    { name: 'Sustainability', icon: LuSprout },
+                    { name: 'Innovation', icon: LuLightbulb },
+                    { name: 'Collaboration', icon: LuHandshake },
+                    { name: 'Equity', icon: LuScale },
+                    { name: 'Integrity', icon: LuShieldCheck }
                   ].map((value, idx) => (
                     <div key={idx} className="flex items-center justify-center gap-2 text-sm text-gray-800">
-                      <span className="text-lg">{value.icon}</span>
+                      <value.icon className="h-5 w-5 flex-none text-[#17702D]" aria-hidden="true" />
                       <span>{value.name}</span>
                     </div>
                   ))}
@@ -132,9 +133,9 @@ const About = () => {
                     loading="lazy"
                   />
                   <div className="p-5">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#78C31E] transition-colors duration-300">{area.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#1E963C] transition-colors duration-300">{area.title}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{area.desc}</p>
-                    <div className="mt-4 flex items-center text-[#78C31E] font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                    <div className="mt-4 flex items-center text-[#17702D] font-semibold group-hover:translate-x-2 transition-transform duration-300">
                       Learn More
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -155,7 +156,7 @@ const About = () => {
                 <div className="flex items-start gap-4">
                   {/* Fixed: wider box, no overflow */}
                   <div className="flex-shrink-0 w-16 h-16 bg-[#F2FAE8] rounded-xl flex items-center justify-center">
-                    <span className="text-[#78C31E] font-bold text-sm leading-tight text-center">15–35</span>
+                    <span className="text-[#17702D] font-bold text-sm leading-tight text-center">15–35</span>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">Age Range</h3>
@@ -207,22 +208,22 @@ const About = () => {
             <p className="text-base xs:text-lg sm:text-xl text-gray-800 mb-8 xs:mb-10 sm:mb-12 text-center max-w-4xl mx-auto px-4 xs:px-6 sm:px-0">
               At SWK, we believe that true sustainability begins with empowered youth. Our approach is grounded in community-driven action, collaborative partnerships, and continuous learning.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-8 sm:gap-10">
+            <div className="flex flex-wrap justify-center gap-6 xs:gap-8 sm:gap-10">
               {[
-                { step: '1', title: 'Youth-Centred Engagement', desc: 'We design programmes with and for young people, ensuring their voices shape the future they inherit.', bgColor: 'bg-[#F2FAE8]', stepColor: 'bg-[#78C31E]', icon: '👥' },
-                { step: '2', title: 'Community-Based Implementation', desc: 'Our interventions begin at the grassroots, aligning with the needs and aspirations of local communities.', bgColor: 'bg-blue-100', stepColor: 'bg-blue-600', icon: '🏘️' },
-                { step: '3', title: 'Capacity Building', desc: 'We emphasise skills development, knowledge sharing, and leadership training to build confident and competent change-makers.', bgColor: 'bg-purple-100', stepColor: 'bg-purple-600', icon: '🎓' },
-                { step: '4', title: 'Systems-Level Advocacy', desc: 'By engaging with MMDAs and national institutions, we influence policy, amplify youth perspectives, and champion systemic change.', bgColor: 'bg-orange-100', stepColor: 'bg-orange-600', icon: '📢' },
-                { step: '5', title: 'Evidence-Based Impact', desc: 'We evaluate our work rigorously and adapt based on data, stories, and community feedback.', bgColor: 'bg-green-100', stepColor: 'bg-green-600', icon: '📊' },
+                { step: '1', title: 'Youth-Centred Engagement', desc: 'We design programmes with and for young people, ensuring their voices shape the future they inherit.', bgColor: 'bg-[#F2FAE8]', stepColor: 'bg-[#17702D]', icon: LuUsers },
+                { step: '2', title: 'Community-Based Implementation', desc: 'Our interventions begin at the grassroots, aligning with the needs and aspirations of local communities.', bgColor: 'bg-[#EAF6DC]', stepColor: 'bg-[#17702D]', icon: LuHouse },
+                { step: '3', title: 'Capacity Building', desc: 'We emphasise skills development, knowledge sharing, and leadership training to build confident and competent change-makers.', bgColor: 'bg-[#EAF6DC]', stepColor: 'bg-[#17702D]', icon: LuGraduationCap },
+                { step: '4', title: 'Systems-Level Advocacy', desc: 'By engaging with MMDAs and national institutions, we influence policy, amplify youth perspectives, and champion systemic change.', bgColor: 'bg-[#EAF6DC]', stepColor: 'bg-[#17702D]', icon: LuMegaphone },
+                { step: '5', title: 'Evidence-Based Impact', desc: 'We evaluate our work rigorously and adapt based on data, stories, and community feedback.', bgColor: 'bg-[#EAF6DC]', stepColor: 'bg-[#17702D]', icon: LuChartColumn },
               ].map((approach, idx) => (
-                <div key={idx} className="text-center group">
+                <div key={idx} className="text-center group w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.667rem)]">
                   <div className={`w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 ${approach.bgColor} rounded-xl xs:rounded-2xl flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-2xl xs:text-3xl">{approach.icon}</span>
+                    <approach.icon className="h-8 w-8 xs:h-9 xs:w-9 text-[#17702D]" aria-hidden="true" />
                   </div>
                   <div className={`w-10 h-10 xs:w-12 xs:h-12 ${approach.stepColor} text-white rounded-full flex items-center justify-center mx-auto mb-3 xs:mb-4 font-bold text-base xs:text-lg`}>
                     {approach.step}
                   </div>
-                  <h3 className="text-lg xs:text-xl font-bold text-gray-900 mb-3 xs:mb-4 group-hover:text-[#78C31E] transition-colors duration-300">{approach.title}</h3>
+                  <h3 className="text-lg xs:text-xl font-bold text-gray-900 mb-3 xs:mb-4 group-hover:text-[#1E963C] transition-colors duration-300">{approach.title}</h3>
                   <p className="text-sm xs:text-base text-gray-800 leading-relaxed">{approach.desc}</p>
                 </div>
               ))}

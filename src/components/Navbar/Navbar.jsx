@@ -146,7 +146,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                       onClick={() => setMobileSub((v) => (v === link.label ? null : link.label))}
                       aria-expanded={expanded}
                       className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition ${
-                        isGroupActive(link) ? "text-[#78C31E] font-bold" : "text-gray-800 hover:bg-gray-50"
+                        isGroupActive(link) ? "text-[#17702D] font-bold" : "text-gray-800 hover:bg-gray-50"
                       }`}
                     >
                       <span>{link.label}</span>
@@ -160,7 +160,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                               to={c.href}
                               onClick={() => setOpen(false)}
                               className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition ${
-                                isActive(c.href) ? "text-[#78C31E] font-bold bg-[#F2FAE8]" : "text-gray-700 hover:bg-gray-50"
+                                isActive(c.href) ? "text-[#17702D] font-bold bg-[#F2FAE8]" : "text-gray-700 hover:bg-gray-50"
                               }`}
                             >
                               {c.label}
@@ -179,7 +179,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="block w-full text-center font-bold py-3 mx-1 rounded-xl text-white"
+                      className="block w-full text-center font-bold py-3 mx-1 rounded-xl text-[#0C2E11]"
                       style={{ backgroundColor: "#78C31E" }}
                       onClick={() => setOpen(false)}
                     >
@@ -195,7 +195,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
                   <Link
                     to={link.href}
                     className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition ${
-                      isActive(link.href) ? "text-white font-bold" : "text-gray-800 hover:bg-gray-50"
+                      isActive(link.href) ? "text-[#0C2E11] font-bold" : "text-gray-800 hover:bg-gray-50"
                     }`}
                     style={isActive(link.href) ? { backgroundColor: "#78C31E" } : {}}
                     onClick={() => setOpen(false)}
@@ -233,7 +233,7 @@ const DropdownItem = ({ link, open, active, isChildActive, onOpen, onClose, onTo
         onClick={onToggle}
         onFocus={openNow}
         className="relative px-2 py-2 text-sm font-medium transition-colors flex items-center gap-1"
-        style={{ color: active ? "#78C31E" : "#1A1A1A" }}
+        style={{ color: active ? "#17702D" : "#1A1A1A" }}
       >
         <span>{link.label}</span>
         <Chevron open={open} />
@@ -260,7 +260,7 @@ const DropdownItem = ({ link, open, active, isChildActive, onOpen, onClose, onTo
                   aria-current={current ? "page" : undefined}
                   className={`flex flex-col rounded-xl px-3.5 py-2.5 transition-colors hover:bg-[#F2FAE8] ${current ? "bg-[#F2FAE8]" : ""}`}
                 >
-                  <span className="text-sm font-semibold" style={{ color: current ? "#1E963C" : "#1A1A1A" }}>
+                  <span className="text-sm font-semibold" style={{ color: current ? "#17702D" : "#1A1A1A" }}>
                     {c.label}
                   </span>
                   {c.desc && <span className="mt-0.5 text-xs leading-snug text-gray-500">{c.desc}</span>}
@@ -294,7 +294,7 @@ const NavItem = ({ label, href, active, cta }) => {
       <li>
         <Link
           to={href}
-          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
+          className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-bold text-[#0C2E11] transition-all hover:opacity-90 active:scale-95"
           style={{ backgroundColor: "#78C31E" }}
         >
           {label}
@@ -308,7 +308,7 @@ const NavItem = ({ label, href, active, cta }) => {
         to={href}
         aria-current={active ? "page" : undefined}
         className="relative px-2 py-2 text-sm font-medium transition-colors"
-        style={{ color: active ? "#78C31E" : "#1A1A1A" }}
+        style={{ color: active ? "#17702D" : "#1A1A1A" }}
       >
         <span>{label}</span>
         <span

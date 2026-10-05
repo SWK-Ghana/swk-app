@@ -42,7 +42,7 @@ const DocActions = ({ item }) => (
     <a
       href={item.href}
       download
-      className="inline-flex items-center gap-2 rounded-xl bg-[#1E963C] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#177a30] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E] focus-visible:ring-offset-2"
+      className="inline-flex items-center gap-2 rounded-xl bg-[#17702D] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#0F5A24] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E] focus-visible:ring-offset-2"
     >
       <DownloadIcon /> Download PDF
       <span className="sr-only">: {item.title}</span>
@@ -51,7 +51,7 @@ const DocActions = ({ item }) => (
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold text-[#1E963C] transition-colors hover:bg-[#F2FAE8] hover:text-[#177a30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]"
+      className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-sm font-semibold text-[#17702D] transition-colors hover:bg-[#F2FAE8] hover:text-[#177a30] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]"
     >
       Preview <ExternalIcon />
       <span className="sr-only">{item.title} (opens in a new tab)</span>
@@ -208,7 +208,7 @@ const Support = () => {
             <Cover no={featured.no} title={featured.title} edition={featured.edition} size="lg" className="min-h-[15rem]" />
             <div className="flex flex-col justify-center gap-4 p-7 sm:p-9">
               <h3 className="text-2xl font-bold text-gray-900">
-                {featured.title}: <span className="text-[#1E963C]">{featured.edition}</span>
+                {featured.title}: <span className="text-[#17702D]">{featured.edition}</span>
               </h3>
               <p className="leading-relaxed text-gray-600">{featured.desc}</p>
               <DocMeta item={featured} />
@@ -245,7 +245,7 @@ const Support = () => {
             </div>
             <label className="relative block w-full lg:max-w-sm">
               <span className="sr-only">Search resources</span>
-              <svg className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
               </svg>
               <input
@@ -268,11 +268,11 @@ const Support = () => {
                   onClick={() => setCat(c.id)}
                   aria-pressed={on}
                   className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E] ${
-                    on ? 'border-[#1E963C] bg-[#1E963C] text-white' : 'border-gray-200 bg-white text-gray-700 hover:border-[#78C31E] hover:text-[#1E963C]'
+                    on ? 'border-[#17702D] bg-[#17702D] text-white' : 'border-gray-200 bg-white text-gray-700 hover:border-[#78C31E] hover:text-[#1E963C]'
                   }`}
                 >
                   {c.label}
-                  <span className={`text-xs ${on ? 'text-white/80' : 'text-gray-400'}`}>
+                  <span className={`text-xs ${on ? 'text-white' : 'text-gray-500'}`}>
                     {c.id === 'all' ? RESOURCES.length : counts[c.id]}
                   </span>
                 </button>
@@ -296,12 +296,12 @@ const Support = () => {
                   >
                     <span className="flex items-start justify-between gap-3">
                       <span className="text-base font-bold leading-snug text-gray-900 group-hover:text-[#1E963C]">{r.name}</span>
-                      <span className="mt-1 flex-none text-gray-400 group-hover:text-[#1E963C]"><ExternalIcon /></span>
+                      <span className="mt-1 flex-none text-gray-500 group-hover:text-[#1E963C]"><ExternalIcon /></span>
                     </span>
                     <span className="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{r.desc}</span>
                     <span className="mt-4 flex flex-wrap gap-1.5">
                       {r.tags.map((t) => (
-                        <span key={t} className="rounded-full bg-[#F2FAE8] px-2.5 py-0.5 text-xs font-semibold text-[#1E963C]">{t}</span>
+                        <span key={t} className="rounded-full bg-[#F2FAE8] px-2.5 py-0.5 text-xs font-semibold text-[#17702D]">{t}</span>
                       ))}
                     </span>
                     <span className="sr-only"> (opens in a new tab)</span>
@@ -315,7 +315,7 @@ const Support = () => {
               <button
                 type="button"
                 onClick={() => { setQuery(''); setCat('all') }}
-                className="mt-3 text-sm font-bold text-[#1E963C] underline underline-offset-4"
+                className="mt-3 text-sm font-bold text-[#17702D] underline underline-offset-4"
               >
                 Clear the search and filters
               </button>
@@ -368,7 +368,7 @@ const Support = () => {
               <details key={q} className="group p-5 sm:p-6">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gray-900 [&::-webkit-details-marker]:hidden">
                   {q}
-                  <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#F2FAE8] text-[#1E963C] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                  <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#F2FAE8] text-[#17702D] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
                 </summary>
                 <p className="mt-3 leading-relaxed text-gray-600">{a}</p>
               </details>

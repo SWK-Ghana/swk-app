@@ -105,7 +105,7 @@ const MeetTheTeam = () => {
                 {/* Photo */}
                 <div className="text-center mb-4">
                   <div className="relative inline-block">
-                    <div className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-emerald-100 shadow-lg">
+                    <div className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-[#D4F0A0] shadow-lg">
                       <img
                         src={member.photo}
                         alt={member.name}
@@ -113,7 +113,7 @@ const MeetTheTeam = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="absolute -bottom-1 -right-1 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs xs:text-sm font-bold shadow-lg border-2 border-white z-10">
+                    <div className="absolute -bottom-1 -right-1 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 bg-[#17702D] rounded-full flex items-center justify-center text-white text-xs xs:text-sm font-bold shadow-lg border-2 border-white z-10">
                       {member.initials}
                     </div>
                   </div>
@@ -132,7 +132,7 @@ const MeetTheTeam = () => {
                       href={member.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors duration-200"
+                      className="w-8 h-8 bg-[#17702D] text-white rounded-full flex items-center justify-center hover:bg-[#0F5A24] transition-colors duration-200"
                       aria-label={`${member.name} LinkedIn`}
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ const MeetTheTeam = () => {
                   {member.social.email && (
                     <a
                       href={member.social.email}
-                      className="w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors duration-200"
+                      className="w-8 h-8 bg-[#17702D] text-white rounded-full flex items-center justify-center hover:bg-[#0F5A24] transition-colors duration-200"
                       aria-label={`${member.name} Email`}
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ const MeetTheTeam = () => {
                 href="https://www.linkedin.com/company/100929740"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors duration-200"
+                className="w-10 h-10 bg-[#17702D] text-white rounded-full flex items-center justify-center hover:bg-[#0F5A24] transition-colors duration-200"
                 aria-label="SWK Ghana LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -176,7 +176,7 @@ const MeetTheTeam = () => {
               </a>
             </div>
             
-            <a href="/get-involved" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60 bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 hover:brightness-105">
+            <a href="/get-involved" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-semibold text-white shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]/60 bg-gradient-to-r from-[#D4F0A0] via-[#F2FAE8] to-[#F2FAE8] hover:brightness-105">
               Get Involved
             </a>
           </div>

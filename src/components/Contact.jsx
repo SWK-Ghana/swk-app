@@ -62,13 +62,13 @@ const Contact = () => {
                 {/* Email */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
                   <div className="w-10 h-10 xs:w-12 xs:h-12 bg-[#F2FAE8] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@swkghana.org" className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors break-words">
+                    <a href="mailto:info@swkghana.org" className="text-sm xs:text-base text-gray-800 hover:text-[#1E963C] transition-colors break-words">
                       info@swkghana.org
                     </a>
                   </div>
@@ -76,14 +76,14 @@ const Contact = () => {
 
                 {/* Phone */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
-                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-[#EAF6DC] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+233534492220" className="text-sm xs:text-base text-gray-800 hover:text-[#78C31E] transition-colors">
+                    <a href="tel:+233534492220" className="text-sm xs:text-base text-gray-800 hover:text-[#1E963C] transition-colors">
                       +233 (0) 534 492 220
                     </a>
                     <p className="text-sm xs:text-base text-gray-800">Mon–Fri 9AM – 6PM GMT</p>
@@ -92,8 +92,8 @@ const Contact = () => {
 
                 {/* Address */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
-                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-[#EAF6DC] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -106,8 +106,8 @@ const Contact = () => {
 
                 {/* Social */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
-                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 xs:w-12 xs:h-12 bg-[#EAF6DC] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 xs:w-6 xs:h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                     </svg>
                   </div>
@@ -127,7 +127,7 @@ const Contact = () => {
               {status === 'success' ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
                   <div className="w-16 h-16 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>

@@ -4,9 +4,9 @@ import { SOCIALS } from '../data/socials'
 // SWK Ghana's social profiles as icon links. `tone` matches the surface the
 // row sits on; `size` sets the button size. Profiles come from data/socials.js.
 const TONES = {
-  bar: 'text-white/75 hover:text-[#A8E04A] focus-visible:text-[#A8E04A]',
+  bar: 'text-[#0C2E11]/75 hover:text-[#A8E04A] focus-visible:text-[#A8E04A]',
   dark: 'bg-white/10 text-white hover:bg-[#78C31E] hover:text-[#123D16] focus-visible:bg-[#78C31E] focus-visible:text-[#123D16]',
-  light: 'bg-[#F2FAE8] text-[#1E963C] hover:bg-[#1E963C] hover:text-white focus-visible:bg-[#1E963C] focus-visible:text-white',
+  light: 'bg-[#F2FAE8] text-[#17702D] hover:bg-[#1E963C] hover:text-[#0C2E11] focus-visible:bg-[#1E963C] focus-visible:text-white',
 }
 
 const SIZES = {

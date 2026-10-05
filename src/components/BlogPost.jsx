@@ -4,6 +4,7 @@ import { client } from '../utils/sanityClient'
 import Seo from './Seo'
 import SocialLinks from './SocialLinks'
 import { FlowStrip, PatternBand } from './Patterns'
+import { LuInbox } from 'react-icons/lu'
 
 // Route loader — runs in the router (browser) AND in the build-time
 // prerenderer, so the full article text is baked into static HTML for SEO.
@@ -107,7 +108,7 @@ const BlogPost = () => {
   if (!post) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
-        <div className="text-6xl mb-4">📭</div>
+        <LuInbox className="mx-auto mb-4 h-14 w-14 text-[#17702D]" aria-hidden="true" />
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Post not found</h2>
         <Link to="/blog" className="font-semibold" style={{ color: '#78C31E' }}>← Back to Blog</Link>
       </div>
@@ -187,7 +188,7 @@ const BlogPost = () => {
         {/* Meta */}
         {post.category && (
           <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4"
-            style={{ background: '#F2FAE8', color: '#1E963C' }}>
+            style={{ background: '#F2FAE8', color: '#17702D' }}>
             {post.category}
           </span>
         )}
@@ -213,7 +214,7 @@ const BlogPost = () => {
         {/* Body — HTML (admin posts) or Portable Text (Sanity Studio posts) */}
         <article className="prose max-w-none">
           {post.content
-            ? <div dangerouslySetInnerHTML={{ __html: post.content }} className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:text-gray-700 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_li]:text-gray-700 [&_li]:mb-1 [&_a]:text-emerald-600 [&_a]:underline [&_img]:max-w-full [&_img]:rounded-xl [&_img]:my-6 [&_strong]:font-bold [&_em]:italic [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-600 [&_blockquote]:my-4" />
+            ? <div dangerouslySetInnerHTML={{ __html: post.content }} className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:text-gray-700 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_li]:text-gray-700 [&_li]:mb-1 [&_a]:text-[#17702D] [&_a]:underline [&_img]:max-w-full [&_img]:rounded-xl [&_img]:my-6 [&_strong]:font-bold [&_em]:italic [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-600 [&_blockquote]:my-4" />
             : post.body?.map((block, idx) => renderBlock(block, idx))
           }
         </article>

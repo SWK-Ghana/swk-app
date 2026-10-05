@@ -29,7 +29,7 @@ const Resources = () => {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md hover:border-[#78C31E] transition-all duration-200 flex flex-col">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-[#F2FAE8] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -52,7 +52,7 @@ const Resources = () => {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md hover:border-[#78C31E] transition-all duration-200 flex flex-col">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-[#F2FAE8] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -69,7 +69,7 @@ const Resources = () => {
               >
                 Open the Support Hub →
               </Link>
-              <Link to="/contact" className="mt-3 text-center text-sm font-semibold text-[#1E963C] hover:underline">
+              <Link to="/contact" className="mt-3 text-center text-sm font-semibold text-[#17702D] hover:underline">
                 Need our team? Contact us
               </Link>
             </div>
@@ -90,8 +90,8 @@ const Resources = () => {
                     Download our Annual Reports and Impact Reports — tracking our programmes, reach, and community outcomes across Ghana and Africa.
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
-                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#1E963C] px-3 py-1 rounded-full">Annual Report 2025</span>
-                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#1E963C] px-3 py-1 rounded-full">Agribusiness Impact Report 2025</span>
+                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#17702D] px-3 py-1 rounded-full">Annual Report 2025</span>
+                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#17702D] px-3 py-1 rounded-full">Agribusiness Impact Report 2025</span>
                   </div>
                 </div>
               </div>

@@ -189,7 +189,7 @@ const GetInvolved = () => {
   const SuccessState = ({ name, message, onClose }) => (
     <div className="flex flex-col items-center py-10 text-center">
       <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
-        <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-7 h-7 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
@@ -218,7 +218,7 @@ const GetInvolved = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#F2FAE8] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
-                <svg className="w-7 h-7 xs:w-8 xs:h-8 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7 xs:w-8 xs:h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
@@ -228,8 +228,8 @@ const GetInvolved = () => {
             </div>
 
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+                <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
@@ -239,8 +239,8 @@ const GetInvolved = () => {
             </div>
 
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+                <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2" />
                 </svg>
               </div>
@@ -255,8 +255,8 @@ const GetInvolved = () => {
             <h2 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-6 xs:mb-8 text-center">Success Stories</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 xs:gap-6">
               {[
-                { initial: 'A', color: 'bg-[#F2FAE8] text-[#78C31E]', name: 'Alex Johnson', text: '"Volunteering with this organization has been incredibly rewarding. I\'ve seen firsthand the positive impact we\'re making in our community."' },
-                { initial: 'M', color: 'bg-blue-100 text-blue-600', name: 'Maria Rodriguez', text: '"The resources and support provided have helped me grow both personally and professionally. I\'m grateful to be part of this community."' },
+                { initial: 'A', color: 'bg-[#F2FAE8] text-[#17702D]', name: 'Alex Johnson', text: '"Volunteering with this organization has been incredibly rewarding. I\'ve seen firsthand the positive impact we\'re making in our community."' },
+                { initial: 'M', color: 'bg-[#EAF6DC] text-[#17702D]', name: 'Maria Rodriguez', text: '"The resources and support provided have helped me grow both personally and professionally. I\'m grateful to be part of this community."' },
               ].map(({ initial, color, name, text }) => (
                 <div key={name} className="flex items-start space-x-4">
                   <div className={`w-12 h-12 ${color} rounded-full flex items-center justify-center flex-shrink-0`}>
@@ -278,7 +278,7 @@ const GetInvolved = () => {
             {contactStatus === 'success' ? (
               <div className="flex flex-col items-center py-10 text-center">
                 <div className="w-14 h-14 bg-[#F2FAE8] rounded-full flex items-center justify-center mb-3">
-                  <svg className="w-7 h-7 text-[#78C31E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -386,7 +386,7 @@ const GetInvolved = () => {
                       type="file"
                       accept=".pdf,.doc,.docx,.odt,.txt,.jpg,.jpeg,.png,.webp"
                       onChange={handleFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-medium file:bg-[#78C31E] file:text-white hover:file:bg-[#1E963C] cursor-pointer"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-medium file:bg-[#78C31E] file:text-[#0C2E11] hover:file:bg-[#1E963C] cursor-pointer"
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       Accepted: PDF, Word (.doc/.docx), OpenDocument (.odt), Plain text (.txt), Images (.jpg, .png, .webp) — Max 10 MB
@@ -400,7 +400,7 @@ const GetInvolved = () => {
                       </p>
                     )}
                     {volunteerDocFile && !volunteerDocError && (
-                      <p className="text-xs text-[#1E963C] mt-1 flex items-center gap-1">
+                      <p className="text-xs text-[#17702D] mt-1 flex items-center gap-1">
                         <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
@@ -409,14 +409,14 @@ const GetInvolved = () => {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
                     <div className="flex-1 h-px bg-gray-200" />
                     <span>or</span>
                     <div className="flex-1 h-px bg-gray-200" />
                   </div>
 
                   <div>
-                    <label htmlFor="v-link" className="block text-xs font-medium text-gray-600 mb-1">Paste a link <span className="font-normal text-gray-400">(Google Drive, LinkedIn, Dropbox, etc.)</span></label>
+                    <label htmlFor="v-link" className="block text-xs font-medium text-gray-600 mb-1">Paste a link <span className="font-normal text-gray-500">(Google Drive, LinkedIn, Dropbox, etc.)</span></label>
                     <input
                       id="v-link"
                       type="url"

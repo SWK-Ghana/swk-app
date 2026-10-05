@@ -4,6 +4,7 @@ import Seo from './Seo'
 import PageHero from './PageHero'
 import { FlowBackdrop, FlowPanel } from './Patterns'
 import Partnerships from './Partnerships'
+import { LuCalendarDays, LuClapperboard, LuHandshake, LuMapPin, LuPlay, LuRecycle, LuShoppingCart, LuTicket } from 'react-icons/lu'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
 const CLD = 'https://res.cloudinary.com/dwgj3lovn'
@@ -133,7 +134,7 @@ const GalleryGrid = () => {
 const imageProjects = [
   {
     id: 'webinar',
-    gradient: 'from-[#F2FAE8] to-green-50',
+    gradient: 'from-[#F2FAE8] to-white',
     border: 'border-[#D4F0A0]',
     // The poster's "THANK YOU" header (top 45%), so the wide thumbnail isn't cut mid-text.
     thumb: img('c_crop,x_0,y_0,w_1.0,h_0.45/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png'),
@@ -143,15 +144,15 @@ const imageProjects = [
   },
   {
     id: 'eacademy',
-    gradient: 'from-blue-50 to-cyan-50',
-    border: 'border-blue-100',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     thumb: img('v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png'),
     title: 'e-Academy Courses',
     desc: 'Online learning platform for agribusiness and sustainable farming practices available to youth across Ghana.',
   },
   {
     id: 'ambassador',
-    gradient: 'from-[#F2FAE8] to-blue-50',
+    gradient: 'from-[#F2FAE8] to-white',
     border: 'border-[#D4F0A0]',
     thumb: null, // dual-image layout
     title: 'Ambassador Recognition',
@@ -166,8 +167,8 @@ const imageProjects = [
 const videoProjects = [
   {
     id: 'taka',
-    gradient: 'from-purple-50 to-pink-50',
-    border: 'border-purple-100',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     ytId: 'mqVJMGlINt4',
     isShort: false,
     title: 'Taka Kipawa App',
@@ -175,8 +176,8 @@ const videoProjects = [
   },
   {
     id: 'circular',
-    gradient: 'from-green-50 to-[#F2FAE8]',
-    border: 'border-green-100',
+    gradient: 'from-[#F2FAE8] to-[#F2FAE8]',
+    border: 'border-[#D4F0A0]',
     ytId: '2SIXUJJppP4',
     isShort: false,
     title: 'Circular Economy Innovation',
@@ -184,8 +185,8 @@ const videoProjects = [
   },
   {
     id: 'climate',
-    gradient: 'from-orange-50 to-red-50',
-    border: 'border-orange-100',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     ytId: 'GAE6AL3NWBo',
     isShort: true,
     title: 'Climate Action',
@@ -193,8 +194,8 @@ const videoProjects = [
   },
   {
     id: 'galamsey',
-    gradient: 'from-red-50 to-pink-50',
-    border: 'border-red-100',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
     ytId: 'zDywICh3Ay0',
     isShort: true,
     title: 'Fight Against Galamsey',
@@ -221,11 +222,11 @@ const VideoCard = ({ gradient, border, ytId, title, desc }) => {
             onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }}
           />
           <div className="hidden w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 items-center justify-center flex-col gap-2" aria-hidden="true">
-            <span className="text-4xl">🎬</span>
+            <LuClapperboard className="h-10 w-10 text-[#17702D]" aria-hidden="true" />
             <span className="text-xs text-gray-700 font-medium">Click to play</span>
           </div>
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-            <div className="bg-red-600 group-hover:bg-red-700 rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
+            <div className="bg-[#17702D] group-hover:bg-[#0F5A24] rounded-2xl px-5 py-3 shadow-lg transition-all group-hover:scale-110 flex items-center gap-2">
               <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -252,9 +253,9 @@ const VideoCard = ({ gradient, border, ytId, title, desc }) => {
           href={`https://www.youtube.com/watch?v=${ytId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 self-start text-xs font-bold text-red-600 hover:text-red-700 hover:underline flex items-center gap-1"
+          className="mt-3 self-start text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
         >
-          ▶ Watch on YouTube
+          <LuPlay className="h-3.5 w-3.5" aria-hidden="true" /> Watch on YouTube
         </a>
       </div>
     </div>
@@ -297,10 +298,10 @@ const OurWork = () => {
                 youth pitch showcase.
               </p>
               <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
-                <li>📅 Saturday, 7 November 2026 · 9:00 AM – 2:00 PM GMT</li>
-                <li>📍 The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
-                <li>🤝 In partnership with TGLC, Agribusiness e-Academy, Calidad Farms &amp; The Food Discourse</li>
-                <li>🎟️ Free entry · Seats are filling fast</li>
+                <li className="flex items-start gap-2"><LuCalendarDays className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Saturday, 7 November 2026 · 9:00 AM – 2:00 PM GMT</li>
+                <li className="flex items-start gap-2"><LuMapPin className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
+                <li className="flex items-start gap-2"><LuHandshake className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />In partnership with TGLC, Agribusiness e-Academy, Calidad Farms &amp; The Food Discourse</li>
+                <li className="flex items-start gap-2"><LuTicket className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Free entry · Seats are filling fast</li>
               </ul>
               <a
                 href="/summit"
@@ -371,7 +372,7 @@ const OurWork = () => {
           {/* Video projects */}
           <div className="mb-2">
             <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-xl">🎬</span> Video Stories
+              <LuClapperboard className="h-5 w-5 text-[#17702D]" aria-hidden="true" /> Video Stories
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5">
               {videoProjects.map((v) => (
@@ -396,24 +397,24 @@ const OurWork = () => {
               {
                 href: '/taka-kipawa',
                 img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg',
-                icon: '♻️',
-                gradient: 'from-purple-50 to-pink-50',
-                border: 'border-purple-100',
+                icon: LuRecycle,
+                gradient: 'from-[#F2FAE8] to-white',
+                border: 'border-[#D4F0A0]',
                 title: 'Taka Kipawa',
                 desc: 'Our waste-management platform connecting households, waste collectors, and recyclers across Ga West Municipality for a cleaner, circular economy.',
                 cta: 'Explore Taka Kipawa',
-                linkClass: 'text-purple-700',
+                linkClass: 'text-[#0F5A24]',
               },
               {
                 href: '/marketplace',
                 img: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg',
-                icon: '🛒',
-                gradient: 'from-[#F2FAE8] to-green-50',
+                icon: LuShoppingCart,
+                gradient: 'from-[#F2FAE8] to-white',
                 border: 'border-[#D4F0A0]',
                 title: 'SWK Marketplace',
                 desc: 'A marketplace for eco-friendly, youth-led products — supporting sustainable consumption and the circular economy in line with UN SDG 12.',
                 cta: 'Explore Marketplace',
-                linkClass: 'text-[#1E963C]',
+                linkClass: 'text-[#17702D]',
               },
             ].map((card) => (
               <Link
@@ -431,7 +432,7 @@ const OurWork = () => {
                 </div>
                 <div className="p-5 xs:p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl" aria-hidden="true">{card.icon}</span>
+                    <card.icon className="h-6 w-6 text-[#17702D]" aria-hidden="true" />
                     <h3 className="text-lg xs:text-xl font-bold text-gray-900">{card.title}</h3>
                   </div>
                   <p className="text-sm text-gray-700 leading-relaxed flex-1 mb-4">{card.desc}</p>
@@ -491,14 +492,14 @@ const OurWork = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { n: '4', title: 'Quality Education', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
-              { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-blue-50 text-blue-700 border-blue-100' },
-              { n: '10', title: 'Reduced Inequalities', color: 'bg-purple-50 text-purple-700 border-purple-100' },
-              { n: '11', title: 'Sustainable Cities', color: 'bg-green-50 text-green-700 border-green-100' },
-              { n: '12', title: 'Responsible Consumption', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
-              { n: '13', title: 'Climate Action', color: 'bg-green-50 text-green-700 border-green-100' },
-              { n: '15', title: 'Life on Land', color: 'bg-[#F2FAE8] text-[#1E963C] border-[#D4F0A0]' },
-              { n: '17', title: 'Partnerships for the Goals', color: 'bg-blue-50 text-blue-700 border-blue-100' },
+              { n: '4', title: 'Quality Education', color: 'bg-[#F2FAE8] text-[#17702D] border-[#D4F0A0]' },
+              { n: '8', title: 'Decent Work & Economic Growth', color: 'bg-[#F2FAE8] text-[#0F5A24] border-[#D4F0A0]' },
+              { n: '10', title: 'Reduced Inequalities', color: 'bg-[#F2FAE8] text-[#0F5A24] border-[#D4F0A0]' },
+              { n: '11', title: 'Sustainable Cities', color: 'bg-[#F2FAE8] text-[#0F5A24] border-[#D4F0A0]' },
+              { n: '12', title: 'Responsible Consumption', color: 'bg-[#F2FAE8] text-[#17702D] border-[#D4F0A0]' },
+              { n: '13', title: 'Climate Action', color: 'bg-[#F2FAE8] text-[#0F5A24] border-[#D4F0A0]' },
+              { n: '15', title: 'Life on Land', color: 'bg-[#F2FAE8] text-[#17702D] border-[#D4F0A0]' },
+              { n: '17', title: 'Partnerships for the Goals', color: 'bg-[#F2FAE8] text-[#0F5A24] border-[#D4F0A0]' },
             ].map((g, i) => (
               <div key={i} className={`flex items-center gap-3 rounded-xl border ${g.color} p-3 xs:p-4`}>
                 <div className="flex items-center justify-center h-10 w-10 xs:h-12 xs:w-12 rounded-lg bg-white shadow-inner border flex-shrink-0">

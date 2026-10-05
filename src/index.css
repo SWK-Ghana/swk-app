@@ -52,11 +52,11 @@
   }
 
   a {
-    color: #1E963C;
+    color: #17702D;
   }
 
   a:hover {
-    color: #78C31E;
+    color: #0F5A24;
   }
 }
 
@@ -69,12 +69,12 @@
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 0.01em;
     background-color: #78C31E;
-    color: #ffffff;
-    focus-visible-ring-color: #78C31E;
+    color: #0C2E11;
   }
 
   .btn-gradient:hover {
-    background-color: #1E963C;
+    background-color: #8AD62B;
+    color: #0C2E11;
     transform: translateY(-1px);
   }
 
@@ -83,13 +83,13 @@
     @apply inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border-2 transition-all duration-150 ease-out active:scale-[0.98];
     font-family: 'Ubuntu', sans-serif;
     border-color: #78C31E;
-    color: #1E963C;
+    color: #17702D;
     background-color: transparent;
   }
 
   .btn-outline:hover {
     background-color: #78C31E;
-    color: #ffffff;
+    color: #0C2E11;
   }
 
   @media (prefers-reduced-motion: reduce) {
