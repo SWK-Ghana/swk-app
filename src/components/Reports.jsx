@@ -27,11 +27,11 @@ const ShareButtons = ({ url, title }) => {
       <span className="text-xs font-semibold text-gray-700">Share:</span>
       {shares.map(({ label, color, href, icon }) => (
         <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${label}`}
-          className={`${color} text-white rounded-lg p-1.5 transition-colors`}>
-          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
+          className={`${color} text-white rounded-lg p-2 transition-colors`}>
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
         </a>
       ))}
-      <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs px-2.5 py-1.5 rounded-lg transition-colors">
+      <button onClick={copyLink} className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs px-3 py-2 rounded-lg transition-colors">
         {copied ? 'Copied!' : 'Copy link'}
       </button>
     </div>
@@ -367,7 +367,7 @@ const Reports = () => {
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs xs:text-sm font-semibold text-[#17702D] hover:text-[#1E963C]"
+                    className="inline-block py-1.5 text-xs xs:text-sm font-semibold text-[#17702D] hover:text-[#1E963C]"
                   >
                     Read Article →
                   </a>

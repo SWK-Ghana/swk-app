@@ -253,7 +253,7 @@ const VideoCard = ({ gradient, border, ytId, title, desc }) => {
           href={`https://www.youtube.com/watch?v=${ytId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 self-start text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
+          className="mt-2 self-start py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
         >
           <LuPlay className="h-3.5 w-3.5" aria-hidden="true" /> Watch on YouTube
         </a>

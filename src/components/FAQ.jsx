@@ -124,7 +124,7 @@ const FAQ = () => {
                 </a>
               </div>
             </FlowPanel>
-            <Link to="/resources" className="inline-block text-sm font-semibold text-[#17702D] hover:text-[#1E963C] hover:underline transition-colors">
+            <Link to="/resources" className="inline-block py-1.5 text-sm font-semibold text-[#17702D] hover:text-[#1E963C] hover:underline transition-colors">
               ← Back to Resources
             </Link>
           </aside>

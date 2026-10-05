@@ -91,7 +91,7 @@ const VideoCard = ({ bg, border, ytId, title, description }) => {
           href={`https://www.youtube.com/watch?v=${ytId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 self-start text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
+          className="mt-2 self-start py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
         >
           <LuPlay className="h-3.5 w-3.5" aria-hidden="true" /> Watch on YouTube
         </a>
@@ -430,7 +430,7 @@ const Home = () => {
             {slides.map((_, idx) => (
               <button key={idx} onClick={() => setCurrentSlide(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className="p-1.5">
+                className="p-2.5">
                 <span className={`block rounded-full transition-all duration-300 ${idx === currentSlide ? 'bg-white w-8 h-2' : 'bg-white/40 w-2 h-2 hover:bg-white/70'}`} />
               </button>
             ))}
@@ -485,7 +485,7 @@ const Home = () => {
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
                       <div className="flex-shrink-0 flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-center">
                         <span className="text-2xl xs:text-3xl font-bold text-white leading-none">{e.day}</span>
-                        <span className="text-[0.65rem] font-bold text-white/70 uppercase tracking-wide mt-1">
+                        <span className="text-xs font-bold text-white/75 uppercase tracking-wide mt-1">
                           {e.month} {e.year}
                         </span>
                       </div>

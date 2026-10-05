@@ -42,7 +42,7 @@ const Footer = () => (
           <ul className="space-y-2">
             {QUICK_LINKS.map(({ label, href }) => (
               <li key={label}>
-                <a href={href} className="text-sm xs:text-base text-white/80 hover:text-white transition-colors">
+                <a href={href} className="inline-block py-1 text-sm xs:text-base text-white/80 hover:text-white transition-colors">
                   {label}
                 </a>
               </li>
@@ -55,18 +55,18 @@ const Footer = () => (
           <h4 className="text-base xs:text-lg font-semibold mb-3 xs:mb-4 text-white">Contact</h4>
           <ul className="space-y-2 text-sm xs:text-base text-white/80">
             <li>
-              <a href={`mailto:${CONTACT.email}`} className="text-white/80 hover:text-white transition-colors break-words">
+              <a href={`mailto:${CONTACT.email}`} className="inline-block py-1 text-white/80 hover:text-white transition-colors break-words">
                 {CONTACT.email}
               </a>
             </li>
             <li>
-              <a href={CONTACT.phoneHref} className="text-white/80 hover:text-white transition-colors">
+              <a href={CONTACT.phoneHref} className="inline-block py-1 text-white/80 hover:text-white transition-colors">
                 {CONTACT.phone}
               </a>
             </li>
             <li>Accra, Ghana</li>
             <li className="pt-2">
-              <a href="https://swkghana.org" className="text-white/80 hover:text-white transition-colors">
+              <a href="https://swkghana.org" className="inline-block py-1 text-white/80 hover:text-white transition-colors">
                 swkghana.org
               </a>
             </li>
@@ -78,7 +78,7 @@ const Footer = () => (
       <div className="border-t border-white/10 mt-6 xs:mt-8 pt-6 xs:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs xs:text-sm text-white/65">
         <p className="text-white/65">&copy; 2026 SWK Ghana LBG. All rights reserved.</p>
         <div className="flex items-center gap-4">
-          <a href="/privacy-policy" className="text-white/65 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="/privacy-policy" className="inline-block py-1 text-white/65 hover:text-white transition-colors">Privacy Policy</a>
           <p className="text-white/65">Building resilient communities across Africa 🌍</p>
         </div>
       </div>
