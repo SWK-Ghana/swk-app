@@ -102,6 +102,15 @@
   }
 }
 
+/* ── Page shell ────────────────────────────────────────────────────────────
+   One width for everything: top bar, navbar, page headers, page content and
+   footer all share these edges, so every page lines up. */
+@layer components {
+  .swk-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12;
+  }
+}
+
 /* ── Responsive utilities ────────────────────────────────────────────────── */
 @layer utilities {
   .text-responsive-xs {
@@ -170,10 +179,10 @@
   background: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .93) 42%, rgba(12, 46, 17, .74) 100%);
 }
 
-/* Even veil for centred heroes: darkest behind the copy, the pattern
-   showing at the edges. */
-.swk-veil-center {
-  background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .92) 55%, rgba(12, 46, 17, .76) 100%);
+/* Wash over a header photo: darkest behind the centred copy, lighter at
+   the edges so the people in the photo still show. */
+.swk-veil-photo {
+  background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(12, 46, 17, .74) 0%, rgba(12, 46, 17, .45) 55%, rgba(12, 46, 17, .12) 100%);
 }
 
 /* Veil for bold green call-to-action panels. */

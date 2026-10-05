@@ -89,46 +89,45 @@ const FAQ = () => {
       />
 
       <PageHero
-        eyebrow="Help Centre"
         title="Frequently Asked Questions"
         lede="Answers to the most common questions about SWK Ghana, our programmes, the marketplace, and how to get involved."
         pattern="keys"
       />
 
-      {/* FAQ List */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="space-y-3">
-          {FAQS.map((faq, i) => (
-            <FAQItem key={i} question={faq.question} answer={faq.answer} />
-          ))}
-        </div>
-
-        {/* Still have questions */}
-        <FlowPanel className="mt-12 p-6 sm:p-10 text-center">
-          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Still have a question?</h3>
-          <p className="text-white/90 text-sm sm:text-base mb-5">
-            Can't find what you're looking for? Our team is happy to help.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/contact" className="rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-[#17702D] transition-colors hover:bg-gray-100 hover:text-[#17702D]">
-              Contact Us
-            </Link>
-            <a
-              href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border-2 border-white px-6 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white hover:text-[#17702D]"
-            >
-              Join WhatsApp Community
-            </a>
+      {/* Questions in the page's main column, help alongside: both start on
+          the same edge as the header text. */}
+      <div className="swk-shell py-12 sm:py-16">
+        <div className="grid gap-10 lg:grid-cols-3 lg:gap-12">
+          <div className="space-y-3 lg:col-span-2">
+            {FAQS.map((faq, i) => (
+              <FAQItem key={i} question={faq.question} answer={faq.answer} />
+            ))}
           </div>
-        </FlowPanel>
 
-        {/* Back to Resources */}
-        <div className="mt-6 text-center">
-          <Link to="/resources" className="text-sm font-semibold text-[#78C31E] hover:text-[#1E963C] hover:underline transition-colors">
-            ← Back to Resources
-          </Link>
+          <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
+            <FlowPanel className="p-6 sm:p-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Still have a question?</h2>
+              <p className="text-white/90 text-sm sm:text-base mb-5">
+                Can't find what you're looking for? Our team is happy to help.
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link to="/contact" className="rounded-xl bg-white px-6 py-2.5 text-center text-sm font-bold text-[#17702D] transition-colors hover:bg-gray-100 hover:text-[#17702D]">
+                  Contact us
+                </Link>
+                <a
+                  href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border-2 border-white px-6 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-white hover:text-[#17702D]"
+                >
+                  Join our WhatsApp community
+                </a>
+              </div>
+            </FlowPanel>
+            <Link to="/resources" className="inline-block text-sm font-semibold text-[#17702D] hover:text-[#1E963C] hover:underline transition-colors">
+              ← Back to Resources
+            </Link>
+          </aside>
         </div>
       </div>
     </main>

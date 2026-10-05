@@ -7,7 +7,7 @@ import { CONTACT } from '../data/socials'
 // Fixed at 2.25rem tall (h-9) so full-height heroes can subtract it.
 const TopBar = () => (
   <div className="bg-[#0C2E11] text-[13px] text-white/75">
-    <div className="mx-auto flex h-9 max-w-7xl items-center justify-center gap-4 px-4 sm:justify-between sm:px-6 md:px-8 lg:px-10 xl:px-12">
+    <div className="swk-shell flex h-9 items-center justify-center gap-4 sm:justify-between">
       <div className="hidden min-w-0 items-center gap-5 sm:flex">
         <a href={`mailto:${CONTACT.email}`} className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white">
           <svg className="h-3.5 w-3.5 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

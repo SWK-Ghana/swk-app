@@ -40,7 +40,7 @@ const cardSrcset = (path) => srcset(path, [300, 600, 900])
 const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
 // Video card using YouTube embed
-const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
+const VideoCard = ({ bg, border, ytId, title, description }) => {
   const [playing, setPlaying] = useState(false)
   const embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`
 
@@ -84,7 +84,6 @@ const VideoCard = ({ bg, border, accent, badge, ytId, title, description }) => {
         </div>
       )}
       <div className="p-4 flex flex-col flex-1">
-        <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{description}</p>
         <a
@@ -194,9 +193,8 @@ const Section = ({ children, className = '' }) => (
   </div>
 )
 
-const SectionHeader = ({ badge, badgeColor = 'bg-[#F2FAE8] text-[#1E963C]', title, subtitle }) => (
+const SectionHeader = ({ title, subtitle }) => (
   <div className="text-center mb-10 sm:mb-14">
-    <span className={`inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest ${badgeColor}`}>{badge}</span>
     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h2>
     {subtitle && <p className="text-lg sm:text-xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
   </div>
@@ -347,10 +345,10 @@ const Home = () => {
   const resetPartner = () => { setPartnerOrg(''); setPartnerName(''); setPartnerEmail(''); setPartnerMessage(''); setPartnerStatus('idle') }
 
   const videoProjects = [
-    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', accent: 'bg-purple-100 text-purple-700', badge: 'Innovation', ytId: 'mqVJMGlINt4', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
-    { id: 'circular', bg: 'from-green-50 to-[#F2FAE8]', border: 'border-green-100', accent: 'bg-[#F2FAE8] text-[#1E963C]', badge: 'Circular Economy', ytId: '2SIXUJJppP4', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
-    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', accent: 'bg-orange-100 text-orange-700', badge: 'Climate Action', ytId: 'GAE6AL3NWBo', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
-    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', accent: 'bg-red-100 text-red-700', badge: 'Advocacy', ytId: 'zDywICh3Ay0', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
+    { id: 'taka', bg: 'from-purple-50 to-pink-50', border: 'border-purple-100', ytId: 'mqVJMGlINt4', title: 'Taka Kipawa App', description: 'Digital solutions for waste management and circular economy.' },
+    { id: 'circular', bg: 'from-green-50 to-[#F2FAE8]', border: 'border-green-100', ytId: '2SIXUJJppP4', title: 'Circular Economy Innovation', description: 'Youth-led solutions for sustainable consumption and waste reduction.' },
+    { id: 'climate', bg: 'from-orange-50 to-red-50', border: 'border-orange-100', ytId: 'GAE6AL3NWBo', title: 'Climate Action', description: 'Children advocating for environmental protection and climate action.' },
+    { id: 'galamsey', bg: 'from-red-50 to-pink-50', border: 'border-red-100', ytId: 'zDywICh3Ay0', title: 'Fight Against Galamsey', description: "Youth voices against illegal mining to protect Ghana's natural resources." },
   ]
 
   return (
@@ -380,9 +378,6 @@ const Home = () => {
 
           {/* Hero content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
-              Youth · Sustainability · Africa
-            </span>
             {/* The fluid effect draws the headline into a WebGL canvas, which
                 crawlers and screen readers cannot read. So the real <h1> always
                 stays in the DOM: it is the visible headline until the canvas
@@ -444,7 +439,7 @@ const Home = () => {
           <FlowStrip className="absolute inset-x-0 bottom-0 h-2.5" />
         </div>
 
-        <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-12 sm:pt-16">
+        <div className="swk-shell pt-12 sm:pt-16">
 
         {/* ══ 1b. UPCOMING EVENTS ═════════════════════════════════════════════
              Top billing, directly under the hero: these are time-bound and are
@@ -453,9 +448,6 @@ const Home = () => {
              there is one authoritative place for what is coming up. */}
         <div className="mb-10 sm:mb-16">
           <div className="text-center mb-6 sm:mb-8">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-3 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
-              Upcoming Events
-            </span>
             <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               Join us next
             </h2>
@@ -496,12 +488,6 @@ const Home = () => {
                           {e.month} {e.year}
                         </span>
                       </div>
-                      <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${e.tagClass}`}>{e.tag}</span>
-                      {e.flag && (
-                        <span className="ml-auto bg-[#78C31E] text-[#123D16] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                          {e.flag}
-                        </span>
-                      )}
                     </div>
 
                     <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
@@ -571,7 +557,6 @@ const Home = () => {
             </div>
             {/* Text */}
             <div className="order-1 lg:order-2">
-              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">Who We Are</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Building Africa's Next Generation of Changemakers
               </h2>
@@ -603,7 +588,7 @@ const Home = () => {
 
         {/* ══ 4. FOCUS AREAS ══════════════════════════════════════════════════ */}
         <Section>
-          <SectionHeader badge="What We Do" title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
+          <SectionHeader title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
             {[
               { src: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
@@ -634,7 +619,7 @@ const Home = () => {
 
         {/* ══ 5. PHOTO HIGHLIGHTS ═════════════════════════════════════════════ */}
         <Section>
-          <SectionHeader badge="Gallery" title="Moments in Action" subtitle="A glimpse into our programs, events, and community impact across Ghana." />
+          <SectionHeader title="Moments in Action" subtitle="A glimpse into our programs, events, and community impact across Ghana." />
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
             {[
               { path: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', caption: 'Youth Empowerment' },
@@ -668,14 +653,14 @@ const Home = () => {
 
         {/* ══ 6. PROJECTS & IMPACT ════════════════════════════════════════════ */}
         <Section>
-          <SectionHeader badge="Impact" badgeColor="bg-blue-100 text-blue-700" title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
+          <SectionHeader title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
 
           {/* The webinar series, then our partnerships (src/data/partnerships.js),
               each linking to its full story on Our Work. */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xs:gap-6 mb-8">
             {[
               {
-                gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]', badge: 'Impact', accent: 'bg-[#F2FAE8] text-[#1E963C]',
+                gradient: 'from-[#F2FAE8] to-green-50', border: 'border-[#D4F0A0]',
                 path: EPW_POSTER_HEADER, title: 'Agribusiness Webinar Series',
                 desc: 'Latest edition: Elevator Pitch Workshop with Aequitas Foundation — September 2026. An ongoing webinar series empowering youth with agribusiness knowledge and networks.', stat: '230+ Registrants',
               },
@@ -691,7 +676,6 @@ const Home = () => {
                   decoding="async"
                 />
                 <div className="p-4 xs:p-5 flex flex-col flex-1">
-                  <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>{p.badge}</span>
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
                   <span className="self-start text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">{p.stat}</span>
@@ -754,8 +738,6 @@ const Home = () => {
         {/* ══ 6b. DIGITAL SOLUTIONS ══════════════════════════════════════════════ */}
         <Section>
           <SectionHeader
-            badge="Digital Innovation"
-            badgeColor="bg-purple-100 text-purple-700"
             title="Our Digital Solutions"
             subtitle="Technology-driven tools built by SWK Ghana to solve real community challenges."
           />
@@ -812,8 +794,6 @@ const Home = () => {
               <VideoCard
                 bg="from-purple-50 to-pink-50"
                 border="border-purple-100"
-                accent="bg-purple-100 text-purple-700"
-                badge="Watch Demo"
                 ytId="mqVJMGlINt4"
                 title="Taka Kipawa — Waste Management App"
                 description="See how the Taka Kipawa app is transforming waste management in Ga West Municipality."
@@ -824,20 +804,16 @@ const Home = () => {
 
         {/* ══ 7. WHAT WE'RE DOING ═════════════════════════════════════════════ */}
         <Section>
-          <SectionHeader badge="Currently Active" title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />
+          <SectionHeader title="What We're Doing" subtitle="Programs and initiatives SWK Ghana is actively running right now." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-5">
             {[
-              { icon: '🌾', tag: 'Agribusiness', tc: 'bg-green-100 text-green-700', title: 'Agribusiness Webinar Series', desc: "Ongoing webinar series equipping youth with agribusiness knowledge, tools, and networks." },
-              { icon: '🌍', tag: 'Climate Action', tc: 'bg-blue-100 text-blue-700', title: 'Climate Action Campaigns', desc: 'Youth-led campaigns raising awareness about climate change and sustainable practices across Ghana.' },
-              { icon: '🤝', tag: 'Community', tc: 'bg-purple-100 text-purple-700', title: 'Community Outreach Programs', desc: 'Grassroots programs engaging communities in sustainable development and education across Greater Accra.' },
-              { icon: '💡', tag: 'Training', tc: 'bg-yellow-100 text-yellow-700', title: 'Skills & Leadership Workshops', desc: 'Practical workshops building leadership, entrepreneurship, and digital skills for young Ghanaians.' },
-              { icon: '📢', tag: 'Advocacy', tc: 'bg-red-100 text-red-700', title: 'Youth Advocacy Initiatives', desc: 'Amplifying youth voices in policy discussions on climate and sustainability at local and continental levels.' },
+              { icon: '🌾', title: 'Agribusiness Webinar Series', desc: "Ongoing webinar series equipping youth with agribusiness knowledge, tools, and networks." },
+              { icon: '🌍', title: 'Climate Action Campaigns', desc: 'Youth-led campaigns raising awareness about climate change and sustainable practices across Ghana.' },
+              { icon: '🤝', title: 'Community Outreach Programs', desc: 'Grassroots programs engaging communities in sustainable development and education across Greater Accra.' },
+              { icon: '💡', title: 'Skills & Leadership Workshops', desc: 'Practical workshops building leadership, entrepreneurship, and digital skills for young Ghanaians.' },
+              { icon: '📢', title: 'Youth Advocacy Initiatives', desc: 'Amplifying youth voices in policy discussions on climate and sustainability at local and continental levels.' },
             ].map((a, idx) => (
               <div key={idx} className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl p-5 border border-[#D4F0A0] hover:shadow-md transition-shadow flex flex-col">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${a.tc}`}>{a.tag}</span>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#F2FAE8] text-[#1E963C]">● Ongoing</span>
-                </div>
                 <div className="text-3xl mb-3">{a.icon}</div>
                 <h3 className="text-base font-semibold text-gray-900 mb-2">{a.title}</h3>
                 <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{a.desc}</p>
@@ -848,7 +824,7 @@ const Home = () => {
 
         {/* ══ 9. REPORTS & RESOURCES ══════════════════════════════════════════ */}
         <Section>
-          <SectionHeader badge="Publications" title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
+          <SectionHeader title="Reports & Resources" subtitle="Access our latest impact reports, annual reviews, and research publications." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 mb-8">
 
             {/* Report 1 — September 2026 Elevator Pitch Workshop Report */}
@@ -859,11 +835,9 @@ const Home = () => {
                   srcSet={cardSrcset(EPW_POSTER_HEADER)}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt="Webinar Report: Elevator Pitch Workshop — September 2026" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
-                <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Latest Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
-                <span className="text-xs font-semibold text-[#78C31E] uppercase tracking-wide">Impact Report</span>
-                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Elevator Pitch Workshop — September 2026</h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">Elevator Pitch Workshop — September 2026</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.</p>
                 <div className="flex gap-2">
                   <a href="/reports/elevator-pitch-workshop-2026"
@@ -894,11 +868,9 @@ const Home = () => {
                 <div className="hidden w-full h-48 bg-gradient-to-br from-blue-200 to-cyan-200 items-center justify-center">
                   <span className="text-5xl">📊</span>
                 </div>
-                <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Annual Report</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
-                <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Annual Report</span>
-                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">SWK Ghana Annual Report 2025</h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">SWK Ghana Annual Report 2025</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our annual review of programs, partnerships, community impact, and organizational milestones for 2025.</p>
                 <div className="flex gap-2">
                   <a href="https://drive.google.com/file/d/17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4/view?usp=sharing" target="_blank" rel="noopener noreferrer"
@@ -916,8 +888,7 @@ const Home = () => {
                 <span className="text-sm font-semibold text-purple-800">Coming Soon</span>
               </div>
               <div className="p-4 xs:p-5 flex flex-col flex-1">
-                <span className="text-xs font-semibold text-purple-600 uppercase tracking-wide">Program Summary</span>
-                <h3 className="text-base font-semibold text-gray-900 mt-1 mb-2">Youth Development Program Summary</h3>
+                <h3 className="text-base font-semibold text-gray-900 mb-2">Youth Development Program Summary</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">A comprehensive summary of SWK Ghana's youth development programs, reach, and outcomes across Ghana.</p>
                 <span className="self-start text-xs font-semibold text-purple-600 bg-purple-50 border border-purple-200 px-3 py-2 rounded-lg">Coming Soon</span>
               </div>
@@ -932,7 +903,7 @@ const Home = () => {
 
         {/* ══ 10. UN SDG ALIGNMENT (moved down) ═══════════════════════════════ */}
         <Section>
-          <SectionHeader badge="Global Goals" badgeColor="bg-blue-100 text-blue-700" title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
+          <SectionHeader title="UN SDG Alignment" subtitle="SWK Ghana's mission directly contributes to eight Sustainable Development Goals." />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 items-center">
             <div className="overflow-hidden rounded-xl border border-gray-200">
               <img
@@ -992,9 +963,6 @@ const Home = () => {
             </div>
             {/* Text */}
             <div className="order-1 lg:order-2 text-center lg:text-left">
-              <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
-                New Volunteers
-              </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Welcome to the Team
               </h2>

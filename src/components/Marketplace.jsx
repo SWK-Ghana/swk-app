@@ -39,10 +39,7 @@ export default function Marketplace() {
         noindex
       />
       <div className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-[#1E963C]">
-          SWK Marketplace
-        </p>
-        <h1 className="mt-3 text-2xl font-bold text-gray-900 sm:text-3xl">
+        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
           Taking you to the marketplace…
         </h1>
         <p className="mx-auto mt-3 max-w-md leading-relaxed text-gray-700">

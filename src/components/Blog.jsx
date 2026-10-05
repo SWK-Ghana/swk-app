@@ -93,10 +93,7 @@ const Blog = () => {
         <FlowStrip className="absolute inset-x-0 bottom-0 z-10 h-2.5" />
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 text-center py-24 anim-rise">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest text-white mb-6 border border-white/30 bg-white/10 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#A8E04A]" /> SWK Ghana Blog
-          </span>
+        <div className="relative z-10 swk-shell text-center py-24 anim-rise">
           <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] drop-shadow-sm">
             Stories &amp; Insights
           </h1>
@@ -129,7 +126,7 @@ const Blog = () => {
         </a>
       </section>
 
-      <div id="blog-posts" className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 scroll-mt-24">
+      <div id="blog-posts" className="swk-shell py-12 scroll-mt-24">
         {/* Search */}
         <div className="max-w-xl mx-auto mb-8">
           <input

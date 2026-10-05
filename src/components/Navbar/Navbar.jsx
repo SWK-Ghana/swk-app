@@ -104,7 +104,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
-      <nav ref={navRef} className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <nav ref={navRef} className="swk-shell">
         <div className="flex h-16 xs:h-18 sm:h-20 md:h-24 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group" aria-label={logoAlt}>

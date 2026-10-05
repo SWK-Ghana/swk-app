@@ -135,8 +135,6 @@ const imageProjects = [
     id: 'webinar',
     gradient: 'from-[#F2FAE8] to-green-50',
     border: 'border-[#D4F0A0]',
-    accent: 'bg-[#F2FAE8] text-[#1E963C]',
-    badge: 'Impact',
     // The poster's "THANK YOU" header (top 45%), so the wide thumbnail isn't cut mid-text.
     thumb: img('c_crop,x_0,y_0,w_1.0,h_0.45/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png'),
     title: 'Agribusiness Webinar Series',
@@ -147,23 +145,17 @@ const imageProjects = [
     id: 'eacademy',
     gradient: 'from-blue-50 to-cyan-50',
     border: 'border-blue-100',
-    accent: 'bg-blue-100 text-blue-700',
-    badge: 'Learning',
     thumb: img('v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png'),
     title: 'e-Academy Courses',
     desc: 'Online learning platform for agribusiness and sustainable farming practices available to youth across Ghana.',
-    stat: 'Online',
   },
   {
     id: 'ambassador',
     gradient: 'from-[#F2FAE8] to-blue-50',
     border: 'border-[#D4F0A0]',
-    accent: 'bg-purple-100 text-purple-700',
-    badge: 'Recognition',
     thumb: null, // dual-image layout
     title: 'Ambassador Recognition',
     desc: "SWK Ghana's leadership team selected as official ambassadors for the Agribusiness e-Academy.",
-    stat: 'Partnership',
     dual: [
       img('v1760551738/1752658915453_atc9oo.jpg', 400),
       img('v1760551737/1752658914512_k1zf9t.jpg', 400),
@@ -176,8 +168,6 @@ const videoProjects = [
     id: 'taka',
     gradient: 'from-purple-50 to-pink-50',
     border: 'border-purple-100',
-    accent: 'bg-purple-100 text-purple-700',
-    badge: 'Innovation',
     ytId: 'mqVJMGlINt4',
     isShort: false,
     title: 'Taka Kipawa App',
@@ -187,8 +177,6 @@ const videoProjects = [
     id: 'circular',
     gradient: 'from-green-50 to-[#F2FAE8]',
     border: 'border-green-100',
-    accent: 'bg-[#F2FAE8] text-[#1E963C]',
-    badge: 'Circular Economy',
     ytId: '2SIXUJJppP4',
     isShort: false,
     title: 'Circular Economy Innovation',
@@ -198,8 +186,6 @@ const videoProjects = [
     id: 'climate',
     gradient: 'from-orange-50 to-red-50',
     border: 'border-orange-100',
-    accent: 'bg-orange-100 text-orange-700',
-    badge: 'Climate Action',
     ytId: 'GAE6AL3NWBo',
     isShort: true,
     title: 'Climate Action',
@@ -209,8 +195,6 @@ const videoProjects = [
     id: 'galamsey',
     gradient: 'from-red-50 to-pink-50',
     border: 'border-red-100',
-    accent: 'bg-red-100 text-red-700',
-    badge: 'Advocacy',
     ytId: 'zDywICh3Ay0',
     isShort: true,
     title: 'Fight Against Galamsey',
@@ -219,7 +203,7 @@ const videoProjects = [
 ]
 
 // ─── VideoCard ─────────────────────────────────────────────────────────────────
-const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
+const VideoCard = ({ gradient, border, ytId, title, desc }) => {
   const [playing, setPlaying] = useState(false)
   const embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`
 
@@ -262,7 +246,6 @@ const VideoCard = ({ gradient, border, accent, badge, ytId, title, desc }) => {
         </div>
       )}
       <div className="p-4 flex flex-col flex-1">
-        <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${accent}`}>{badge}</span>
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{desc}</p>
         <a
@@ -290,12 +273,11 @@ const OurWork = () => {
         path="/our-work"
       />
       <PageHero
-        eyebrow="Programs & Impact"
         title="Our Work"
         lede="From agribusiness webinars to climate action films: explore the full breadth of SWK Ghana's programs and impact."
         image={{ path: 'v1773660844/photo_2026-03-16_11-33-50_wn3lbm.jpg', alt: 'A speaker addressing young people at an SWK Ghana programme', position: '50% 22%', aspect: 'lg:aspect-[4/5]', frame: 'max-w-xl lg:max-w-md' }}
       />
-      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12 md:py-14">
+      <div className="swk-shell py-8 xs:py-10 sm:py-12 md:py-14">
 
         {/* ── Featured: Agribusiness Summit 2026 ──
              /summit is a static page outside the React router, so this uses a
@@ -305,9 +287,6 @@ const OurWork = () => {
           <FlowBackdrop />
           <div className="grid grid-cols-1 md:grid-cols-2 items-center">
             <div className="p-5 xs:p-6 sm:p-8 md:p-10 order-2 md:order-1">
-              <span className="inline-block bg-[#78C31E] text-[#123D16] text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg mb-3">
-                Flagship Event
-              </span>
               <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
                 Agribusiness Summit 2026
               </h2>
@@ -352,9 +331,6 @@ const OurWork = () => {
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
 
           <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-            <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-              Impact
-            </span>
             <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Our Projects & Impact
             </h2>
@@ -380,14 +356,13 @@ const OurWork = () => {
                   <img src={p.thumb} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
                 )}
                 <div className="p-4 xs:p-5 flex flex-col flex-1">
-                  <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${p.accent}`}>
-                    {p.badge}
-                  </span>
                   <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
                   <p className="text-xs xs:text-sm text-gray-800 leading-relaxed flex-1 mb-3">{p.desc}</p>
-                  <span className="self-start text-xs font-semibold text-[#78C31E] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">
-                    {p.stat}
-                  </span>
+                  {p.stat && (
+                    <span className="self-start text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">
+                      {p.stat}
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
@@ -409,9 +384,6 @@ const OurWork = () => {
         {/* ── Our Initiatives ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
           <div className="text-center mb-6 xs:mb-8">
-            <span className="inline-block bg-purple-100 text-purple-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-              Initiatives
-            </span>
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Our Initiatives
             </h2>
@@ -425,8 +397,6 @@ const OurWork = () => {
                 href: '/taka-kipawa',
                 img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg',
                 icon: '♻️',
-                badge: 'Waste Management App',
-                badgeClass: 'bg-purple-600 text-white',
                 gradient: 'from-purple-50 to-pink-50',
                 border: 'border-purple-100',
                 title: 'Taka Kipawa',
@@ -438,8 +408,6 @@ const OurWork = () => {
                 href: '/marketplace',
                 img: 'v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg',
                 icon: '🛒',
-                badge: 'Youth-Led Marketplace',
-                badgeClass: 'bg-[#78C31E] text-white',
                 gradient: 'from-[#F2FAE8] to-green-50',
                 border: 'border-[#D4F0A0]',
                 title: 'SWK Marketplace',
@@ -460,9 +428,6 @@ const OurWork = () => {
                     className="w-full h-48 sm:h-56 object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <span className={`absolute top-3 left-3 ${card.badgeClass} text-xs font-bold px-2.5 py-1 rounded-full shadow`}>
-                    {card.badge}
-                  </span>
                 </div>
                 <div className="p-5 xs:p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-2">
@@ -482,9 +447,6 @@ const OurWork = () => {
         {/* ── Focus areas ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
           <div className="text-center mb-6 xs:mb-8">
-            <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-              Our Pillars
-            </span>
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Focus Areas
             </h2>
@@ -520,9 +482,6 @@ const OurWork = () => {
         {/* ── SDG Alignment ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
           <div className="text-center mb-6 xs:mb-8">
-            <span className="inline-block bg-blue-100 text-blue-700 text-xs xs:text-sm font-semibold px-3 py-1 rounded-full mb-3">
-              Global Goals
-            </span>
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               UN SDG Alignment
             </h2>
@@ -554,9 +513,6 @@ const OurWork = () => {
         {/* ── Photo Gallery ── */}
         <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
           <div className="text-center mb-6 xs:mb-8 sm:mb-10">
-            <span className="inline-block bg-[#F2FAE8] text-[#1E963C] text-xs xs:text-sm font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
-              Gallery
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Moments in Action</h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto font-light">A glimpse into our programs, events, and community impact across Ghana.</p>
           </div>

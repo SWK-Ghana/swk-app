@@ -22,20 +22,19 @@ const NotFound = () => {
         noindex
       />
       <PageHero
-        eyebrow="Error 404"
         title="Page not found"
         lede="Sorry, the page you are looking for doesn't exist or may have moved."
       />
-      <div className="container mx-auto px-4 py-14 sm:py-20 text-center max-w-2xl">
+      <div className="swk-shell py-14 sm:py-20">
         <p className="text-gray-700 mb-8">
           Here are some helpful links instead:
         </p>
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap gap-3 mb-10">
           {HELPFUL_LINKS.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="px-4 py-2 rounded-xl border border-[#C0E870] bg-white text-sm font-semibold text-[#1E963C] hover:bg-[#F2FAE8] transition-colors"
+              className="px-4 py-2 rounded-xl border border-[#C0E870] bg-white text-sm font-semibold text-[#17702D] hover:bg-[#F2FAE8] transition-colors"
             >
               {l.label}
             </Link>

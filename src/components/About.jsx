@@ -17,7 +17,7 @@ const About = () => {
       <PageHero
         title="About SWK Ghana"
         hideTitle
-        layout="center"
+        layout="cover"
         image={{ path: 'v1773615639/photo_2026-03-15_23-00-07_ggjpdz.jpg', alt: 'The SWK Ghana team', position: '50% 38%' }}
         lede={
           <>
@@ -47,8 +47,8 @@ const About = () => {
       </PageHero>
 
       <div className="swk-weave">
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto">
+      <div className="swk-shell py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
+        <div>
           <blockquote className="text-sm xs:text-base sm:text-lg md:text-xl italic text-gray-700 bg-white p-4 xs:p-6 sm:p-8 md:p-10 rounded-xl xs:rounded-2xl shadow-lg border-l-4 border-[#78C31E] max-w-4xl mx-auto mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             "The power of youth is the common wealth for the entire world. The faces of young people are the faces of our past, our present and our future. No segment in society can match with the power, idealism, enthusiasm and courage of the young people."
             <footer className="mt-3 xs:mt-4 sm:mt-5 text-xs xs:text-sm sm:text-base text-gray-800 font-semibold not-italic">— Kailash Satyarthi (Nobel Peace Prize laureate, 2014)</footer>

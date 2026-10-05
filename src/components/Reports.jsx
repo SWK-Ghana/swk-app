@@ -195,15 +195,14 @@ const Reports = () => {
         path="/reports"
       />
       <PageHero
-        eyebrow="Publications"
         title="Reports & Publications"
         lede="Access SWK Ghana's impact reports, annual reviews, program summaries, research findings, and latest articles."
         pattern="keys"
       />
-      <div className="px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 xs:py-10 sm:py-12">
+      <div className="swk-shell py-8 xs:py-10 sm:py-12">
 
       {/* ── Featured: two live reports side-by-side ── */}
-      <div className="max-w-6xl mx-auto mb-6 xs:mb-8">
+      <div className="mb-6 xs:mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
           {reports.filter((r) => r.driveLink).map((report) => (
             <div
@@ -218,14 +217,6 @@ const Reports = () => {
                   className="w-full h-52 xs:h-56 sm:h-60 object-cover"
                   loading="lazy"
                 />
-                {report.badgeText && (
-                  <span className="absolute top-3 left-3 bg-[#78C31E] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                    {report.badgeText}
-                  </span>
-                )}
-                <span className={`absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full ${report.categoryColor}`}>
-                  {report.category}
-                </span>
               </div>
               {/* Content */}
               <div className="p-5 xs:p-6 flex flex-col flex-1">
@@ -262,7 +253,7 @@ const Reports = () => {
       </div>
 
       {/* ── All reports with filter ── */}
-      <div className="max-w-6xl mx-auto bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10">
+      <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 xs:mb-8">
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900">
             All Documents
@@ -314,12 +305,7 @@ const Reports = () => {
               )}
 
               <div className="p-4 flex flex-col flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${report.categoryColor}`}>
-                    {report.category}
-                  </span>
-                  <span className="text-xs text-gray-700">{report.date}</span>
-                </div>
+                <p className="text-xs text-gray-700 mb-2">{report.date}</p>
                 <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug flex-1">
                   {report.title}
                 </h3>
@@ -357,7 +343,7 @@ const Reports = () => {
       </div>
 
       {/* ── Articles section ── */}
-      <div className="max-w-6xl mx-auto bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200">
+      <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200">
         <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6">
           Latest Articles
         </h2>
@@ -368,12 +354,7 @@ const Reports = () => {
                 key={article.id}
                 className="bg-gradient-to-br from-[#F2FAE8] to-green-50 rounded-xl border border-[#D4F0A0] p-4 xs:p-5 hover:shadow-md transition-shadow"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${article.categoryColor}`}>
-                    {article.category}
-                  </span>
-                  <span className="text-xs text-gray-700">{article.date}</span>
-                </div>
+                <p className="text-xs text-gray-700 mb-3">{article.date}</p>
                 <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-2 leading-snug">
                   {article.title}
                 </h3>

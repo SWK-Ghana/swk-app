@@ -131,7 +131,6 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
       />
 
       <PageHero
-        eyebrow="Legal"
         title="Privacy Policy"
         lede="How SWK Ghana collects, uses, and protects your personal information."
         pattern="keys"
@@ -141,8 +140,8 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
 
       {/* Registration info bar */}
       <div className="bg-[#0C2E11] py-4">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-          <div className="flex flex-wrap justify-center gap-6 text-center">
+        <div className="swk-shell">
+          <div className="flex flex-wrap justify-center gap-6 text-center sm:justify-start sm:text-left">
             <div>
               <span className="text-xs text-white/60 uppercase tracking-widest block mb-0.5">Organisation</span>
               <span className="text-sm font-semibold text-white">SWK Ghana LBG</span>
@@ -167,7 +166,8 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 md:py-16 max-w-4xl">
+      <div className="swk-shell py-12 md:py-16">
+      <div className="max-w-4xl">
 
         {/* Intro */}
         <div className="bg-[#F2FAE8] border border-[#D4F0A0] rounded-2xl p-6 sm:p-8 mb-10">
@@ -192,25 +192,25 @@ Address: GE-138-7728, Number 24, Agbogba Ashongman, Glendora Street, Accra, Grea
 
         {/* Bottom nav */}
         <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col sm:flex-row gap-4 justify-between items-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-600">
             © {new Date().getFullYear()} SWK Ghana LBG · Reg No. CG024110426
           </p>
           <div className="flex gap-3">
             <button
               onClick={() => navigate('/contact')}
-              className="text-sm font-semibold text-[#78C31E] hover:text-[#1E963C] transition-colors"
+              className="text-sm font-semibold text-[#17702D] hover:text-[#1E963C] transition-colors"
             >
               Contact Us →
             </button>
             <button
               onClick={() => navigate('/')}
-              className="text-sm font-semibold px-5 py-2 rounded-xl text-white transition-colors"
-              style={{ background: '#78C31E' }}
+              className="text-sm font-semibold px-5 py-2 rounded-xl bg-[#78C31E] text-[#0C2E11] transition-colors hover:bg-[#8AD62B]"
             >
               Back to Home
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

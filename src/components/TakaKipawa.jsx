@@ -38,7 +38,6 @@ const TakaKipawa = () => {
       />
 
       <PageHero
-        eyebrow="Digital Innovation · SWK Ghana"
         title="Taka Kipawa"
         lede="Ghana's youth-powered waste management app: a digital platform connecting communities, vendors, and waste collectors to build a cleaner, circular economy across Ghana and Africa."
         image={{ path: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', alt: 'Young people sorting plastic bottles for recycling at a community clean-up', position: '50% 55%' }}
@@ -63,7 +62,7 @@ const TakaKipawa = () => {
 
       {/* Stats */}
       <div className="swk-flow-deep py-10">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="swk-shell">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <div key={i}>
@@ -75,14 +74,11 @@ const TakaKipawa = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 md:py-20">
+      <div className="swk-shell py-16 md:py-20">
 
         {/* About */}
         <div className="max-w-4xl mx-auto mb-16 md:mb-20">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
-              About the App
-            </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
               style={{ fontFamily: 'Ubuntu, sans-serif' }}>
               What is Taka Kipawa?
@@ -122,9 +118,6 @@ const TakaKipawa = () => {
         {/* Features */}
         <div className="mb-16 md:mb-20">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-[#F2FAE8] text-[#1E963C]">
-              Features
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
               style={{ fontFamily: 'Ubuntu, sans-serif' }}>
               What the App Does
@@ -147,9 +140,6 @@ const TakaKipawa = () => {
         {/* SDG Alignment */}
         <div className="swk-flow-deep rounded-2xl p-8 sm:p-12 mb-16 md:mb-20">
           <div className="text-center mb-8">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-[#78C31E]/20 text-[#78C31E] border border-[#78C31E]/30">
-              Global Goals
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3"
               style={{ fontFamily: 'Ubuntu, sans-serif' }}>
               SDG Alignment
@@ -169,9 +159,6 @@ const TakaKipawa = () => {
         {/* Tech Stack */}
         <div className="mb-16 md:mb-20">
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest bg-blue-100 text-blue-700">
-              Technology
-            </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
               style={{ fontFamily: 'Ubuntu, sans-serif' }}>
               Built With

@@ -11,7 +11,7 @@ const photoSrcSet = (path) => [480, 768, 1024, 1280, 1600].map((w) => `${photoSr
 //
 // Beside the copy it shows one of:
 //   image    a photo (people and programme pages), framed on the right, or
-//            under centred copy with layout="center"
+//            filling the header behind centred copy with layout="cover"
 //   pattern  the page family's own pattern in an arch (knowledge pages)
 //   aside    anything else
 //
@@ -19,39 +19,35 @@ const photoSrcSet = (path) => [480, 768, 1024, 1280, 1600].map((w) => `${photoSr
 // aspect a Tailwind aspect class for large screens; frame a max-width class,
 // narrower for portrait photos so the header doesn't grow too tall).
 // hideTitle keeps the h1 for search engines and screen readers only.
-const PageHero = ({ eyebrow, title, hideTitle, lede, pattern, image, layout = 'split', aside, children }) => {
+const PageHero = ({ title, hideTitle, lede, pattern, image, layout = 'split', aside, children }) => {
   const heading = title && (
-    <h1 className={hideTitle ? 'sr-only' : `${eyebrow ? 'mt-6 ' : ''}text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl`}>{title}</h1>
-  )
-  const label = eyebrow && (
-    <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#A8E04A]">
-      <span className="h-1.5 w-1.5 rounded-full bg-[#A8E04A]" /> {eyebrow}
-    </p>
+    <h1 className={hideTitle ? 'sr-only' : 'text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl'}>{title}</h1>
   )
 
-  if (image && layout === 'center') {
+  if (image && layout === 'cover') {
     return (
-      <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
-        <FlowBackdrop veil="swk-veil-center" />
-        <div className="anim-rise mx-auto max-w-4xl px-4 pt-14 text-center sm:px-6 sm:pt-20 lg:pt-24">
-          {label}
+      <section className="relative isolate flex min-h-[32rem] items-center overflow-hidden bg-[#0C2E11] text-white sm:min-h-[36rem] lg:min-h-[42rem]">
+        <img
+          src={photoSrc(image.path, 1600)}
+          srcSet={photoSrcSet(image.path)}
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 -z-30 h-full w-full object-cover"
+          style={{ objectPosition: image.position ?? '50% 40%' }}
+        />
+        {/* The photo blends into the brand: a light green multiply, then a deep
+            green wash that is strongest behind the copy and fades out towards
+            the edges, so the people in the photo stay clearly visible. */}
+        <div className="absolute inset-0 -z-20 bg-gradient-to-br from-[#78C31E] via-[#1E963C] to-[#123D16] opacity-70 mix-blend-multiply" aria-hidden="true" />
+        <div className="swk-veil-photo absolute inset-0 -z-10" aria-hidden="true" />
+        <div className="anim-rise swk-shell py-20 text-center sm:py-24 [text-shadow:0_2px_18px_rgba(0,0,0,.35)]">
           {heading}
-          {lede && <div className="mx-auto max-w-3xl text-white/85">{lede}</div>}
+          {lede && <div className="mx-auto max-w-4xl text-white/90">{lede}</div>}
           {children}
         </div>
-        <div className="mx-auto mt-10 max-w-5xl px-4 sm:mt-12 sm:px-6">
-          <img
-            src={photoSrc(image.path, 1280)}
-            srcSet={photoSrcSet(image.path)}
-            sizes="(min-width: 1024px) 1024px, 100vw"
-            alt={image.alt}
-            fetchPriority="high"
-            decoding="async"
-            className={`block w-full rounded-t-3xl object-cover shadow-2xl shadow-black/40 aspect-[4/3] ${image.aspect ?? 'sm:aspect-[2/1]'}`}
-            style={{ objectPosition: image.position ?? '50% 40%' }}
-          />
-        </div>
-        <FlowStrip />
+        <FlowStrip className="absolute inset-x-0 bottom-0 h-2.5" />
       </section>
     )
   }
@@ -76,9 +72,8 @@ const PageHero = ({ eyebrow, title, hideTitle, lede, pattern, image, layout = 's
   return (
     <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
       <FlowBackdrop />
-      <div className={`mx-auto grid max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-16 md:px-8 lg:gap-16 lg:px-10 lg:py-20 xl:px-12 ${image ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]' : 'lg:grid-cols-[minmax(0,1fr)_auto]'}`}>
+      <div className={`swk-shell grid items-center gap-12 py-14 sm:py-16 lg:gap-16 lg:py-20 ${image ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]' : 'lg:grid-cols-[minmax(0,1fr)_auto]'}`}>
         <div className="anim-rise max-w-3xl">
-          {label}
           {heading}
           {lede && <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{lede}</p>}
           {children}

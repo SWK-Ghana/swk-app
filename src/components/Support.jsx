@@ -133,12 +133,9 @@ const Support = () => {
       {/* ══ Hero ══════════════════════════════════════════════════════════ */}
       <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
         <FlowBackdrop />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 md:px-8 lg:grid-cols-[1.15fr_1fr] lg:px-10 lg:py-24 xl:px-12">
+        <div className="relative swk-shell grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:py-24">
           <div className="anim-rise">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#A8E04A]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#A8E04A]" /> NGO Support Hub
-            </p>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
               Free tools to help your NGO grow.
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
@@ -178,7 +175,7 @@ const Support = () => {
 
         {/* At a glance */}
         <div className="relative border-t border-white/10">
-          <dl className="mx-auto grid max-w-7xl grid-cols-2 px-4 sm:px-6 md:grid-cols-4 md:px-8 lg:px-10 xl:px-12">
+          <dl className="swk-shell grid grid-cols-2 md:grid-cols-4">
             {[
               [TOOLKIT.length, 'Templates and guides'],
               [RESOURCES.length, 'Trusted resources'],
@@ -197,10 +194,9 @@ const Support = () => {
 
       {/* ══ Toolkit ═══════════════════════════════════════════════════════ */}
       <section id="toolkit" className="scroll-mt-28 swk-weave py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="swk-shell">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1E963C]">The SWK NGO Toolkit</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Seven practical guides, ready to use today</h2>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Seven practical guides, ready to use today</h2>
             <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
               Written by our team from what we’ve learned running a youth-led NGO in Ghana. Download them, print
               them, and adapt them to your organisation.
@@ -211,7 +207,6 @@ const Support = () => {
           <article className="mt-10 grid overflow-hidden rounded-3xl border border-[#D4F0A0] bg-white shadow-sm md:grid-cols-[1fr_1.15fr]">
             <Cover no={featured.no} title={featured.title} edition={featured.edition} size="lg" className="min-h-[15rem]" />
             <div className="flex flex-col justify-center gap-4 p-7 sm:p-9">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#1E963C]">Start here · {featured.topic}</p>
               <h3 className="text-2xl font-bold text-gray-900">
                 {featured.title}: <span className="text-[#1E963C]">{featured.edition}</span>
               </h3>
@@ -226,7 +221,6 @@ const Support = () => {
               <article key={d.file} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#B5DE7F] hover:shadow-md">
                 <Cover no={d.no} title={d.title} edition={d.edition} className="h-40" />
                 <div className="flex flex-1 flex-col gap-3 p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#1E963C]">{d.topic}</p>
                   <h3 className="text-lg font-bold leading-snug text-gray-900">{d.title}</h3>
                   <p className="flex-1 text-sm leading-relaxed text-gray-600">{d.desc}</p>
                   <DocMeta item={d} />
@@ -240,11 +234,10 @@ const Support = () => {
 
       {/* ══ Library ═══════════════════════════════════════════════════════ */}
       <section id="library" className="scroll-mt-28 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <div className="swk-shell">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1E963C]">Trusted resources</p>
-              <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Links worth your time</h2>
+              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Links worth your time</h2>
               <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
                 Official registration offices, funders, free and discounted tools, standards and courses. Each one
                 checked by our team.
@@ -301,8 +294,7 @@ const Support = () => {
                     rel="noopener noreferrer"
                     className="group flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#B5DE7F] hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#78C31E]"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1E963C]">{catLabel(r.cat)}</span>
-                    <span className="mt-2 flex items-start justify-between gap-3">
+                    <span className="flex items-start justify-between gap-3">
                       <span className="text-base font-bold leading-snug text-gray-900 group-hover:text-[#1E963C]">{r.name}</span>
                       <span className="mt-1 flex-none text-gray-400 group-hover:text-[#1E963C]"><ExternalIcon /></span>
                     </span>
@@ -337,8 +329,8 @@ const Support = () => {
       </section>
 
       {/* ══ Suggest + follow ══════════════════════════════════════════════ */}
-      <section className="px-4 pb-16 sm:px-6 sm:pb-20 md:px-8 lg:px-10 xl:px-12">
-        <div className="relative isolate mx-auto max-w-7xl overflow-hidden rounded-3xl bg-[#0C2E11] px-6 py-12 text-white sm:px-10 lg:px-14">
+      <section className="swk-shell pb-16 sm:pb-20">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-[#0C2E11] px-6 py-12 text-white sm:px-10 lg:px-14">
           <FlowBackdrop />
           <div className="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
             <div>

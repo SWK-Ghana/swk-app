@@ -205,27 +205,32 @@ const Donate = () => {
         path="/donate"
       />
       <PageHero
-        eyebrow="Support our mission"
         title="Donate to SWK Ghana"
         lede="Every contribution funds youth programs, climate action, agribusiness training, and community initiatives across Ghana. Give from anywhere in the world."
         image={{ path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', alt: 'Young people working on laptops at an SWK Ghana skills workshop', position: '50% 45%', aspect: 'lg:aspect-[3/2]' }}
       />
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
-        <div className="max-w-3xl mx-auto">
+      <div className="swk-shell py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
+        {/* Payment options in the main column; what a gift does alongside on
+            large screens (first on phones). Both start on the header's edge. */}
+        <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
 
-          {/* Impact statements */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          <aside className="lg:order-2 lg:sticky lg:top-28 lg:self-start">
+            <h2 className="text-lg font-bold text-gray-900 mb-3">What your gift does</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
             {[
               { amt: 'GH₵50', impact: 'Sponsors a youth for one webinar session' },
               { amt: 'GH₵250', impact: 'Funds a community outreach activity' },
               { amt: 'GH₵500', impact: 'Supports a skills-training workshop' },
             ].map((i) => (
-              <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center">
-                <div className="text-lg font-bold text-[#1E963C]">{i.amt}</div>
-                <div className="text-xs text-gray-600 mt-1 leading-snug">{i.impact}</div>
+              <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center lg:text-left">
+                <div className="text-lg font-bold text-[#17702D]">{i.amt}</div>
+                <div className="text-sm text-gray-600 mt-1 leading-snug">{i.impact}</div>
               </div>
             ))}
-          </div>
+            </div>
+          </aside>
+
+          <div className="lg:col-span-2 lg:order-1">
 
           {/* Payment method tabs */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 xs:gap-3 mb-5">
@@ -282,13 +287,13 @@ const Donate = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">🏦 Bank Transfer</div>
+                  <h3 className="text-sm font-semibold text-gray-800">Bank transfer</h3>
                   <CopyField label="Bank" value={BANK_NAME} event="bank_name" />
                   <CopyField label="Account Number" value={BANK_ACCOUNT} event="bank_account" />
                 </div>
 
                 <div className="space-y-3">
-                  <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">📱 Mobile Money</div>
+                  <h3 className="text-sm font-semibold text-gray-800">Mobile Money</h3>
                   <CopyField label="MoMo Number" value={MOMO_NUMBER} copyValue={MOMO_NUMBER.replace(/\s/g, '')} event="momo_number" />
                 </div>
 
@@ -437,9 +442,10 @@ const Donate = () => {
 
           <p className="text-center text-xs text-gray-500 mt-6">
             Questions about giving? Email{' '}
-            <a href={`mailto:${DONATE_EMAIL}`} className="text-[#1E963C] font-semibold hover:underline">{DONATE_EMAIL}</a>{' '}
+            <a href={`mailto:${DONATE_EMAIL}`} className="text-[#17702D] font-semibold hover:underline">{DONATE_EMAIL}</a>{' '}
             — we're happy to help.
           </p>
+          </div>
         </div>
       </div>
     </div>
