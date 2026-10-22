@@ -31,11 +31,9 @@
        They are intentionally NOT hardcoded here so each route gets its own
        unique, correct canonical + description (SEO / Ad Grants best practice). -->
 
-  <!-- Preload first hero image for faster LCP -->
-  <link rel="preload" as="image"
-    href="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294683/SWK_at_Ga_West_n0c3fz.jpg"
-    imagesrcset="https://res.cloudinary.com/dwgj3lovn/image/upload/w_768/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 768w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1280/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 1280w, https://res.cloudinary.com/dwgj3lovn/image/upload/w_1920/v1760294683/SWK_at_Ga_West_n0c3fz.jpg 1920w"
-    imagesizes="100vw">
+  <!-- No hero image preload here: this template serves every route, so a
+       preload would download one page's image on all of them. Each page's
+       hero <img> is in its prerendered HTML with fetchpriority="high". -->
 
   <!-- SEO Meta (meta description is set per page by <Seo>) -->
   <meta name="keywords"

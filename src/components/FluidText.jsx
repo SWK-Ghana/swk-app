@@ -885,6 +885,17 @@ export default function FluidText(props) {
     }
     document.fonts?.ready?.then(() => { maskKey = '' })
 
+    // Added: hold the hand-over until the headline's own typeface has loaded.
+    // Painted any sooner, the mask uses the fallback font and the canvas text
+    // visibly reshapes when the real one arrives.
+    let fontReady = typeof document.fonts?.load !== 'function'
+    if (!fontReady) {
+      const f = live.current.font
+      const family = /\s/.test(f.fontFamily) && !/["']/.test(f.fontFamily) ? `"${f.fontFamily}"` : f.fontFamily
+      const done = () => { fontReady = true; maskKey = '' }
+      document.fonts.load(`${fontWeightOf(f)} 64px ${family}`).then(done, done)
+    }
+
     const tint = () => 0.5
 
     let colorPhase = Math.random()
@@ -1171,9 +1182,10 @@ export default function FluidText(props) {
       step(dt)
       render()
 
-      // Only hand the headline over once a real frame has been drawn, so the
-      // fallback text never disappears before the canvas can replace it.
-      if (!announced) { announced = true; report('ready') }
+      // Only hand the headline over once a real frame has been drawn in the
+      // real typeface, so the fallback text never disappears before the canvas
+      // can replace it like for like.
+      if (!announced && fontReady) { announced = true; report('ready') }
 
       raf = requestAnimationFrame(frame)
     }

@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
 import Seo from './Seo'
@@ -37,6 +37,12 @@ const heroSrcset = (path) => srcset(path, [480, 768, 1024, 1280, 1920])
 
 // Card images — smaller breakpoints for thumbnails
 const cardSrcset = (path) => srcset(path, [300, 600, 900])
+
+// Hero type. The headline and subtitle boxes hold every slide's text, stacked
+// invisibly in one grid cell, so each box is as tall as its longest slide from
+// the first paint and nothing below it moves when the slides change.
+const HERO_HEADLINE = 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05]'
+const HERO_SUBTITLE = 'text-lg sm:text-xl md:text-2xl font-light leading-relaxed'
 
 const videoThumb = (ytId) => `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
 
@@ -229,15 +235,23 @@ const Home = () => {
   //   pointer. The effect responds only to pointer movement, so on touch it
   //   would burn CPU to render a static headline. Starts false, which is what
   //   the prerenderer emits, so the static HTML keeps the plain <h1>.
-  // `fluidReady`   — a frame has actually been drawn. Only then is the <h1>
-  //   visually hidden, so the headline is never missing mid-load.
+  // `fluidReady`   — a frame has actually been drawn in the real typeface.
+  //   Only then does the <h1> fade out under the canvas, so the headline is
+  //   never missing mid-load.
+  // The canvas is drawn over the <h1>'s own box, at the <h1>'s own size, so
+  // switching between them never moves anything.
   const [fluidAllowed, setFluidAllowed] = useState(false)
   const [fluidReady, setFluidReady] = useState(false)
+  const headlineRef = useRef(null)
+  const [headlinePx, setHeadlinePx] = useState(96)
 
   useEffect(() => {
     if (typeof window.matchMedia !== 'function') return
     const mq = window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)')
     const apply = () => {
+      if (mq.matches && headlineRef.current) {
+        setHeadlinePx(parseFloat(getComputedStyle(headlineRef.current).fontSize) || 96)
+      }
       setFluidAllowed(mq.matches)
       if (!mq.matches) setFluidReady(false)
     }
@@ -362,7 +376,8 @@ const Home = () => {
       <div className="px-0 pb-0">
 
         {/* ══ 1. HERO SLIDER ══════════════════════════════════════════════════ */}
-        <div className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden">
+        {/* Deep green behind the photos, so the hero is on-brand even before the first image arrives */}
+        <div className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden bg-[#0C2E11]">
           {slides.map((s, idx) => (
             <img key={s.image} src={s.image}
               srcSet={heroSrcset(s._path)}
@@ -377,42 +392,57 @@ const Home = () => {
           {/* Dark gradient overlay — stronger at bottom */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
 
-          {/* Hero content */}
+          {/* Hero content. Nothing here changes size after the first paint, so
+              the page never jumps as it loads or as the slides turn. */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10">
             {/* The fluid effect draws the headline into a WebGL canvas, which
                 crawlers and screen readers cannot read. So the real <h1> always
                 stays in the DOM: it is the visible headline until the canvas
-                reports a drawn frame, and only then becomes visually hidden.
-                If WebGL is missing or the visitor prefers reduced motion, the
-                canvas reports 'unsupported' and this simply stays visible. */}
-            <h1
-              className={
-                fluidReady
-                  ? 'sr-only'
-                  : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] max-w-5xl'
-              }
-            >
-              {slides[currentSlide].title}
-            </h1>
-            {fluidAllowed && (
-              <div aria-hidden="true" className="w-full max-w-5xl h-[16rem] lg:h-[19rem] mb-6">
-                <Suspense fallback={null}>
-                  <FluidText
-                    text={slides[currentSlide].title}
-                    color="#FFFFFF"
-                    paletteColors={['#78C31E', '#A8E04A', '#1E963C', '#D4F0A0', '#2E7D32']}
-                    font={{ fontFamily: 'Ubuntu', fontWeight: 700, lineHeight: '1.05em', textAlign: 'center' }}
-                    minFontSize={40}
-                    maxFontSize={110}
-                    vwFontSize={0.085}
-                    onStatus={handleFluidStatus}
-                  />
-                </Suspense>
-              </div>
-            )}
-            <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-10 max-w-2xl font-light leading-relaxed">
-              {slides[currentSlide].subtitle}
-            </p>
+                reports a drawn frame, and then fades out beneath it. If WebGL is
+                missing or the visitor prefers reduced motion, the canvas
+                reports 'unsupported' and the <h1> simply stays. */}
+            <div className="relative grid w-full max-w-5xl mb-6">
+              {slides.map((s) => (
+                <span key={s._path} aria-hidden="true" className={`invisible [grid-area:1/1] ${HERO_HEADLINE}`}>
+                  {s.title}
+                </span>
+              ))}
+              <h1
+                ref={headlineRef}
+                className={`[grid-area:1/1] flex items-center justify-center text-white transition-opacity duration-700 ${HERO_HEADLINE} ${fluidReady ? 'opacity-0' : 'opacity-100'}`}
+              >
+                {slides[currentSlide].title}
+              </h1>
+              {fluidAllowed && (
+                <div
+                  aria-hidden="true"
+                  className={`absolute inset-0 transition-opacity duration-700 ${fluidReady ? 'opacity-100' : 'opacity-0'}`}
+                >
+                  <Suspense fallback={null}>
+                    <FluidText
+                      text={slides[currentSlide].title}
+                      color="#FFFFFF"
+                      paletteColors={['#78C31E', '#A8E04A', '#1E963C', '#D4F0A0', '#2E7D32']}
+                      font={{ fontFamily: 'Ubuntu', fontWeight: 700, lineHeight: '1.05em', textAlign: 'center' }}
+                      minFontSize={headlinePx}
+                      maxFontSize={headlinePx}
+                      padding={0}
+                      onStatus={handleFluidStatus}
+                    />
+                  </Suspense>
+                </div>
+              )}
+            </div>
+            <div className="grid w-full max-w-2xl mb-10">
+              {slides.map((s) => (
+                <span key={s._path} aria-hidden="true" className={`invisible [grid-area:1/1] ${HERO_SUBTITLE}`}>
+                  {s.subtitle}
+                </span>
+              ))}
+              <p className={`[grid-area:1/1] flex items-center justify-center text-white/80 ${HERO_SUBTITLE}`}>
+                {slides[currentSlide].subtitle}
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="btn-gradient text-base sm:text-lg px-8 py-4 rounded-xl" onClick={() => navigate('/get-involved')}>
                 Get Involved
