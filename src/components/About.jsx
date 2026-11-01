@@ -82,7 +82,7 @@ const About = () => {
                 </div>
                 <h2 className="text-xl xs:text-2xl font-bold text-gray-900 mb-3 xs:mb-4">Our Mission</h2>
                 <p className="text-sm xs:text-base text-gray-800 leading-relaxed">
-                  To empower and mobilise young people as holistic changemakers: building leadership skills and opportunities to drive sustainability, community development, and systemic transformation by 2035.
+                  To empower and mobilise young people as holistic changemakers: building leadership skills and opportunities to drive sustainability, community development, and systemic transformation.
                 </p>
               </div>
 

@@ -54,6 +54,6 @@ export const SOCIALS = [
 
 export const CONTACT = {
   email: 'info@swkghana.org',
-  phone: '+233 534 492 220',
-  phoneHref: 'tel:+233534492220',
+  phone: '+233 596 838 595',
+  phoneHref: 'tel:+233596838595',
 }

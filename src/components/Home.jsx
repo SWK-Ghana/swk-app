@@ -127,7 +127,7 @@ const Faqs = () => {
     },
     {
       q: 'Does SWK Ghana operate outside of Accra?',
-      a: 'Our current base is in Accra, Greater Accra Region, but our programs — especially our webinar series — reach youth across Ghana and beyond. We have had participants from 9+ countries. Our vision is to scale across Africa by 2035.',
+      a: 'Our current base is in Accra, Greater Accra Region, but our programs — especially our webinar series — reach youth across Ghana and beyond. We have had participants from 9+ countries. Our vision is to scale across Africa.',
     },
     {
       q: 'How can my organization partner with SWK Ghana?',

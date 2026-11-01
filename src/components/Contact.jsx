@@ -83,8 +83,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+233534492220" className="inline-block py-1 text-sm xs:text-base text-gray-800 hover:text-[#1E963C] transition-colors">
-                      +233 (0) 534 492 220
+                    <a href="tel:+233596838595" className="inline-block py-1 text-sm xs:text-base text-gray-800 hover:text-[#1E963C] transition-colors">
+                      +233 (0) 596 838 595
                     </a>
                     <p className="text-sm xs:text-base text-gray-800">Mon–Fri 9AM – 6PM GMT</p>
                   </div>
