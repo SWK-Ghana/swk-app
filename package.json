@@ -12,6 +12,7 @@
     "sync:socials": "node scripts/sync-socials.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
+    "test": "node --test tests/admin-api.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

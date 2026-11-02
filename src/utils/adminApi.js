@@ -1,10 +1,12 @@
-// Client helper for the server-side admin proxy (/api/admin).
+// Client helper for the staff dashboard's server API (/api/admin).
 // The Sanity write token lives ONLY on the server; this talks to it over HTTP.
-// The session token is kept in memory + sessionStorage so a refresh keeps you
-// logged in until it expires (server-enforced).
+// The session token is kept in sessionStorage so a refresh keeps you logged in
+// until it expires (server-enforced).
 
 const ENDPOINT = '/api/admin'
 const STORAGE_KEY = 'swk-admin-session'
+
+export const SESSION_EXPIRED_EVENT = 'swk-admin-session-expired'
 
 export const getSession = () => {
   try { return sessionStorage.getItem(STORAGE_KEY) || '' } catch { return '' }
@@ -12,14 +14,16 @@ export const getSession = () => {
 const setSession = (t) => { try { sessionStorage.setItem(STORAGE_KEY, t) } catch { /* storage unavailable */ } }
 export const clearSession = () => { try { sessionStorage.removeItem(STORAGE_KEY) } catch { /* storage unavailable */ } }
 
-async function post(payload) {
+async function call(action, payload = {}) {
+  const token = getSession()
   const res = await fetch(ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ action, token, ...payload }),
   })
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
+    if (res.status === 401 && token && action !== 'password.change') window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT))
     const err = new Error(data?.error || `Request failed (${res.status})`)
     err.status = res.status
     throw err
@@ -27,25 +31,44 @@ async function post(payload) {
   return data
 }
 
-/** Log in with the admin password. Returns true on success; throws on failure. */
-export async function login(password) {
-  const { token } = await post({ action: 'login', password })
+// Accounts
+export const getStatus = () => call('status')
+export const setupOwner = (fields) => call('setup', fields)
+export async function login(email, password) {
+  const { token, user } = await call('login', { email, password })
   setSession(token)
-  return true
+  return user
+}
+export const getMe = async () => (await call('me')).user
+/** Changing a password ends the session, so this signs back in with the new one. */
+export async function changePassword(email, currentPassword, newPassword) {
+  await call('password.change', { currentPassword, newPassword })
+  return login(email, newPassword)
 }
 
+// Team (Owner)
+export const listUsers = async () => (await call('users.list')).users
+export const createUser = (fields) => call('users.create', fields)
+export const updateUser = (id, changes) => call('users.update', { id, ...changes })
+export const resetUserPassword = (id) => call('users.resetPassword', { id })
+
+// Dashboard
+export const getOverview = () => call('overview')
+export const setCampaign = (campaign) => call('campaign.set', { campaign })
+
+// Receipts
+export const listReceipts = async () => (await call('receipts.list')).receipts
+export const issueReceipt = async (receipt) => (await call('receipts.issue', { receipt })).receipt
+export const recordReceipt = async (no, issued, receipt) => (await call('receipts.record', { no, issued, receipt })).receipt
+export const updateReceipt = async (no, receipt) => (await call('receipts.update', { no, receipt })).receipt
+export const cancelReceipt = (no, reason) => call('receipts.cancel', { no, reason })
+export const getSignature = async () => (await call('signature.get')).dataUri
+export const setSignature = (dataUri) => call('signature.set', { dataUri })
+
+// Website content
 /** Create a document. Returns the created document (with _id). */
-export async function createDoc(doc) {
-  const { document } = await post({ action: 'create', token: getSession(), doc })
-  return document
-}
-
+export const createDoc = async (doc) => (await call('create', { doc })).document
 /** Patch a document's fields (set). */
-export async function patchDoc(id, set) {
-  return post({ action: 'patch', token: getSession(), id, set })
-}
-
+export const patchDoc = (id, set) => call('patch', { id, set })
 /** Delete a document by id. */
-export async function deleteDoc(id) {
-  return post({ action: 'delete', token: getSession(), id })
-}
+export const deleteDoc = (id) => call('delete', { id })

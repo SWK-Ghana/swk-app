@@ -8,6 +8,8 @@ import { trackPageView } from '../../utils/analytics'
 const RootLayout = () => {
   const [showConsent, setShowConsent] = useState(false)
   const location = useLocation()
+  // The staff dashboard stands alone: no public header, footer or cookie notice.
+  const isDashboard = location.pathname.startsWith('/admin')
 
   useEffect(() => {
     try {
@@ -34,11 +36,11 @@ const RootLayout = () => {
   return (
     <div>
       <ScrollRestoration />
-      <TopBar />
-      <Navbar />
+      {!isDashboard && <TopBar />}
+      {!isDashboard && <Navbar />}
       <Outlet />
-      <Footer />
-      {showConsent && (
+      {!isDashboard && <Footer />}
+      {showConsent && !isDashboard && (
         <div className="fixed inset-x-0 bottom-0 z-50 px-3 xs:px-4 sm:px-6 pb-3 xs:pb-4 sm:pb-5">
           <div className="mx-auto max-w-3xl rounded-lg xs:rounded-xl sm:rounded-2xl border border-gray-200 bg-white shadow-lg p-3 xs:p-4 sm:p-5 md:p-6">
             <div className="sm:flex sm:items-center sm:justify-between gap-3 xs:gap-4">
