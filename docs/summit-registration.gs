@@ -42,6 +42,11 @@
  *
  *  6. Test: visit the URL in a browser. You should see {"ok":true,...}.
  *
+ * ─── DASHBOARD TOTALS ───────────────────────────────────────────────────────
+ * The staff dashboard reads totals through doGet with a private key. The copy
+ * of this file in the public repo leaves STATS_KEY blank. Paste the private copy
+ * from the founder's computer, then publish a new version as described below.
+ *
  * ─── IF YOU EVER EDIT THIS SCRIPT ───────────────────────────────────────────
  * Deploy → Manage deployments → pencil → Version: New version → Deploy.
  * Editing alone does nothing until you publish a new version. The URL stays
@@ -88,7 +93,8 @@ function json(obj) {
 }
 
 /** Visiting the deployment URL in a browser hits this — a quick health check. */
-function doGet() {
+function doGet(e) {
+  if (e && e.parameter && e.parameter.stats) return json(stats(e.parameter.stats));
   return json({ ok: true, status: 'ready', service: 'SWK Summit 2026 registration' });
 }
 
@@ -129,4 +135,103 @@ function doPost(e) {
   } catch (err) {
     return json({ ok: false, error: String(err) });
   }
+}
+
+// ─── Dashboard totals ─────────────────────────────────────────────────────────
+// Read-only: this never changes the Sheet. It returns counts for the staff
+// dashboard and never a person's answers. Only the questions in STATS_FIELDS are
+// counted, and a group smaller than STATS_MIN_GROUP is folded into "Other", so
+// nobody can be picked out. Email is used only to count repeat entries.
+// STATS_KEY stays blank in the public copy of this file, which turns this off.
+
+var STATS_KEY = '';
+var STATS_MIN_GROUP = 3;
+var STATS_TOP_GROUPS = 8;
+var STATS_DAY_MS = 24 * 60 * 60 * 1000;
+var STATS_FIELDS = {
+  gender: {},
+  age: { bands: true },
+  location: { lastPart: true },
+  status: {},
+  education: {},
+  interest: {},
+  heard: {},
+};
+
+function statsAgeBand(text) {
+  var age = parseInt(text, 10);
+  if (!age) return 'Not stated';
+  if (age < 18) return 'Under 18';
+  if (age <= 24) return '18 to 24';
+  if (age <= 35) return '25 to 35';
+  return '36 and over';
+}
+
+function statsValues(raw, rule) {
+  var text = String(raw === undefined || raw === null ? '' : raw).trim();
+  if (rule.bands) return [statsAgeBand(text)];
+  if (!text) return ['Not stated'];
+  if (rule.lastPart) {
+    var place = text.split(',').pop().trim().toLowerCase();
+    return [place.replace(/(^|\s)\S/g, function (c) { return c.toUpperCase(); })];
+  }
+  return text.split(';').map(function (v) { return v.trim(); }).filter(Boolean);
+}
+
+function statsGroups(counts) {
+  var names = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+  var groups = [];
+  var other = 0;
+  names.forEach(function (name) {
+    if (name === 'Other' || counts[name] < STATS_MIN_GROUP || groups.length >= STATS_TOP_GROUPS) {
+      other += counts[name];
+    } else {
+      groups.push({ name: name.slice(0, 60), count: counts[name] });
+    }
+  });
+  if (other) groups.push({ name: 'Other', count: other });
+  return groups;
+}
+
+function stats(key) {
+  if (!STATS_KEY || key !== STATS_KEY) return { ok: false, error: 'not allowed' };
+
+  var rows = SpreadsheetApp.openById(SHEET_ID).getSheets()[0].getDataRange().getValues();
+  var fields = Object.keys(STATS_FIELDS);
+  var emailColumn = ROW_FIELDS.indexOf('email') + 1;
+  var now = Date.now();
+  var counts = {};
+  var daily = {};
+  var seen = {};
+  var result = { ok: true, total: 0, last7: 0, previous7: 0, duplicates: 0, latest: '' };
+  fields.forEach(function (field) { counts[field] = {}; });
+
+  rows.forEach(function (row) {
+    var when = new Date(row[0]);
+    if (isNaN(when.getTime())) return; // the header row, or a blank one
+
+    result.total++;
+    var daysAgo = (now - when.getTime()) / STATS_DAY_MS;
+    var day = when.toISOString().slice(0, 10);
+    if (daysAgo < 7) result.last7++;
+    else if (daysAgo < 14) result.previous7++;
+    if (daysAgo < 30) daily[day] = (daily[day] || 0) + 1;
+    if (day > result.latest) result.latest = day;
+
+    fields.forEach(function (field) {
+      var column = ROW_FIELDS.indexOf(field) + 1;
+      statsValues(row[column], STATS_FIELDS[field]).forEach(function (value) {
+        counts[field][value] = (counts[field][value] || 0) + 1;
+      });
+    });
+
+    var email = String(row[emailColumn] || '').trim().toLowerCase();
+    if (email && seen[email]) result.duplicates++;
+    seen[email] = true;
+  });
+
+  result.daily = daily;
+  result.groups = {};
+  fields.forEach(function (field) { result.groups[field] = statsGroups(counts[field]); });
+  return result;
 }

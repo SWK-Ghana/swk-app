@@ -3,6 +3,9 @@ import { readSession } from './security.js'
 import { fail } from './errors.js'
 import * as accounts from './accounts.js'
 import * as receipts from './receipts.js'
+import { registrations } from './registrations.js'
+import { visitors } from './visits.js'
+import { quality } from './quality.js'
 
 // Only these document types may be created through the content tools.
 const ALLOWED_TYPES = ['post', 'marketplaceProduct']
@@ -44,6 +47,9 @@ const ACTIONS = {
   me: [EVERYONE, accounts.me],
   'password.change': [EVERYONE, accounts.changePassword],
   overview: [EVERYONE, receipts.overview],
+  registrations: [EVERYONE, registrations],
+  visitors: [EVERYONE, visitors],
+  quality: [EVERYONE, quality],
 
   'users.list': [OWNER, accounts.listUsers],
   'users.create': [OWNER, accounts.createUser],
@@ -77,7 +83,7 @@ const signedInUser = async (store, token, secret) => {
   return user
 }
 
-export const createHandler = (makeStore, env = process.env) => async (req, res) => {
+export const createHandler = (makeStore, env = process.env, fetcher = fetch) => async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Method not allowed' })
@@ -107,7 +113,7 @@ export const createHandler = (makeStore, env = process.env) => async (req, res) 
     const [roles, run] = ACTIONS[action]
     if (user.mustChangePassword && !BEFORE_PASSWORD_CHANGE.includes(action)) fail(403, 'Please set a new password first.')
     if (!roles.includes(user.role)) fail(403, 'Your role does not allow this.')
-    return res.status(200).json(await run({ store, user, body, env }))
+    return res.status(200).json(await run({ store, user, body, env, fetcher }))
   } catch (err) {
     const status = err.status || 500
     // Sanity's own permission errors are worth showing; anything unexpected is not.

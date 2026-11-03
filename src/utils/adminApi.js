@@ -55,6 +55,9 @@ export const resetUserPassword = (id) => call('users.resetPassword', { id })
 // Dashboard
 export const getOverview = () => call('overview')
 export const setCampaign = (campaign) => call('campaign.set', { campaign })
+export const getRegistrations = async () => (await call('registrations')).forms
+export const getVisitors = () => call('visitors')
+export const getQuality = () => call('quality')
 
 // Receipts
 export const listReceipts = async () => (await call('receipts.list')).receipts

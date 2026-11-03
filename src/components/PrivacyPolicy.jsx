@@ -5,7 +5,7 @@ import PageHero from './PageHero'
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate()
-  const lastUpdated = 'May 2026'
+  const lastUpdated = 'November 2026'
 
   const sections = [
     {
@@ -74,6 +74,8 @@ We may also disclose your information where required by law or to protect the ri
 
 • Essential cookies — necessary for the website to function
 • Analytics cookies — help us understand how visitors interact with the site (e.g. Google Analytics)
+
+We also keep our own simple count of page visits. It uses no cookies and stores no IP addresses or personal details, only totals by page, country, device type and referring site.
 
 You can control and manage cookies through your browser settings. Disabling cookies may affect some functionality of the website.`
     },

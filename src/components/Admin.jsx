@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuStore, LuUsers } from 'react-icons/lu'
+import {
+  LuChartColumn, LuClipboardList, LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuShieldCheck, LuStore, LuUsers,
+} from 'react-icons/lu'
 import Seo from './Seo'
 import { FlowStrip } from './Patterns'
 import { SESSION_EXPIRED_EVENT, clearSession, getMe, getSession } from '../utils/adminApi'
 import AdminLogin, { ChangePasswordForm } from './admin/AdminLogin'
 import Overview from './admin/Overview'
+import Quality from './admin/Quality'
 import Receipts from './admin/Receipts'
+import Registrations from './admin/Registrations'
 import Team from './admin/Team'
+import Website from './admin/Website'
 import { MarketplaceAdmin, PostsAdmin } from './admin/ContentAdmin'
 import { Loading } from './admin/ui'
+
+const EVERYONE = ['owner', 'finance', 'content', 'viewer']
 
 // Each screen and who sees it. The server checks every action as well; this
 // only keeps people's menus to what they can use.
 const SCREENS = [
-  { id: 'overview', label: 'Overview', icon: LuLayoutDashboard, roles: ['owner', 'finance', 'content', 'viewer'], Screen: Overview },
+  { id: 'overview', label: 'Overview', icon: LuLayoutDashboard, roles: EVERYONE, Screen: Overview },
+  { id: 'registrations', label: 'Registrations', icon: LuClipboardList, roles: EVERYONE, Screen: Registrations },
+  { id: 'website', label: 'Website visitors', icon: LuChartColumn, roles: EVERYONE, Screen: Website },
+  { id: 'quality', label: 'Quality checks', icon: LuShieldCheck, roles: EVERYONE, Screen: Quality },
   { id: 'receipts', label: 'Donations and receipts', icon: LuReceiptText, roles: ['owner', 'finance'], Screen: Receipts },
   { id: 'posts', label: 'Blog posts', icon: LuFileText, roles: ['owner', 'content'], Screen: PostsAdmin },
   { id: 'marketplace', label: 'Marketplace', icon: LuStore, roles: ['owner', 'content'], Screen: MarketplaceAdmin },

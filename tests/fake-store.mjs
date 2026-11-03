@@ -3,6 +3,7 @@ export const fakeStore = () => {
   const users = new Map()
   const receipts = new Map()
   const docs = new Map()
+  const visits = new Map()
   let signature = null
   let campaign = null
   const conflict = () => Object.assign(new Error('Document already exists'), { status: 409 })
@@ -38,6 +39,22 @@ export const fakeStore = () => {
     async setCampaign(v) { campaign = v },
 
     pendingProducts: async () => [...docs.values()].filter((d) => d._type === 'marketplaceProduct' && !d.approved).length,
+    contentAudit: async () => ({
+      posts: [...docs.values()].filter((d) => d._type === 'post'),
+      products: [...docs.values()].filter((d) => d._type === 'marketplaceProduct'),
+    }),
+
+    visits,
+    async recordVisit(day, fields) {
+      const record = visits.get(day) || { day, views: 0, visits: 0 }
+      for (const field of fields) {
+        const [group, key] = field.split('.')
+        if (key) record[group] = { ...record[group], [key]: (record[group]?.[key] || 0) + 1 }
+        else record[group] += 1
+      }
+      visits.set(day, record)
+    },
+    listVisits: async (from) => [...visits.values()].filter((r) => r.day >= from).sort((a, b) => (a.day < b.day ? -1 : 1)),
 
     async createDoc(doc) { const d = { _id: `doc${docs.size + 1}`, ...doc }; docs.set(d._id, d); return d },
     async patchDoc(id, set) { docs.set(id, { ...docs.get(id), ...set }) },

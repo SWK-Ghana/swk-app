@@ -1,16 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { LuTriangleAlert } from 'react-icons/lu'
-import { getOverview, getSignature, setCampaign } from '../../utils/adminApi'
-import { Field, Loading, Notice, PageTitle, Panel, buttonClass, inputClass, quietButtonClass } from './ui'
+import { getOverview, getQuality, getRegistrations, getVisitors, setCampaign } from '../../utils/adminApi'
+import { Field, Loading, Notice, PageTitle, Panel, Stat, buttonClass, inputClass, quietButtonClass } from './ui'
+import { problemsIn, weekChange } from './helpers'
 import { longDate, money } from './receiptTemplate'
+import { Check } from './Quality'
 
-const Stat = ({ label, value, detail }) => (
-  <Panel>
-    <p className="text-sm text-gray-600">{label}</p>
-    <p className="mt-1 text-3xl font-bold text-[#0C2E11]">{value}</p>
-    {detail && <p className="mt-1 text-sm text-gray-500">{detail}</p>}
-  </Panel>
-)
+const SHOWN_PROBLEMS = 5
 
 const Meter = ({ label, value, max, text }) => {
   const percent = max > 0 ? Math.min(100, (value / max) * 100) : 0
@@ -63,45 +59,52 @@ const CampaignForm = ({ campaign, onSaved, onClose }) => {
   )
 }
 
+// What it would take to reach the target in the days left.
+const paceText = ({ raised, target, daysLeft }) => {
+  const left = target - raised
+  if (left <= 0) return 'Target reached.'
+  if (daysLeft <= 0) return `Closed ${money(left)} short of the target.`
+  return `${money(left)} still to raise, about ${money(left / daysLeft)} a day.`
+}
+
 const Overview = ({ user, onNavigate }) => {
   const [data, setData] = useState(null)
-  const [hasSignature, setHasSignature] = useState(true)
+  const [problems, setProblems] = useState([])
+  const [summit, setSummit] = useState(null)
+  const [visits, setVisits] = useState(null)
   const [error, setError] = useState('')
   const [editing, setEditing] = useState(false)
-  const canSeeMoney = ['owner', 'finance'].includes(user.role)
 
   const load = useCallback(() => {
     getOverview().then(setData).catch((err) => setError(err.message))
-    if (canSeeMoney) getSignature().then((s) => setHasSignature(!!s)).catch(() => {})
-  }, [canSeeMoney])
+  }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    load()
+    // The slower sources fill in on their own, so they never hold up the page.
+    getQuality().then((result) => setProblems(problemsIn(result.groups))).catch(() => {})
+    getRegistrations().then((forms) => setSummit(forms.find((f) => f.id === 'summit') || null)).catch(() => {})
+    getVisitors().then(setVisits).catch(() => {})
+  }, [load])
 
   if (error) return <Notice>{error}</Notice>
   if (!data) return <Loading />
 
   const { campaign, receiptsIssued, pendingProducts } = data
-  const todo = [
-    canSeeMoney && !hasSignature && { text: 'Your signature has not been uploaded, so receipts print unsigned.', screen: 'receipts', action: 'Open receipts' },
-    pendingProducts > 0 && ['owner', 'content'].includes(user.role) && {
-      text: `${pendingProducts} marketplace product${pendingProducts === 1 ? ' is' : 's are'} waiting for review.`, screen: 'marketplace', action: 'Review',
-    },
-  ].filter(Boolean)
+  const registered = summit?.state === 'ok'
 
   return (
     <div className="max-w-5xl">
       <PageTitle title={`Welcome, ${user.name.split(' ')[0]}`} subtitle="Where SWK Ghana stands today." />
 
-      {todo.length > 0 && (
+      {problems.length > 0 && (
         <Panel tone="warn" className="mb-5">
-          <h2 className="mb-2 flex items-center gap-2 font-bold text-amber-900"><LuTriangleAlert aria-hidden="true" /> Needs attention</h2>
-          <ul className="space-y-2 text-sm text-amber-900">
-            {todo.map((t) => (
-              <li key={t.text} className="flex flex-wrap items-center justify-between gap-2">
-                {t.text}
-                <button onClick={() => onNavigate(t.screen)} className="font-semibold underline">{t.action}</button>
-              </li>
-            ))}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className="flex items-center gap-2 font-bold text-amber-900"><LuTriangleAlert aria-hidden="true" /> Needs attention ({problems.length})</h2>
+            <button onClick={() => onNavigate('quality')} className="text-sm font-semibold text-amber-900 underline">All quality checks</button>
+          </div>
+          <ul className="mt-1 divide-y divide-amber-200">
+            {problems.slice(0, SHOWN_PROBLEMS).map((check, i) => <Check key={i} check={check} onNavigate={onNavigate} />)}
           </ul>
         </Panel>
       )}
@@ -122,13 +125,23 @@ const Overview = ({ user, onNavigate }) => {
           <Meter label="Money raised" value={campaign.raised} max={campaign.target} text={`${money(campaign.raised)} of ${money(campaign.target)}`} />
           <Meter label="Seats funded" value={campaign.seatsFunded} max={campaign.seats} text={`${campaign.seatsFunded} of ${campaign.seats}`} />
         </div>
+        <p className="mt-4 text-sm font-medium text-gray-700">{paceText(campaign)}</p>
         {editing && <CampaignForm campaign={campaign} onClose={() => setEditing(false)} onSaved={() => { setEditing(false); load() }} />}
       </Panel>
 
-      <div className="grid gap-5 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Raised for this campaign" value={money(campaign.raised)} detail={`${campaign.donations} donation${campaign.donations === 1 ? '' : 's'}`} />
-        <Stat label="Receipts issued" value={receiptsIssued} detail="All campaigns, excluding cancelled" />
-        <Stat label="Marketplace products to review" value={pendingProducts} />
+        <Stat
+          label="Registered for the Summit"
+          value={registered ? summit.total : '–'}
+          detail={registered ? `${campaign.seatsFunded} seats funded so far` : 'Waiting for the form'}
+        />
+        <Stat
+          label="Website visits in 7 days"
+          value={visits ? visits.last7 : '–'}
+          detail={visits ? weekChange(visits.last7, visits.previous7) : ''}
+        />
+        <Stat label="Receipts issued" value={receiptsIssued} detail={`${pendingProducts} marketplace product${pendingProducts === 1 ? '' : 's'} to review`} />
       </div>
     </div>
   )

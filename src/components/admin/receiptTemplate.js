@@ -123,7 +123,7 @@ export const receiptHtml = (r, { signature = null, origin = '' } = {}) => `<!doc
     <dl>
       ${row('Purpose', r.purpose)}
       ${row('Payment date', longDate(r.date))}
-      ${row('Payment method', r.method)}
+      ${row('Payment method', r.method === 'Not stated' ? '' : r.method)}
       ${row('Transaction ID', r.txn)}
     </dl>
     <p class="msg">Thank you for standing with young people in Ghana. Your gift goes directly into SWK Ghana's programmes, and every donor receives our impact report when the work is done.</p>

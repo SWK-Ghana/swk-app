@@ -6,7 +6,7 @@ import {
 import { Field, Loading, Notice, PageTitle, Panel, buttonClass, inputClass, quietButtonClass } from './ui'
 import { longDate, money, printReceipt, receiptFileName, receiptHtml } from './receiptTemplate'
 
-const METHODS = ['MTN Mobile Money', 'Telecel Cash', 'AT Money', 'Bank transfer', 'Card payment', 'Cash']
+const METHODS = ['MTN Mobile Money', 'Telecel Cash', 'AT Money', 'Bank transfer', 'Card payment', 'Cash', 'Not stated']
 const PURPOSES = ['Agribusiness Summit 2026 · Sponsor a Seat', 'General donation to SWK Ghana', 'Agribusiness Webinar Series']
 const today = () => new Date().toISOString().slice(0, 10)
 

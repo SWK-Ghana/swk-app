@@ -19,6 +19,7 @@ const isConfigured = () =>
  * @param {string} title Document title for the page
  */
 export function trackPageView(path, title) {
+  window.swkVisit?.(path.split('?')[0])
   if (!isConfigured()) return
   window.gtag('event', 'page_view', {
     page_path: path,
@@ -33,6 +34,7 @@ export function trackPageView(path, title) {
  * @param {object} [params] Extra event parameters
  */
 export function trackEvent(name, params = {}) {
+  window.swkEvent?.(name)
   if (!isConfigured()) return
   window.gtag('event', name, params)
 }

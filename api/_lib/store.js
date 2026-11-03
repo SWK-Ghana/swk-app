@@ -1,6 +1,6 @@
 // Every Sanity query the admin API makes. Documents with a dot in their _id are
 // private: anonymous readers of this public dataset cannot see them, so staff,
-// receipts and the signature all live under such ids.
+// receipts, the signature and visit totals all live under such ids.
 const PROJECT_ID = process.env.SANITY_PROJECT_ID || 'qaen86pl'
 const DATASET = process.env.SANITY_DATASET || 'production'
 const BASE = `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data`
@@ -49,6 +49,27 @@ export const sanityStore = (token) => {
     setCampaign: (data) => mutate([{ createOrReplace: { _id: CAMPAIGN_ID, _type: 'adminCampaign', ...data } }]),
 
     pendingProducts: () => query('count(*[_type == "marketplaceProduct" && approved != true])'),
+    contentAudit: () =>
+      query(`{
+        "posts": *[_type == "post"]{title, excerpt, coverImageUrl, published, publishedAt, _createdAt},
+        "products": *[_type == "marketplaceProduct"]{productName, approved, imageUrl, price}
+      }`),
+
+    /** Adds 1 to each field of the day's totals, creating whatever is missing. */
+    recordVisit: (day, fields) => {
+      const id = `analytics.${day}`
+      const nested = fields.filter((field) => field.includes('.'))
+      const parents = [...new Set(nested.map((field) => field.split('.')[0]))]
+      const each = (keys, value) => Object.fromEntries(keys.map((key) => [key, value]))
+      return mutate([
+        { createIfNotExists: { _id: id, _type: 'siteVisits', day, views: 0, visits: 0 } },
+        { patch: { id, setIfMissing: each(parents, {}) } },
+        { patch: { id, setIfMissing: each(nested, 0) } },
+        { patch: { id, inc: each(fields, 1) } },
+      ])
+    },
+    listVisits: (from) =>
+      query('*[_type == "siteVisits" && day >= $from] | order(day asc){day, views, visits, pages, sources, devices, countries, events}', { from }),
 
     createDoc: async (doc) => (await mutate([{ create: doc }])).results?.[0]?.document || null,
     patchDoc: (id, set) => mutate([{ patch: { id, set } }]),
