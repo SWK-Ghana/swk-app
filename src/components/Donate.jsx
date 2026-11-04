@@ -16,7 +16,8 @@ const FLW_KEY = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || ''
 
 const BANK_NAME = 'Fidelity Bank'
 const BANK_ACCOUNT = '2030192755111'
-const MOMO_NUMBER = '+233 548 704 107'
+const MOMO_NUMBER = '0596 838 595'
+const MOMO_MERCHANT_ID = '670968'
 const DONATE_EMAIL = 'info@swkghana.org'
 const LOGO_URL = 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png'
 
@@ -295,6 +296,7 @@ const Donate = () => {
 
                 <div className="space-y-3">
                   <h3 className="text-sm font-semibold text-gray-800">Mobile Money</h3>
+                  <CopyField label="Merchant ID" value={MOMO_MERCHANT_ID} event="momo_merchant_id" />
                   <CopyField label="MoMo Number" value={MOMO_NUMBER} copyValue={MOMO_NUMBER.replace(/\s/g, '')} event="momo_number" />
                 </div>
 
