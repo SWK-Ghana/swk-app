@@ -111,8 +111,8 @@ const Contact = () => {
                     <div className="flex flex-wrap gap-3 xs:gap-4">
                       {[
                         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/100929740' },
-                        { label: 'Instagram', href: 'https://www.instagram.com/swk.gh/' },
-                        { label: 'X', href: 'https://x.com/swk_gh' },
+                        { label: 'Instagram', href: 'https://www.instagram.com/swkghana/' },
+                        { label: 'X', href: 'https://x.com/swkghana' },
                         { label: 'Facebook', href: 'https://web.facebook.com/profile.php?id=61560213077945' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@swkghana' },
                       ].map(({ label, href }) => (
