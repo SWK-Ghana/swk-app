@@ -21,30 +21,21 @@ export async function sendEmail(data) {
   return true
 }
 
-// ─── Brevo (newsletter subscriptions only) ───────────────────────────────────
-const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY
-const BREVO_API = 'https://api.brevo.com/v3'
+// ─── Newsletter (via /api/subscribe, so the Brevo key stays on the server) ───
 
 /**
- * Add a contact to Brevo newsletter list
+ * Add an email address to the newsletter list
  * @param {string} email
  */
 export async function subscribeContact(email) {
-  const res = await fetch(`${BREVO_API}/contacts`, {
+  const res = await fetch('/api/subscribe', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'api-key': BREVO_API_KEY,
-    },
-    body: JSON.stringify({
-      email,
-      listIds: [2],
-      updateEnabled: true,
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
   })
-  if (!res.ok && res.status !== 204) {
+  if (!res.ok) {
     const err = await res.json().catch(() => ({}))
-    throw new Error(err?.message || 'Failed to subscribe')
+    throw new Error(err?.error || 'Failed to subscribe')
   }
   return true
 }
