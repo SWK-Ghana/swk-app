@@ -139,7 +139,7 @@ const Faqs = () => {
     },
     {
       q: 'How can I support SWK Ghana financially?',
-      a: 'You can support us through our Donate page — by card, Mobile Money, direct bank transfer, or international card payment in USD, GBP, or EUR. Every contribution — big or small — goes directly towards funding our programs, events, and community initiatives. We also welcome in-kind support and sponsorships.',
+      a: 'You can support us through our Donate page — by card, Mobile Money, MoMo Pay, or international card payment in USD, GBP, or EUR. Every contribution — big or small — goes directly towards funding our programs, events, and community initiatives. We also welcome in-kind support and sponsorships.',
     },
   ]
   return (

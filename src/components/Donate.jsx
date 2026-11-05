@@ -3,21 +3,25 @@ import Seo from './Seo'
 import PageHero from './PageHero'
 import { trackConversion, trackEvent } from '../utils/analytics'
 import { loadPaystack, loadFlutterwave } from '../utils/payments'
-import { LuGlobe, LuLandmark, LuSmartphone } from 'react-icons/lu'
+import { LuGlobe, LuSmartphone, LuWallet } from 'react-icons/lu'
 
 // ─── Payment configuration ────────────────────────────────────────────────────
 // Public keys only (safe in the browser). Set in .env / Vercel:
 //   VITE_PAYSTACK_PUBLIC_KEY     → enables Card & Mobile Money (GHS, Paystack)
 //   VITE_FLUTTERWAVE_PUBLIC_KEY  → enables International giving (USD/GBP/EUR, Flutterwave)
 // Until a key is set, that tab guides donors to the always-working
-// Bank / Mobile Money transfer option — the donate flow is never dead.
+// MoMo Pay option — the donate flow is never dead.
 const PAYSTACK_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || ''
 const FLW_KEY = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || ''
 
-const BANK_NAME = 'Fidelity Bank'
-const BANK_ACCOUNT = '2030192755111'
-const MOMO_NUMBER = '0596 838 595'
 const MOMO_MERCHANT_ID = '670968'
+const MOMO_STEPS = [
+  'Dial *170# on your MTN line.',
+  'Choose MoMoPay & Pay Bill, then MoMoPay.',
+  `Enter the Merchant ID ${MOMO_MERCHANT_ID}.`,
+  'Enter the amount, and “Donation — your name” as the reference.',
+  'Check the merchant name, then confirm with your MoMo PIN. MTN sends you an SMS receipt.',
+]
 const DONATE_EMAIL = 'info@swkghana.org'
 const LOGO_URL = 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png'
 
@@ -31,7 +35,7 @@ const CURRENCIES = {
 const METHODS = [
   { id: 'paystack', icon: LuSmartphone, label: 'Card & Mobile Money', sub: 'Ghana · GH₵' },
   { id: 'intl', icon: LuGlobe, label: 'International', sub: 'USD · GBP · EUR' },
-  { id: 'transfer', icon: LuLandmark, label: 'Bank / MoMo Transfer', sub: 'Direct transfer' },
+  { id: 'transfer', icon: LuWallet, label: 'MoMo Pay', sub: 'MTN merchant payment' },
 ]
 
 // ─── Copy-to-clipboard field for the transfer tab ─────────────────────────────
@@ -158,7 +162,7 @@ const Donate = () => {
           onSuccess(payment.transaction_id || payment.tx_ref)
         } else {
           setStatus('error')
-          setMessage('The payment was not completed. Please try again, or use a bank transfer.')
+          setMessage('The payment was not completed. Please try again, or use MoMo Pay.')
         }
       },
       onclose: () => {
@@ -181,7 +185,7 @@ const Donate = () => {
     if (!key) {
       // Gateway not activated yet → guide the donor to the transfer option.
       setStatus('error')
-      setMessage('Online checkout for this option is being activated. Please use the Bank / MoMo Transfer option — it takes under a minute.')
+      setMessage('Online checkout for this option is being activated. Please use the MoMo Pay option — it takes under a minute.')
       return
     }
 
@@ -191,19 +195,19 @@ const Donate = () => {
       else await handleFlutterwave()
     } catch {
       setStatus('error')
-      setMessage(`We could not open the secure payment window. Please try again, use a bank transfer, or email ${DONATE_EMAIL}.`)
+      setMessage(`We could not open the secure payment window. Please try again, use MoMo Pay, or email ${DONATE_EMAIL}.`)
     }
   }
 
-  const receiptMailto = `mailto:${DONATE_EMAIL}?subject=${encodeURIComponent('Donation Transfer — SWK Ghana')}&body=${encodeURIComponent(
-    `Hi SWK Ghana,\n\nI have just sent a donation by bank/mobile money transfer.\n\nName: \nAmount: \nMethod (Bank / MoMo): \nDate: \n\nPlease acknowledge receipt. Thank you!`
+  const receiptMailto = `mailto:${DONATE_EMAIL}?subject=${encodeURIComponent('Donation by MoMo Pay — SWK Ghana')}&body=${encodeURIComponent(
+    `Hi SWK Ghana,\n\nI have just sent a donation by MoMo Pay (Merchant ID ${MOMO_MERCHANT_ID}).\n\nName: \nAmount: \nMoMo number I paid from: \nDate: \n\nPlease acknowledge receipt. Thank you!`
   )}`
 
   return (
     <div className="min-h-screen swk-weave">
       <Seo
         title="Donate to SWK Ghana – Support Youth-Led Sustainable Change"
-        description="Support SWK Ghana by card, Mobile Money, bank transfer, or international payment in USD, GBP or EUR. Every gift funds youth programs, climate action, and community initiatives across Ghana."
+        description="Support SWK Ghana by card, Mobile Money, MoMo Pay, or international payment in USD, GBP or EUR. Every gift funds youth programs, climate action, and community initiatives across Ghana."
         path="/donate"
       />
       <PageHero
@@ -277,37 +281,37 @@ const Donate = () => {
                 </button>
               </div>
 
-            /* ── Bank / MoMo transfer tab ── */
+            /* ── MoMo Pay tab ── */
             ) : method === 'transfer' ? (
               <div className="space-y-5">
                 <div>
-                  <h2 className="text-lg font-bold text-gray-900 mb-1">Give by direct transfer</h2>
+                  <h2 className="text-lg font-bold text-gray-900 mb-1">Give with MoMo Pay</h2>
                   <p className="text-sm text-gray-600">
-                    Send your donation straight to our accounts below — no fees, no middleman.
-                    Please use the reference <span className="font-semibold text-gray-800">“Donation — your name”</span>.
+                    Pay SWK Ghana straight from your MTN Mobile Money wallet with our merchant ID — no fees, no middleman.
                   </p>
                 </div>
 
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-gray-800">Bank transfer</h3>
-                  <CopyField label="Bank" value={BANK_NAME} event="bank_name" />
-                  <CopyField label="Account Number" value={BANK_ACCOUNT} event="bank_account" />
-                </div>
+                <CopyField label="Merchant ID" value={MOMO_MERCHANT_ID} event="momo_merchant_id" />
 
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-gray-800">Mobile Money</h3>
-                  <CopyField label="Merchant ID" value={MOMO_MERCHANT_ID} event="momo_merchant_id" />
-                  <CopyField label="MoMo Number" value={MOMO_NUMBER} copyValue={MOMO_NUMBER.replace(/\s/g, '')} event="momo_number" />
-                </div>
+                <ol className="space-y-2.5 text-sm text-gray-700">
+                  {MOMO_STEPS.map((step, i) => (
+                    <li key={step} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#17702D] text-xs font-bold text-white" aria-hidden="true">{i + 1}</span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
 
                 <div className="bg-[#F2FAE8] border border-[#D4F0A0] rounded-xl p-4 text-sm text-gray-700 leading-relaxed">
-                  After transferring, please{' '}
+                  After paying, please{' '}
                   <a href={receiptMailto} className="font-bold text-[#17702D] hover:underline">email us at {DONATE_EMAIL}</a>{' '}
                   with your name and amount so we can acknowledge your gift and send you a receipt.
                 </div>
 
                 <p className="text-xs text-gray-500 text-center">
-                  Donating from outside Ghana? International cards are accepted on the{' '}
+                  On another network, or paying by card? Use the{' '}
+                  <button type="button" onClick={() => switchMethod('paystack')} className="font-semibold text-[#17702D] hover:underline">Card &amp; Mobile Money</button> option.
+                  Donating from outside Ghana? Use the{' '}
                   <button type="button" onClick={() => switchMethod('intl')} className="font-semibold text-[#17702D] hover:underline">International</button> option.
                 </p>
               </div>
@@ -411,7 +415,7 @@ const Donate = () => {
                       onClick={() => switchMethod('transfer')}
                       className="text-sm font-bold text-[#17702D] hover:underline"
                     >
-                      → Use Bank / MoMo Transfer instead
+                      → Pay with MoMo Pay instead
                     </button>
                   </div>
                 )}
