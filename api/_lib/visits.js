@@ -4,7 +4,7 @@
 const SITE_HOSTS = ['swkghana.org', 'www.swkghana.org']
 const BOTS = /bot|crawl|spider|slurp|headless|lighthouse|preview|monitor|facebookexternalhit|whatsapp/i
 const PAGE = /^\/[a-z0-9/_-]{0,79}$/i
-const HIDDEN_PAGE = /^\/(admin|api)(\/|$)/
+const HIDDEN_PAGE = /^\/(admin|checkin|api)(\/|$)/
 const HOST = /^[a-z0-9.-]{1,60}$/i
 const EVENTS = ['donate_start', 'donate', 'donate_interest', 'contact_submit', 'volunteer_signup', 'partnership_inquiry']
 const MAX_PER_MINUTE = 120

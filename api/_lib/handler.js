@@ -6,6 +6,7 @@ import * as receipts from './receipts.js'
 import { registrations } from './registrations.js'
 import { visitors } from './visits.js'
 import { quality } from './quality.js'
+import * as summit from './summit.js'
 
 // Only these document types may be created through the content tools.
 const ALLOWED_TYPES = ['post', 'marketplaceProduct']
@@ -36,15 +37,29 @@ const content = {
   },
 }
 
-const PUBLIC_ACTIONS = { status: accounts.status, setup: accounts.setup, login: accounts.login }
+const PUBLIC_ACTIONS = { status: accounts.status, setup: accounts.setup, login: accounts.login, 'door.login': summit.doorLogin }
 
 const OWNER = ['owner']
 const MONEY = ['owner', 'finance']
 const EDITORS = ['owner', 'content']
 const EVERYONE = accounts.ROLES
+// The door team signs in with the event code and sees only the check-in tools.
+const DOOR = ['door', ...EVERYONE]
 
 const ACTIONS = {
-  me: [EVERYONE, accounts.me],
+  me: [DOOR, accounts.me],
+
+  'summit.event': [DOOR, summit.getEvent],
+  'summit.list': [DOOR, summit.listAttendees],
+  'summit.checkin': [DOOR, summit.checkIn],
+  'summit.undo': [DOOR, summit.undoCheckIn],
+  'summit.walkin': [DOOR, summit.walkIn],
+  'summit.report': [EVERYONE, summit.report],
+  'summit.update': [MONEY, summit.updateAttendee],
+  'summit.import': [OWNER, summit.importRegistrations],
+  'summit.setEvent': [OWNER, summit.setEvent],
+  'summit.setCode': [OWNER, summit.setDoorCode],
+
   'password.change': [EVERYONE, accounts.changePassword],
   overview: [EVERYONE, receipts.overview],
   registrations: [EVERYONE, registrations],
@@ -76,6 +91,10 @@ const BEFORE_PASSWORD_CHANGE = ['me', 'password.change']
 // The account is re-read on every request, so a change takes effect at once.
 const signedInUser = async (store, token, secret) => {
   const session = readSession(token, secret)
+  if (session?.uid === 'door') {
+    if (!(await summit.doorSessionValid(store, session))) fail(401, 'The door code has changed. Please enter the new one.')
+    return summit.DOOR_USER
+  }
   const user = session && (await store.getUser(session.uid))
   if (!user || user.active === false || (user.sessionVersion || 0) !== session.sv) {
     fail(401, 'Session expired or invalid. Please log in again.')

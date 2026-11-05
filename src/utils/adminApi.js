@@ -13,6 +13,8 @@ export const getSession = () => {
 }
 const setSession = (t) => { try { sessionStorage.setItem(STORAGE_KEY, t) } catch { /* storage unavailable */ } }
 export const clearSession = () => { try { sessionStorage.removeItem(STORAGE_KEY) } catch { /* storage unavailable */ } }
+/** Puts back a token kept elsewhere, such as the door page's longer-lived one. */
+export const restoreSession = (token) => { if (token) setSession(token) }
 
 async function call(action, payload = {}) {
   const token = getSession()
@@ -67,6 +69,24 @@ export const updateReceipt = async (no, receipt) => (await call('receipts.update
 export const cancelReceipt = (no, reason) => call('receipts.cancel', { no, reason })
 export const getSignature = async () => (await call('signature.get')).dataUri
 export const setSignature = (dataUri) => call('signature.set', { dataUri })
+
+// Summit check-in
+export const getSummitEvent = () => call('summit.event')
+export const listAttendees = () => call('summit.list')
+export const checkInAttendee = (id, at) => call('summit.checkin', { id, at })
+export const undoCheckIn = (id) => call('summit.undo', { id })
+export const registerWalkIn = (attendee, at) => call('summit.walkin', { attendee, at })
+export const updateAttendee = (id, fields) => call('summit.update', { id, fields })
+export const importRegistrations = (csv) => call('summit.import', { csv })
+export const setSummitEvent = (event) => call('summit.setEvent', { event })
+export const setDoorCode = (code) => call('summit.setCode', { code })
+export const getSummitReport = () => call('summit.report')
+/** The door team's sign-in: an event code instead of an account. */
+export async function doorLogin(code) {
+  const { token, user } = await call('door.login', { code })
+  setSession(token)
+  return user
+}
 
 // Website content
 /** Create a document. Returns the created document (with _id). */

@@ -36,8 +36,8 @@ export const temporaryPassword = () => crypto.randomBytes(12).toString('base64ur
 
 const sign = (payload, secret) => b64url(crypto.createHmac('sha256', secret).update(payload).digest())
 
-export const issueSession = (user, secret, now = Date.now()) => {
-  const payload = b64url(JSON.stringify({ uid: user._id, sv: user.sessionVersion || 0, exp: now + SESSION_TTL_MS }))
+export const issueSession = (user, secret, now = Date.now(), ttl = SESSION_TTL_MS) => {
+  const payload = b64url(JSON.stringify({ uid: user._id, sv: user.sessionVersion || 0, exp: now + ttl }))
   return `${payload}.${sign(payload, secret)}`
 }
 

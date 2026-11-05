@@ -41,5 +41,6 @@ export const routes = [
     ],
   },
   { path: 'admin', lazy: page(() => import('./components/Admin')) },
+  { path: 'checkin', lazy: page(() => import('./components/Checkin')) },
   { path: '*', lazy: page(() => import('./components/NotFound')) },
 ]

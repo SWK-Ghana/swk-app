@@ -48,6 +48,16 @@ export const sanityStore = (token) => {
     getCampaign: () => query('*[_id == $id][0]{name, purpose, target, seatPrice, seats, deadline}', { id: CAMPAIGN_ID }),
     setCampaign: (data) => mutate([{ createOrReplace: { _id: CAMPAIGN_ID, _type: 'adminCampaign', ...data } }]),
 
+    listAttendees: () => query('*[_type == "summitAttendee"] | order(name asc)'),
+    getAttendee: (id) => query('*[_type == "summitAttendee" && _id == $id][0]', { id }),
+    createAttendees: (docs) => mutate(docs.map((doc) => ({ createIfNotExists: doc }))),
+    patchAttendee: (id, set, unset = []) => mutate([{ patch: { id, set, ...(unset.length ? { unset } : {}) } }]),
+    getEvent: () => query('*[_id == "summit.event"][0]'),
+    patchEvent: (set) => mutate([
+      { createIfNotExists: { _id: 'summit.event', _type: 'summitEvent' } },
+      { patch: { id: 'summit.event', set } },
+    ]),
+
     pendingProducts: () => query('count(*[_type == "marketplaceProduct" && approved != true])'),
     contentAudit: () =>
       query(`{

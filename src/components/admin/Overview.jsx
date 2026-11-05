@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { LuTriangleAlert } from 'react-icons/lu'
-import { getOverview, getQuality, getRegistrations, getVisitors, setCampaign } from '../../utils/adminApi'
+import { getOverview, getQuality, getRegistrations, getSummitEvent, getVisitors, setCampaign } from '../../utils/adminApi'
 import { Field, Loading, Notice, PageTitle, Panel, Stat, buttonClass, inputClass, quietButtonClass } from './ui'
 import { problemsIn, weekChange } from './helpers'
 import { longDate, money } from './receiptTemplate'
@@ -72,6 +72,7 @@ const Overview = ({ user, onNavigate }) => {
   const [problems, setProblems] = useState([])
   const [summit, setSummit] = useState(null)
   const [visits, setVisits] = useState(null)
+  const [checkin, setCheckin] = useState(null)
   const [error, setError] = useState('')
   const [editing, setEditing] = useState(false)
 
@@ -85,6 +86,7 @@ const Overview = ({ user, onNavigate }) => {
     getQuality().then((result) => setProblems(problemsIn(result.groups))).catch(() => {})
     getRegistrations().then((forms) => setSummit(forms.find((f) => f.id === 'summit') || null)).catch(() => {})
     getVisitors().then(setVisits).catch(() => {})
+    getSummitEvent().then(setCheckin).catch(() => {})
   }, [load])
 
   if (error) return <Notice>{error}</Notice>
@@ -132,9 +134,9 @@ const Overview = ({ user, onNavigate }) => {
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label="Raised for this campaign" value={money(campaign.raised)} detail={`${campaign.donations} donation${campaign.donations === 1 ? '' : 's'}`} />
         <Stat
-          label="Registered for the Summit"
-          value={registered ? summit.total : '–'}
-          detail={registered ? `${campaign.seatsFunded} seats funded so far` : 'Waiting for the form'}
+          label={checkin?.counts.registered ? 'Checked in at the Summit' : 'Registered for the Summit'}
+          value={checkin?.counts.registered ? checkin.counts.checkedIn : registered ? summit.total : '–'}
+          detail={checkin?.counts.registered ? `of ${checkin.counts.registered} on the list, ${checkin.counts.walkIns} at the entrance` : registered ? `${campaign.seatsFunded} seats funded so far` : 'Waiting for the form'}
         />
         <Stat
           label="Website visits in 7 days"

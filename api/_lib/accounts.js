@@ -27,7 +27,7 @@ const checkPassword = (value) => {
 
 // What the browser may see of an account.
 export const publicUser = (u) => ({
-  id: u._id, name: u.name, email: u.email, role: u.role, active: u.active !== false,
+  id: u._id, name: u.name, email: u.email || '', role: u.role, active: u.active !== false,
   mustChangePassword: !!u.mustChangePassword,
 })
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
-  LuChartColumn, LuClipboardList, LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuShieldCheck, LuStore, LuUsers,
+  LuChartColumn, LuClipboardList, LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuShieldCheck, LuStore, LuTicketCheck, LuUsers,
 } from 'react-icons/lu'
 import Seo from './Seo'
 import { FlowStrip } from './Patterns'
@@ -10,6 +10,7 @@ import Overview from './admin/Overview'
 import Quality from './admin/Quality'
 import Receipts from './admin/Receipts'
 import Registrations from './admin/Registrations'
+import Summit from './admin/Summit'
 import Team from './admin/Team'
 import Website from './admin/Website'
 import { MarketplaceAdmin, PostsAdmin } from './admin/ContentAdmin'
@@ -21,6 +22,7 @@ const EVERYONE = ['owner', 'finance', 'content', 'viewer']
 // only keeps people's menus to what they can use.
 const SCREENS = [
   { id: 'overview', label: 'Overview', icon: LuLayoutDashboard, roles: EVERYONE, Screen: Overview },
+  { id: 'summit', label: 'Summit check-in', icon: LuTicketCheck, roles: EVERYONE, Screen: Summit },
   { id: 'registrations', label: 'Registrations', icon: LuClipboardList, roles: EVERYONE, Screen: Registrations },
   { id: 'website', label: 'Website visitors', icon: LuChartColumn, roles: EVERYONE, Screen: Website },
   { id: 'quality', label: 'Quality checks', icon: LuShieldCheck, roles: EVERYONE, Screen: Quality },

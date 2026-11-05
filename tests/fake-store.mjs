@@ -4,6 +4,8 @@ export const fakeStore = () => {
   const receipts = new Map()
   const docs = new Map()
   const visits = new Map()
+  const attendees = new Map()
+  let event = null
   let signature = null
   let campaign = null
   const conflict = () => Object.assign(new Error('Document already exists'), { status: 409 })
@@ -37,6 +39,18 @@ export const fakeStore = () => {
     async setSignature(v) { signature = v },
     getCampaign: async () => campaign,
     async setCampaign(v) { campaign = v },
+
+    attendees,
+    listAttendees: async () => [...attendees.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    getAttendee: async (id) => attendees.get(id) || null,
+    async createAttendees(list) { for (const doc of list) if (!attendees.has(doc._id)) attendees.set(doc._id, { ...doc }) },
+    async patchAttendee(id, set, unset = []) {
+      const next = { ...attendees.get(id), ...set }
+      for (const key of unset) delete next[key]
+      attendees.set(id, next)
+    },
+    getEvent: async () => event,
+    async patchEvent(set) { event = { ...(event || { _id: 'summit.event', _type: 'summitEvent' }), ...set } },
 
     pendingProducts: async () => [...docs.values()].filter((d) => d._type === 'marketplaceProduct' && !d.approved).length,
     contentAudit: async () => ({
