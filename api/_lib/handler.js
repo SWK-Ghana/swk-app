@@ -57,6 +57,7 @@ const ACTIONS = {
   'summit.report': [EVERYONE, summit.report],
   'summit.update': [MONEY, summit.updateAttendee],
   'summit.import': [OWNER, summit.importRegistrations],
+  'summit.sync': [EVERYONE, summit.syncFromSheet],
   'summit.setEvent': [OWNER, summit.setEvent],
   'summit.setCode': [OWNER, summit.setDoorCode],
 

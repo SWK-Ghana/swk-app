@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LuDownload, LuKeyRound, LuPrinter, LuRefreshCw, LuSearch, LuUpload, LuUserPlus } from 'react-icons/lu'
 import {
-  checkInAttendee, getSummitEvent, getSummitReport, importRegistrations, listAttendees, registerWalkIn, setDoorCode, setSummitEvent, undoCheckIn, updateAttendee,
+  checkInAttendee, getSummitEvent, getSummitReport, importRegistrations, listAttendees, registerWalkIn, setDoorCode, setSummitEvent, syncRegistrations, undoCheckIn, updateAttendee,
 } from '../../utils/adminApi'
 import { Field, Loading, Notice, PageTitle, Panel, Stat, buttonClass, inputClass, quietButtonClass } from './ui'
 import WalkInForm from './WalkInForm'
@@ -107,7 +107,28 @@ const Row = ({ person, canEdit, onCheckIn, onUndo, onSave }) => {
   )
 }
 
-const OwnerTools = ({ event, onChanged }) => {
+const importSummary = (r) => `${r.rowsRead} rows read, ${r.repeatsRemoved} repeat${r.repeatsRemoved === 1 ? '' : 's'} removed, ${r.people} people found: ${r.added} added, ${r.alreadyThere} already on the list.`
+
+/** How the list is fed from the Google Sheet: linked and checking itself, or waiting on a set-up step. */
+const SheetStatus = ({ sync }) => {
+  const { state, at, added, message } = sync || { state: 'not-connected' }
+  if (state === 'ok') {
+    return (
+      <p className="mb-2 text-sm text-gray-600">
+        <span className="font-semibold text-[#17702D]">Linked to the Google Sheet.</span> New registrations are picked up every few minutes while this page or a door phone is open.
+        {at && <> Last checked {timeOf(at)}{added ? `, ${added} added` : ''}.</>}
+      </p>
+    )
+  }
+  if (state === 'pending') return <p className="mb-2 text-sm text-gray-600">Linked to the Google Sheet; the first check runs with the next refresh.</p>
+  return (
+    <p className="mb-2 text-sm text-gray-600">
+      {message || 'Not linked to the Google Sheet yet.'} Until then, in the Google Sheet choose File, Download, CSV, then upload that file here. Repeat submissions are removed, and loading it again only adds new people.
+    </p>
+  )
+}
+
+const OwnerTools = ({ event, sync, onChanged }) => {
   const [code, setCode] = useState('')
   const [details, setDetails] = useState({ name: event.name, date: event.date, venue: event.venue })
   const [result, setResult] = useState('')
@@ -133,11 +154,9 @@ const OwnerTools = ({ event, onChanged }) => {
     const f = e.target.files?.[0]
     e.target.value = ''
     if (!f) return
-    run(async () => {
-      const r = await importRegistrations(await f.text())
-      return `${r.rowsRead} rows read, ${r.repeatsRemoved} repeat${r.repeatsRemoved === 1 ? '' : 's'} removed, ${r.people} people found: ${r.added} added, ${r.alreadyThere} already on the list.`
-    }, true)
+    run(async () => importSummary(await importRegistrations(await f.text())), true)
   }
+  const syncNow = () => run(async () => `Sheet read: ${importSummary(await syncRegistrations())}`, true)
   const saveCode = (e) => {
     e.preventDefault()
     run(async () => { await setDoorCode(code.trim()); setCode(''); return 'Door code saved. Anyone already signed in at the door must enter the new one.' }, true)
@@ -154,9 +173,14 @@ const OwnerTools = ({ event, onChanged }) => {
       <div className="grid gap-6 lg:grid-cols-3">
         <div>
           <h3 className="mb-1 text-sm font-bold text-gray-800">1. Load the registrations</h3>
-          <p className="mb-2 text-sm text-gray-600">In the Google Sheet choose File, Download, CSV, then upload that file here. Repeat submissions are removed, and loading it again only adds new people.</p>
+          <SheetStatus sync={sync} />
           <input ref={file} type="file" accept=".csv,text/csv" onChange={importFile} className="hidden" />
-          <button onClick={() => file.current?.click()} disabled={busy} className={quietButtonClass}><LuUpload aria-hidden="true" /> Upload the CSV</button>
+          <div className="flex flex-wrap gap-2">
+            {sync?.state === 'ok' || sync?.state === 'pending'
+              ? <button onClick={syncNow} disabled={busy} className={buttonClass}><LuRefreshCw aria-hidden="true" /> Check the sheet now</button>
+              : null}
+            <button onClick={() => file.current?.click()} disabled={busy} className={quietButtonClass}><LuUpload aria-hidden="true" /> Upload a CSV</button>
+          </div>
         </div>
         <form onSubmit={saveCode}>
           <h3 className="mb-1 text-sm font-bold text-gray-800">2. Door code {event.hasCode ? <span className="font-normal text-[#17702D]">(set)</span> : <span className="font-normal text-amber-700">(not set yet)</span>}</h3>
@@ -270,7 +294,7 @@ const Summit = ({ user }) => {
         <Stat label="Not arrived yet" value={counts.online - people.filter((p) => p.source !== 'walk-in' && p.checkedInAt).length} detail="Online registrants" />
       </div>
 
-      {user.role === 'owner' && <OwnerTools event={event} onChanged={load} />}
+      {user.role === 'owner' && <OwnerTools event={event} sync={data.sync} onChanged={load} />}
 
       <Panel className="mb-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">

@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import { fail } from './errors.js'
 import { hashPassword, issueSession, verifyPassword } from './security.js'
 import { parseCsv } from './csv.js'
+import { FORMS } from './registrations.js'
 
 export const DEFAULT_EVENT = {
   name: 'Agribusiness Summit 2026',
@@ -17,6 +18,10 @@ const MIN_CODE = 4
 const MAX_CODE = 40
 const DOOR_TRIES_PER_MINUTE = 30
 const CREATE_CHUNK = 50
+const SHEET_URL = FORMS.find((f) => f.id === 'summit').url
+const SHEET_TIMEOUT_MS = 8000
+const SYNC_EVERY_MS = 3 * 60 * 1000 // how often an open door or dashboard re-reads the sheet
+const SYNC_USER = 'Sheet sync'
 
 // The registration form's questions. Column names match the Sheet's headers
 // and the form's own field names, so either export imports.
@@ -116,9 +121,8 @@ const groupPeople = (rows) => {
   return [...groups.values()]
 }
 
-/** Reads the sheet: one attendee per person, keeping the latest answers and the first registration time. */
-export const peopleFromCsv = (csv) => {
-  const rows = parseCsv(csv)
+/** Reads the sheet's rows (header first): one attendee per person, keeping the latest answers and the first registration time. */
+export const peopleFromRows = (rows) => {
   if (rows.length < 2) fail(400, 'That file has no registrations in it.')
   const { map, time } = columnMap(rows[0])
   const parsed = rows.slice(1).map((r, n) => {
@@ -145,8 +149,10 @@ export const peopleFromCsv = (csv) => {
   return { people, rowsRead: parsed.length, repeatsRemoved: parsed.length - people.length }
 }
 
-export const importRegistrations = async ({ store, user, body }) => {
-  const { people, rowsRead, repeatsRemoved } = peopleFromCsv(body.csv)
+export const peopleFromCsv = (csv) => peopleFromRows(parseCsv(csv))
+
+/** Adds the people not already on the list, matched by phone or email. */
+const addPeople = async (store, { people, rowsRead, repeatsRemoved }, by) => {
   const existing = await store.listAttendees()
   const known = new Set()
   for (const a of existing) {
@@ -155,21 +161,100 @@ export const importRegistrations = async ({ store, user, body }) => {
   }
   const fresh = people.filter((p) => !(p.phone && known.has(`p:${p.phone}`)) && !(p.email && known.has(`e:${p.email}`)))
   const now = new Date().toISOString()
-  const docs = fresh.map((p) => ({ _id: newId(), _type: 'summitAttendee', ...p, source: 'online', importedAt: now, importedBy: user.name }))
+  const docs = fresh.map((p) => ({ _id: newId(), _type: 'summitAttendee', ...p, source: 'online', importedAt: now, importedBy: by }))
   for (let i = 0; i < docs.length; i += CREATE_CHUNK) await store.createAttendees(docs.slice(i, i + CREATE_CHUNK))
   return { rowsRead, repeatsRemoved, people: people.length, added: docs.length, alreadyThere: people.length - docs.length }
 }
+
+export const importRegistrations = async ({ store, user, body }) => addPeople(store, peopleFromCsv(body.csv), user.name)
+
+// ─── Reading the Google Sheet directly ──────────────────────────────────────
+// The form's Apps Script hands over the sheet's rows when asked with the
+// private key, so new registrations reach the list without a CSV. The sheet is
+// only ever read.
+
+// state: ok | not-connected (no key set) | needs-update (old script) | refused (wrong key) | unreachable
+const readSheet = async (env, fetcher) => {
+  const key = env.REGISTRATION_STATS_KEY
+  if (!key) return { state: 'not-connected' }
+  try {
+    const res = await fetcher(`${SHEET_URL}?rows=${encodeURIComponent(key)}`, { signal: AbortSignal.timeout(SHEET_TIMEOUT_MS) })
+    const data = await res.json()
+    if (data.ok && Array.isArray(data.headers) && Array.isArray(data.rows)) {
+      return { state: 'ok', rows: [data.headers, ...data.rows] }
+    }
+    return { state: data.status === 'ready' || (data.ok && data.total !== undefined) ? 'needs-update' : 'refused' }
+  } catch {
+    return { state: 'unreachable' }
+  }
+}
+
+const SYNC_MESSAGES = {
+  'not-connected': 'The dashboard is not connected to the form yet (REGISTRATION_STATS_KEY is not set).',
+  'needs-update': "The form's script needs its new version before the sheet can be read. Publish the private copy as a new deployment.",
+  refused: "The form's script refused the key. It must match STATS_KEY in the private script.",
+  unreachable: 'Google did not answer in time. Try again in a moment.',
+}
+
+/** Reads the sheet and adds anyone new. Records the outcome on the event so every screen can show it. */
+const syncSheet = async (store, env, fetcher) => {
+  const at = new Date().toISOString()
+  const sheet = await readSheet(env, fetcher)
+  if (sheet.state !== 'ok') {
+    await store.patchEvent({ syncAt: at, syncState: sheet.state })
+    return { state: sheet.state, at, error: SYNC_MESSAGES[sheet.state] }
+  }
+  let parsed
+  try {
+    parsed = peopleFromRows(sheet.rows)
+  } catch {
+    parsed = { people: [], rowsRead: 0, repeatsRemoved: 0 }
+  }
+  const result = await addPeople(store, parsed, SYNC_USER)
+  await store.patchEvent({ syncAt: at, syncState: 'ok', syncRows: result.rowsRead, syncAdded: result.added })
+  return { state: 'ok', at, ...result }
+}
+
+export const syncFromSheet = async ({ store, env, fetcher }) => {
+  const result = await syncSheet(store, env, fetcher)
+  if (result.state !== 'ok') fail(result.state === 'unreachable' ? 503 : 409, result.error)
+  return result
+}
+
+/** Called by the list: re-reads the sheet when the last look is older than SYNC_EVERY_MS. Never fails the list. */
+const syncIfStale = async (store, env, fetcher, now) => {
+  if (!env.REGISTRATION_STATS_KEY) return
+  const e = (await store.getEvent()) || {}
+  const last = e.syncAt ? new Date(e.syncAt).getTime() : 0
+  if (now - last < SYNC_EVERY_MS) return
+  // Claim the slot first, so a room full of door phones does not all read the sheet at once.
+  await store.patchEvent({ syncAt: new Date(now).toISOString() })
+  try {
+    await syncSheet(store, env, fetcher)
+  } catch {
+    // The list still loads; the next refresh tries again.
+  }
+}
+
+const syncInfo = (e, env) => ({
+  state: e.syncState || (env.REGISTRATION_STATS_KEY ? 'pending' : 'not-connected'),
+  at: e.syncAt || null,
+  rows: e.syncRows || 0,
+  added: e.syncAdded || 0,
+  message: SYNC_MESSAGES[e.syncState] || '',
+})
 
 // ─── The event and the door code ────────────────────────────────────────────
 
 const event = async (store) => ({ ...DEFAULT_EVENT, ...((await store.getEvent()) || {}) })
 
-export const getEvent = async ({ store, user }) => {
+export const getEvent = async ({ store, user, env = {} }) => {
   const e = await event(store)
   const attendees = await store.listAttendees()
   const checkedIn = attendees.filter((a) => a.checkedInAt)
   return {
     event: { name: e.name, date: e.date, venue: e.venue, hasCode: !!e.doorCodeHash },
+    sync: syncInfo(e, env),
     counts: {
       registered: attendees.length,
       online: attendees.filter((a) => a.source !== 'walk-in').length,
@@ -220,7 +305,8 @@ export const doorSessionValid = async (store, session) => session.sv === (((awai
 
 // ─── Check-in ───────────────────────────────────────────────────────────────
 
-export const listAttendees = async ({ store, user }) => {
+export const listAttendees = async ({ store, user, env = {}, fetcher = fetch }) => {
+  await syncIfStale(store, env, fetcher, Date.now())
   const attendees = await store.listAttendees()
   return { attendees: attendees.map(user.role === 'door' ? forDoor : forStaff), fetchedAt: new Date().toISOString() }
 }

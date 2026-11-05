@@ -43,9 +43,10 @@
  *  6. Test: visit the URL in a browser. You should see {"ok":true,...}.
  *
  * ─── DASHBOARD TOTALS ───────────────────────────────────────────────────────
- * The staff dashboard reads totals through doGet with a private key. The copy
- * of this file in the public repo leaves STATS_KEY blank. Paste the private copy
- * from the founder's computer, then publish a new version as described below.
+ * The staff dashboard reads totals, and the Summit check-in list reads the
+ * rows, through doGet with a private key. The copy of this file in the public
+ * repo leaves STATS_KEY blank. Paste the private copy from the founder's
+ * computer, then publish a new version as described below.
  *
  * ─── IF YOU EVER EDIT THIS SCRIPT ───────────────────────────────────────────
  * Deploy → Manage deployments → pencil → Version: New version → Deploy.
@@ -95,6 +96,7 @@ function json(obj) {
 /** Visiting the deployment URL in a browser hits this — a quick health check. */
 function doGet(e) {
   if (e && e.parameter && e.parameter.stats) return json(stats(e.parameter.stats));
+  if (e && e.parameter && e.parameter.rows) return json(rows(e.parameter.rows));
   return json({ ok: true, status: 'ready', service: 'SWK Summit 2026 registration' });
 }
 
@@ -135,6 +137,25 @@ function doPost(e) {
   } catch (err) {
     return json({ ok: false, error: String(err) });
   }
+}
+
+// ─── Check-in list ────────────────────────────────────────────────────────────
+// Read-only: hands the sheet's rows to the staff dashboard, which keeps the
+// Summit check-in list up to date without anyone downloading a CSV. Needs the
+// same private key as the totals below, so it is off in the public copy.
+
+function rows(key) {
+  if (!STATS_KEY || key !== STATS_KEY) return { ok: false, error: 'not allowed' };
+  var values = SpreadsheetApp.openById(SHEET_ID).getSheets()[0].getDataRange().getValues();
+  var text = function (v) {
+    if (v instanceof Date) return isNaN(v.getTime()) ? '' : v.toISOString();
+    return v === undefined || v === null ? '' : String(v);
+  };
+  return {
+    ok: true,
+    headers: (values[0] || []).map(text),
+    rows: values.slice(1).map(function (row) { return row.map(text); }),
+  };
 }
 
 // ─── Dashboard totals ─────────────────────────────────────────────────────────

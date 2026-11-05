@@ -13,10 +13,18 @@ answer from the registration form, `source` (`online` or `walk-in`),
 `summit.event` holds the event's name, date and venue, the hashed door code and
 its version. Nothing personal is in the repo or the public dataset.
 
-The registration sheet is never written to. The Owner downloads it as CSV and
-uploads it on the Summit screen; the import keeps one person per phone or
-email, with their latest answers and first registration time, and adds only
-people not already on the list, so it can be repeated as registrations come in.
+The registration sheet is never written to. The form's Apps Script hands the
+sheet's rows to the server when asked with the private `REGISTRATION_STATS_KEY`
+(`?rows=<key>`, next to the existing `?stats=`). Whenever the dashboard or a
+door phone fetches the list and the last read is more than three minutes old,
+the server re-reads the sheet and adds anyone new; the Owner can also press
+"Check the sheet now", or upload a CSV downloaded from the sheet. Either way the
+import keeps one person per phone or email, with their latest answers and first
+registration time, and adds only people not already on the list. The event
+document records when the sheet was last read and how it went (`syncAt`,
+`syncState`, `syncRows`, `syncAdded`), and the Summit screen shows that, or the
+set-up step still missing: no key, the old script version, a key mismatch, or
+Google not answering. A failed read never stops the list from loading.
 
 ## The door
 
