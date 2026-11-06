@@ -26,10 +26,10 @@ const DONATE_EMAIL = 'info@swkghana.org'
 const LOGO_URL = 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png'
 
 const CURRENCIES = {
-  GHS: { symbol: 'GH₵', presets: [50, 100, 250, 500] },
-  USD: { symbol: '$', presets: [10, 25, 50, 100] },
-  GBP: { symbol: '£', presets: [10, 25, 50, 100] },
-  EUR: { symbol: '€', presets: [10, 25, 50, 100] },
+  GHS: { symbol: 'GH₵', presets: [100, 250, 500, 1000] },
+  USD: { symbol: '$', presets: [25, 50, 100, 250] },
+  GBP: { symbol: '£', presets: [25, 50, 100, 250] },
+  EUR: { symbol: '€', presets: [25, 50, 100, 250] },
 }
 
 const METHODS = [
@@ -224,9 +224,9 @@ const Donate = () => {
             <h2 className="text-lg font-bold text-gray-900 mb-3">What your gift does</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
             {[
-              { amt: 'GH₵50', impact: 'Sponsors a youth for one webinar session' },
-              { amt: 'GH₵250', impact: 'Funds a community outreach activity' },
-              { amt: 'GH₵500', impact: 'Supports a skills-training workshop' },
+              { amt: 'GH₵100', impact: 'Sponsors a youth for one webinar session' },
+              { amt: 'GH₵500', impact: 'Funds a community outreach activity' },
+              { amt: 'GH₵1,000', impact: 'Supports a skills-training workshop' },
             ].map((i) => (
               <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center lg:text-left">
                 <div className="text-lg font-bold text-[#17702D]">{i.amt}</div>
