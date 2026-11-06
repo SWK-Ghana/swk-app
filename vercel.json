@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/give",
+      "destination": "/donate",
+      "permanent": false
+    },
+    {
       "source": "/marketplace",
       "destination": "https://marketplace.swkghana.org",
       "permanent": false
