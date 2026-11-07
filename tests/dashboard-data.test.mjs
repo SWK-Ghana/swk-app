@@ -56,7 +56,7 @@ test('every role can read the registration totals', async () => {
     const { call, token } = await signedIn({ role })
     const { status, forms } = await call('registrations', { token })
     assert.equal(status, 200)
-    assert.equal(forms.length, 4)
+    assert.equal(forms.length, 5)
     assert.equal(forms[0].total, 40)
   }
 })
