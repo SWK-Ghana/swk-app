@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0C2E11" />
+  <meta name="robots" content="noindex" />
+
+  <title>Feedback | SWK Ghana Agribusiness Summit 2026</title>
+  <meta name="description"
+    content="Three minutes to tell SWK Ghana how the Agribusiness Summit 2026 went for you. Your answers shape the next one." />
+  <link rel="canonical" href="https://swkghana.org/feedback" />
+  <meta name="author" content="SWK Ghana" />
+  <link rel="icon" type="image/png"
+    href="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SWK Ghana" />
+  <meta property="og:locale" content="en_GH" />
+  <meta property="og:title" content="How was the Summit? | SWK Ghana Agribusiness Summit 2026" />
+  <meta property="og:description" content="Three minutes to tell us how it went. Your answers shape the next Summit." />
+  <meta property="og:url" content="https://swkghana.org/feedback" />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:0C2E11,q_auto,f_auto/v1760294682/SWK_LOGO_es585y.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,400..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/patterns/patterns.css" />
+
+  <style>
+    :root {
+      --lime: #78C31E;
+      --lime-hi: #8AD62B;
+      --green-text: #17702D;
+      --green-deep: #123D16;
+      --green-900: #0C2E11;
+      --white: #FFFFFF;
+      --cream: #F7FAF2;
+      --cream-warm: #FBFDF6;
+      --ink: #1C2118;
+      --ink-soft: #4A5346;
+      --font: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --shell: 1200px;
+      --gutter: clamp(1.25rem, 5vw, 3rem);
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --radius: 18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--font); font-size: clamp(1rem, .96rem + .25vw, 1.125rem); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    h1, h2, h3 { font-weight: 800; line-height: 1.06; margin: 0; letter-spacing: -.025em; }
+    p { margin: 0; }
+    img { max-width: 100%; display: block; }
+    [hidden] { display: none !important; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+
+    .shell { width: 100%; max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }
+    .skip { position: absolute; left: 50%; top: 0; transform: translate(-50%, -120%); z-index: 200; background: var(--lime); color: var(--green-deep); font-weight: 700; padding: .75rem 1.25rem; border-radius: 0 0 10px 10px; text-decoration: none; }
+    .skip:focus { transform: translate(-50%, 0); }
+    .eyebrow { display: inline-flex; align-items: center; gap: .7rem; font-size: clamp(.72rem, .68rem + .18vw, .82rem); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.1rem; }
+    .eyebrow::before { content: ""; width: clamp(24px, 5vw, 44px); height: 3px; border-radius: 2px; background: var(--lime); flex: none; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; font-size: clamp(.98rem, .94rem + .2vw, 1.08rem); font-weight: 800; text-decoration: none; border: 0; cursor: pointer; padding: 1.05rem 2.4rem; border-radius: 999px; font-family: inherit; transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease); }
+    .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+    .btn--lime { background: var(--lime); color: var(--green-deep); box-shadow: 0 10px 30px -10px rgba(120, 195, 30, .7); }
+    .btn--lime:hover { background: var(--lime-hi); transform: translateY(-3px); }
+    .btn--ghost { background: transparent; color: var(--green-text); border: 1.5px solid rgba(23, 112, 45, .3); padding: .85rem 1.6rem; box-shadow: none; }
+    .btn--ghost:hover { background: rgba(120, 195, 30, .1); border-color: var(--lime); transform: none; }
+    .btn[disabled] { opacity: .55; cursor: not-allowed; transform: none; }
+
+    .topbar { background: var(--green-900); color: var(--white); }
+    .topbar__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; flex-wrap: wrap; }
+    .lockup { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .lockup img { height: 34px; width: auto; border-radius: 6px; }
+    .lockup span { font-weight: 800; color: var(--white); font-size: 1rem; }
+    .topbar__links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; font-size: .9rem; font-weight: 700; }
+    .topbar__links a { text-decoration: none; color: rgba(255,255,255,.85); display: inline-flex; align-items: center; gap: .4rem; }
+    .topbar__links a:hover { color: var(--lime); }
+    .topbar__links svg { width: 16px; height: 16px; }
+
+    /* Flow, SWK's signature pattern, under a deep green veil. */
+    .hero { position: relative; isolation: isolate; overflow: hidden; background-color: var(--green-900); background-image: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .9) 45%, rgba(12, 46, 17, .72) 100%), url('/patterns/flow.svg'); background-size: auto, 640px auto; color: var(--white); padding-block: clamp(2.5rem, 6vw, 4rem); }
+    .hero::before { content: ""; position: absolute; z-index: -1; top: 0; right: 0; pointer-events: none; width: min(54vw, 760px); aspect-ratio: 4 / 3; background: url('/patterns/kente.svg') right top / contain no-repeat; opacity: .5; }
+    @media (max-width: 899px) { .hero::before { width: 90vw; opacity: .25; } }
+    .hero h1 { color: var(--white); font-size: clamp(2.1rem, 1.5rem + 3vw, 3.3rem); max-width: 16ch; }
+    .hero__lede { color: rgba(255,255,255,.82); max-width: 52ch; margin-top: 1rem; }
+    .hero__facts { display: grid; gap: .6rem; margin-top: 1.5rem; }
+    .hero__fact { display: flex; align-items: flex-start; gap: .65rem; font-size: .95rem; color: rgba(255,255,255,.9); }
+    .hero__fact svg { width: 20px; height: 20px; flex: none; color: var(--lime); margin-top: .1rem; }
+
+    /* Form card: the same system as the Summit registration form. */
+    .reg { background: var(--cream); padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+    .reg__card { max-width: 46rem; margin-inline: auto; background: var(--white); border: 1px solid rgba(23, 112, 45, .16); border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 2.75rem); box-shadow: 0 18px 50px -35px rgba(12, 46, 17, .5); }
+    .reg__progress { display: flex; align-items: center; gap: .6rem; margin-bottom: clamp(1.5rem, 3.5vw, 2rem); }
+    .reg__bar { flex: 1; height: 6px; border-radius: 999px; background: rgba(23, 112, 45, .14); overflow: hidden; }
+    .reg__bar span { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--lime); transition: width .4s var(--ease); }
+    .reg__count { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green-text); flex: none; }
+    .reg__step { display: none; }
+    .reg__step.is-active { display: block; }
+    .reg__step h2 { font-size: clamp(1.25rem, 1.1rem + .6vw, 1.6rem); color: var(--green-text); margin-bottom: .4rem; }
+    .reg__step > p { color: var(--ink-soft); font-size: .95rem; margin-bottom: 1.6rem; }
+
+    .field { margin-bottom: 1.35rem; }
+    .field > label, .field__legend { display: block; font-size: .92rem; font-weight: 700; color: var(--ink); margin-bottom: .45rem; }
+    .field__hint { display: block; font-weight: 500; font-size: .8rem; color: var(--ink-soft); margin-top: .15rem; }
+    .req { color: #B3261E; margin-left: .15rem; }
+    .field input[type="text"], .field textarea { width: 100%; font-family: var(--font); font-size: 1rem; color: var(--ink); background: var(--white); border: 1.5px solid rgba(23, 112, 45, .28); border-radius: 10px; padding: .8rem .9rem; transition: border-color .2s var(--ease), box-shadow .2s var(--ease); }
+    .field textarea { min-height: 5.5rem; resize: vertical; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--lime); box-shadow: 0 0 0 3px rgba(120, 195, 30, .25); }
+    .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #B3261E; }
+    .field__error { display: none; margin-top: .4rem; font-size: .82rem; font-weight: 600; color: #B3261E; }
+    .field.has-error .field__error { display: block; }
+    fieldset.field { border: 0; padding: 0; margin-inline: 0; }
+    .choices { display: grid; gap: .5rem; }
+    .choices--inline { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .choices--inline .choice { flex: 0 1 auto; }
+    .choice { display: flex; align-items: flex-start; gap: .6rem; padding: .7rem .85rem; border: 1.5px solid rgba(23, 112, 45, .22); border-radius: 10px; cursor: pointer; font-size: .93rem; line-height: 1.45; transition: border-color .2s var(--ease), background-color .2s var(--ease); }
+    .choice:hover { border-color: var(--lime); background: rgba(120, 195, 30, .06); }
+    .choice input { margin: .2rem 0 0; accent-color: var(--lime); flex: none; }
+    .choice:has(input:checked) { border-color: var(--lime); background: rgba(120, 195, 30, .12); }
+    .choice:has(input:focus-visible) { outline: 3px solid var(--lime); outline-offset: 2px; }
+
+    /* 1 to 5 scale: five equal boxes, the number is the whole label. */
+    .scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: .45rem; }
+    .scale .choice { position: relative; justify-content: center; align-items: center; padding: .75rem .25rem; font-weight: 800; font-size: 1.05rem; }
+    .scale .choice input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+    .scale__ends { display: flex; justify-content: space-between; font-size: .78rem; color: var(--ink-soft); margin-top: .35rem; }
+    .rate { display: grid; gap: 1rem; margin-bottom: 1.35rem; }
+    .rate .field { margin-bottom: 0; }
+
+    .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+
+    .reg__nav { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; margin-top: clamp(1.5rem, 3.5vw, 2rem); padding-top: clamp(1.25rem, 3vw, 1.6rem); border-top: 1px solid rgba(23, 112, 45, .14); }
+    @media (max-width: 640px) {
+      .reg__nav { position: sticky; bottom: 0; z-index: 3; margin-inline: calc(var(--gutter) * -1); padding: .9rem var(--gutter) max(.9rem, env(safe-area-inset-bottom)); margin-top: 1.25rem; background: var(--cream-warm); box-shadow: 0 -10px 22px -14px rgba(0, 0, 0, .45); }
+      .reg__nav > span { display: none; }
+      .reg__nav .btn { flex: 1 1 auto; justify-content: center; padding-inline: 1rem; }
+    }
+    .reg__status { margin-top: 1rem; font-size: .92rem; font-weight: 600; min-height: 1.4em; }
+    .reg__status.is-error { color: #B3261E; }
+    .reg__done { display: none; text-align: center; padding: clamp(1rem, 3vw, 2rem) 0; }
+    .reg__done.is-active { display: block; }
+    .reg__done .tick { width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; display: grid; place-items: center; background: var(--lime); color: var(--green-deep); }
+    .reg__done .tick svg { width: 32px; height: 32px; }
+    .reg__done h2 { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.9rem); color: var(--green-text); margin-bottom: .6rem; }
+    .reg__done p { color: var(--ink-soft); max-width: 34rem; margin-inline: auto; }
+    .reg__done .links { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: clamp(1.5rem, 3.5vw, 2rem); }
+    .reg__unconfigured { display: none; margin-top: 1.25rem; padding: 1rem 1.15rem; border-radius: 10px; background: #FFF6E5; border: 1.5px solid #E0A82E; color: #6B4E12; font-size: .9rem; font-weight: 600; }
+
+    .footer { background-color: var(--green-900); background-image: linear-gradient(rgba(12, 46, 17, .9), rgba(12, 46, 17, .9)), url('/patterns/flow.svg'); background-size: auto, 640px auto; color: rgba(255, 255, 255, .72); padding-block: clamp(2rem, 5vw, 3rem); font-size: .9rem; }
+    .footer__row { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; }
+    .footer a { color: rgba(255,255,255,.85); text-decoration: none; font-weight: 700; }
+    .footer a:hover { color: var(--lime); }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+  <script src="/visit.js" data-auto defer></script>
+</head>
+
+<body>
+  <a class="skip" href="#feedback-form">Skip to the survey</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="i-clock" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></g>
+      <g id="i-pin" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></g>
+      <g id="i-users" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></g>
+      <g id="i-heart" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></g>
+      <g id="i-arrow-right" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></g>
+    </defs>
+  </svg>
+
+  <main id="main">
+    <div class="topbar">
+      <div class="shell topbar__bar">
+        <a class="lockup" href="https://www.swkghana.org" aria-label="SWK Ghana home">
+          <img src="https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png" alt="SWK Ghana" width="34" height="34" />
+          <span>SWK Ghana</span>
+        </a>
+        <div class="topbar__links">
+          <a href="https://swkghana.org/summit"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users" /></svg>Agribusiness Summit 2026</a>
+          <a href="https://swkghana.org/give"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart" /></svg>Give</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="shell">
+        <p class="eyebrow">SWK Ghana Agribusiness Summit 2026 &middot; From the Ground Up</p>
+        <h1>Thank you for coming. How was it?</h1>
+        <p class="hero__lede">
+          Three minutes, mostly taps. Your answers decide what the next Summit keeps, fixes and adds.
+        </p>
+        <div class="hero__facts">
+          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock" /></svg>About 3 minutes &middot; 3 short pages</span>
+          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pin" /></svg>Saturday 7 November 2026 &middot; The GracedLife Leadership Centre, Ashaley Botwe, Accra</span>
+        </div>
+      </div>
+    </header>
+    <div class="swk-strip" aria-hidden="true"></div>
+
+    <!-- ══ THE SURVEY ══
+         Posts JSON to a Google Apps Script web app, which appends a row to the
+         feedback Sheet. Setup lives in docs/summit-feedback.gs — paste ENDPOINT
+         in the script below once deployed. -->
+    <section class="reg" id="feedback-form" aria-label="Summit feedback survey">
+      <div class="shell">
+        <div class="reg__card">
+          <form id="reg-form" novalidate>
+            <div class="reg__progress" id="reg-progress">
+              <span class="reg__count"><span id="reg-step-num">1</span>&thinsp;/&thinsp;3</span>
+              <span class="reg__bar"><span id="reg-bar"></span></span>
+            </div>
+
+            <!-- Honeypot — never named "company"/"organization" (see summit-2026.html for why). -->
+            <div class="hp" aria-hidden="true">
+              <label>Leave this field blank
+                <input type="text" name="swk_ref" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+
+            <!-- ── Page 1: The Summit ── -->
+            <div class="reg__step is-active" data-step="1">
+              <h2>The Summit</h2>
+              <p>How the day landed, phase by phase.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">Overall, how would you rate the Summit? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="scale">
+                  <label class="choice"><input type="radio" name="overall" value="1" required />1</label>
+                  <label class="choice"><input type="radio" name="overall" value="2" />2</label>
+                  <label class="choice"><input type="radio" name="overall" value="3" />3</label>
+                  <label class="choice"><input type="radio" name="overall" value="4" />4</label>
+                  <label class="choice"><input type="radio" name="overall" value="5" />5</label>
+                </div>
+                <div class="scale__ends" aria-hidden="true"><span>Poor</span><span>Excellent</span></div>
+                <p class="field__error">Please pick a number.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Which parts of the programme did you attend? <span class="req" aria-hidden="true">*</span>
+                  <span class="field__hint">Tick as many as apply.</span>
+                </legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="attended" value="Opening & cultural performance" required /> Opening &amp; cultural performance</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Keynote address" /> Keynote address</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Panel of agribusiness practitioners" /> Panel of agribusiness practitioners</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Live demonstrations" /> Live demonstrations</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Agribusiness Model Canvas workshop" /> Agribusiness Model Canvas workshop</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Youth pitch showcase" /> Youth pitch showcase</label>
+                  <label class="choice"><input type="checkbox" name="attended" value="Networking time" /> Networking time</label>
+                </div>
+                <p class="field__error">Please tick at least one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Which part was the most valuable to you? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="mostValuable" value="Opening & cultural performance" required /> Opening &amp; cultural performance</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Keynote address" /> Keynote address</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Panel of agribusiness practitioners" /> Panel of agribusiness practitioners</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Live demonstrations" /> Live demonstrations</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Agribusiness Model Canvas workshop" /> Agribusiness Model Canvas workshop</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Youth pitch showcase" /> Youth pitch showcase</label>
+                  <label class="choice"><input type="radio" name="mostValuable" value="Networking time" /> Networking time</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <div class="rate">
+                <fieldset class="field">
+                  <legend class="field__legend">Speakers and content <span class="req" aria-hidden="true">*</span></legend>
+                  <div class="scale">
+                    <label class="choice"><input type="radio" name="speakers" value="1" required />1</label>
+                    <label class="choice"><input type="radio" name="speakers" value="2" />2</label>
+                    <label class="choice"><input type="radio" name="speakers" value="3" />3</label>
+                    <label class="choice"><input type="radio" name="speakers" value="4" />4</label>
+                    <label class="choice"><input type="radio" name="speakers" value="5" />5</label>
+                  </div>
+                  <p class="field__error">Please pick a number.</p>
+                </fieldset>
+                <fieldset class="field">
+                  <legend class="field__legend">Organisation and timekeeping <span class="req" aria-hidden="true">*</span></legend>
+                  <div class="scale">
+                    <label class="choice"><input type="radio" name="organisation" value="1" required />1</label>
+                    <label class="choice"><input type="radio" name="organisation" value="2" />2</label>
+                    <label class="choice"><input type="radio" name="organisation" value="3" />3</label>
+                    <label class="choice"><input type="radio" name="organisation" value="4" />4</label>
+                    <label class="choice"><input type="radio" name="organisation" value="5" />5</label>
+                  </div>
+                  <p class="field__error">Please pick a number.</p>
+                </fieldset>
+                <fieldset class="field">
+                  <legend class="field__legend">Venue and facilities <span class="req" aria-hidden="true">*</span></legend>
+                  <div class="scale">
+                    <label class="choice"><input type="radio" name="venue" value="1" required />1</label>
+                    <label class="choice"><input type="radio" name="venue" value="2" />2</label>
+                    <label class="choice"><input type="radio" name="venue" value="3" />3</label>
+                    <label class="choice"><input type="radio" name="venue" value="4" />4</label>
+                    <label class="choice"><input type="radio" name="venue" value="5" />5</label>
+                  </div>
+                  <div class="scale__ends" aria-hidden="true"><span>Poor</span><span>Excellent</span></div>
+                  <p class="field__error">Please pick a number.</p>
+                </fieldset>
+              </div>
+            </div>
+
+            <!-- ── Page 2: Your takeaways ── -->
+            <div class="reg__step" data-step="2">
+              <h2>Your takeaways</h2>
+              <p>What you leave with, in your own words.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">After today, how do you feel about starting or growing an agribusiness? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="confidence" value="Much more confident" required /> Much more confident</label>
+                  <label class="choice"><input type="radio" name="confidence" value="A little more confident" /> A little more confident</label>
+                  <label class="choice"><input type="radio" name="confidence" value="About the same" /> About the same</label>
+                  <label class="choice"><input type="radio" name="confidence" value="Less confident" /> Less confident</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Did you build an Agribusiness Model Canvas in the workshop? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="canvas" value="Yes, I completed one" required /> Yes, I completed one</label>
+                  <label class="choice"><input type="radio" name="canvas" value="I started one" /> I started one</label>
+                  <label class="choice"><input type="radio" name="canvas" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <div class="field">
+                <label for="f-next">One thing you will do in the next 30 days because of the Summit <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="f-next" name="nextStep" rows="2" required></textarea>
+                <p class="field__error">One line is enough.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-improve">What should we improve next time? <span class="field__hint">(Optional, but the most useful box on this page)</span></label>
+                <textarea id="f-improve" name="improve" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- ── Page 3: Stay connected ── -->
+            <div class="reg__step" data-step="3">
+              <h2>Stay connected</h2>
+              <p>What you want from SWK Ghana next, and how to reach you.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">What support would you like from SWK Ghana after the Summit?
+                  <span class="field__hint">Tick as many as apply.</span>
+                </legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="support" value="Agribusiness e-Academy courses" /> Free online courses on the Agribusiness e-Academy</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Mentorship" /> Mentorship from a practitioner</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Fellowship or incubation" /> A fellowship or incubation programme</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Links to funding" /> Links to funding or investors</label>
+                  <label class="choice"><input type="checkbox" name="support" value="WhatsApp community" /> Join the SWK Ghana WhatsApp community</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Volunteer" /> Volunteer with SWK Ghana</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Nothing for now" /> Nothing for now</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Would you recommend the Summit to a friend? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="recommend" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="recommend" value="Maybe" /> Maybe</label>
+                  <label class="choice"><input type="radio" name="recommend" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <div class="field">
+                <label for="f-name">Your name <span class="field__hint">(Optional. Leave blank to answer anonymously.)</span></label>
+                <input id="f-name" name="fullName" type="text" autocomplete="name" />
+              </div>
+
+              <div class="field">
+                <label for="f-contact">Phone or email <span class="field__hint">(Optional. Lets us match your answers to your registration and follow up on the support you ticked.)</span></label>
+                <input id="f-contact" name="contact" type="text" autocomplete="off" inputmode="email" />
+              </div>
+
+              <fieldset class="field">
+                <legend class="field__legend">Permissions</legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="consentQuote" value="Yes" /> You may quote my feedback publicly, with my first name only.</label>
+                  <label class="choice"><input type="checkbox" name="consentContact" value="Yes" /> SWK Ghana may contact me about follow-up programmes.</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="reg__nav">
+              <button type="button" class="btn btn--ghost" id="reg-back" hidden>&larr; Back</button>
+              <span style="flex:1"></span>
+              <button type="button" class="btn btn--lime" id="reg-next">
+                Continue
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </button>
+              <button type="submit" class="btn btn--lime" id="reg-submit" hidden>
+                Send my feedback
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
+              </button>
+            </div>
+
+            <p class="reg__status" id="reg-status" role="status" aria-live="polite"></p>
+            <p class="reg__unconfigured" id="reg-unconfigured">
+              The survey is not connected yet. In the meantime, send your feedback to
+              <a href="mailto:info@swkghana.org">info@swkghana.org</a>.
+            </p>
+          </form>
+
+          <div class="reg__done" id="reg-done">
+            <div class="tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m20 6-11 11-5-5" />
+              </svg>
+            </div>
+            <h2>Thank you.</h2>
+            <p>
+              Your feedback is in, and it will shape the next Summit. Keep the conversation going in the
+              SWK Ghana WhatsApp community, and start a free course on the Agribusiness e-Academy whenever you are ready.
+            </p>
+            <div class="links">
+              <a class="btn btn--lime" href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu" target="_blank" rel="noopener noreferrer">Join the WhatsApp community</a>
+              <a class="btn btn--ghost" href="https://online.atingi.org/auth/emailgiz/referral.php?code=YUj5viM2aQzzJdV" target="_blank" rel="noopener noreferrer">Agribusiness e-Academy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="swk-strip" aria-hidden="true"></div>
+  <footer class="footer">
+    <div class="shell footer__row">
+      <p>&copy; <span id="year">2026</span> SWK Ghana LBG &middot; <a href="mailto:info@swkghana.org">info@swkghana.org</a></p>
+      <p><a href="https://www.swkghana.org">swkghana.org</a> &middot; <a href="https://swkghana.org/summit">Agribusiness Summit 2026</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var y = document.getElementById('year');
+      if (y) y.textContent = String(new Date().getFullYear());
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Paste the Apps Script Web app URL here once deployed (docs/summit-feedback.gs).
+      // While this is empty the survey can be walked through but refuses to send, and says so.
+      var ENDPOINT = '';
+
+      var form = document.getElementById('reg-form');
+      var TOTAL = 3;
+      var current = 1;
+      var steps = form.querySelectorAll('.reg__step');
+      var backBtn = document.getElementById('reg-back');
+      var nextBtn = document.getElementById('reg-next');
+      var submitBtn = document.getElementById('reg-submit');
+      var statusEl = document.getElementById('reg-status');
+      var bar = document.getElementById('reg-bar');
+      var stepNum = document.getElementById('reg-step-num');
+      var doneEl = document.getElementById('reg-done');
+      var unconfiguredEl = document.getElementById('reg-unconfigured');
+
+      var showStep = function (n) {
+        current = Math.min(TOTAL, Math.max(1, n));
+        steps.forEach(function (s) { s.classList.toggle('is-active', Number(s.dataset.step) === current); });
+        stepNum.textContent = current;
+        bar.style.width = (current / TOTAL) * 100 + '%';
+        backBtn.hidden = current === 1;
+        nextBtn.hidden = current === TOTAL;
+        submitBtn.hidden = current !== TOTAL;
+        statusEl.textContent = '';
+        statusEl.classList.remove('is-error');
+      };
+
+      var wrapOf = function (el) { return el.closest('.field'); };
+      var clearError = function (el) { var w = wrapOf(el); if (w) w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); };
+      var markError = function (el) { var w = wrapOf(el); if (w) w.classList.add('has-error'); el.setAttribute('aria-invalid', 'true'); };
+
+      // Validates only the visible page. A required radio/checkbox group counts
+      // as answered when any option in it is selected.
+      var validateStep = function () {
+        var step = form.querySelector('.reg__step[data-step="' + current + '"]');
+        var controls = step.querySelectorAll('input, textarea');
+        var seenGroup = {};
+        var firstBad = null;
+        controls.forEach(function (el) {
+          if (!el.required || el.disabled) return;
+          if (el.type === 'radio' || el.type === 'checkbox') {
+            if (seenGroup[el.name]) return;
+            seenGroup[el.name] = true;
+            var group = form.querySelectorAll('input[name="' + el.name + '"]');
+            var picked = Array.prototype.some.call(group, function (r) { return r.checked; });
+            if (!picked) { markError(el); if (!firstBad) firstBad = el; } else clearError(el);
+            return;
+          }
+          if (String(el.value || '').trim() === '') { markError(el); if (!firstBad) firstBad = el; } else clearError(el);
+        });
+        if (firstBad) {
+          statusEl.textContent = 'Please check the highlighted question' + (form.querySelectorAll('.has-error').length > 1 ? 's' : '') + '.';
+          statusEl.classList.add('is-error');
+          var w = wrapOf(firstBad);
+          (w || firstBad).scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+          return false;
+        }
+        return true;
+      };
+
+      form.addEventListener('input', function (e) { clearError(e.target); });
+      form.addEventListener('change', function (e) { clearError(e.target); });
+
+      var toFormTop = function () { form.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' }); };
+      nextBtn.addEventListener('click', function () { if (!validateStep()) return; showStep(current + 1); toFormTop(); });
+      backBtn.addEventListener('click', function () { showStep(current - 1); toFormTop(); });
+      form.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' || e.target.tagName === 'TEXTAREA') return;
+        if (current < TOTAL) { e.preventDefault(); nextBtn.click(); }
+      });
+
+      var collect = function () {
+        var data = {};
+        var fd = new FormData(form);
+        fd.forEach(function (value, key) {
+          if (data[key] === undefined) data[key] = value;
+          else if (Array.isArray(data[key])) data[key].push(value);
+          else data[key] = [data[key], value];
+        });
+        ['attended', 'support'].forEach(function (k) { if (data[k] && !Array.isArray(data[k])) data[k] = [data[k]]; });
+        data.company = data.swk_ref || '';
+        delete data.swk_ref;
+        data.source = window.location.href;
+        return data;
+      };
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateStep()) return;
+        if (!ENDPOINT) {
+          unconfiguredEl.style.display = 'block';
+          statusEl.textContent = '';
+          unconfiguredEl.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+          return;
+        }
+        submitBtn.disabled = true;
+        backBtn.disabled = true;
+        statusEl.classList.remove('is-error');
+        statusEl.textContent = 'Sending…';
+        fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(collect()) })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (!res || res.ok !== true) throw new Error((res && res.error) || 'rejected');
+            form.style.display = 'none';
+            doneEl.classList.add('is-active');
+            toFormTop();
+          })
+          .catch(function (err) {
+            submitBtn.disabled = false;
+            backBtn.disabled = false;
+            statusEl.classList.add('is-error');
+            statusEl.innerHTML = 'Sorry, that did not go through. Please try again, or email <a href="mailto:info@swkghana.org" style="color:inherit">info@swkghana.org</a>.';
+            console.warn('Feedback submit failed:', err);
+          });
+      });
+
+      showStep(1);
+    })();
+  </script>
+</body>
+
+</html>
