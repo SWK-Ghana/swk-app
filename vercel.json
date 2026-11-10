@@ -38,6 +38,10 @@
       "destination": "/summit-feedback.html"
     },
     {
+      "source": "/speaker-feedback",
+      "destination": "/summit-speaker-feedback.html"
+    },
+    {
       "source": "/partners",
       "destination": "/summit-call-for-partners.html"
     },
