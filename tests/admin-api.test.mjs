@@ -97,7 +97,7 @@ test('roles reach only what they should', async () => {
     ['receipts.record', { no: 'SWK-2026-0100', issued: '2026-11-02', receipt: RECEIPT }, ['owner']],
     ['receipts.issue', { receipt: RECEIPT }, ['owner', 'finance']],
     ['receipts.list', {}, ['owner', 'finance']],
-    ['signature.get', {}, ['owner', 'finance']],
+    ['signature.get', {}, ['owner', 'finance', 'content']],
     ['create', { doc: { _type: 'post', title: 't' } }, ['owner', 'content']],
     ['overview', {}, ['owner', 'finance', 'content', 'viewer']],
   ]

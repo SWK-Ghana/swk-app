@@ -5,6 +5,7 @@ export const fakeStore = () => {
   const docs = new Map()
   const visits = new Map()
   const attendees = new Map()
+  const certificates = new Map()
   let event = null
   let signature = null
   let campaign = null
@@ -34,6 +35,21 @@ export const fakeStore = () => {
       receipts.set(doc.no, { ...doc })
     },
     async patchReceipt(no, set) { receipts.set(no, { ...receipts.get(no), ...set }) },
+
+    certificates,
+    listCertificates: async () => [...certificates.values()].sort((a, b) => (a.no < b.no ? 1 : -1)),
+    getCertificate: async (no) => certificates.get(no) || null,
+    certificateNumbers: async (series) => [...certificates.keys()].filter((no) => no.startsWith(`${series}-`)),
+    async createCertificate(doc) {
+      if (this.raceOnce > 0) {
+        this.raceOnce -= 1
+        certificates.set(doc.no, { ...doc, name: 'Someone else' })
+        throw conflict()
+      }
+      if (certificates.has(doc.no)) throw conflict()
+      certificates.set(doc.no, { ...doc })
+    },
+    async patchCertificate(no, set) { certificates.set(no, { ...certificates.get(no), ...set }) },
 
     getSignature: async () => signature,
     async setSignature(v) { signature = v },

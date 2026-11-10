@@ -12,13 +12,14 @@
     "sync:socials": "node scripts/sync-socials.mjs",
     "build:spa": "vite build",
     "lint": "eslint .",
-    "test": "node --test tests/admin-api.test.mjs tests/dashboard-data.test.mjs tests/form-scripts.test.mjs tests/summit.test.mjs tests/summit-sync.test.mjs tests/subscribe.test.mjs",
+    "test": "node --test tests/admin-api.test.mjs tests/dashboard-data.test.mjs tests/form-scripts.test.mjs tests/summit.test.mjs tests/summit-sync.test.mjs tests/subscribe.test.mjs tests/certificates.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "@sanity/client": "^7.20.0",
     "@sanity/image-url": "^1.2.0",
     "gh-pages": "^6.3.0",
+    "qrcode": "^1.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",

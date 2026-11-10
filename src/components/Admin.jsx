@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {
-  LuChartColumn, LuClipboardList, LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuShieldCheck, LuStore, LuTicketCheck, LuUsers,
+  LuAward, LuChartColumn, LuClipboardList, LuFileText, LuLayoutDashboard, LuLogOut, LuReceiptText, LuShieldCheck, LuStore, LuTicketCheck, LuUsers,
 } from 'react-icons/lu'
 import Seo from './Seo'
 import { FlowStrip } from './Patterns'
 import { SESSION_EXPIRED_EVENT, clearSession, getMe, getSession } from '../utils/adminApi'
 import AdminLogin, { ChangePasswordForm } from './admin/AdminLogin'
+import Certificates from './admin/Certificates'
 import Overview from './admin/Overview'
 import Quality from './admin/Quality'
 import Receipts from './admin/Receipts'
@@ -23,6 +24,7 @@ const EVERYONE = ['owner', 'finance', 'content', 'viewer']
 const SCREENS = [
   { id: 'overview', label: 'Overview', icon: LuLayoutDashboard, roles: EVERYONE, Screen: Overview },
   { id: 'summit', label: 'Summit check-in', icon: LuTicketCheck, roles: EVERYONE, Screen: Summit },
+  { id: 'certificates', label: 'Certificates', icon: LuAward, roles: ['owner', 'finance', 'content'], Screen: Certificates },
   { id: 'registrations', label: 'Registrations', icon: LuClipboardList, roles: EVERYONE, Screen: Registrations },
   { id: 'website', label: 'Website visitors', icon: LuChartColumn, roles: EVERYONE, Screen: Website },
   { id: 'quality', label: 'Quality checks', icon: LuShieldCheck, roles: EVERYONE, Screen: Quality },

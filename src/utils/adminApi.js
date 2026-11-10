@@ -68,6 +68,15 @@ export const recordReceipt = async (no, issued, receipt) => (await call('receipt
 export const updateReceipt = async (no, receipt) => (await call('receipts.update', { no, receipt })).receipt
 export const cancelReceipt = (no, reason) => call('receipts.cancel', { no, reason })
 export const getSignature = async () => (await call('signature.get')).dataUri
+
+// Certificates
+export const listCertificates = async () => (await call('certificates.list')).certificates
+export const issueCertificate = async (certificate) => (await call('certificates.issue', { certificate })).certificate
+export const issueCertificates = (items) => call('certificates.issueMany', { items })
+export const updateCertificate = async (no, fields) => (await call('certificates.update', { no, fields })).certificate
+export const revokeCertificate = (no, reason) => call('certificates.revoke', { no, reason })
+/** The public page's lookup: no sign-in, full id (number and key) required. */
+export const getPublicCertificate = (id) => call('certificate.get', { id })
 export const setSignature = (dataUri) => call('signature.set', { dataUri })
 
 // Summit check-in

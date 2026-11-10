@@ -48,6 +48,12 @@ export const sanityStore = (token) => {
     getCampaign: () => query('*[_id == $id][0]{name, purpose, target, seatPrice, seats, deadline}', { id: CAMPAIGN_ID }),
     setCampaign: (data) => mutate([{ createOrReplace: { _id: CAMPAIGN_ID, _type: 'adminCampaign', ...data } }]),
 
+    listCertificates: () => query('*[_type == "certificate"] | order(no desc)'),
+    getCertificate: (no) => query('*[_id == $id][0]', { id: `cert.${no}` }),
+    certificateNumbers: (series) => query('*[_type == "certificate" && string::startsWith(no, $prefix)].no', { prefix: `${series}-` }),
+    createCertificate: (doc) => mutate([{ create: { _id: `cert.${doc.no}`, _type: 'certificate', ...doc } }]),
+    patchCertificate: (no, set) => mutate([{ patch: { id: `cert.${no}`, set } }]),
+
     listAttendees: () => query('*[_type == "summitAttendee"] | order(name asc)'),
     getAttendee: (id) => query('*[_type == "summitAttendee" && _id == $id][0]', { id }),
     createAttendees: (docs) => mutate(docs.map((doc) => ({ createIfNotExists: doc }))),

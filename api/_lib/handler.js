@@ -7,6 +7,7 @@ import { registrations } from './registrations.js'
 import { visitors } from './visits.js'
 import { quality } from './quality.js'
 import * as summit from './summit.js'
+import * as certificates from './certificates.js'
 
 // Only these document types may be created through the content tools.
 const ALLOWED_TYPES = ['post', 'marketplaceProduct']
@@ -37,11 +38,15 @@ const content = {
   },
 }
 
-const PUBLIC_ACTIONS = { status: accounts.status, setup: accounts.setup, login: accounts.login, 'door.login': summit.doorLogin }
+const PUBLIC_ACTIONS = {
+  status: accounts.status, setup: accounts.setup, login: accounts.login, 'door.login': summit.doorLogin,
+  'certificate.get': certificates.publicCertificate,
+}
 
 const OWNER = ['owner']
 const MONEY = ['owner', 'finance']
 const EDITORS = ['owner', 'content']
+const STAFF = ['owner', 'finance', 'content']
 const EVERYONE = accounts.ROLES
 // The door team signs in with the event code and sees only the check-in tools.
 const DOOR = ['door', ...EVERYONE]
@@ -77,7 +82,12 @@ const ACTIONS = {
   'receipts.update': [MONEY, receipts.updateReceipt],
   'receipts.cancel': [MONEY, receipts.cancelReceipt],
   'receipts.record': [OWNER, receipts.recordReceipt],
-  'signature.get': [MONEY, receipts.getSignature],
+  'signature.get': [STAFF, receipts.getSignature],
+  'certificates.list': [EVERYONE, certificates.listCertificates],
+  'certificates.issue': [STAFF, certificates.issueCertificate],
+  'certificates.issueMany': [STAFF, certificates.issueCertificates],
+  'certificates.update': [STAFF, certificates.updateCertificate],
+  'certificates.revoke': [OWNER, certificates.revokeCertificate],
   'signature.set': [OWNER, receipts.setSignature],
   'campaign.set': [OWNER, receipts.setCampaign],
 
