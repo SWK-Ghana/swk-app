@@ -124,15 +124,17 @@ const seal = (year) => `
 export const certificateHtml = (c, { signature = null, origin = '', qr = null } = {}) => {
   const event = c.event || 'SWK Ghana Agribusiness Summit 2026'
   const eventName = /^SWK Ghana/i.test(event) ? event : `SWK Ghana ${event}`
-  const deed = (DEEDS[c.role] || DEEDS.participant).replace('{event}', eventName)
+  // The citation, with the event's name set in bold.
+  const [before, after] = (DEEDS[c.role] || DEEDS.participant).split('{event}')
+  const deed = `${esc(before)}<b>${esc(eventName)}</b>${esc(after)}`
   const link = verifyUrl(c, 'https://swkghana.org').replace(/^https?:\/\//, '')
   const year = (c.eventDate || '2026').slice(0, 4)
   const name = c.name || 'Name of recipient'
-  const nameClass = name.length > 34 ? ' name--xs' : name.length > 24 ? ' name--s' : ''
+  const nameClass = name.length > 36 ? ' name--xxs' : name.length > 28 ? ' name--xs' : name.length > 20 ? ' name--s' : ''
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>${esc(certificateFileName(c))}</title>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,400..600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,400..600&family=League+Spartan:wght@500..900&display=swap" rel="stylesheet">
 <style>
   :root { --deep: #0C2E11; --green: #17702D; --lime: #78C31E; --gold: #E9A23B; --ink: #1C2A1E; --soft: #5B665C; }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -140,57 +142,60 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
   body { font-family: 'Figtree', system-ui, sans-serif; color: var(--ink); }
   .cert { position: relative; width: 297mm; height: 210mm; display: grid; grid-template-columns: 58mm 1fr; overflow: hidden; contain: strict; background: #fff; }
 
-  /* The kente band, edged in gold and lime. */
+  /* The kente band, edged in deep green and lime. */
   .band { position: relative; background: ${INK}; border-right: 1mm solid var(--deep); box-shadow: 1.2mm 0 0 var(--lime); }
   .kente { display: block; width: 100%; height: 100%; }
-  .seal { position: absolute; z-index: 2; left: 58mm; top: 50mm; width: 31mm; height: 31mm; transform: translateX(-50%); }
 
-  .page { position: relative; display: flex; flex-direction: column; padding: 11mm 14mm 7mm 22mm; min-width: 0; }
-  .top { display: flex; justify-content: space-between; align-items: center; gap: 8mm; }
-  .logo { width: 37mm; height: auto; display: block; }
-  .partners { text-align: right; }
-  .partners p { font-size: 6.6pt; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); margin-bottom: 1.2mm; }
-  .partners div { display: flex; align-items: center; justify-content: flex-end; gap: 4mm; }
+  /* Everything on the sheet is centred inside a fine frame. */
+  .page { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 13mm 17mm 9mm 18.2mm; min-width: 0; }
+  .page::before { content: ""; position: absolute; inset: 5.5mm 5.5mm 5.5mm 6.7mm; border: .35mm solid #C5CFC3; pointer-events: none; }
+
+  /* SWK's logo and the partners' logos stand together as one row. */
+  .top { display: flex; align-items: center; justify-content: center; gap: 6mm; }
+  .logo { width: 35mm; height: auto; display: block; }
+  .top i { width: .35mm; align-self: stretch; background: #C5CFC3; margin: 1mm 0; }
+  .partners p { font-size: 6.4pt; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); margin-bottom: 1mm; text-align: left; }
+  .partners div { display: flex; align-items: center; gap: 4.5mm; }
   /* The crops carry the flyer's off-white ground; lifting it to white hides the box. */
-  .partners img { height: 13mm; width: auto; display: block; filter: brightness(1.05); }
+  .partners img { height: 12.5mm; width: auto; display: block; filter: brightness(1.05); }
 
-  .main { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; padding: 2mm 0; }
-  .eyebrow { display: flex; align-items: center; gap: 2.5mm; font-size: 8.6pt; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--green); }
-  .eyebrow::before { content: ""; width: 11mm; height: .8mm; border-radius: 1mm; background: var(--lime); }
+  .main { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2mm 0; width: 100%; }
+  .eyebrow { display: flex; align-items: center; gap: 3mm; font-size: 8.4pt; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--green); }
+  .eyebrow::before, .eyebrow::after { content: ""; width: 10mm; height: .7mm; border-radius: 1mm; background: var(--lime); }
   .eyebrow span { color: var(--soft); font-weight: 600; letter-spacing: .16em; }
-  .title { margin-top: 2.5mm; font-size: 55pt; font-weight: 900; line-height: .95; letter-spacing: .015em; text-transform: uppercase; color: var(--green); }
-  .kind { margin-top: 2mm; font-size: 19pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--deep); }
-  .presented { margin-top: 6.5mm; font-size: 9.5pt; font-weight: 500; font-style: italic; letter-spacing: .14em; text-transform: uppercase; color: var(--soft); }
-  .name { margin-top: .5mm; font-family: 'Great Vibes', 'Figtree', cursive; font-size: 50pt; font-weight: 400; line-height: 1.2; color: var(--deep); white-space: nowrap; overflow: hidden; text-overflow: clip; padding: 0 1mm; }
-  .name--s { font-size: 41pt; } .name--xs { font-size: 32pt; }
-  .name.blank { font-family: 'Figtree', sans-serif; font-size: 22pt; font-weight: 500; color: #9AA39B; line-height: 2.4; }
-  .underline { height: 1.1pt; background: var(--deep); margin-top: -1mm; }
-  .detail { margin-top: 2mm; font-size: 10pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
-  .deed { margin-top: 4mm; max-width: 188mm; font-size: 11.6pt; font-style: italic; line-height: 1.55; color: var(--ink); }
-  .held { margin-top: 5mm; display: flex; align-items: center; gap: 4mm; flex-wrap: wrap; }
-  .held b { background: var(--green); color: #fff; font-size: 10.5pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 2.2mm 4.5mm; }
+  .title { margin-top: 3.5mm; font-family: 'League Spartan', 'Figtree', sans-serif; font-size: 50pt; font-weight: 800; line-height: .9; letter-spacing: .05em; text-transform: uppercase; color: var(--green); }
+  .kind { margin-top: 1.5mm; font-family: 'League Spartan', 'Figtree', sans-serif; font-size: 17pt; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; color: var(--deep); padding-left: .34em; }
+  .presented { margin-top: 6mm; font-size: 9pt; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); }
+  .name { margin-top: 2.5mm; font-family: 'League Spartan', 'Figtree', sans-serif; font-size: 40pt; font-weight: 700; line-height: 1.1; letter-spacing: -.005em; color: var(--deep); white-space: nowrap; max-width: 100%; overflow: hidden; }
+  .name--s { font-size: 34pt; } .name--xs { font-size: 28pt; } .name--xxs { font-size: 22pt; }
+  .name.blank { font-weight: 500; font-size: 26pt; color: #A6AEA6; }
+  .underline { width: 150mm; height: .5mm; background: var(--lime); margin-top: 1.5mm; }
+  .detail { margin-top: 2.2mm; font-size: 9.6pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
+  .deed { margin-top: 4mm; max-width: 172mm; font-size: 11.4pt; line-height: 1.55; color: var(--ink); }
+  .deed b { font-weight: 700; color: var(--deep); }
+  .held { margin-top: 5mm; display: flex; align-items: center; justify-content: center; gap: 4mm; flex-wrap: wrap; }
+  .held b { background: var(--green); color: #fff; font-size: 10pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 2mm 4.5mm; }
   .held span { font-size: 10pt; font-weight: 500; color: var(--soft); }
 
-  /* Signature, number and QR sit on one baseline: every block is a 15mm
-     stage, a rule, then two label lines, and the QR is exactly as tall. */
-  .foot { display: flex; align-items: flex-end; gap: 8mm; }
+  /* Signature, seal, number and QR stand together on one baseline: each
+     lettered block is a 15mm stage, a rule, then two label lines, and the
+     seal and QR are exactly as tall as those blocks. */
+  .foot { display: flex; align-items: flex-end; justify-content: center; gap: 7mm; text-align: left; }
   .blk { flex: none; }
   .blk .stage { height: 15mm; display: flex; align-items: flex-end; }
   .blk .rule { height: .4mm; background: var(--deep); margin-bottom: 1.6mm; }
   .blk .l1 { height: 4.6mm; line-height: 4.6mm; font-size: 10.5pt; font-weight: 800; color: var(--deep); white-space: nowrap; }
   .blk .l2 { height: 4mm; line-height: 4mm; font-size: 8.4pt; font-weight: 500; color: var(--soft); white-space: nowrap; }
-  .sig { width: 50mm; }
+  .sig { width: 52mm; }
   .sig img { display: block; height: 19mm; width: auto; margin: 0 0 -2.6mm 1mm; }
-  .num { width: 44mm; }
-  .num .stage span { font-size: 14.5pt; font-weight: 800; letter-spacing: .03em; color: var(--deep); line-height: 1; padding-bottom: 1.6mm; white-space: nowrap; }
-  .scan { display: flex; align-items: flex-end; gap: 3.5mm; }
-  .scan > img, .scan > .qrbox { width: 25.6mm; height: 25.6mm; display: block; flex: none; }
-  .scan > .qrbox { border: .4mm dashed #B9C2BA; }
-  .scan .blk .stage { height: 15mm; }
-  .scan .blk .rule { background: transparent; }
-  .scan .blk .l2 { font-size: 7.8pt; }
+  .num { width: 48mm; }
+  .num .stage span { font-family: 'League Spartan', 'Figtree', sans-serif; font-size: 16pt; font-weight: 700; letter-spacing: .04em; color: var(--deep); line-height: 1; padding-bottom: .8mm; white-space: nowrap; }
+  .seal, .qr { flex: none; width: 25.6mm; height: 25.6mm; display: block; }
+  .qr--blank { border: .4mm dashed #B9C2BA; }
 
-  .legal { margin-top: 4.5mm; padding-top: 2.2mm; border-top: 1px solid #DCE2D6; font-size: 6.9pt; line-height: 1.4; color: var(--soft); }
+  .verify { margin-top: 4mm; font-size: 8pt; font-weight: 500; color: var(--soft); }
+  .verify b { color: var(--deep); font-weight: 700; }
+  .legal { margin-top: 1.2mm; font-size: 6.7pt; line-height: 1.4; color: var(--soft); }
   .legal b { color: var(--deep); }
   .void { position: absolute; inset: 0; display: grid; place-items: center; font-size: 60pt; font-weight: 900; letter-spacing: .1em; color: rgba(185, 28, 28, .25); transform: rotate(-18deg); pointer-events: none; }
   @page { size: 297mm 210mm; margin: 0; }
@@ -198,10 +203,10 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
 <body>
 <article class="cert">
   <div class="band">${kenteBand()}</div>
-  ${seal(year)}
   <div class="page">
     <header class="top">
       <img class="logo" src="${esc(origin)}/brand/swk-logo.svg" alt="SWK Ghana">
+      <i></i>
       <div class="partners">
         <p>In partnership with</p>
         <div>${PARTNERS.map((p) => `<img src="${esc(p.src)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ratio.toFixed(3)}">`).join('')}</div>
@@ -215,7 +220,7 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
       <div class="name${c.name ? nameClass : ' blank'}">${esc(name)}</div>
       <div class="underline"></div>
       ${c.detail ? `<div class="detail">${esc(c.detail)}</div>` : ''}
-      <p class="deed">${esc(deed)}</p>
+      <p class="deed">${deed}</p>
       <p class="held"><b>Held on ${esc(fullDate(c.eventDate))}</b><span>${esc(c.venue || '')}</span></p>
     </section>
     <footer class="foot">
@@ -225,22 +230,16 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
         <div class="l1">Frank Koomson</div>
         <div class="l2">Founder, SWK Ghana</div>
       </div>
+      ${seal(year)}
       <div class="blk num">
         <div class="stage"><span>${esc(c.no || 'SWK-AS26-····')}</span></div>
         <div class="rule"></div>
         <div class="l1">Certificate number</div>
         <div class="l2">${c.no ? `Issued ${esc(fullDate(c.issued).replace(/^\w+, /, ''))}` : 'Given when the certificate is issued'}</div>
       </div>
-      <div class="scan">
-        ${qr ? `<img src="${esc(qr)}" alt="QR code linking to the verification page">` : '<div class="qrbox"></div>'}
-        <div class="blk">
-          <div class="stage"></div>
-          <div class="rule"></div>
-          <div class="l1">Scan to verify</div>
-          <div class="l2">${c.no ? esc(link) : 'The link appears once issued'}</div>
-        </div>
-      </div>
+      ${qr ? `<img class="qr" src="${esc(qr)}" alt="QR code linking to the verification page">` : '<div class="qr qr--blank"></div>'}
     </footer>
+    <p class="verify">${c.no ? `Scan the code to verify this certificate, or visit <b>${esc(link)}</b>` : 'The verification code and link appear once the certificate is issued'}</p>
     <p class="legal"><b>SWK Ghana LBG</b> · Registered non-profit company limited by guarantee · Reg. No. CG024110426 · NPO Licence No. NPOS/GR01/LN04158/26 · info@swkghana.org · swkghana.org</p>
     ${c.status === 'revoked' ? '<div class="void">REVOKED</div>' : ''}
   </div>
