@@ -265,7 +265,23 @@ const Summit = ({ user }) => {
     }
   }
   const printReport = () => report && printReceipt(reportHtml(report, { origin: window.location.origin }), reportFileName(report)).catch((err) => setError(err.message))
-  const exportCsv = () => downloadFile(`swk-summit-attendees-${new Date().toISOString().slice(0, 10)}.csv`, toCsv([CSV_COLUMNS, ...people.map((p) => CSV_COLUMNS.map((c) => p[c] ?? ''))]))
+  // Both follow the list on screen: choose "Checked in" first to get only the people who came.
+  const narrowed = filter !== 'all' || search.trim() !== ''
+  const exportCsv = () => downloadFile(
+    `swk-summit-${narrowed ? `${filter === 'all' ? 'search' : filter}-` : 'attendees-'}${new Date().toISOString().slice(0, 10)}.csv`,
+    toCsv([CSV_COLUMNS, ...shown.map((p) => CSV_COLUMNS.map((c) => p[c] ?? ''))]),
+  )
+  const copyEmails = async () => {
+    const emails = [...new Set(shown.map((p) => p.email).filter(Boolean))]
+    const without = shown.filter((p) => !p.email).length
+    setError('')
+    try {
+      await navigator.clipboard.writeText(emails.join(', '))
+      setNotice(`${emails.length} email address${emails.length === 1 ? '' : 'es'} copied${without ? `; ${without} of the people shown gave no email` : ''}. Paste them into the BCC line so recipients do not see each other.`)
+    } catch {
+      setError('Copying is blocked in this browser. Use Download CSV instead; the emails are in the third column.')
+    }
+  }
 
   if (error && !data) return <Notice>{error}</Notice>
   if (!data) return <Loading />
@@ -278,7 +294,7 @@ const Summit = ({ user }) => {
       <PageTitle title={event.name} subtitle={`${longDate(event.date)} · ${event.venue}. Check people in here or at swkghana.org/checkin.`}>
         <div className="flex flex-wrap gap-2">
           <button onClick={load} className={quietButtonClass}><LuRefreshCw aria-hidden="true" /> Refresh</button>
-          <button onClick={exportCsv} disabled={!people.length} className={quietButtonClass}><LuDownload aria-hidden="true" /> Download CSV</button>
+          <button onClick={exportCsv} disabled={!shown.length} className={quietButtonClass}><LuDownload aria-hidden="true" /> {narrowed ? `Download these ${shown.length}` : 'Download CSV'}</button>
         </div>
       </PageTitle>
 
@@ -326,6 +342,7 @@ const Summit = ({ user }) => {
             <button key={id} onClick={() => setFilter(id)} className={`rounded-full border px-3 py-1 text-sm font-medium ${filter === id ? 'border-[#0C2E11] bg-[#0C2E11] text-white' : 'border-gray-300 bg-white text-gray-700'}`}>{label}</button>
           ))}
           <span className="self-center text-sm text-gray-500">{shown.length} shown</span>
+          {shown.length > 0 && <button onClick={copyEmails} className="self-center text-sm font-semibold text-[#17702D] underline">Copy their emails</button>}
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] text-left text-sm">
