@@ -173,9 +173,8 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
   .detail { margin-top: 2.2mm; font-size: 9.6pt; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
   .deed { margin-top: 4mm; max-width: 172mm; font-size: 11.4pt; line-height: 1.55; color: var(--ink); }
   .deed b { font-weight: 700; color: var(--deep); }
-  .held { margin-top: 5mm; display: flex; align-items: center; justify-content: center; gap: 4mm; flex-wrap: wrap; }
-  .held b { background: var(--green); color: #fff; font-size: 10pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 2mm 4.5mm; }
-  .held span { font-size: 10pt; font-weight: 500; color: var(--soft); }
+  .deed { text-wrap: balance; }
+  .deed + .deed { margin-top: 1.2mm; max-width: 198mm; }
 
   /* Signature, seal, number and QR stand together on one baseline: each
      lettered block is a 15mm stage, a rule, then two label lines, and the
@@ -221,7 +220,7 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
       <div class="underline"></div>
       ${c.detail ? `<div class="detail">${esc(c.detail)}</div>` : ''}
       <p class="deed">${deed}</p>
-      <p class="held"><b>Held on ${esc(fullDate(c.eventDate))}</b><span>${esc(c.venue || '')}</span></p>
+      <p class="deed"><b>Held on ${esc(fullDate(c.eventDate))}</b>${c.venue ? ` at ${esc(c.venue)}` : ''}.</p>
     </section>
     <footer class="foot">
       <div class="blk sig">
