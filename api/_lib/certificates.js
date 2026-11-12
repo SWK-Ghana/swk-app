@@ -27,15 +27,27 @@ const randomKey = () => {
   return [...bytes].map((b) => KEY_ALPHABET[b % KEY_ALPHABET.length]).join('')
 }
 
+/**
+ * A name typed all in lower case or all in capitals, set as a name: "ama
+ * owusu-ansah" and "AMA OWUSU-ANSAH" both become "Ama Owusu-Ansah". A name
+ * that already mixes cases is left exactly as written.
+ */
+export const tidyName = (name) => {
+  const letters = name.replace(/[^\p{L}]/gu, '')
+  if (!letters || (letters !== letters.toLowerCase() && letters !== letters.toUpperCase())) return name
+  return name.toLowerCase().replace(/(^|[\s\-'’.(])(\p{L})/gu, (_, before, letter) => before + letter.toUpperCase())
+}
+
 // Only these fields ever reach a certificate, so numbers, status and authorship can't be forged.
 const cleanCertificate = (input = {}) => {
-  const name = text(input.name, 120)
+  const attendeeId = text(input.attendeeId, 40).replace(/[^a-z0-9.]/gi, '')
+  // Names from the registration form arrive as people typed them; names staff type are theirs to spell.
+  const name = attendeeId ? tidyName(text(input.name, 120)) : text(input.name, 120)
   if (!name || name.length > 120) fail(400, "Enter the person's name, up to 120 characters.")
   const role = String(input.role || '').trim()
   if (!ROLES.includes(role)) fail(400, 'Choose a role for the certificate.')
   const detail = text(input.detail, 140)
   if (detail.length > 140) fail(400, 'Keep the detail line under 140 characters.')
-  const attendeeId = text(input.attendeeId, 40).replace(/[^a-z0-9.]/gi, '')
   return { name, role, detail, attendeeId }
 }
 

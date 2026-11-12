@@ -52,14 +52,15 @@ const DEEDS = {
   partner: 'in appreciation of partnering with SWK Ghana to deliver the {event}, making a free Summit for young people in agribusiness possible.',
 }
 
-// The Summit's partners, as they appear on the Summit page (crops of the flyer).
+// The Summit's partners, as they appear on the Summit page: crops of the flyer,
+// with the flyer's off-white ground turned white so no box shows on the sheet.
 const FLYER = 'https://res.cloudinary.com/dwgj3lovn/image/upload'
 const PARTNERS = [
   ['The GracedLife Leadership Centre', 'c_crop,x_1018,y_121,w_168,h_168', 1],
   ['Agribusiness e-Academy', 'c_crop,x_1246,y_133,w_245,h_146', 245 / 146],
   ['Calidad Farms Ltd', 'c_crop,x_1538,y_150,w_305,h_106', 305 / 106],
   ['The Food Discourse', 'c_crop,x_1888,y_122,w_160,h_160', 1],
-].map(([name, crop, ratio]) => ({ name, ratio, src: `${FLYER}/${crop}/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png` }))
+].map(([name, crop, ratio]) => ({ name, ratio, src: `${FLYER}/${crop}/e_replace_color:white:12:F7F7F4/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png` }))
 
 export const titleFor = (role) => `Certificate ${kindFor(role)}`
 
@@ -168,8 +169,7 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
   .top i { width: .35mm; align-self: stretch; background: #C5CFC3; margin: 1mm 0; }
   .partners p { font-size: 6.4pt; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); margin-bottom: 1mm; text-align: left; }
   .partners div { display: flex; align-items: center; gap: 4.5mm; }
-  /* The crops carry the flyer's off-white ground; lifting it to white hides the box. */
-  .partners img { height: 12.5mm; width: auto; display: block; filter: brightness(1.05); }
+  .partners img { height: 12.5mm; width: auto; display: block; }
 
   .main { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2mm 0; width: 100%; }
   .eyebrow { display: flex; align-items: center; gap: 3mm; font-size: 8.4pt; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--green); }

@@ -133,3 +133,21 @@ test('a bulk issue keeps going when someone else is issuing at the same time', a
   assert.deepEqual(r.issued.map((c) => c.no), ['SWK-AS26-0009', 'SWK-AS26-0010', 'SWK-AS26-0011'])
   assert.equal(new Set([...store.certificates.keys()]).size, 11)
 })
+
+test('names from the registration list are set as names; names staff type are left alone', async () => {
+  const { tidyName } = await import('../api/_lib/certificates.js')
+  assert.equal(tidyName('jonathan kwarteng'), 'Jonathan Kwarteng')
+  assert.equal(tidyName('AMA OWUSU-ANSAH'), 'Ama Owusu-Ansah')
+  assert.equal(tidyName("n.k. o'brien"), "N.K. O'Brien")
+  assert.equal(tidyName('Abena de Graft-Johnson'), 'Abena de Graft-Johnson')
+  assert.equal(tidyName('McCarthy Mensah'), 'McCarthy Mensah')
+
+  const { call, owner } = await harness()
+  const r = await call('certificates.issueMany', {
+    token: owner,
+    items: [{ name: 'esi   test', role: 'participant', attendeeId: 'a1' }, { name: 'KOFI TEST', role: 'participant', attendeeId: 'a2' }],
+  })
+  assert.deepEqual(r.issued.map((c) => c.name), ['Esi Test', 'Kofi Test'])
+  const typed = await call('certificates.issue', { token: owner, certificate: { name: 'GIZ', role: 'partner' } })
+  assert.equal(typed.certificate.name, 'GIZ')
+})

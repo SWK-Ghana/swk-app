@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { LuAward, LuCopy, LuDownload, LuPrinter, LuSearch } from 'react-icons/lu'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { LuAward, LuCopy, LuDownload, LuFileArchive, LuPrinter, LuSearch } from 'react-icons/lu'
 import {
   getSignature, getSummitEvent, issueCertificate, issueCertificates, listAttendees, listCertificates, revokeCertificate, updateCertificate,
 } from '../../utils/adminApi'
@@ -7,6 +7,7 @@ import { Field, Loading, Notice, PageTitle, Panel, buttonClass, inputClass, quie
 import { printReceipt } from './receiptTemplate'
 import { ROLE_LABELS, certificateFileName, certificateHtml, fullDate, qrFor, verifyUrl } from './certificateTemplate'
 import CertificatePreview from './CertificatePreview'
+import { exportCertificatesZip } from './certificateExport'
 import { downloadFile, toCsv } from './summitShared'
 
 const EMPTY = { name: '', role: 'participant', detail: '' }
@@ -42,6 +43,9 @@ const Certificates = ({ user }) => {
   const [picked, setPicked] = useState(() => new Set())
   const [pickSearch, setPickSearch] = useState('')
   const [onlyCheckedIn, setOnlyCheckedIn] = useState(true)
+  const [roleFilter, setRoleFilter] = useState('all')
+  const [zip, setZip] = useState(null) // { done, total } while PDFs are being made
+  const stopZip = useRef(false)
   const isOwner = user.role === 'owner'
   const origin = window.location.origin
 
@@ -157,8 +161,37 @@ const Certificates = ({ user }) => {
 
   const shown = useMemo(() => {
     const term = search.trim().toLowerCase()
-    return (certs || []).filter((c) => !term || `${c.no} ${c.name} ${ROLE_LABELS[c.role] || ''} ${c.detail || ''}`.toLowerCase().includes(term))
-  }, [certs, search])
+    return (certs || [])
+      .filter((c) => roleFilter === 'all' || c.role === roleFilter)
+      .filter((c) => !term || `${c.no} ${c.name} ${ROLE_LABELS[c.role] || ''} ${c.detail || ''}`.toLowerCase().includes(term))
+  }, [certs, search, roleFilter])
+  const rolesInUse = useMemo(() => Object.keys(ROLE_LABELS).filter((r) => (certs || []).some((c) => c.role === r)), [certs])
+  const zippable = useMemo(() => shown.filter((c) => c.status === 'issued').sort((a, b) => (a.no < b.no ? -1 : 1)), [shown])
+
+  // Every certificate in the table as its own PDF, in one ZIP. Revoked ones are left out.
+  const downloadZip = async () => {
+    setError('')
+    setNotice('')
+    stopZip.current = false
+    setZip({ done: 0, total: zippable.length })
+    try {
+      const result = await exportCertificatesZip(zippable, {
+        signature, origin, onProgress: (done, total) => setZip({ done, total }), shouldStop: () => stopZip.current,
+      })
+      if (!result) { setNotice('Download stopped. Nothing was saved.'); return }
+      const label = roleFilter === 'all' ? 'certificates' : `${roleFilter}-certificates`
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(result.blob)
+      a.download = `swk-summit-2026-${label}-${new Date().toISOString().slice(0, 10)}.zip`
+      a.click()
+      setTimeout(() => URL.revokeObjectURL(a.href), 60000)
+      setNotice(`${result.count} PDF${result.count === 1 ? '' : 's'} saved in one ZIP file. Look in your Downloads folder.`)
+    } catch (err) {
+      setError(`The ZIP could not be made: ${err.message}`)
+    } finally {
+      setZip(null)
+    }
+  }
 
   if (error && !certs) return <Notice>{error}</Notice>
   if (!certs) return <Loading />
@@ -262,17 +295,36 @@ const Certificates = ({ user }) => {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-bold text-[#0C2E11]">All certificates</h2>
-            <p className="text-sm text-gray-600">{certs.length} issued</p>
+            <p className="text-sm text-gray-600">{certs.length} issued{shown.length !== certs.length ? ` · ${shown.length} shown` : ''}</p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <label>
+              <span className="sr-only">Show one role</span>
+              <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} className={inputClass}>
+                <option value="all">All roles</option>
+                {rolesInUse.map((r) => <option key={r} value={r}>{ROLE_LABELS[r]}</option>)}
+              </select>
+            </label>
             <label className="relative">
               <span className="sr-only">Search certificates</span>
               <LuSearch className="absolute left-3 top-3 text-gray-400" aria-hidden="true" />
               <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Name, number or role" className={`${inputClass} pl-9`} />
             </label>
             <button onClick={exportCsv} disabled={!certs.length} className={quietButtonClass}><LuDownload aria-hidden="true" /> Export with links</button>
+            <button onClick={downloadZip} disabled={!!zip || !zippable.length} className={buttonClass}>
+              <LuFileArchive aria-hidden="true" /> {zip ? `Making PDF ${Math.min(zip.done + 1, zip.total)} of ${zip.total}…` : `Download ${zippable.length} as PDFs (ZIP)`}
+            </button>
+            {zip && <button onClick={() => { stopZip.current = true }} className={quietButtonClass}>Stop</button>}
           </div>
         </div>
+        {zip && (
+          <div className="mb-3">
+            <div className="h-2 overflow-hidden rounded-full bg-gray-200" role="progressbar" aria-valuemin={0} aria-valuemax={zip.total} aria-valuenow={zip.done} aria-label="Making the PDFs">
+              <div className="h-full bg-[#78C31E] transition-[width]" style={{ width: `${zip.total ? (zip.done / zip.total) * 100 : 0}%` }} />
+            </div>
+            <p className="mt-1 text-xs text-gray-600">Keep this tab open. Each certificate takes a second or two.</p>
+          </div>
+        )}
         {shown.length === 0 ? (
           <p className="py-6 text-center text-sm text-gray-500">{certs.length ? 'No certificates match that search.' : 'No certificates yet.'}</p>
         ) : (
