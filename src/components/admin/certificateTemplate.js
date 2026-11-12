@@ -60,7 +60,10 @@ const PARTNERS = [
   ['Agribusiness e-Academy', 'c_crop,x_1246,y_133,w_245,h_146', 245 / 146],
   ['Calidad Farms Ltd', 'c_crop,x_1538,y_150,w_305,h_106', 305 / 106],
   ['The Food Discourse', 'c_crop,x_1888,y_122,w_160,h_160', 1],
-].map(([name, crop, ratio]) => ({ name, ratio, src: `${FLYER}/${crop}/e_replace_color:white:12:F7F7F4/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png` }))
+].map(([name, crop, ratio]) => ({ name, ratio, src: `${FLYER}/${crop}/e_replace_color:white:12:F7F7F4/f_auto,q_auto/v1790846227/SummitFlyer-selection_5_zshe0n.png` })).concat([
+  // Partners whose logos are not on the flyer, served from the site itself.
+  { name: 'Rotaract Club of Accra Ring Road Central', ratio: 823 / 266, path: '/brand/partners/rotaract-accra-ring-road-central.png' },
+])
 
 export const titleFor = (role) => `Certificate ${kindFor(role)}`
 
@@ -220,7 +223,7 @@ export const certificateHtml = (c, { signature = null, origin = '', qr = null } 
       <i></i>
       <div class="partners">
         <p>In partnership with</p>
-        <div>${PARTNERS.map((p) => `<img src="${esc(p.src)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ratio.toFixed(3)}">`).join('')}</div>
+        <div>${PARTNERS.map((p) => `<img src="${esc(p.src || `${origin}${p.path}`)}" alt="${esc(p.name)}" style="aspect-ratio:${p.ratio.toFixed(3)}">`).join('')}</div>
       </div>
     </header>
     <section class="main">
