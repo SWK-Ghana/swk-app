@@ -8,7 +8,10 @@ import { fail } from './errors.js'
 import { DEFAULT_EVENT } from './summit.js'
 
 export const SERIES = 'SWK-AS26' // Agribusiness Summit 2026
-export const ROLES = ['participant', 'volunteer', 'keynote', 'panellist', 'workshop', 'demonstration', 'judge', 'partner']
+export const ROLES = [
+  'participant', 'volunteer', 'panellist', 'moderator', 'spotlight', 'panelspot', 'workshop',
+  'goodwill', 'solidarity', 'performer', 'keynote', 'demonstration', 'judge', 'partner',
+]
 const NUMBER = new RegExp(`^${SERIES}-\\d{4}$`)
 const PUBLIC_ID = new RegExp(`^(${SERIES}-\\d{4})-([A-HJ-NP-Z2-9]{4})$`)
 const KEY_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // no 0/O or 1/I to misread
