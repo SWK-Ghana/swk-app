@@ -42,6 +42,10 @@
       "destination": "/summit-speaker-feedback.html"
     },
     {
+      "source": "/mentorship",
+      "destination": "/summit-mentorship.html"
+    },
+    {
       "source": "/partners",
       "destination": "/summit-call-for-partners.html"
     },

@@ -6,7 +6,7 @@ import vm from 'node:vm'
 
 const KEY = 'test-key'
 const DAY_MS = 24 * 60 * 60 * 1000
-const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application']
+const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application', 'summit-mentorship']
 
 // Loads a script with the key filled in. `sheet` records any attempt to change it.
 const load = (file, rows, key = KEY) => {
