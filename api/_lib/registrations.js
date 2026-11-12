@@ -8,6 +8,7 @@ export const FORMS = [
   { id: 'partners', name: 'Summit partners', url: script('AKfycbxiyaBhVtDEOtYfcoa3FWkMEg-7sD3LaSSdvBz0p25HRfsZsCvY7jOJy8jFoBk8BKTo') },
   { id: 'pitch', name: 'Elevator Pitch Workshop', url: script('AKfycbyevrLSaUWhtZRlJS65og3t8fnlYLj-xIR6-ObooQbHo6DYV9IYBbY_xLQdkowq0tsk') },
   { id: 'feedback', name: 'Summit feedback', url: script('AKfycbwdwun0tcLkKGm2HfWWjO3ZjmRzUfXbGM-nG08BK-9S8OkIc2WoSalDpJgQeMXYoMAD7A') },
+  { id: 'mentorship', name: 'Mentorship requests', url: script('AKfycbw2nWywX4y50eirUYCKGmZ9j7XTGj2GDIybsKdOTe2aNLNrkLuRU6ZkdMn6PRKQk_JfGg') },
 ]
 
 const TIMEOUT_MS = 8000
