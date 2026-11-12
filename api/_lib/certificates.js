@@ -15,7 +15,7 @@ export const ROLES = [
 const NUMBER = new RegExp(`^${SERIES}-\\d{4}$`)
 const PUBLIC_ID = new RegExp(`^(${SERIES}-\\d{4})-([A-HJ-NP-Z2-9]{4})$`)
 const KEY_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // no 0/O or 1/I to misread
-const NUMBER_RETRIES = 5
+const NUMBER_RETRIES = 12
 const MAX_BATCH = 300
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 
@@ -58,11 +58,16 @@ const eventFields = async (store) => {
   return { event: e.name, eventDate: e.date, venue: e.venue }
 }
 
-/** Gives one cleaned certificate the next free number. */
-const numberAndSave = async (store, user, clean, ev) => {
+/**
+ * Gives one cleaned certificate the next free number. `floor` is the highest
+ * number already known to be taken: when someone else issues at the same
+ * moment, each lost race raises it, so the next try never asks for a number
+ * that has just been refused.
+ */
+const numberAndSave = async (store, user, clean, ev, floor = 0) => {
   for (let attempt = 0; attempt < NUMBER_RETRIES; attempt++) {
     const used = await store.certificateNumbers(SERIES)
-    const next = Math.max(0, ...used.map((no) => parseInt(no.split('-')[2], 10) || 0)) + 1
+    const next = Math.max(floor, ...used.map((no) => parseInt(no.split('-')[2], 10) || 0)) + 1
     const cert = {
       ...clean,
       ...ev,
@@ -78,10 +83,12 @@ const numberAndSave = async (store, user, clean, ev) => {
       return cert
     } catch (err) {
       if (err.status !== 409) throw err
+      floor = next
     }
   }
   fail(503, 'Could not get a certificate number. Please try again.')
 }
+const numberOf = (cert) => parseInt(cert.no.split('-')[2], 10) || 0
 
 export const issueCertificate = async ({ store, user, body }) => {
   const clean = cleanCertificate(body.certificate)
@@ -105,10 +112,12 @@ export const issueCertificates = async ({ store, user, body }) => {
   const ev = await eventFields(store)
   const issued = []
   let skipped = 0
+  let last = 0
   for (const clean of cleaned) {
     const keys = [`n:${clean.name.toLowerCase()}:${clean.role}`, clean.attendeeId && `a:${clean.attendeeId}:${clean.role}`].filter(Boolean)
     if (keys.some((k) => held.has(k))) { skipped++; continue }
-    const cert = await numberAndSave(store, user, clean, ev)
+    const cert = await numberAndSave(store, user, clean, ev, last)
+    last = numberOf(cert)
     keys.forEach((k) => held.add(k))
     issued.push(forStaff(cert))
   }

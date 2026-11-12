@@ -119,3 +119,17 @@ test('corrections keep the number; roles reach only what they should', async () 
   assert.equal((await call('signature.get', { token: content })).status, 200, 'content staff can fetch the signature to print')
   assert.equal((await call('signature.get', { token: viewer })).status, 403)
 })
+
+test('a bulk issue keeps going when someone else is issuing at the same time', async () => {
+  const { call, owner, store } = await harness()
+  // Another person takes the next number just before each of the first eight tries.
+  store.raceOnce = 8
+  const r = await call('certificates.issueMany', {
+    token: owner,
+    items: [{ name: 'Ama Test', role: 'participant' }, { name: 'Kofi Test', role: 'participant' }, { name: 'Esi Test', role: 'volunteer' }],
+  })
+  assert.equal(r.status, 200)
+  assert.equal(r.issued.length, 3)
+  assert.deepEqual(r.issued.map((c) => c.no), ['SWK-AS26-0009', 'SWK-AS26-0010', 'SWK-AS26-0011'])
+  assert.equal(new Set([...store.certificates.keys()]).size, 11)
+})
