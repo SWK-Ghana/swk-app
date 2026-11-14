@@ -8,7 +8,7 @@
 
   <title>Agribusiness Summit 2026: What Happened | SWK Ghana</title>
   <meta name="description"
-    content="SWK Ghana's first in-person Agribusiness Summit, 7 November 2026 in Accra: 138 registrations, 13 speakers and facilitators, 6 partners, and a room of young people mapping agribusinesses of their own. The day in photos, numbers and voices." />
+    content="SWK Ghana's first in-person Agribusiness Summit, 7 November 2026 in Accra: 138 registrations, 62 people on the day, 13 speakers and facilitators, 6 partners, and a room of young people mapping agribusinesses of their own. The day in photos, numbers and voices." />
   <link rel="canonical" href="https://swkghana.org/reports/agribusiness-summit-2026" />
   <meta name="author" content="SWK Ghana" />
   <link rel="icon" type="image/png"
@@ -180,6 +180,21 @@
     .voice--wide .voice__name { color: var(--green-deep); }
     .voice--wide .voice__role { color: var(--green-deep); opacity: .8; }
 
+    /* ── Key takeaways ─────────────────────────────────────────────────── */
+    .lessons { list-style: none; counter-reset: lesson; display: grid; gap: clamp(.8rem, 2vw, 1.1rem); }
+    @media (min-width: 900px) { .lessons { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+    .lessons li { counter-increment: lesson; background: var(--cream-warm); border: 1px solid var(--line); border-top: 5px solid var(--lime); border-radius: var(--radius); padding: 1.2rem 1.15rem; }
+    .lessons li::before { content: counter(lesson, decimal-leading-zero); display: block; font-size: .78rem; font-weight: 800; letter-spacing: .14em; color: var(--green-text); margin-bottom: .45rem; }
+    .lessons h3 { font-size: 1.05rem; color: var(--green-deep); letter-spacing: -.01em; line-height: 1.25; }
+    .lessons p { font-size: .92rem; color: var(--ink-soft); margin-top: .45rem; line-height: 1.55; }
+    .notes { display: grid; gap: clamp(.8rem, 2vw, 1.1rem); margin-top: clamp(1.25rem, 3vw, 2rem); }
+    @media (min-width: 720px) { .notes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1000px) { .notes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .note { border-left: 4px solid var(--lime); padding: .2rem 0 .2rem 1.05rem; }
+    .note h3 { font-size: 1.02rem; color: var(--green-deep); letter-spacing: -.01em; }
+    .note p { font-size: .93rem; color: var(--ink-soft); margin-top: .3rem; line-height: 1.55; }
+    .note span { display: block; font-size: .8rem; font-weight: 700; color: var(--green-text); margin-top: .4rem; }
+
     /* ── Who was in the room ───────────────────────────────────────────── */
     .room { display: grid; gap: clamp(1rem, 2.5vw, 1.5rem); }
     @media (min-width: 900px) { .room { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -341,17 +356,17 @@
         <div class="stats">
           <div class="stat"><p class="stat__value">138</p><p class="stat__label">registrations</p></div>
           <div class="stat"><p class="stat__value">62</p><p class="stat__label">people in the room on the day</p></div>
+          <div class="stat"><p class="stat__value">35</p><p class="stat__label">young participants</p></div>
           <div class="stat"><p class="stat__value">13</p><p class="stat__label">speakers and facilitators</p></div>
           <div class="stat"><p class="stat__value">6</p><p class="stat__label">partner organisations</p></div>
           <div class="stat"><p class="stat__value">11</p><p class="stat__label">volunteers</p></div>
-          <div class="stat"><p class="stat__value">96%</p><p class="stat__label">of checked-in attendees aged 18 to 35</p></div>
         </div>
         <p class="stats__note">
-          Figures come from the Summit's registration form and the door check-in. Of the 138 registrations, 123 came in online before the day and 15 at the entrance.
-          Sixty-two people took part on the day: 48 were checked in at the door, and three speakers, eight members
-          of the SWK Ghana team, one volunteer, our photographer and one guest did not go through check-in. Twelve of the thirteen speakers and facilitators
-          were there in person; one sent a recorded message. Age is based on the 46
-          attendees who gave it: 44 were between 18 and 35, and the median age was 27.
+          How we count: 138 registrations came in, 123 online before the day and 15 at the entrance.
+          Sixty-two people were in the room: 35 participants, 12 speakers and facilitators, 6 volunteers,
+          7 members of the SWK Ghana team, our photographer and one guest. Forty-eight of them were checked in
+          at the door; the other fourteen are counted from the team's own records. One speaker sent a recorded
+          message. Two of the eleven volunteers also spoke on the programme, so they are counted with the speakers.
         </p>
       </div>
     </section>
@@ -437,9 +452,9 @@
               <ul class="chapter__people">
                 <li><b>Samuel Yeboah</b>, Country Director, Dream Renewables &middot; solar-powered irrigation</li>
                 <li><b>Tracey Rama Osman Tia</b> &middot; drones in agriculture</li>
-                <li><b>Mrs Sheila Cornelius</b>, CEO, Lam Naturals; Managing Director, Cornelius Farms</li>
-                <li><b>Wendy Dumelo</b>, CEO and Co-Founder, JERO Foods</li>
-                <li><b>Jonathan Kwarteng</b>, Founder and CEO, Farmer Hut, Ada</li>
+                <li><b>Mrs Sheila Cornelius</b>, CEO, Lam Naturals; Managing Director, Cornelius Farms &middot; training young people, value addition and agri-tourism</li>
+                <li><b>Wendy Dumelo</b>, CEO and Co-Founder, JERO Foods &middot; mushroom farming in Nsawam</li>
+                <li><b>Jonathan Kwarteng</b>, Founder and CEO, Farmer Hut, Ada &middot; tomato and rabbit farming</li>
               </ul>
             </div>
           </article>
@@ -535,6 +550,32 @@
       </div>
     </section>
 
+    <!-- ── Key takeaways (from Lawrencia Owusu's session notes) ──────── -->
+    <section class="section section--white" id="takeaways">
+      <div class="shell">
+        <div class="section__head">
+          <p class="eyebrow">Key takeaways</p>
+          <h2>Five lessons the room heard again and again.</h2>
+          <p>Drawn from notes taken on the day by Lawrencia Owusu, one of our volunteers.</p>
+        </div>
+        <ol class="lessons">
+          <li><h3>Agribusiness is farming run as a business.</h3><p>Production becomes agribusiness when profit and technology are built in.</p></li>
+          <li><h3>The technology is ready; uptake is slow.</h3><p>Drones, farm-data tools and solar irrigation are available. Many farmers have not adopted them because of a knowledge gap.</p></li>
+          <li><h3>Records and readiness unlock funding.</h3><p>Farmers who keep no records struggle to get finance. Lenders look for businesses that are business-ready and funding-ready.</p></li>
+          <li><h3>The biggest gaps are the biggest openings.</h3><p>Post-harvest loss, market linkage and funding were named as the main problems, and each is a business, for example working as an aggregator between farmers and buyers.</p></li>
+          <li><h3>Start small and add value.</h3><p>Choose a niche, test which products sell fastest, and add value through drying, powders and processing.</p></li>
+        </ol>
+        <div class="notes">
+          <div class="note"><h3>Drones in agriculture</h3><p>Drones apply fertiliser, spray seeds and collect data on farm health. Commercial use needs both drone registration and a pilot licence.</p><span>Tracey Rama Osman Tia</span></div>
+          <div class="note"><h3>Solar-powered irrigation</h3><p>Have an expert assess your needs before investing. Shared irrigation lowers the cost for each farmer, and where you farm matters: land from illegal mining can contaminate crops.</p><span>Dream Renewables</span></div>
+          <div class="note"><h3>Value addition and agri-tourism</h3><p>Keep records, because no records means no funding. Dried fruit and processed products pay, and farm stays are a growing idea.</p><span>Cornelius Farms</span></div>
+          <div class="note"><h3>Mushroom farming</h3><p>Ghana's climate suits oyster mushrooms. Mushroom powder, dried mushrooms and mushroom bread are in demand.</p><span>JERO Foods</span></div>
+          <div class="note"><h3>Choose your niche</h3><p>Production, processing or selling: pick one, start small, and build skills in data. Volunteer to gain experience and keep an opportunity tracker.</p><span>The panel</span></div>
+          <div class="note"><h3>One page, one business</h3><p>Every business needs a Business Model Canvas, and each part of the canvas feeds the others. Value chains discussed included cashew, cocoa, maize and livestock.</p><span>Agribusiness e-Academy</span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ── Who was in the room ───────────────────────────────────────── -->
     <section class="section" id="room">
       <div class="shell">
@@ -542,54 +583,56 @@
           <p class="eyebrow">Who was in the room</p>
           <h2>Young, mixed, and already doing something.</h2>
           <p>
-            What the 48 people who checked in told us when they registered. They are students, workers
-            and business owners, and one in three already runs a venture.
+            What the 35 participants told us when they registered. They are students, workers and business
+            owners, and nearly half already run a venture. Speakers, volunteers and the team are not included here.
           </p>
         </div>
 
         <div class="room">
           <div class="card">
             <h3>What they do now</h3>
-            <p class="card__hint">48 people</p>
+            <p class="card__hint">35 participants</p>
             <ul class="bars">
-              <li><span>Employed</span><span class="bars__n">15</span><span class="bars__track"><span style="--w:100%"></span></span></li>
-              <li><span>Students</span><span class="bars__n">11</span><span class="bars__track"><span style="--w:73.3%"></span></span></li>
-              <li><span>Self-employed</span><span class="bars__n">8</span><span class="bars__track"><span style="--w:53.3%"></span></span></li>
-              <li><span>Running a business</span><span class="bars__n">8</span><span class="bars__track"><span style="--w:53.3%"></span></span></li>
-              <li><span>Looking for work</span><span class="bars__n">6</span><span class="bars__track"><span style="--w:40%"></span></span></li>
+              <li><span>Students</span><span class="bars__n">11</span><span class="bars__track"><span style="--w:100%"></span></span></li>
+              <li><span>Employed</span><span class="bars__n">11</span><span class="bars__track"><span style="--w:100%"></span></span></li>
+              <li><span>Self-employed</span><span class="bars__n">7</span><span class="bars__track"><span style="--w:63.6%"></span></span></li>
+              <li><span>Running a business</span><span class="bars__n">4</span><span class="bars__track"><span style="--w:36.4%"></span></span></li>
+              <li><span>Looking for work</span><span class="bars__n">2</span><span class="bars__track"><span style="--w:18.2%"></span></span></li>
             </ul>
           </div>
           <div class="card">
             <h3>What they came for</h3>
-            <p class="card__hint">People could choose more than one</p>
+            <p class="card__hint">35 participants; they could choose more than one</p>
             <ul class="bars">
-              <li><span>Networking</span><span class="bars__n">27</span><span class="bars__track"><span style="--w:100%"></span></span></li>
-              <li><span>Business ideas</span><span class="bars__n">25</span><span class="bars__track"><span style="--w:92.6%"></span></span></li>
-              <li><span>Practical skills</span><span class="bars__n">21</span><span class="bars__track"><span style="--w:77.8%"></span></span></li>
-              <li><span>Mentorship</span><span class="bars__n">20</span><span class="bars__track"><span style="--w:74.1%"></span></span></li>
-              <li><span>Market linkages</span><span class="bars__n">19</span><span class="bars__track"><span style="--w:70.4%"></span></span></li>
-              <li><span>Funding</span><span class="bars__n">17</span><span class="bars__track"><span style="--w:63%"></span></span></li>
+              <li><span>Business ideas</span><span class="bars__n">24</span><span class="bars__track"><span style="--w:100%"></span></span></li>
+              <li><span>Networking</span><span class="bars__n">23</span><span class="bars__track"><span style="--w:95.8%"></span></span></li>
+              <li><span>Practical skills</span><span class="bars__n">20</span><span class="bars__track"><span style="--w:83.3%"></span></span></li>
+              <li><span>Mentorship</span><span class="bars__n">16</span><span class="bars__track"><span style="--w:66.7%"></span></span></li>
+              <li><span>Market linkages</span><span class="bars__n">16</span><span class="bars__track"><span style="--w:66.7%"></span></span></li>
+              <li><span>Funding</span><span class="bars__n">15</span><span class="bars__track"><span style="--w:62.5%"></span></span></li>
             </ul>
           </div>
           <div class="card">
             <h3>Where their interest lies</h3>
-            <p class="card__hint">Main area of interest, 46 answers</p>
+            <p class="card__hint">Main area of interest, 35 participants</p>
             <ul class="bars">
-              <li><span>Crop production</span><span class="bars__n">15</span><span class="bars__track"><span style="--w:100%"></span></span></li>
-              <li><span>Marketing, sales and export</span><span class="bars__n">9</span><span class="bars__track"><span style="--w:60%"></span></span></li>
-              <li><span>Agri-tech</span><span class="bars__n">8</span><span class="bars__track"><span style="--w:53.3%"></span></span></li>
-              <li><span>Finance</span><span class="bars__n">6</span><span class="bars__track"><span style="--w:40%"></span></span></li>
-              <li><span>Agro-processing</span><span class="bars__n">5</span><span class="bars__track"><span style="--w:33.3%"></span></span></li>
-              <li><span>Livestock</span><span class="bars__n">3</span><span class="bars__track"><span style="--w:20%"></span></span></li>
+              <li><span>Crop production</span><span class="bars__n">9</span><span class="bars__track"><span style="--w:100%"></span></span></li>
+              <li><span>Marketing, sales and export</span><span class="bars__n">8</span><span class="bars__track"><span style="--w:88.9%"></span></span></li>
+              <li><span>Agri-tech</span><span class="bars__n">6</span><span class="bars__track"><span style="--w:66.7%"></span></span></li>
+              <li><span>Finance and investment</span><span class="bars__n">4</span><span class="bars__track"><span style="--w:44.4%"></span></span></li>
+              <li><span>Livestock and poultry</span><span class="bars__n">3</span><span class="bars__track"><span style="--w:33.3%"></span></span></li>
+              <li><span>Agro-processing</span><span class="bars__n">3</span><span class="bars__track"><span style="--w:33.3%"></span></span></li>
+              <li><span>Other</span><span class="bars__n">2</span><span class="bars__track"><span style="--w:22.2%"></span></span></li>
             </ul>
           </div>
         </div>
 
         <div class="facts">
-          <div class="fact"><p class="fact__n">20 women, 28 men</p><p class="fact__t">Women were 42% of the people who checked in.</p></div>
-          <div class="fact"><p class="fact__n">17 run a venture</p><p class="fact__t">More than one in three attendees already has a business or project of their own.</p></div>
-          <div class="fact"><p class="fact__n">60 already in agribusiness</p><p class="fact__t">Of the 138 who registered, 60 said they already work in the sector.</p></div>
+          <div class="fact"><p class="fact__n">40% women</p><p class="fact__t">14 women and 21 men took part as participants.</p></div>
+          <div class="fact"><p class="fact__n">94% aged 18 to 35</p><p class="fact__t">32 of the 34 participants who gave their age. The median age was 26.</p></div>
+          <div class="fact"><p class="fact__n">16 run a venture</p><p class="fact__t">Nearly half of participants already have a business or project of their own.</p></div>
         </div>
+        <p class="stats__note">Of all 138 registrations, 52 were from women and 124 of the 136 who gave their age were 18 to 35; 60 said they already work in agribusiness.</p>
       </div>
     </section>
 
@@ -635,9 +678,9 @@
             <p class="lesson__n">01</p>
             <h3>The demand is there</h3>
             <p>
-              138 people registered for a first in-person Summit, 60 of them already working in
-              agribusiness, and 15 of them signed up at the door on the day. Young people are
-              looking for this.
+              138 registrations came in for a first in-person Summit, 60 of them from people already
+              working in agribusiness, and six more young people signed up at the door on the day.
+              Young people are looking for this.
             </p>
           </div>
           <div class="card">
@@ -653,9 +696,9 @@
             <p class="lesson__n">03</p>
             <h3>Guard the clock, and the follow-up</h3>
             <p>
-              Early feedback rated the content highly and asked us to keep better time. Mentorship was
-              among the things attendees wanted most, so we have opened mentorship requests with our
-              speakers.
+              Early feedback rated the speakers and content highly and asked us to keep better time.
+              Sixteen participants came hoping for mentorship, so we have opened mentorship requests with
+              our speakers.
             </p>
           </div>
         </div>
