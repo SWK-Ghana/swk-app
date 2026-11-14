@@ -26,7 +26,7 @@ const STATIC_ROUTES = [
 
 // Static HTML pages served straight from public/ via vercel.json rewrites
 // (not React routes — never render()'d, only listed here for the sitemap).
-const EXTRA_SITEMAP_ROUTES = ['/summit', '/epwwebinar', '/volunteers', '/partners', '/reports/elevator-pitch-workshop-2026']
+const EXTRA_SITEMAP_ROUTES = ['/reports/agribusiness-summit-2026', '/epwwebinar', '/volunteers', '/partners', '/reports/elevator-pitch-workshop-2026']
 
 // ── Fetch published blog slugs from Sanity (public dataset, no token) ────────
 async function fetchPosts() {

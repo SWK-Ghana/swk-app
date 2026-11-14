@@ -273,16 +273,16 @@ const Home = () => {
   const events = useMemo(() => ([
     {
       day: '7', month: 'Nov', year: '2026',
-      flag: 'Next up',
+      flag: 'Just held',
       tag: 'Summit',
       tagClass: 'bg-[#1E963C] text-white',
-      title: 'Agribusiness Summit 2026',
-      desc: 'Our first in-person flagship event. A free, half-day summit in Accra: a keynote, a rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, live demonstrations, and a youth pitch showcase.',
-      meta: '9:00 AM – 2:00 PM GMT · Ashaley Botwe, Accra',
-      href: '/summit',
-      cta: 'Explore the Summit',
-      // Square (2160×2160), shown whole: never cropped or stretched.
-      flyer: 'v1790846227/SummitFlyer-selection_5_zshe0n.png',
+      title: 'Agribusiness Summit 2026: what happened',
+      desc: 'Our first in-person Summit brought young people, farmers, founders and partners together in Accra: a panel on building profitable agribusinesses, Spotlight talks from the field, and a hands-on Agribusiness Model Canvas workshop. See the day in photos, numbers and voices.',
+      meta: '138 registrations · 12 speakers and facilitators · 6 partners',
+      href: '/reports/agribusiness-summit-2026',
+      cta: 'See what happened',
+      // A photo from the day, served from public/ (1600×822), shown whole.
+      photo: { src: '/summit-2026/group-800.webp', srcSet: '/summit-2026/group-800.webp 800w, /summit-2026/group-1600.webp 1600w', width: 1600, height: 822, alt: 'Participants, speakers and volunteers together at the close of the Agribusiness Summit 2026.' },
     },
   ]), [])
 
@@ -480,15 +480,15 @@ const Home = () => {
         <div className="mb-10 sm:mb-16">
           <div className="text-center mb-6 sm:mb-8">
             <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Join us next
+              {events.some((e) => e.photo) ? 'Fresh from the Summit' : 'Join us next'}
             </h2>
           </div>
 
-          {/* A lone event with a flyer gets the wide layout: the flyer beside
-              the details on large screens, above them on small ones. */}
-          <div className={`grid grid-cols-1 gap-5 xs:gap-6 ${events.length > 1 ? 'lg:grid-cols-2' : events[0]?.flyer ? 'max-w-5xl mx-auto' : 'max-w-3xl mx-auto'}`}>
+          {/* A lone event with a flyer or photo gets the wide layout: the image
+              beside the details on large screens, above them on small ones. */}
+          <div className={`grid grid-cols-1 gap-5 xs:gap-6 ${events.length > 1 ? 'lg:grid-cols-2' : (events[0]?.flyer || events[0]?.photo) ? 'max-w-5xl mx-auto' : 'max-w-3xl mx-auto'}`}>
             {events.map((e) => {
-              const wide = e.flyer && events.length === 1
+              const wide = (e.flyer || e.photo) && events.length === 1
               return (
                 <a
                   key={e.href}
@@ -503,6 +503,19 @@ const Home = () => {
                       width="2160"
                       height="2160"
                       alt={`${e.title} flyer`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-full h-auto max-w-lg mx-auto mb-6 rounded-xl shadow-xl shadow-black/30 ${wide ? 'lg:max-w-none lg:mb-0' : ''}`}
+                    />
+                  )}
+                  {e.photo && (
+                    <img
+                      src={e.photo.src}
+                      srcSet={e.photo.srcSet}
+                      sizes={wide ? '(min-width: 1024px) 452px, (min-width: 640px) 512px, calc(100vw - 80px)' : '(min-width: 1024px) 480px, calc(100vw - 80px)'}
+                      width={e.photo.width}
+                      height={e.photo.height}
+                      alt={e.photo.alt}
                       loading="lazy"
                       decoding="async"
                       className={`w-full h-auto max-w-lg mx-auto mb-6 rounded-xl shadow-xl shadow-black/30 ${wide ? 'lg:max-w-none lg:mb-0' : ''}`}

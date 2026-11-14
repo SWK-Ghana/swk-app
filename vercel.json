@@ -6,6 +6,11 @@
       "permanent": false
     },
     {
+      "source": "/summit",
+      "destination": "/reports/agribusiness-summit-2026",
+      "permanent": false
+    },
+    {
       "source": "/marketplace",
       "destination": "https://marketplace.swkghana.org",
       "permanent": false
@@ -18,8 +23,8 @@
   ],
   "rewrites": [
     {
-      "source": "/summit",
-      "destination": "/summit-2026.html"
+      "source": "/reports/agribusiness-summit-2026",
+      "destination": "/reports/agribusiness-summit-2026.html"
     },
     {
       "source": "/epwwebinar",

@@ -41,6 +41,23 @@ const ShareButtons = ({ url, title }) => {
 // ─── Report data ───────────────────────────────────────────────────────────────
 const reports = [
   {
+    id: 7,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'Event Report: Agribusiness Summit 2026',
+    description:
+      'Our first in-person Summit, 7 November 2026 in Accra: 138 registrations, 12 speakers and facilitators, 6 partners. The day in photos, numbers and voices, what we learned, and what is next.',
+    date: 'November 2026',
+    thumbnail: '/summit-2026/group-800.webp',
+    badgeText: 'Latest Report',
+    driveLink: 'https://swkghana.org/reports/agribusiness-summit-2026',
+    downloadLink: null,
+  },
+  {
     id: 6,
     category: 'Impact Report',
     categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
@@ -55,7 +72,7 @@ const reports = [
     thumbnail:
       // The poster's "THANK YOU" header, so the wide cover isn't cut mid-text.
       'https://res.cloudinary.com/dwgj3lovn/image/upload/c_crop,x_0,y_0,w_1080,h_608/f_auto,q_auto,w_800/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png',
-    badgeText: 'Latest Report',
+    badgeText: null,
     driveLink: 'https://swkghana.org/reports/elevator-pitch-workshop-2026',
     downloadLink: 'https://swkghana.org/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf',
   },
@@ -237,14 +254,16 @@ const Reports = () => {
                   >
                     <LuFileText className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />View report
                   </a>
-                  <a
-                    href={report.downloadLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-3 py-2.5 rounded-lg transition-colors`}
-                  >
-                    <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />Download PDF
-                  </a>
+                  {report.downloadLink && (
+                    <a
+                      href={report.downloadLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-3 py-2.5 rounded-lg transition-colors`}
+                    >
+                      <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />Download PDF
+                    </a>
+                  )}
                 </div>
                 <ShareButtons url={report.driveLink} title={report.title} />
               </div>
@@ -323,14 +342,16 @@ const Reports = () => {
                     >
                       <LuFileText className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />View
                     </a>
-                    <a
-                      href={report.downloadLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-2 py-1.5 rounded-lg transition-colors`}
-                    >
-                      <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />PDF
-                    </a>
+                    {report.downloadLink && (
+                      <a
+                        href={report.downloadLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex-1 text-center text-xs font-semibold border ${report.btnBorder} px-2 py-1.5 rounded-lg transition-colors`}
+                      >
+                        <LuDownload className="inline h-3.5 w-3.5 -mt-0.5 mr-1" aria-hidden="true" />PDF
+                      </a>
+                    )}
                   </div>
                 ) : (
                   <span className="text-xs font-semibold text-gray-600 bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-lg text-center">

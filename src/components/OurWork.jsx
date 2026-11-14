@@ -281,7 +281,7 @@ const OurWork = () => {
       <div className="swk-shell py-8 xs:py-10 sm:py-12 md:py-14">
 
         {/* ── Featured: Agribusiness Summit 2026 ──
-             /summit is a static page outside the React router, so this uses a
+             The report is a static page outside the React router, so this uses a
              plain <a> throughout — a router <Link> would be intercepted and
              render the SPA 404 instead. */}
         <div className="relative isolate rounded-xl xs:rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-[#0C2E11] mb-8 xs:mb-10 sm:mb-12">
@@ -293,30 +293,32 @@ const OurWork = () => {
               </h2>
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
                 Our first in-person flagship event, growing out of a webinar series that has reached 300+
-                young people across 9+ countries. A free, half-day summit: a keynote, a
-                rapid-fire panel, a hands-on Agribusiness Model Canvas workshop, live demonstrations, and a
-                youth pitch showcase.
+                young people across 9+ countries. On 7 November 2026, young people, farmers, founders and
+                partners met in Accra for a panel, Spotlight talks from the field and a hands-on
+                Agribusiness Model Canvas workshop.
               </p>
               <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
-                <li className="flex items-start gap-2"><LuCalendarDays className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Saturday, 7 November 2026 · 9:00 AM – 2:00 PM GMT</li>
+                <li className="flex items-start gap-2"><LuCalendarDays className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Held on Saturday, 7 November 2026</li>
                 <li className="flex items-start gap-2"><LuMapPin className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
-                <li className="flex items-start gap-2"><LuHandshake className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />In partnership with TGLC, Agribusiness e-Academy, Calidad Farms &amp; The Food Discourse</li>
-                <li className="flex items-start gap-2"><LuTicket className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Free entry · Seats are filling fast</li>
+                <li className="flex items-start gap-2"><LuHandshake className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />With TGLC, Agribusiness e-Academy, Calidad Farms, The Food Discourse, Rotaract Club of Accra Ring Road Central &amp; Dream Renewables</li>
+                <li className="flex items-start gap-2"><LuTicket className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />138 registrations · 12 speakers and facilitators · free to attend</li>
               </ul>
               <a
-                href="/summit"
+                href="/reports/agribusiness-summit-2026"
                 className="inline-flex items-center gap-1.5 bg-[#78C31E] hover:bg-[#8AD62B] text-[#123D16] text-sm font-bold px-5 py-2.5 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Explore the Summit <span aria-hidden="true">→</span>
+                See what happened <span aria-hidden="true">→</span>
               </a>
             </div>
             <div className="order-1 md:order-2 p-5 xs:p-6 sm:p-8 md:p-10 md:pl-0">
-              <a href="/summit" tabIndex={-1} aria-hidden="true">
+              <a href="/reports/agribusiness-summit-2026" tabIndex={-1} aria-hidden="true">
                 <img
-                  src={img('v1790846227/SummitFlyer-selection_5_zshe0n.png', 700)}
+                  src="/summit-2026/group-800.webp"
+                  srcSet="/summit-2026/group-800.webp 800w, /summit-2026/group-1600.webp 1600w"
+                  sizes="(min-width: 768px) 45vw, 90vw"
                   alt=""
-                  width="2160"
-                  height="2160"
+                  width="1600"
+                  height="822"
                   loading="lazy"
                   className="w-full h-auto rounded-xl shadow-2xl"
                 />
