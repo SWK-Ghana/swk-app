@@ -92,3 +92,19 @@ test('the free-text questions are not on any script list', () => {
     assert.doesNotMatch(list, /\b(fullName|name|email|phone|whatsapp|why|gain|anythingElse|achieve|orgName|contactPerson)\b:/)
   }
 })
+
+// Each form page must send exactly the columns its Apps Script writes, so a
+// script built from another form's copy cannot slip through.
+test('the mentorship forms send the columns their scripts expect', () => {
+  const pairs = [['summit-mentorship', 'summit-mentorship'], ['mentorship-2027-mentors', 'mentorship-2027-mentors']]
+  for (const [page, script] of pairs) {
+    const html = readFileSync(new URL(`../public/${page}.html`, import.meta.url), 'utf8')
+    const gs = readFileSync(new URL(`../docs/${script}.gs`, import.meta.url), 'utf8')
+    const sent = [...new Set([...html.matchAll(/<(?:input|textarea)[^>]*name="([a-zA-Z]+)"/g)].map((m) => m[1]).filter((n) => n !== 'swk_ref'))]
+    const columns = [...gs.match(/var ROW_FIELDS = \[([\s\S]*?)\];/)[1].matchAll(/'([a-zA-Z]+)'/g)].map((m) => m[1]).filter((n) => n !== 'source')
+    assert.deepEqual(sent, columns, `${page} and ${script}.gs disagree`)
+    for (const field of [...gs.match(/var STATS_FIELDS = \{([\s\S]*?)\};/)[1].matchAll(/(\w+):/g)].map((m) => m[1])) {
+      assert.ok(columns.includes(field), `${script}.gs counts ${field}, which the form never sends`)
+    }
+  }
+})

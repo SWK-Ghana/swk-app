@@ -42,26 +42,23 @@ var ROW_FIELDS = [
   'phone',
   'email',
   'gender',
-  'age',
   'location',
-  'status',
-  'attended',
-  'mentorType',
-  'mentors',
-  'mentorReason',
-  'kinds',
-  'areas',
-  'areaOther',
-  'stage',
-  'ventureName',
-  'ventureDetails',
-  'goal',
-  'why',
-  'challenge',
+  'organisation',
+  'role',
+  'website',
+  'experience',
+  'summitLink',
+  'tracks',
+  'expertise',
+  'visit',
+  'built',
+  'capacity',
+  'availability',
   'format',
-  'mode',
-  'frequency',
-  'consentShare',
+  'alsoWilling',
+  'motivation',
+  'references',
+  'consentVerify',
   'consentContact',
   'source',
 ];
@@ -79,7 +76,7 @@ function json(obj) {
 /** Visiting the deployment URL in a browser hits this — a quick health check. */
 function doGet(e) {
   if (e && e.parameter && e.parameter.stats) return json(stats(e.parameter.stats));
-  return json({ ok: true, status: 'ready', service: 'SWK Summit 2026 mentorship' });
+  return json({ ok: true, status: 'ready', service: 'SWK Mentorship Programme 2027 mentors' });
 }
 
 function doPost(e) {
@@ -130,12 +127,15 @@ var STATS_MIN_GROUP = 3;
 var STATS_TOP_GROUPS = 12;
 var STATS_DAY_MS = 24 * 60 * 60 * 1000;
 var STATS_FIELDS = {
-  mentorType: {},
-  mentors: {},
-  kinds: {},
-  areas: {},
-  stage: {},
-  attended: {},
+  tracks: {},
+  expertise: {},
+  visit: {},
+  capacity: {},
+  availability: {},
+  format: {},
+  experience: {},
+  summitLink: {},
+  alsoWilling: {},
 };
 
 function statsValues(raw) {

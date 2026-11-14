@@ -8,7 +8,8 @@ export const FORMS = [
   { id: 'partners', name: 'Summit partners', url: script('AKfycbxiyaBhVtDEOtYfcoa3FWkMEg-7sD3LaSSdvBz0p25HRfsZsCvY7jOJy8jFoBk8BKTo') },
   { id: 'pitch', name: 'Elevator Pitch Workshop', url: script('AKfycbyevrLSaUWhtZRlJS65og3t8fnlYLj-xIR6-ObooQbHo6DYV9IYBbY_xLQdkowq0tsk') },
   { id: 'feedback', name: 'Summit feedback', url: script('AKfycbwdwun0tcLkKGm2HfWWjO3ZjmRzUfXbGM-nG08BK-9S8OkIc2WoSalDpJgQeMXYoMAD7A') },
-  { id: 'mentorship', name: 'Mentorship requests', url: script('AKfycbw2nWywX4y50eirUYCKGmZ9j7XTGj2GDIybsKdOTe2aNLNrkLuRU6ZkdMn6PRKQk_JfGg') },
+  { id: 'mentorship', name: 'Mentorship Programme 2027 interest', url: script('AKfycbw2nWywX4y50eirUYCKGmZ9j7XTGj2GDIybsKdOTe2aNLNrkLuRU6ZkdMn6PRKQk_JfGg') },
+  { id: 'mentors', name: 'Mentorship Programme 2027 mentors', url: script('AKfycbzhBhwft1c5Mm9cVS4r5mBMJGRHNgY111cqMIyyudyPok7taLk3IFdC7ZdKQVG2LOQqoQ') },
 ]
 
 const TIMEOUT_MS = 8000
