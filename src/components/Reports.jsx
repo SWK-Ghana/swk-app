@@ -55,7 +55,7 @@ const reports = [
     thumbnail: '/summit-2026/group-800.webp',
     badgeText: 'Latest Report',
     driveLink: 'https://swkghana.org/reports/agribusiness-summit-2026',
-    downloadLink: null,
+    downloadLink: 'https://swkghana.org/reports/SWK-Ghana-Agribusiness-Summit-2026-Report.pdf',
   },
   {
     id: 6,

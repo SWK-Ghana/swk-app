@@ -96,6 +96,14 @@
     .topbar__links a:hover { color: var(--lime); }
     .topbar__links .pill { background: var(--lime); color: var(--green-deep); padding: .5rem 1.1rem; border-radius: 999px; }
     .topbar__links .pill:hover { background: var(--lime-hi); color: var(--green-deep); }
+    /* Phones: the logo and Give share the first row; the text links take the second. */
+    @media (max-width: 600px) {
+      .topbar__bar { justify-content: flex-start; row-gap: .35rem; font-size: .88rem; font-weight: 700; }
+      .topbar__bar::after { content: ""; order: 1; flex-basis: 100%; height: 0; }
+      .topbar__links { display: contents; }
+      .topbar__links .pill { order: 1; margin-left: auto; }
+      .topbar__links a:not(.pill) { order: 2; text-decoration: none; color: rgba(255, 255, 255, .85); }
+    }
 
     /* ── Hero: Flow under a deep green veil, kente in the corner ───────── */
     .hero { position: relative; isolation: isolate; overflow: hidden; background-color: var(--green-900); background-image: linear-gradient(100deg, rgba(12, 46, 17, .97) 0%, rgba(12, 46, 17, .92) 50%, rgba(12, 46, 17, .8) 100%), url('/patterns/flow.svg'); background-size: auto, 640px auto; color: var(--white); padding-block: clamp(2.5rem, 6vw, 4.5rem); }
@@ -282,6 +290,7 @@
       </a>
       <nav class="topbar__links" aria-label="Report">
         <a href="/reports">All reports</a>
+        <a href="/reports/SWK-Ghana-Agribusiness-Summit-2026-Report.pdf" download>Download PDF</a>
         <a href="#next">What is next</a>
         <a class="pill" href="/give">Give</a>
       </nav>
