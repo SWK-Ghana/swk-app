@@ -301,7 +301,7 @@ const OurWork = () => {
                 <li className="flex items-start gap-2"><LuCalendarDays className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Held on Saturday, 7 November 2026</li>
                 <li className="flex items-start gap-2"><LuMapPin className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
                 <li className="flex items-start gap-2"><LuHandshake className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />With TGLC, Agribusiness e-Academy, Calidad Farms, The Food Discourse, Rotaract Club of Accra Ring Road Central &amp; Dream Renewables</li>
-                <li className="flex items-start gap-2"><LuTicket className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />138 registrations · 12 speakers and facilitators · free to attend</li>
+                <li className="flex items-start gap-2"><LuTicket className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />138 registrations · 13 speakers and facilitators · free to attend</li>
               </ul>
               <a
                 href="/reports/agribusiness-summit-2026"

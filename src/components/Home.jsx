@@ -278,7 +278,7 @@ const Home = () => {
       tagClass: 'bg-[#1E963C] text-white',
       title: 'Agribusiness Summit 2026: what happened',
       desc: 'Our first in-person Summit brought young people, farmers, founders and partners together in Accra: a panel on building profitable agribusinesses, Spotlight talks from the field, and a hands-on Agribusiness Model Canvas workshop. See the day in photos, numbers and voices.',
-      meta: '138 registrations · 12 speakers and facilitators · 6 partners',
+      meta: '138 registrations · 13 speakers and facilitators · 6 partners',
       href: '/reports/agribusiness-summit-2026',
       cta: 'See what happened',
       // A photo from the day, served from public/ (1600×822), shown whole.

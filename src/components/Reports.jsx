@@ -50,7 +50,7 @@ const reports = [
     btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
     title: 'Event Report: Agribusiness Summit 2026',
     description:
-      'Our first in-person Summit, 7 November 2026 in Accra: 138 registrations, 12 speakers and facilitators, 6 partners. The day in photos, numbers and voices, what we learned, and what is next.',
+      'Our first in-person Summit, 7 November 2026 in Accra: 138 registrations, 13 speakers and facilitators, 6 partners. The day in photos, numbers and voices, what we learned, and what is next.',
     date: 'November 2026',
     thumbnail: '/summit-2026/group-800.webp',
     badgeText: 'Latest Report',
