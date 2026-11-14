@@ -156,6 +156,13 @@
     .chapter__sub { font-weight: 700; color: var(--green-text); margin-top: .35rem; }
     .chapter p + p { margin-top: .8rem; }
     .chapter__body { color: var(--ink-soft); margin-top: .9rem; }
+    .faces { list-style: none; margin-top: 1.2rem; display: grid; gap: .75rem; }
+    @media (min-width: 560px) { .faces { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .faces li { display: flex; align-items: center; gap: .8rem; }
+    .faces img, .faces__initials { flex: none; width: 74px; height: 74px; border-radius: 50%; object-fit: cover; border: 3px solid var(--lime); background: var(--cream); }
+    .faces__initials { display: grid; place-items: center; font-weight: 800; color: var(--green-text); font-size: 1.05rem; }
+    .faces li > span:last-child { font-size: .86rem; color: var(--ink-soft); line-height: 1.35; }
+    .faces b { display: block; color: var(--ink); font-size: .95rem; }
     .chapter__people { margin-top: 1.1rem; display: grid; gap: .45rem; font-size: .93rem; }
     .chapter__people li { padding-left: 1.1rem; position: relative; color: var(--ink-soft); line-height: 1.5; }
     .chapter__people li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
@@ -400,11 +407,11 @@
                   Leadership Centre, our host and partner.
                 </p>
               </div>
-              <ul class="chapter__people">
-                <li><b>Ben Brown</b>, Co-Founder, SWK Ghana &middot; MC</li>
-                <li><b>Frank Koomson</b>, Founder, SWK Ghana &middot; welcome address</li>
-                <li><b>Mr Emmanuel N.K. Nuamah</b>, Chief Servant, TGLC &middot; goodwill message (recorded)</li>
-                <li><b>Mrs Rachael Danso</b> &middot; solidarity message on behalf of TGLC</li>
+              <ul class="faces">
+                <li><img src="/summit-2026/person-ben.webp" width="480" height="480" loading="lazy" alt="Ben Brown" /><span><b>Ben Brown</b>Co-Founder, SWK Ghana &middot; MC</span></li>
+                <li><img src="/summit-2026/person-frank.webp" width="480" height="480" loading="lazy" alt="Frank Koomson" /><span><b>Frank Koomson</b>Founder, SWK Ghana &middot; welcome address</span></li>
+                <li><img src="/summit-2026/person-nuamah.webp" width="480" height="480" loading="lazy" alt="Mr Emmanuel N.K. Nuamah" /><span><b>Mr Emmanuel N.K. Nuamah</b>Chief Servant, TGLC &middot; goodwill message (recorded)</span></li>
+                <li><img src="/summit-2026/person-rachael.webp" width="480" height="480" loading="lazy" alt="Mrs Rachael Danso" /><span><b>Mrs Rachael Danso</b>Solidarity message on behalf of TGLC</span></li>
               </ul>
             </div>
           </article>
@@ -437,7 +444,8 @@
           <article class="chapter">
             <figure class="chapter__media">
               <img src="/summit-2026/spotlight-3-800.webp" srcset="/summit-2026/spotlight-3-800.webp 800w, /summit-2026/spotlight-3-1600.webp 1600w" sizes="(min-width: 860px) 46vw, 92vw" width="1600" height="1200" loading="lazy"
-                alt="A Spotlight speaker, seated with a microphone, talks to the audience during the Spotlight Sessions." />
+                alt="Wendy Dumelo of JERO Foods, seated with a microphone, speaks during the Spotlight Sessions." />
+              <figcaption class="cap">Wendy Dumelo, CEO and Co-Founder of JERO Foods, during the Spotlight Sessions.</figcaption>
             </figure>
             <div>
               <span class="chapter__time">Spotlight Sessions</span>
@@ -449,12 +457,12 @@
                   <b>Jovial Hargo Tetteh</b> performed between sessions.
                 </p>
               </div>
-              <ul class="chapter__people">
-                <li><b>Samuel Yeboah</b>, Country Director, Dream Renewables &middot; solar-powered irrigation</li>
-                <li><b>Tracey Rama Osman Tia</b> &middot; drones in agriculture</li>
-                <li><b>Mrs Sheila Cornelius</b>, CEO, Lam Naturals; Managing Director, Cornelius Farms &middot; training young people, value addition and agri-tourism</li>
-                <li><b>Wendy Dumelo</b>, CEO and Co-Founder, JERO Foods &middot; mushroom farming in Nsawam</li>
-                <li><b>Jonathan Kwarteng</b>, Founder and CEO, Farmer Hut, Ada &middot; tomato and rabbit farming</li>
+              <ul class="faces">
+                <li><img src="/summit-2026/person-samuel.webp" width="480" height="480" loading="lazy" alt="Samuel Yeboah" /><span><b>Samuel Yeboah</b>Country Director, Dream Renewables &middot; solar-powered irrigation</span></li>
+                <li><span class="faces__initials" aria-hidden="true">TT</span><span><b>Tracey Rama Osman Tia</b>Agricultural Drone Pilot &middot; drones in agriculture</span></li>
+                <li><img src="/summit-2026/person-sheila.webp" width="480" height="480" loading="lazy" alt="Mrs Sheila Cornelius" /><span><b>Mrs Sheila Cornelius</b>CEO, Lam Naturals; MD, Cornelius Farms &middot; value addition and agri-tourism</span></li>
+                <li><img src="/summit-2026/person-wendy.webp" width="480" height="480" loading="lazy" alt="Wendy Dumelo" /><span><b>Wendy Dumelo</b>CEO and Co-Founder, JERO Foods &middot; mushroom farming in Nsawam</span></li>
+                <li><img src="/summit-2026/person-jonathan.webp" width="480" height="480" loading="lazy" alt="Jonathan Kwarteng" /><span><b>Jonathan Kwarteng</b>Founder and CEO, Farmer Hut, Ada &middot; tomato and rabbit farming</span></li>
               </ul>
             </div>
           </article>
@@ -653,7 +661,7 @@
           <button type="button" data-full="/summit-2026/spotlight-2-1600.webp" data-caption="Spotlight Sessions: Lessons from the Field."><img src="/summit-2026/spotlight-2-800.webp" width="800" height="600" loading="lazy" alt="A Spotlight speaker gestures while speaking to the room." /></button>
           <button type="button" class="is-wide" data-full="/summit-2026/room-1600.webp" data-caption="The hall during the morning sessions."><img src="/summit-2026/room-800.webp" width="800" height="450" loading="lazy" alt="The Summit hall seen from the back, rows of attendees facing the stage." /></button>
           <button type="button" data-full="/summit-2026/panel-wide-1600.webp" data-caption="Beyond the Farm Gate, from the audience."><img src="/summit-2026/panel-wide-800.webp" width="800" height="600" loading="lazy" alt="The panel seen from the audience, with the SWK Ghana banner behind them." /></button>
-          <button type="button" data-full="/summit-2026/spotlight-4-1600.webp" data-caption="Spotlight Sessions: Lessons from the Field."><img src="/summit-2026/spotlight-4-800.webp" width="800" height="600" loading="lazy" alt="A Spotlight speaker talks with the audience gathered close." /></button>
+          <button type="button" data-full="/summit-2026/spotlight-4-1600.webp" data-caption="Jonathan Kwarteng of Farmer Hut, Ada, during the Spotlight Sessions."><img src="/summit-2026/spotlight-4-800.webp" width="800" height="600" loading="lazy" alt="Jonathan Kwarteng of Farmer Hut, seated with a microphone, speaks to the audience." /></button>
           <button type="button" class="is-big is-top" data-full="/summit-2026/team-volunteers-1600.webp" data-caption="The SWK Ghana team and volunteers who ran the day."><img src="/summit-2026/team-volunteers-800.webp" width="800" height="650" loading="lazy" alt="The SWK Ghana team and volunteers in Summit T-shirts, standing together." /></button>
           <button type="button" data-full="/summit-2026/ben-mc-1600.webp" data-caption="Ben Brown, Co-Founder of SWK Ghana, MC for the day."><img src="/summit-2026/ben-mc-800.webp" width="800" height="600" loading="lazy" alt="Ben Brown, Co-Founder of SWK Ghana and MC for the day, at the lectern with a microphone." /></button>
           <button type="button" data-full="/summit-2026/pledge-close-1600.webp" data-caption="The SWK Community Pledge, on the back of every Summit T-shirt."><img src="/summit-2026/pledge-close-800.webp" width="800" height="600" loading="lazy" alt="Close view of the pledge printed on a Summit T-shirt, with the partner logos beneath." /></button>
