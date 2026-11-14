@@ -5,11 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0C2E11" />
-  <meta name="robots" content="noindex" />
 
-  <title>Find a Mentor | SWK Ghana Agribusiness Summit 2026</title>
+  <title>Mentorship Programme 2027: Register Your Interest | SWK Ghana</title>
   <meta name="description"
-    content="Ask for mentorship from a speaker or facilitator of the SWK Ghana Agribusiness Summit 2026, or tell us what you need and we will match you." />
+    content="SWK Ghana is building a six-month agribusiness mentorship programme for young people aged 18 to 35, starting July 2027. Tell us where you are and what you need." />
   <link rel="canonical" href="https://swkghana.org/mentorship" />
   <meta name="author" content="SWK Ghana" />
   <link rel="icon" type="image/png"
@@ -18,8 +17,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SWK Ghana" />
   <meta property="og:locale" content="en_GH" />
-  <meta property="og:title" content="Find a mentor | SWK Ghana Agribusiness Summit 2026" />
-  <meta property="og:description" content="Learn from the people who spoke at the Summit, or let SWK Ghana match you with a mentor." />
+  <meta property="og:title" content="Grow with a mentor: SWK Agribusiness Mentorship Programme 2027" />
+  <meta property="og:description" content="Three months learning from people who run agribusinesses, then three months taking your first steps. Register your interest." />
   <meta property="og:url" content="https://swkghana.org/mentorship" />
   <meta property="og:image"
     content="https://res.cloudinary.com/dwgj3lovn/image/upload/c_pad,w_1200,h_630,b_rgb:0C2E11,q_auto,f_auto/v1760294682/SWK_LOGO_es585y.png" />
@@ -110,7 +109,7 @@
     .field > label, .field__legend { display: block; font-size: .92rem; font-weight: 700; color: var(--ink); margin-bottom: .45rem; }
     .field__hint { display: block; font-weight: 500; font-size: .8rem; color: var(--ink-soft); margin-top: .15rem; }
     .req { color: #B3261E; margin-left: .15rem; }
-    .field input[type="text"], .field textarea { width: 100%; font-family: var(--font); font-size: 1rem; color: var(--ink); background: var(--white); border: 1.5px solid rgba(23, 112, 45, .28); border-radius: 10px; padding: .8rem .9rem; transition: border-color .2s var(--ease), box-shadow .2s var(--ease); }
+    .field input[type="text"], .field input[type="tel"], .field input[type="email"], .field input[type="url"], .field textarea { width: 100%; font-family: var(--font); font-size: 1rem; color: var(--ink); background: var(--white); border: 1.5px solid rgba(23, 112, 45, .28); border-radius: 10px; padding: .8rem .9rem; transition: border-color .2s var(--ease), box-shadow .2s var(--ease); }
     .field textarea { min-height: 5.5rem; resize: vertical; }
     .field input:focus, .field textarea:focus { outline: none; border-color: var(--lime); box-shadow: 0 0 0 3px rgba(120, 195, 30, .25); }
     .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #B3261E; }
@@ -173,7 +172,7 @@
 </head>
 
 <body>
-  <a class="skip" href="#mentorship-form">Skip to the form</a>
+  <a class="skip" href="#gather-form">Skip to the form</a>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
@@ -193,7 +192,7 @@
           <span>SWK Ghana</span>
         </a>
         <div class="topbar__links">
-          <a href="https://swkghana.org/summit"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users" /></svg>Agribusiness Summit 2026</a>
+          <a href="https://swkghana.org/summit"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users" /></svg>Summit 2026 report</a>
           <a href="https://swkghana.org/give"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart" /></svg>Give</a>
         </div>
       </div>
@@ -201,15 +200,14 @@
 
     <header class="hero">
       <div class="shell">
-        <p class="eyebrow">SWK Ghana Agribusiness Summit 2026 &middot; From the Ground Up</p>
-        <h1>Find a mentor.</h1>
+        <p class="eyebrow">SWK Agribusiness Mentorship Programme 2027</p>
+        <h1>Learn from a mentor. Then take your first steps.</h1>
         <p class="hero__lede">
-          Ask for mentorship from one of the Summit's speakers and facilitators, or tell us what you need
-          and we will find someone suitable for you.
+          We are building a six-month programme for young people aged 18 to 35: three months learning from people who already run agribusinesses, then three months taking your first steps with their coaching, so you know exactly where to turn and what to do. Tell us where you are and what you need, so we build it around you.
         </p>
         <div class="hero__facts">
-          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock" /></svg>About 5 minutes &middot; 3 short pages</span>
-          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-hand" /></svg>We speak with each mentor first, then contact you. Every match depends on the mentor's time.</span>
+          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock" /></svg>About 5 minutes · 3 short pages</span>
+          <span class="hero__fact"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-hand" /></svg>Registering interest is not an application. Applications open in May 2027.</span>
         </div>
       </div>
     </header>
@@ -217,9 +215,9 @@
 
     <!-- ══ THE FORM ══
          Posts JSON to a Google Apps Script web app, which appends a row to the
-         mentorship requests Sheet. Setup lives in docs/summit-mentorship.gs —
-         paste ENDPOINT in the script below once deployed. -->
-    <section class="reg" id="mentorship-form" aria-label="Mentorship request form">
+         Sheet. Setup lives in docs/summit-mentorship.gs; paste ENDPOINT in the script
+         below once deployed. -->
+    <section class="reg" id="gather-form" aria-label="Grow with a mentor: SWK Agribusiness Mentorship Programme 2027">
       <div class="shell">
         <div class="reg__card">
           <form id="reg-form" novalidate>
@@ -238,23 +236,24 @@
             <!-- ── Page 1: About you ── -->
             <div class="reg__step is-active" data-step="1">
               <h2>About you</h2>
-              <p>So the mentor knows who they would be helping, and we can reach you.</p>
+              <p>So we know who is interested and can keep you informed.</p>
 
               <div class="field">
-                <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-                <input id="f-name" name="fullName" type="text" autocomplete="name" required />
+                <label for="f-fullName">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-fullName" name="fullName" type="text" autocomplete="name" required />
                 <p class="field__error">Please enter your full name.</p>
               </div>
 
               <div class="field">
                 <label for="f-phone">Phone / WhatsApp number <span class="req" aria-hidden="true">*</span></label>
-                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 024 123 4567" required />
-                <p class="field__error">Please enter a phone or WhatsApp number.</p>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" required />
+                <p class="field__error">Please enter a phone number we can reach you on.</p>
               </div>
 
               <div class="field">
-                <label for="f-email">Email address <span class="field__hint">(Optional)</span></label>
+                <label for="f-email">Email address<span class="field__hint">Optional, but useful for programme updates.</span></label>
                 <input id="f-email" name="email" type="email" autocomplete="email" />
+                
               </div>
 
               <fieldset class="field">
@@ -268,212 +267,224 @@
               </fieldset>
 
               <fieldset class="field">
-                <legend class="field__legend">Age <span class="req" aria-hidden="true">*</span></legend>
+                <legend class="field__legend">Age <span class="req" aria-hidden="true">*</span><span class="field__hint">The programme is for ages 18 to 35.</span></legend>
                 <div class="choices choices--inline">
-                  <label class="choice"><input type="radio" name="age" value="Under 18" required /> Under 18</label>
-                  <label class="choice"><input type="radio" name="age" value="18 to 24" /> 18 &ndash; 24</label>
-                  <label class="choice"><input type="radio" name="age" value="25 to 35" /> 25 &ndash; 35</label>
-                  <label class="choice"><input type="radio" name="age" value="36 and over" /> 36 and over</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="Under 18" required /> Under 18</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="18 to 24" /> 18 to 24</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="25 to 29" /> 25 to 29</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="30 to 35" /> 30 to 35</label>
+                  <label class="choice"><input type="radio" name="ageGroup" value="Over 35" /> Over 35</label>
                 </div>
                 <p class="field__error">Please choose one.</p>
               </fieldset>
 
               <div class="field">
-                <label for="f-location">Where are you based? <span class="req" aria-hidden="true">*</span>
-                  <span class="field__hint">Town and region, e.g. Ashaley Botwe, Greater Accra.</span>
-                </label>
-                <input id="f-location" name="location" type="text" autocomplete="address-level2" required />
-                <p class="field__error">Please tell us your town and region.</p>
+                <label for="f-location">Town and region <span class="req" aria-hidden="true">*</span><span class="field__hint">For example: Kasoa, Central Region</span></label>
+                <input id="f-location" name="location" type="text" required />
+                <p class="field__error">Please tell us where you are.</p>
               </div>
 
               <fieldset class="field">
                 <legend class="field__legend">What do you do now? <span class="req" aria-hidden="true">*</span></legend>
                 <div class="choices">
                   <label class="choice"><input type="radio" name="status" value="Student" required /> Student</label>
-                  <label class="choice"><input type="radio" name="status" value="Graduate or national service" /> Recent graduate or on national service</label>
-                  <label class="choice"><input type="radio" name="status" value="Running a business" /> Running my own business</label>
-                  <label class="choice"><input type="radio" name="status" value="Farmer" /> Farming</label>
                   <label class="choice"><input type="radio" name="status" value="Employed" /> Employed</label>
+                  <label class="choice"><input type="radio" name="status" value="Self-employed" /> Self-employed</label>
+                  <label class="choice"><input type="radio" name="status" value="Running a business" /> Running a business</label>
                   <label class="choice"><input type="radio" name="status" value="Looking for work" /> Looking for work</label>
                 </div>
                 <p class="field__error">Please choose one.</p>
               </fieldset>
 
               <fieldset class="field">
-                <legend class="field__legend">Did you attend the Agribusiness Summit on 7 November? <span class="req" aria-hidden="true">*</span></legend>
-                <div class="choices choices--inline">
-                  <label class="choice"><input type="radio" name="attended" value="Yes" required /> Yes</label>
-                  <label class="choice"><input type="radio" name="attended" value="No" /> No</label>
+                <legend class="field__legend">How have you connected with SWK Ghana so far? <span class="req" aria-hidden="true">*</span><span class="field__hint">Tick all that apply.</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="connection" value="Agribusiness webinar series" required /> Agribusiness webinar series</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="Agribusiness Summit 2026" /> Agribusiness Summit 2026</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="Elevator Pitch Workshop" /> Elevator Pitch Workshop</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="SWK WhatsApp community" /> SWK WhatsApp community</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="Social media" /> Social media</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="A friend told me" /> A friend told me</label>
+                  <label class="choice"><input type="checkbox" name="connection" value="This is my first time" /> This is my first time</label>
+                </div>
+                <p class="field__error">Please tick at least one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Are you in the SWK Ghana WhatsApp community? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="inCommunity" value="Yes, I have joined" required /> Yes, I have joined</label>
+                  <label class="choice"><input type="radio" name="inCommunity" value="Not yet, please add me" /> Not yet, please add me</label>
+                  <label class="choice"><input type="radio" name="inCommunity" value="Not sure" /> Not sure</label>
                 </div>
                 <p class="field__error">Please choose one.</p>
               </fieldset>
             </div>
 
-            <!-- ── Page 2: Your mentor ── -->
+            <!-- ── Page 2: Where you are ── -->
             <div class="reg__step" data-step="2">
-              <h2>Your mentor</h2>
-              <p>Ask for someone you heard at the Summit, or let us match you.</p>
-
-              <fieldset class="field">
-                <legend class="field__legend">What kind of mentorship are you asking for? <span class="req" aria-hidden="true">*</span></legend>
-                <div class="choices">
-                  <label class="choice"><input type="radio" name="mentorType" value="Specific speaker" required /> <span><b>From a specific Summit speaker or facilitator</b><span class="choice__sub">You choose who, from the list that follows.</span></span></label>
-                  <label class="choice"><input type="radio" name="mentorType" value="General" /> <span><b>General mentorship</b><span class="choice__sub">Tell us what you need and SWK Ghana will find a suitable mentor.</span></span></label>
-                </div>
-                <p class="field__error">Please choose one.</p>
-              </fieldset>
-
-              <div id="wrap-mentors" hidden>
-                <fieldset class="field">
-                  <legend class="field__legend">Who would you like as your mentor? <span class="req" aria-hidden="true">*</span>
-                    <span class="field__hint">Choose up to two.</span>
-                  </legend>
-                  <div class="mentors">
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Wilfred Agbi" required disabled /><span><b>Wilfred Agbi</b><i>Founder and CEO, Calidad Farms Limited</i><span class="choice__sub">Aquaculture: fingerling production, fish farm development and technical support for fish farmers.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Tracey Rama Osman Tia" disabled /><span><b>Tracey Rama Osman Tia</b><i>Agricultural Drone Pilot; Co-founder, C2 Drone Consult and Drones &amp; More</i><span class="choice__sub">Drones in farming, and careers in aviation and STEM, especially for girls.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Richard Yennunam Laarison" disabled /><span><b>Richard Yennunam Laarison</b><i>Co-founder, Vehlverde Farms</i><span class="choice__sub">Climate-smart vegetables, and chilli and habanero supply chains for export.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Samuel Yeboah" disabled /><span><b>Samuel Yeboah</b><i>Country Director, Dream Renewables</i><span class="choice__sub">Solar-powered irrigation and renewable energy for farms.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Sheila Cornelius" disabled /><span><b>Mrs Sheila Cornelius</b><i>CEO, Lam Naturals; Managing Director, Cornelius Farms</i><span class="choice__sub">Sustainable livestock, crop production and natural food products; women in agribusiness.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Wendy Dumelo" disabled /><span><b>Wendy Dumelo</b><i>CEO and Co-Founder, JERO Foods</i><span class="choice__sub">Building a food business, and starting out in agribusiness.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Jonathan Kwarteng" disabled /><span><b>Jonathan Kwarteng</b><i>Founder and CEO, Farmer Hut, Ada</i><span class="choice__sub">Crop production, animal farming and agricultural consultancy.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Leticia Boateng" disabled /><span><b>Leticia Boateng</b><i>Digital Learning Advisor, GIZ &middot; Agri-Business Facility for Africa</i><span class="choice__sub">Business development, climate-smart agriculture, investment readiness and the Agribusiness Model Canvas.</span></span></label>
-                    <label class="choice mentor"><input type="checkbox" name="mentors" value="Elizabeth Kabukie Ocansey" disabled /><span><b>Elizabeth Kabukie Ocansey</b><i>Broadcast Journalist, ChannelOne TV and Citi FM</i><span class="choice__sub">Media, storytelling and getting your agribusiness heard.</span></span></label>
-                  </div>
-                  <p class="field__note" id="mentor-limit" role="status" aria-live="polite"></p>
-                  <p class="field__error">Please choose at least one.</p>
-                </fieldset>
-
-                <div class="field">
-                  <label for="f-mentor-reason">Why would you like mentorship from this person? <span class="req" aria-hidden="true">*</span></label>
-                  <textarea id="f-mentor-reason" name="mentorReason" rows="3" required disabled></textarea>
-                  <p class="field__error">A sentence or two is plenty.</p>
-                </div>
-              </div>
-
-              <fieldset class="field">
-                <legend class="field__legend">What kind of help do you need? <span class="req" aria-hidden="true">*</span>
-                  <span class="field__hint">Tick as many as apply.</span>
-                </legend>
-                <div class="choices">
-                  <label class="choice"><input type="checkbox" name="kinds" value="Starting a business" required /> Starting an agribusiness</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Growing a business" /> Growing a business I already run</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Technical and farming skills" /> Technical and farming skills</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Business planning" /> Business planning and the Agribusiness Model Canvas</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Finance and funding" /> Finance, funding and investment readiness</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Marketing and sales" /> Marketing, sales and finding buyers</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Career guidance" /> Career guidance in agribusiness</label>
-                  <label class="choice"><input type="checkbox" name="kinds" value="Leadership and personal growth" /> Leadership and personal growth</label>
-                </div>
-                <p class="field__error">Please tick at least one.</p>
-              </fieldset>
-
-              <fieldset class="field">
-                <legend class="field__legend">Which area of agribusiness? <span class="req" aria-hidden="true">*</span>
-                  <span class="field__hint">Tick as many as apply.</span>
-                </legend>
-                <div class="choices">
-                  <label class="choice"><input type="checkbox" name="areas" value="Crop production" required /> Crop production</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Vegetables and horticulture" /> Vegetables and horticulture</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Livestock and poultry" /> Livestock and poultry</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Aquaculture" /> Aquaculture (fish farming)</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Agro-processing and value addition" /> Agro-processing and value addition</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Food business" /> Food business and food products</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Agri-tech and drones" /> Agri-tech and drones</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Renewable energy and irrigation" /> Renewable energy and irrigation</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Export and supply chains" /> Export and supply chains</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Media and storytelling" /> Media and storytelling for agribusiness</label>
-                  <label class="choice"><input type="checkbox" name="areas" value="Other" /> Other</label>
-                </div>
-                <p class="field__error">Please tick at least one.</p>
-              </fieldset>
-              <div class="field" id="wrap-area-other" hidden>
-                <label for="f-area-other">Which other area? <span class="req" aria-hidden="true">*</span></label>
-                <input id="f-area-other" name="areaOther" type="text" required disabled />
-                <p class="field__error">Please name the area.</p>
-              </div>
-            </div>
-
-            <!-- ── Page 3: Your goals ── -->
-            <div class="reg__step" data-step="3">
-              <h2>Your goals</h2>
-              <p>This is what the mentor reads first, so be specific.</p>
+              <h2>Where you are</h2>
+              <p>This shapes the tracks, the mentors we recruit and the support we raise money for.</p>
 
               <fieldset class="field">
                 <legend class="field__legend">Where are you with your agribusiness? <span class="req" aria-hidden="true">*</span></legend>
                 <div class="choices">
-                  <label class="choice"><input type="radio" name="stage" value="Idea, not started" required /> I have an idea but have not started</label>
-                  <label class="choice"><input type="radio" name="stage" value="Started in the last year" /> I started in the last year</label>
-                  <label class="choice"><input type="radio" name="stage" value="Running 1 to 3 years" /> Running for 1 to 3 years</label>
-                  <label class="choice"><input type="radio" name="stage" value="Running over 3 years" /> Running for more than 3 years</label>
-                  <label class="choice"><input type="radio" name="stage" value="No business, want to work in agribusiness" /> No business: I want to work in agribusiness</label>
+                  <label class="choice"><input type="radio" name="stage" value="Just an idea" required /> Just an idea</label>
+                  <label class="choice"><input type="radio" name="stage" value="Planning it" /> Planning it</label>
+                  <label class="choice"><input type="radio" name="stage" value="Started, under a year ago" /> Started, under a year ago</label>
+                  <label class="choice"><input type="radio" name="stage" value="Running for 1 to 3 years" /> Running for 1 to 3 years</label>
+                  <label class="choice"><input type="radio" name="stage" value="Running for over 3 years" /> Running for over 3 years</label>
+                  <label class="choice"><input type="radio" name="stage" value="No idea yet, but I want to start" /> No idea yet, but I want to start</label>
                 </div>
                 <p class="field__error">Please choose one.</p>
               </fieldset>
 
               <div class="field">
-                <label for="f-venture-name">Name of your business or idea <span class="field__hint">(Optional)</span></label>
-                <input id="f-venture-name" name="ventureName" type="text" />
+                <label for="f-ventureName">Name of your business or idea, if it has one</label>
+                <input id="f-ventureName" name="ventureName" type="text" />
+                
               </div>
 
               <div class="field">
-                <label for="f-venture">What does it do? <span class="field__hint">(Optional. One or two sentences.)</span></label>
-                <textarea id="f-venture" name="ventureDetails" rows="2"></textarea>
+                <label for="f-ventureDetails">In a sentence or two, what is it?<span class="field__hint">What you grow, make or sell, and to whom. Leave blank if you are still looking for an idea.</span></label>
+                <textarea id="f-ventureDetails" name="ventureDetails" rows="2"></textarea>
+                
               </div>
 
-              <div class="field">
-                <label for="f-goal">What do you want to achieve in the next six months? <span class="req" aria-hidden="true">*</span></label>
-                <textarea id="f-goal" name="goal" rows="3" required></textarea>
-                <p class="field__error">Please tell us your goal.</p>
-              </div>
-
-              <div class="field">
-                <label for="f-why">Why do you need mentorship now? <span class="req" aria-hidden="true">*</span></label>
-                <textarea id="f-why" name="why" rows="3" required></textarea>
-                <p class="field__error">A sentence or two is plenty.</p>
-              </div>
-
-              <div class="field">
-                <label for="f-challenge">Your biggest challenge right now <span class="field__hint">(Optional)</span></label>
-                <textarea id="f-challenge" name="challenge" rows="2"></textarea>
-              </div>
-
-              <fieldset class="field">
-                <legend class="field__legend">How would you like to be mentored? <span class="req" aria-hidden="true">*</span></legend>
-                <div class="choices choices--inline">
-                  <label class="choice"><input type="radio" name="format" value="One-to-one" required /> One-to-one</label>
-                  <label class="choice"><input type="radio" name="format" value="Small group" /> In a small group</label>
-                  <label class="choice"><input type="radio" name="format" value="Either" /> Either</label>
-                </div>
-                <p class="field__error">Please choose one.</p>
-              </fieldset>
-
-              <fieldset class="field">
-                <legend class="field__legend">Where would you meet? <span class="req" aria-hidden="true">*</span></legend>
-                <div class="choices choices--inline">
-                  <label class="choice"><input type="radio" name="mode" value="Online" required /> Online</label>
-                  <label class="choice"><input type="radio" name="mode" value="In person" /> In person</label>
-                  <label class="choice"><input type="radio" name="mode" value="Either" /> Either</label>
-                </div>
-                <p class="field__error">Please choose one.</p>
-              </fieldset>
-
-              <fieldset class="field">
-                <legend class="field__legend">How often could you meet? <span class="req" aria-hidden="true">*</span></legend>
-                <div class="choices choices--inline">
-                  <label class="choice"><input type="radio" name="frequency" value="Once a month" required /> Once a month</label>
-                  <label class="choice"><input type="radio" name="frequency" value="Twice a month" /> Twice a month</label>
-                  <label class="choice"><input type="radio" name="frequency" value="As needed" /> As needed</label>
-                </div>
-                <p class="field__error">Please choose one.</p>
-              </fieldset>
-
-              <fieldset class="field">
-                <legend class="field__legend">Permissions</legend>
+              <fieldset class="field" data-max="2">
+                <legend class="field__legend">Which areas interest you most? <span class="req" aria-hidden="true">*</span><span class="field__hint">Choose up to two.</span></legend>
                 <div class="choices">
-                  <label class="choice"><input type="checkbox" name="consentShare" value="Yes" required /> I agree that SWK Ghana may share my name, contact details and answers with the mentor I am matched with. <span class="req" aria-hidden="true">*</span></label>
-                  <label class="choice"><input type="checkbox" name="consentContact" value="Yes" /> SWK Ghana may also contact me about other programmes.</label>
+                  <label class="choice"><input type="checkbox" name="tracks" value="Production" required /><span>Production<span class="choice__sub">Crops, livestock, poultry, fish; climate-smart farming, inputs, irrigation</span></span></label>
+                  <label class="choice"><input type="checkbox" name="tracks" value="Processing and value addition" /><span>Processing and value addition<span class="choice__sub">Drying, milling, packaging, product development, standards</span></span></label>
+                  <label class="choice"><input type="checkbox" name="tracks" value="Markets and trade" /><span>Markets and trade<span class="choice__sub">Selling, aggregation, export, branding, digital marketing</span></span></label>
+                  <label class="choice"><input type="checkbox" name="tracks" value="Agri-tech and innovation" /><span>Agri-tech and innovation<span class="choice__sub">Drones, farm data, digital platforms, solar</span></span></label>
+                  <label class="choice"><input type="checkbox" name="tracks" value="Not sure yet" /> Not sure yet</label>
                 </div>
-                <p class="field__error">We need this to pass your request to a mentor.</p>
+                <p class="field__hint limit-note" aria-live="polite"></p>
+                <p class="field__error">Please tick at least one.</p>
+              </fieldset>
+
+              <fieldset class="field" data-max="3">
+                <legend class="field__legend">What holds you back most right now? <span class="req" aria-hidden="true">*</span><span class="field__hint">Choose up to three.</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="challenges" value="Money to start" required /> Money to start</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Access to land" /> Access to land</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Finding buyers and markets" /> Finding buyers and markets</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Knowledge and skills" /> Knowledge and skills</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Inputs and equipment" /> Inputs and equipment</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Keeping records and managing money" /> Keeping records and managing money</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Registration and standards (FDA, GSA)" /> Registration and standards (FDA, GSA)</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Technology" /> Technology</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Transport and storage" /> Transport and storage</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Confidence" /> Confidence</label>
+                  <label class="choice"><input type="checkbox" name="challenges" value="Other" /> Other</label>
+                </div>
+                <p class="field__hint limit-note" aria-live="polite"></p>
+                <p class="field__error">Please tick at least one.</p>
+              </fieldset>
+
+              <fieldset class="field" data-max="3">
+                <legend class="field__legend">Which kinds of support would help you most? <span class="req" aria-hidden="true">*</span><span class="field__hint">Choose up to three.</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="support" value="A one-to-one mentor" required /> A one-to-one mentor</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Time inside a working farm or business" /> Time inside a working farm or business</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Group clinics and masterclasses" /> Group clinics and masterclasses</label>
+                  <label class="choice"><input type="checkbox" name="support" value="A peer group of other young agripreneurs" /> A peer group of other young agripreneurs</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Start-up funding or a starter kit" /> Start-up funding or a starter kit</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Links to buyers and markets" /> Links to buyers and markets</label>
+                  <label class="choice"><input type="checkbox" name="support" value="Free courses (e.g. the Agribusiness e-Academy)" /> Free courses (e.g. the Agribusiness e-Academy)</label>
+                </div>
+                <p class="field__hint limit-note" aria-live="polite"></p>
+                <p class="field__error">Please tick at least one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">To start small, roughly how much would you need? <span class="req" aria-hidden="true">*</span><span class="field__hint">A rough guess is fine. It helps us plan start-up support.</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="startNeed" value="Under GH₵1,000" required /> Under GH₵1,000</label>
+                  <label class="choice"><input type="radio" name="startNeed" value="GH₵1,000 to 5,000" /> GH₵1,000 to 5,000</label>
+                  <label class="choice"><input type="radio" name="startNeed" value="GH₵5,000 to 20,000" /> GH₵5,000 to 20,000</label>
+                  <label class="choice"><input type="radio" name="startNeed" value="Over GH₵20,000" /> Over GH₵20,000</label>
+                  <label class="choice"><input type="radio" name="startNeed" value="Not sure" /> Not sure</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+            </div>
+
+            <!-- ── Page 3: The programme ── -->
+            <div class="reg__step" data-step="3">
+              <h2>The programme</h2>
+              <p>Six months, July to December 2027. Free for mentees.</p>
+
+              <fieldset class="field">
+                <legend class="field__legend">Would you like to apply when applications open in May 2027? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="interest" value="Yes, I plan to apply" required /> Yes, I plan to apply</label>
+                  <label class="choice"><input type="radio" name="interest" value="Maybe, tell me more" /> Maybe, tell me more</label>
+                  <label class="choice"><input type="radio" name="interest" value="No, but keep me in the community" /> No, but keep me in the community</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">Could you give about 6 hours a month, July to December 2027? <span class="req" aria-hidden="true">*</span><span class="field__hint">One mentor-circle session, one one-to-one session and one group clinic each month.</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="availability" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="availability" value="Not sure" /> Not sure</label>
+                  <label class="choice"><input type="radio" name="availability" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">How would you prefer to meet your mentor? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="format" value="In person" required /> In person</label>
+                  <label class="choice"><input type="radio" name="format" value="Online" /> Online</label>
+                  <label class="choice"><input type="radio" name="format" value="Both" /> Both</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <div class="field">
+                <label for="f-goal">If you joined, what would you want to have achieved by December 2027?<span class="field__hint">Optional. For example: my first 100 customers, my poultry farm running, a registered product.</span></label>
+                <textarea id="f-goal" name="goal" rows="3"></textarea>
+                
+              </div>
+
+              <fieldset class="field" data-max="2">
+                <legend class="field__legend">Is there a Summit speaker or facilitator you would especially like to learn from?<span class="field__hint">Optional. Choose up to two. We will ask them, but every match depends on their time and the programme's mentors.</span></legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Wilfred Agbi" /><span>Wilfred Agbi<span class="choice__sub">Founder and CEO, Calidad Farms Limited</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Tracey Rama Osman Tia" /><span>Tracey Rama Osman Tia<span class="choice__sub">Agricultural Drone Pilot; Co-founder, C2 Drone Consult and Drones &amp; More</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Richard Yennunam Laarison" /><span>Richard Yennunam Laarison<span class="choice__sub">Co-founder, Vehlverde Farms</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Samuel Yeboah" /><span>Samuel Yeboah<span class="choice__sub">Country Director, Dream Renewables</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Sheila Cornelius" /><span>Sheila Cornelius<span class="choice__sub">CEO, Lam Naturals; Managing Director, Cornelius Farms</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Wendy Dumelo" /><span>Wendy Dumelo<span class="choice__sub">CEO and Co-Founder, JERO Foods</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Jonathan Kwarteng" /><span>Jonathan Kwarteng<span class="choice__sub">Founder and CEO, Farmer Hut, Ada</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Leticia Boateng" /><span>Leticia Boateng<span class="choice__sub">Digital Learning Advisor, GIZ · Agri-Business Facility for Africa</span></span></label>
+                  <label class="choice"><input type="checkbox" name="preferredMentors" value="Elizabeth Kabukie Ocansey" /><span>Elizabeth Kabukie Ocansey<span class="choice__sub">Broadcast Journalist, ChannelOne TV and Citi FM</span></span></label>
+                </div>
+                <p class="field__hint limit-note" aria-live="polite"></p>
+                
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">May we contact you about the programme and other SWK Ghana opportunities? <span class="req" aria-hidden="true">*</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="consentContact" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="consentContact" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
+              </fieldset>
+
+              <fieldset class="field">
+                <legend class="field__legend">May we use your answers, without your name, in our research and public reports? <span class="req" aria-hidden="true">*</span><span class="field__hint">We only ever publish totals, never one person's answers.</span></legend>
+                <div class="choices choices--inline">
+                  <label class="choice"><input type="radio" name="consentResearch" value="Yes" required /> Yes</label>
+                  <label class="choice"><input type="radio" name="consentResearch" value="No" /> No</label>
+                </div>
+                <p class="field__error">Please choose one.</p>
               </fieldset>
             </div>
 
@@ -485,14 +496,14 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
               </button>
               <button type="submit" class="btn btn--lime" id="reg-submit" hidden>
-                Send my request
+                Register my interest
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right" /></svg>
               </button>
             </div>
 
             <p class="reg__status" id="reg-status" role="status" aria-live="polite"></p>
             <p class="reg__unconfigured" id="reg-unconfigured">
-              This form is not connected yet. In the meantime, send your request to
+              This form is not connected yet. In the meantime, write to us at
               <a href="mailto:info@swkghana.org">info@swkghana.org</a>.
             </p>
           </form>
@@ -503,11 +514,9 @@
                 <path d="m20 6-11 11-5-5" />
               </svg>
             </div>
-            <h2>Request received.</h2>
+            <h2>You are on the list.</h2>
             <p>
-              We will speak with the mentors and get back to you on the number you gave us. Matches depend on
-              each mentor's time, so it may take a few weeks. While you wait, keep learning with free courses on
-              the Agribusiness e-Academy and join the SWK Ghana community.
+              Thank you. Your answers will shape the programme. We will share updates, including when applications open in May 2027, through the SWK Ghana WhatsApp community and the contacts you gave us.
             </p>
             <div class="links">
               <a class="btn btn--lime" href="https://online.atingi.org/auth/emailgiz/referral.php?code=YUj5viM2aQzzJdV" target="_blank" rel="noopener noreferrer">Agribusiness e-Academy</a>
@@ -523,7 +532,7 @@
   <footer class="footer">
     <div class="shell footer__row">
       <p>&copy; <span id="year">2026</span> SWK Ghana LBG &middot; <a href="mailto:info@swkghana.org">info@swkghana.org</a></p>
-      <p><a href="https://www.swkghana.org">swkghana.org</a> &middot; <a href="https://swkghana.org/summit">Agribusiness Summit 2026</a></p>
+      <p><a href="https://www.swkghana.org">swkghana.org</a> &middot; <a href="https://swkghana.org/summit">Agribusiness Summit 2026</a> &middot; <a href="https://swkghana.org/give">Give</a></p>
     </div>
   </footer>
 
@@ -536,7 +545,6 @@
       // Paste the Apps Script Web app URL here once deployed (docs/summit-mentorship.gs).
       // While this is empty the form can be walked through but refuses to send, and says so.
       var ENDPOINT = 'https://script.google.com/macros/s/AKfycbw2nWywX4y50eirUYCKGmZ9j7XTGj2GDIybsKdOTe2aNLNrkLuRU6ZkdMn6PRKQk_JfGg/exec';
-      var MAX_MENTORS = 2;
 
       var form = document.getElementById('reg-form');
       var TOTAL = 3;
@@ -617,31 +625,16 @@
       form.addEventListener('input', function (e) { clearError(e.target); });
       form.addEventListener('change', function (e) { clearError(e.target); });
 
-      // A named speaker, or general mentorship.
-      var mentorsWrap = document.getElementById('wrap-mentors');
-      form.querySelectorAll('input[name="mentorType"]').forEach(function (el) {
-        el.addEventListener('change', function () { reveal(mentorsWrap, el.checked && el.value === 'Specific speaker'); });
-      });
-
-      // At most two mentors.
-      var limitNote = document.getElementById('mentor-limit');
-      form.querySelectorAll('input[name="mentors"]').forEach(function (el) {
-        el.addEventListener('change', function () {
-          var chosen = form.querySelectorAll('input[name="mentors"]:checked').length;
-          if (chosen > MAX_MENTORS) {
-            el.checked = false;
-            limitNote.textContent = 'You can choose up to two. Untick one to choose another.';
-          } else {
-            limitNote.textContent = '';
-          }
-        });
-      });
-
-      // "Other" area asks which.
-      var otherWrap = document.getElementById('wrap-area-other');
-      form.querySelectorAll('input[name="areas"]').forEach(function (el) {
-        el.addEventListener('change', function () {
-          reveal(otherWrap, !!form.querySelector('input[name="areas"][value="Other"]:checked'));
+      // "Choose up to N" questions: a fieldset with data-max refuses one tick too many.
+      form.querySelectorAll('fieldset[data-max]').forEach(function (set) {
+        var max = Number(set.dataset.max);
+        var note = set.querySelector('.limit-note');
+        set.querySelectorAll('input[type="checkbox"]').forEach(function (el) {
+          el.addEventListener('change', function () {
+            var chosen = set.querySelectorAll('input:checked').length;
+            if (chosen > max) { el.checked = false; note.textContent = 'You can choose up to ' + max + '. Untick one to choose another.'; }
+            else note.textContent = '';
+          });
         });
       });
 
@@ -661,7 +654,7 @@
           else if (Array.isArray(data[key])) data[key].push(value);
           else data[key] = [data[key], value];
         });
-        ['mentors', 'kinds', 'areas'].forEach(function (k) { if (data[k] && !Array.isArray(data[k])) data[k] = [data[k]]; });
+        ['connection','tracks','challenges','support','preferredMentors'].forEach(function (k) { if (data[k] && !Array.isArray(data[k])) data[k] = [data[k]]; });
         data.company = data.swk_ref || '';
         delete data.swk_ref;
         data.source = window.location.href;
@@ -694,7 +687,7 @@
             backBtn.disabled = false;
             statusEl.classList.add('is-error');
             statusEl.innerHTML = 'Sorry, that did not go through. Please try again, or email <a href="mailto:info@swkghana.org" style="color:inherit">info@swkghana.org</a>.';
-            console.warn('Mentorship request failed:', err);
+            console.warn('Form failed:', err);
           });
       });
 

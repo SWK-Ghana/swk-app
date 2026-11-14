@@ -51,6 +51,10 @@
       "destination": "/summit-mentorship.html"
     },
     {
+      "source": "/become-a-mentor",
+      "destination": "/mentorship-2027-mentors.html"
+    },
+    {
       "source": "/partners",
       "destination": "/summit-call-for-partners.html"
     },

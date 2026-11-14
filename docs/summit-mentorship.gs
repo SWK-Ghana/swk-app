@@ -1,44 +1,30 @@
 /**
- * SWK Ghana Agribusiness Summit 2026 — mentorship requests endpoint.
+ * SWK Mentorship Programme 2027 interest: form endpoint.
  *
- * Receives requests from https://swkghana.org/mentorship (mentorship from a
- * named Summit speaker or facilitator, or general mentorship SWK Ghana will
- * match) and appends one row per request to the Google Sheet below.
+ * Receives answers from https://swkghana.org/mentorship and appends one row per submission to the
+ * Google Sheet below. Part of the Gather step of the SWK Agribusiness Mentorship
+ * Programme 2027.
  *
  * ─── SETUP (about 5 minutes, done once) ─────────────────────────────────────
  *
- *  1. Open the Sheet (created 12 November 2026 in frankkoomson26's Drive):
- *     https://docs.google.com/spreadsheets/d/1BJiIyaFRB60sDLy5g89FjrYWfQ6FEQ-o_zKXloOGVhw/edit
- *     Either do every step below signed in as frankkoomson26 (the owner), or
- *     first share the Sheet with sustainabilitywithkoomson@gmail.com as an
- *     editor. The script runs as whoever deploys it, and that account must be
- *     able to edit the Sheet, or every request fails.
+ *  1. Open the Sheet named in SHEET_ID below, signed in as the account that owns
+ *     it. The script runs as whoever deploys it, and that account must be able
+ *     to edit the Sheet, or every submission fails.
  *
- *  2. Extensions → Apps Script. Delete whatever is in the editor and paste
- *     this entire file in (the private copy with the key, from the founder's
- *     computer). Save.
+ *  2. Extensions → Apps Script. Delete whatever is in the editor and paste this
+ *     entire file in (the private copy with the key). Save.
  *
- *  3. Deploy → New deployment → gear icon → Web app.
- *       Description:    Summit mentorship
- *       Execute as:     Me
- *       Who has access: ANYONE           <-- must be "Anyone", not
- *                                            "Anyone with Google account",
- *                                            or the form gets a login page
- *     Deploy. Approve the permissions prompt (Advanced → Go to … → Allow).
+ *  3. This script is ALREADY deployed for swkghana.org/mentorship. Do not create
+ *     a new deployment. Instead: Deploy → Manage deployments → pencil (Edit) →
+ *     Version: New version → Deploy. The web address stays the same, so the
+ *     website keeps working. Approve any permissions prompt.
  *
- *  4. Copy the Web app URL (https://script.google.com/macros/s/AKfycb..../exec)
- *     and send it to be pasted into public/summit-mentorship.html
- *     (var ENDPOINT = '').
- *
- *  5. Test: visit the URL in a browser. You should see {"ok":true,...}.
- *
- * ─── DASHBOARD TOTALS ───────────────────────────────────────────────────────
- * The staff dashboard reads totals through doGet with a private key. The copy
- * of this file in the public repo leaves STATS_KEY blank.
+ *  4. Test: visit the deployment URL in a browser. You should see
+ *     {"ok":true,"status":"ready","service":"SWK Mentorship Programme 2027 interest"}.
+ *     The first submission creates the "Programme 2027" tab with its header row.
  *
  * ─── IF YOU EVER EDIT THIS SCRIPT ───────────────────────────────────────────
  * Deploy → Manage deployments → pencil → Version: New version → Deploy.
- * The URL stays the same, so the website needs no change.
  *
  * ─── NOTE ON COLUMN ORDER ───────────────────────────────────────────────────
  * ROW_FIELDS below must stay in the same order as the Sheet's header row.
@@ -47,35 +33,47 @@
 
 var SHEET_ID = '1BJiIyaFRB60sDLy5g89FjrYWfQ6FEQ-o_zKXloOGVhw';
 
+// New answers go to their own tab, created with a header row the first time.
+// Earlier tabs (the Summit 2026 requests) are never read or changed.
+var SHEET_TAB = 'Programme 2027';
+
 // Order must match the Sheet header row (after the Timestamp column).
 var ROW_FIELDS = [
   'fullName',
   'phone',
   'email',
   'gender',
-  'age',
+  'ageGroup',
   'location',
   'status',
-  'attended',
-  'mentorType',
-  'mentors',
-  'mentorReason',
-  'kinds',
-  'areas',
-  'areaOther',
+  'connection',
+  'inCommunity',
   'stage',
   'ventureName',
   'ventureDetails',
-  'goal',
-  'why',
-  'challenge',
+  'tracks',
+  'challenges',
+  'support',
+  'startNeed',
+  'interest',
+  'availability',
   'format',
-  'mode',
-  'frequency',
-  'consentShare',
+  'goal',
+  'preferredMentors',
   'consentContact',
+  'consentResearch',
   'source',
 ];
+
+function targetSheet() {
+  var book = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = book.getSheetByName(SHEET_TAB);
+  if (!sheet) {
+    sheet = book.insertSheet(SHEET_TAB);
+    sheet.appendRow(['Timestamp'].concat(ROW_FIELDS));
+  }
+  return sheet;
+}
 
 function json(obj) {
   return ContentService
@@ -86,7 +84,7 @@ function json(obj) {
 /** Visiting the deployment URL in a browser hits this — a quick health check. */
 function doGet(e) {
   if (e && e.parameter && e.parameter.stats) return json(stats(e.parameter.stats));
-  return json({ ok: true, status: 'ready', service: 'SWK Summit 2026 mentorship' });
+  return json({ ok: true, status: 'ready', service: 'SWK Mentorship Programme 2027 interest' });
 }
 
 function doPost(e) {
@@ -100,7 +98,7 @@ function doPost(e) {
     // Honeypot: the form ships a hidden field no human ever fills in. Bots do.
     if (data.company) return json({ ok: true });
 
-    var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+    var sheet = targetSheet();
 
     var row = [new Date()];
     for (var i = 0; i < ROW_FIELDS.length; i++) {
@@ -129,7 +127,7 @@ function doPost(e) {
 // Read-only: this never changes the Sheet. It returns counts for the staff
 // dashboard and never a person's answers. Only the questions in STATS_FIELDS
 // are counted, and a group smaller than STATS_MIN_GROUP is folded into
-// "Other". Email is used only to count repeat entries.
+// "Other". Phone is used only to count repeat entries.
 // STATS_KEY stays blank in the public copy of this file, which turns this off.
 
 var STATS_KEY = '';
@@ -137,12 +135,20 @@ var STATS_MIN_GROUP = 3;
 var STATS_TOP_GROUPS = 12;
 var STATS_DAY_MS = 24 * 60 * 60 * 1000;
 var STATS_FIELDS = {
-  mentorType: {},
-  mentors: {},
-  kinds: {},
-  areas: {},
+  ageGroup: {},
+  gender: {},
+  status: {},
+  connection: {},
+  inCommunity: {},
   stage: {},
-  attended: {},
+  tracks: {},
+  challenges: {},
+  support: {},
+  startNeed: {},
+  preferredMentors: {},
+  interest: {},
+  availability: {},
+  format: {},
 };
 
 function statsValues(raw) {
@@ -169,9 +175,9 @@ function statsGroups(counts) {
 function stats(key) {
   if (!STATS_KEY || key !== STATS_KEY) return { ok: false, error: 'not allowed' };
 
-  var rows = SpreadsheetApp.openById(SHEET_ID).getSheets()[0].getDataRange().getValues();
+  var rows = targetSheet().getDataRange().getValues();
   var fields = Object.keys(STATS_FIELDS);
-  var emailColumn = ROW_FIELDS.indexOf('email') + 1;
+  var emailColumn = ROW_FIELDS.indexOf('phone') + 1;
   var now = Date.now();
   var counts = {};
   var daily = {};

@@ -6,7 +6,7 @@ import vm from 'node:vm'
 
 const KEY = 'test-key'
 const DAY_MS = 24 * 60 * 60 * 1000
-const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application', 'summit-mentorship']
+const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application', 'summit-mentorship', 'mentorship-2027-mentors']
 
 // Loads a script with the key filled in. `sheet` records any attempt to change it.
 const load = (file, rows, key = KEY) => {
@@ -18,7 +18,7 @@ const load = (file, rows, key = KEY) => {
     getLastRow: () => rows.length,
   }
   const context = {
-    SpreadsheetApp: { openById: () => ({ getSheets: () => [sheet] }) },
+    SpreadsheetApp: { openById: () => ({ getSheets: () => [sheet], getSheetByName: () => sheet, insertSheet: () => sheet }) },
     ContentService: {
       MimeType: { JSON: 'json' },
       createTextOutput: (text) => ({ setMimeType: () => JSON.parse(text) }),
