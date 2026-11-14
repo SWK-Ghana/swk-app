@@ -699,6 +699,45 @@ const Home = () => {
         <Section>
           <SectionHeader title="Our Projects & Impact" subtitle="From agribusiness webinars to climate action — here's what we've been building." />
 
+          {/* Featured: the Agribusiness Summit 2026. Its report and the mentorship
+              form are static pages, so plain <a> rather than router links. */}
+          <article className="mb-6 grid overflow-hidden rounded-2xl border border-[#D4F0A0] bg-white shadow-sm lg:grid-cols-[1.1fr_1fr]">
+            <a href="/reports/agribusiness-summit-2026" tabIndex={-1} aria-hidden="true" className="block bg-[#0C2E11]">
+              <img
+                src="/summit-2026/group-800.webp"
+                srcSet="/summit-2026/group-800.webp 800w, /summit-2026/group-1600.webp 1600w"
+                sizes="(min-width: 1024px) 52vw, 100vw"
+                width="1600"
+                height="822"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="h-full min-h-[14rem] w-full object-cover"
+              />
+            </a>
+            <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Just held · 7 November 2026</p>
+              <h3 className="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">Agribusiness Summit 2026</h3>
+              <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
+                Our first in-person Summit, in Accra: a panel on building profitable agribusinesses, Spotlight talks from
+                the field, and a hands-on Agribusiness Model Canvas workshop where groups pitched their ideas.
+              </p>
+              <ul className="flex flex-wrap gap-2 text-xs font-semibold text-[#17702D]">
+                {['138 registrations', '62 in the room', '13 speakers and facilitators', '6 partners'].map((s) => (
+                  <li key={s} className="rounded-full border border-[#C0E870] bg-[#F2FAE8] px-3 py-1">{s}</li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+                <a href="/reports/agribusiness-summit-2026" className="btn-gradient rounded-xl px-5 py-2.5 text-sm font-semibold">
+                  See what happened →
+                </a>
+                <a href="/mentorship" className="text-sm font-bold text-[#17702D] hover:underline">
+                  Next: Mentorship Programme 2027 →
+                </a>
+              </div>
+            </div>
+          </article>
+
           {/* The webinar series, then our partnerships (src/data/partnerships.js),
               each linking to its full story on Our Work. */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xs:gap-6 mb-8">

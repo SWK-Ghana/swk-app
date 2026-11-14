@@ -1,0 +1,135 @@
+// SWK Ghana reports, newest first. Shown in full on /reports and as a
+// preview on /resources.
+import { LuClipboardList, LuMicroscope } from 'react-icons/lu'
+
+export const REPORTS = [
+  {
+    id: 7,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'Event Report: Agribusiness Summit 2026',
+    description:
+      'Our first in-person Summit, 7 November 2026 in Accra: 138 registrations, 13 speakers and facilitators, 6 partners. The day in photos, numbers and voices, what we learned, and what is next.',
+    date: 'November 2026',
+    thumbnail: '/summit-2026/group-800.webp',
+    badgeText: 'Latest Report',
+    driveLink: 'https://swkghana.org/reports/agribusiness-summit-2026',
+    downloadLink: 'https://swkghana.org/reports/SWK-Ghana-Agribusiness-Summit-2026-Report.pdf',
+  },
+  {
+    id: 6,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'Webinar Report: Elevator Pitch Workshop — September 2026',
+    description:
+      'Event report from Pitch Ready, our Elevator Pitch Workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.',
+    date: 'September 2026',
+    thumbnail:
+      // The poster's "THANK YOU" header, so the wide cover isn't cut mid-text.
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/c_crop,x_0,y_0,w_1080,h_608/f_auto,q_auto,w_800/v1790860574/SWK_Ghana_EPW_Thank_You_Poster_v4_mw6mdj.png',
+    badgeText: null,
+    driveLink: 'https://swkghana.org/reports/elevator-pitch-workshop-2026',
+    downloadLink: 'https://swkghana.org/reports/SWK-Ghana-Elevator-Pitch-Workshop-Report-2026.pdf',
+  },
+  {
+    id: 5,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'Agribusiness Webinar Report: Strategic Partnerships — May 2026',
+    description:
+      'Summary report from our May 2026 Agribusiness Webinar on Strategic Partnerships. Insights, attendee highlights, and key takeaways from the session.',
+    date: 'May 2026',
+    thumbnail:
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1781077401/SWK_Ghana_Webinar_Thank_you_Flyer_3_dtptq4.png',
+    badgeText: null,
+    driveLink: 'https://drive.google.com/file/d/1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=1YH1I2D0HKRKCchaz6zi59Ufqij6gmOPi',
+  },
+  {
+    id: 1,
+    category: 'Impact Report',
+    categoryColor: 'bg-[#F2FAE8] text-[#17702D]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'Agribusiness Webinar Series Impact Report 2025',
+    description:
+      'Three-edition webinar series (September–November 2025). 230+ verified registrants, demographic insights, SDG alignment, and full impact metrics.',
+    date: 'November 2025',
+    thumbnail:
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1760551738/SWK_Ghana_Webinar_Thank_you_Flyer_2_rwupaq.png',
+    badgeText: null,
+    driveLink: 'https://drive.google.com/file/d/1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=1Sl55CXUFD_OQY8GYmx9IeTaM0jOTr-Po',
+  },
+  {
+    id: 2,
+    category: 'Annual Report',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: 'bg-[#17702D] hover:bg-[#0F5A24]',
+    btnBorder: 'border-[#78C31E] text-[#17702D] hover:bg-[#F2FAE8]',
+    title: 'SWK Ghana Annual Report 2025',
+    description:
+      "Our annual review of programs, partnerships, community impact, and organizational milestones for the year 2025.",
+    date: 'March 2026',
+    // Using the SWK community photo as the annual report cover
+    thumbnail:
+      'https://res.cloudinary.com/dwgj3lovn/image/upload/f_auto,q_auto,w_600/v1773615456/photo_2026-03-15_22-53-24_iqemaf.jpg',
+    badgeText: 'Annual Report',
+    driveLink: 'https://drive.google.com/file/d/17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4/view?usp=sharing',
+    downloadLink: 'https://drive.google.com/uc?export=download&id=17wNhPEXy1_VCo8uDD1rWzwRqvm8bmQx4',
+  },
+  {
+    id: 3,
+    category: 'Program Summary',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: null,
+    btnBorder: null,
+    title: 'Youth Development Program Summary',
+    description:
+      "A comprehensive summary of SWK Ghana's youth development programs, geographic reach, and outcomes across Ghana.",
+    date: 'Coming Soon',
+    thumbnail: null,
+    thumbIcon: LuClipboardList,
+    thumbBg: 'from-[#D4F0A0] to-[#F2FAE8]',
+    badgeText: null,
+    driveLink: null,
+    downloadLink: null,
+  },
+  {
+    id: 4,
+    category: 'Research',
+    categoryColor: 'bg-[#EAF6DC] text-[#0F5A24]',
+    gradient: 'from-[#F2FAE8] to-white',
+    border: 'border-[#D4F0A0]',
+    btnColor: null,
+    btnBorder: null,
+    title: 'Youth & Sustainable Agriculture in Ghana',
+    description:
+      'Research findings on the role of youth in advancing sustainable agriculture and agribusiness value chains across Ghana.',
+    date: 'Coming Soon',
+    thumbnail: null,
+    thumbIcon: LuMicroscope,
+    thumbBg: 'from-[#D4F0A0] to-[#F2FAE8]',
+    badgeText: null,
+    driveLink: null,
+    downloadLink: null,
+  },
+]

@@ -1,162 +1,211 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { LuDownload, LuExternalLink, LuFileText } from 'react-icons/lu'
 import Seo from './Seo'
-import PageHero from './PageHero'
-import { FlowPanel } from './Patterns'
-import { TOOLKIT, RESOURCES } from '../data/support'
+import ToolkitCover from './ToolkitCover'
+import { FlowBackdrop, FlowPanel, FlowStrip } from './Patterns'
+import { TOOLKIT, RESOURCES, CATEGORIES } from '../data/support'
+import { REPORTS } from '../data/reports'
+
+// Resources opens straight onto the resources themselves: a slim header, then
+// the NGO Support Hub (with a preview of the toolkit), then reports, then FAQ.
+
+const PREVIEW_GUIDES = TOOLKIT.slice(0, 4)
+// One trusted link from each of the first four library topics.
+const PREVIEW_LINKS = CATEGORIES.slice(0, 4)
+  .map((c) => ({ cat: c.label, item: RESOURCES.find((r) => r.cat === c.id) }))
+  .filter((x) => x.item)
+const LATEST_REPORTS = REPORTS.filter((r) => r.driveLink).slice(0, 3)
+
+const kb = (bytes) => (bytes ? `${Math.round(bytes / 1024)} KB` : null)
+
+const SectionTitle = ({ eyebrow, title, children, action }) => (
+  <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="max-w-2xl">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">{eyebrow}</p>
+      <h2 className="mt-2 text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">{title}</h2>
+      {children && <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">{children}</p>}
+    </div>
+    {action}
+  </div>
+)
 
 const Resources = () => {
-
   return (
     <div className="min-h-screen swk-weave">
       <Seo
         title="Resources | SWK Ghana"
-        description="Access SWK Ghana's resources, guides, and educational materials on youth development, sustainability, climate action, agribusiness, and the circular economy."
+        description="Free NGO toolkit and trusted links, SWK Ghana's impact reports, and answers to common questions."
         path="/resources"
       />
-      <PageHero
-        title="Resources"
-        lede="Everything you need to learn about SWK Ghana, get answers, and connect with our team."
-        pattern="keys"
-      />
-      <div className="swk-shell py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
-        <div>
 
-          {/* Active Resources */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 xs:gap-6 mb-10">
+      {/* Slim header: the page gets straight to the resources. */}
+      <header className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
+        <FlowBackdrop />
+        <div className="relative swk-shell py-7 sm:py-9">
+          <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">Resources</h1>
+          <p className="mt-2 max-w-2xl text-sm text-white/80 sm:text-base">
+            Free tools for NGOs and non-profits, our reports, and answers to common questions.
+          </p>
+          <nav className="mt-4 flex flex-wrap gap-2 text-sm font-semibold" aria-label="On this page">
+            <a href="#ngo-support" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Support for NGOs and NPOs</a>
+            <a href="#reports" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Reports</a>
+            <a href="#faq" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">FAQ</a>
+          </nav>
+        </div>
+        <FlowStrip />
+      </header>
 
-            {/* FAQ */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md hover:border-[#78C31E] transition-all duration-200 flex flex-col">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-[#F2FAE8] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">FAQ</h3>
-                </div>
-              </div>
-              <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-5">
-                Frequently asked questions and answers about SWK Ghana, our programmes, the marketplace, partnerships, and how to get involved.
-              </p>
-              <Link
-                to="/faq"
-                className="btn-gradient px-5 py-2.5 text-sm font-semibold rounded-xl text-center"
-              >
-                View FAQ →
-              </Link>
-            </div>
+      <div className="swk-shell space-y-14 py-10 sm:space-y-16 sm:py-12">
 
-            {/* Support */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md hover:border-[#78C31E] transition-all duration-200 flex flex-col">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-[#F2FAE8] rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">Support for NGOs</h3>
-                </div>
-              </div>
-              <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-5">
-                Our free NGO Support Hub: {TOOLKIT.length} templates and guides, plus {RESOURCES.length} trusted links to help NGOs register, raise funds, measure impact and grow.
-              </p>
-              <Link
-                to="/support"
-                className="btn-gradient px-5 py-2.5 text-sm font-semibold rounded-xl text-center"
-              >
+        {/* ══ 1. Support for NGOs and NPOs ══════════════════════════════════ */}
+        <section id="ngo-support" className="scroll-mt-28">
+          <SectionTitle
+            eyebrow="NGO Support Hub"
+            title="Support for NGOs and NPOs"
+            action={(
+              <Link to="/support" className="btn-gradient shrink-0 rounded-xl px-5 py-2.5 text-center text-sm font-semibold">
                 Open the Support Hub →
               </Link>
-              <Link to="/contact" className="mt-3 text-center text-sm font-semibold text-[#17702D] hover:underline">
-                Need our team? Contact us
-              </Link>
-            </div>
-          </div>
+            )}
+          >
+            {TOOLKIT.length} free templates and guides from our own experience, plus {RESOURCES.length} trusted links to help
+            NGOs and non-profits register, raise funds, measure impact and grow.
+          </SectionTitle>
 
-          {/* Reports Section */}
-          <div className="bg-[#F2FAE8] border border-[#D4F0A0] rounded-2xl p-6 sm:p-8 mb-10">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#78C31E] rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">SWK Ghana Reports</h3>
-                  <p className="text-gray-700 text-sm leading-relaxed max-w-lg">
-                    Download our Annual Reports and Impact Reports — tracking our programmes, reach, and community outcomes across Ghana and Africa.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#17702D] px-3 py-1 rounded-full">Annual Report 2025</span>
-                    <span className="text-xs font-semibold bg-white border border-[#D4F0A0] text-[#17702D] px-3 py-1 rounded-full">Agribusiness Impact Report 2025</span>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {PREVIEW_GUIDES.map((d) => (
+              <article key={d.file} className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#B5DE7F] hover:shadow-md">
+                <ToolkitCover no={d.no} title={d.title} edition={d.edition} className="h-36" />
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#17702D]">{d.topic}</p>
+                  <p className="flex-1 text-sm leading-relaxed text-gray-600">{d.desc}</p>
+                  <p className="text-xs text-gray-500">PDF{d.pages ? ` · ${d.pages} page${d.pages > 1 ? 's' : ''}` : ''}{kb(d.bytes) ? ` · ${kb(d.bytes)}` : ''}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-bold">
+                    <a href={d.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                      <LuExternalLink className="h-4 w-4" aria-hidden="true" />Preview
+                    </a>
+                    <a href={d.href} download className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                      <LuDownload className="h-4 w-4" aria-hidden="true" />Download
+                    </a>
                   </div>
                 </div>
-              </div>
-              <Link
-                to="/reports"
-                className="btn-gradient px-6 py-3 text-sm font-semibold rounded-xl flex-shrink-0 text-center"
-              >
-                View All Reports →
-              </Link>
-            </div>
-          </div>
-
-          {/* Coming Soon Resources */}
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Coming soon</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
-
-            {[
-              {
-                icon: (
-                  <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                ),
-                title: 'Video Library',
-                description: 'Recorded webinars, programme recaps, and educational videos.',
-              },
-              {
-                icon: (
-                  <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                ),
-                title: 'Community Hub',
-                description: 'A space to connect with fellow SWK Ghana members and changemakers.',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-white/70 border border-dashed border-gray-300 rounded-2xl p-5 flex flex-col">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4 flex-shrink-0">
-                  {item.icon}
-                </div>
-                <h3 className="text-base font-bold text-gray-800 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed flex-1">{item.description}</p>
-              </div>
+              </article>
             ))}
           </div>
 
-          {/* WhatsApp CTA */}
-          <FlowPanel className="p-6 sm:p-10 text-center">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-              Join our WhatsApp Community
-            </h3>
-            <p className="text-white/90 text-sm sm:text-base mb-5 max-w-xl mx-auto">
-              Get the latest programme updates, resources, and announcements directly on WhatsApp. Over 100 members already inside.
-            </p>
-            <a
-              href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-white text-[#17702D] hover:text-[#17702D] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors text-sm sm:text-base"
-            >
-              Join Now →
-            </a>
-          </FlowPanel>
+          <div className="mt-5 rounded-2xl border border-[#D4F0A0] bg-white p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm font-bold text-gray-900">Trusted links, from registering in Ghana to funding and free tech</p>
+              <Link to="/support#library" className="shrink-0 text-sm font-bold text-[#17702D] hover:underline">
+                See all {RESOURCES.length} links →
+              </Link>
+            </div>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {PREVIEW_LINKS.map(({ cat, item }) => (
+                <li key={item.href}>
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="group block h-full rounded-xl bg-[#F7FAF2] p-4 transition-colors hover:bg-[#EAF6DC]">
+                    <span className="text-[0.7rem] font-bold uppercase tracking-wide text-[#17702D]">{cat}</span>
+                    <span className="mt-1 flex items-start gap-1.5 text-sm font-bold text-gray-900">
+                      {item.name}
+                      <LuExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-400 group-hover:text-[#17702D]" aria-hidden="true" />
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-gray-600">{item.desc}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-        </div>
+        {/* ══ 2. Reports ════════════════════════════════════════════════════ */}
+        <section id="reports" className="scroll-mt-28">
+          <SectionTitle
+            eyebrow="Reports"
+            title="What we do, in numbers"
+            action={(
+              <Link to="/reports" className="btn-gradient shrink-0 rounded-xl px-5 py-2.5 text-center text-sm font-semibold">
+                View all reports →
+              </Link>
+            )}
+          >
+            Event reports, impact reports and our annual reports, tracking our programmes, reach and results.
+          </SectionTitle>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {LATEST_REPORTS.map((r) => (
+              <article key={r.id} className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                {r.thumbnail && (
+                  <img src={r.thumbnail} alt="" className="h-40 w-full object-cover" loading="lazy" decoding="async" />
+                )}
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <p className="text-xs text-gray-600">{r.category} · {r.date}</p>
+                  <h3 className="text-base font-bold leading-snug text-gray-900">{r.title}</h3>
+                  <p className="flex-1 text-sm leading-relaxed text-gray-600">{r.description}</p>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+                    <a href={r.driveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                      <LuFileText className="h-4 w-4" aria-hidden="true" />Read
+                    </a>
+                    {r.downloadLink && (
+                      <a href={r.downloadLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                        <LuDownload className="h-4 w-4" aria-hidden="true" />PDF
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 3. FAQ ════════════════════════════════════════════════════════ */}
+        <section id="faq" className="scroll-mt-28">
+          <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">FAQ</p>
+              <h2 className="mt-2 text-2xl font-bold text-gray-900">Questions about SWK Ghana?</h2>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">
+                Answers about our programmes, the marketplace, partnerships, giving and how to get involved.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+              <Link to="/faq" className="btn-gradient rounded-xl px-5 py-2.5 text-center text-sm font-semibold">View the FAQ →</Link>
+              <Link to="/contact" className="text-center text-sm font-semibold text-[#17702D] hover:underline">Still stuck? Contact us</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══ Coming soon ═══════════════════════════════════════════════════ */}
+        <section>
+          <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">Coming soon</h2>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {[
+              ['Video Library', 'Recorded webinars, programme recaps, and educational videos.'],
+              ['Community Hub', 'A space to connect with fellow SWK Ghana members and changemakers.'],
+            ].map(([title, description]) => (
+              <div key={title} className="rounded-2xl border border-dashed border-gray-300 bg-white/70 p-5">
+                <h3 className="mb-2 text-base font-bold text-gray-800">{title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600">{description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ WhatsApp ══════════════════════════════════════════════════════ */}
+        <FlowPanel className="p-6 text-center sm:p-10">
+          <h2 className="mb-2 text-xl font-bold text-white sm:text-2xl">Join our WhatsApp Community</h2>
+          <p className="mx-auto mb-5 max-w-xl text-sm text-white/90 sm:text-base">
+            Get the latest programme updates, resources, and announcements directly on WhatsApp. Over 100 members already inside.
+          </p>
+          <a
+            href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-xl bg-white px-6 py-3 text-sm font-bold text-[#17702D] transition-colors hover:bg-gray-100 hover:text-[#17702D] sm:text-base"
+          >
+            Join Now →
+          </a>
+        </FlowPanel>
       </div>
     </div>
   )
