@@ -6,7 +6,7 @@ import vm from 'node:vm'
 
 const KEY = 'test-key'
 const DAY_MS = 24 * 60 * 60 * 1000
-const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application', 'summit-mentorship', 'mentorship-2027-mentors']
+const FILES = ['summit-registration', 'pitch-registration', 'volunteers-application', 'partners-application', 'summit-mentorship', 'mentorship-2027-mentors', 'mentorship-2027-volunteers']
 
 // Loads a script with the key filled in. `sheet` records any attempt to change it.
 const load = (file, rows, key = KEY) => {
@@ -96,7 +96,7 @@ test('the free-text questions are not on any script list', () => {
 // Each form page must send exactly the columns its Apps Script writes, so a
 // script built from another form's copy cannot slip through.
 test('the programme forms send the columns their scripts expect', () => {
-  const pairs = [['summit-mentorship', 'summit-mentorship'], ['mentorship-2027-mentors', 'mentorship-2027-mentors'], ['summit-call-for-volunteers', 'volunteers-application']]
+  const pairs = [['summit-mentorship', 'summit-mentorship'], ['mentorship-2027-mentors', 'mentorship-2027-mentors'], ['summit-call-for-volunteers', 'mentorship-2027-volunteers']]
   for (const [page, script] of pairs) {
     const html = readFileSync(new URL(`../public/${page}.html`, import.meta.url), 'utf8')
     const gs = readFileSync(new URL(`../docs/${script}.gs`, import.meta.url), 'utf8')

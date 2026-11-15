@@ -215,7 +215,7 @@
 
     <!-- ══ THE FORM ══
          Posts JSON to a Google Apps Script web app, which appends a row to the
-         Sheet. Setup lives in docs/volunteers-application.gs; paste ENDPOINT in the script
+         Sheet. Setup lives in docs/mentorship-2027-volunteers.gs; paste ENDPOINT in the script
          below once deployed. -->
     <section class="reg" id="gather-form" aria-label="Volunteer with the SWK Agribusiness Mentorship Programme 2027">
       <div class="shell">
@@ -484,9 +484,9 @@
       if (y) y.textContent = String(new Date().getFullYear());
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Paste the Apps Script Web app URL here once deployed (docs/volunteers-application.gs).
+      // Paste the Apps Script Web app URL here once deployed (docs/mentorship-2027-volunteers.gs).
       // While this is empty the form can be walked through but refuses to send, and says so.
-      var ENDPOINT = ''; // connect after the Apps Script is redeployed with docs/volunteers-application.gs (AKfycbxh2cVD...)
+      var ENDPOINT = '';
 
       var form = document.getElementById('reg-form');
       var TOTAL = 3;
