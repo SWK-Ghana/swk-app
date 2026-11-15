@@ -95,8 +95,8 @@ test('the free-text questions are not on any script list', () => {
 
 // Each form page must send exactly the columns its Apps Script writes, so a
 // script built from another form's copy cannot slip through.
-test('the mentorship forms send the columns their scripts expect', () => {
-  const pairs = [['summit-mentorship', 'summit-mentorship'], ['mentorship-2027-mentors', 'mentorship-2027-mentors']]
+test('the programme forms send the columns their scripts expect', () => {
+  const pairs = [['summit-mentorship', 'summit-mentorship'], ['mentorship-2027-mentors', 'mentorship-2027-mentors'], ['summit-call-for-volunteers', 'volunteers-application']]
   for (const [page, script] of pairs) {
     const html = readFileSync(new URL(`../public/${page}.html`, import.meta.url), 'utf8')
     const gs = readFileSync(new URL(`../docs/${script}.gs`, import.meta.url), 'utf8')

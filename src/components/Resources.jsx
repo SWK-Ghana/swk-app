@@ -8,7 +8,7 @@ import { TOOLKIT, RESOURCES, CATEGORIES } from '../data/support'
 import { REPORTS } from '../data/reports'
 
 // Resources opens straight onto the resources themselves: a slim header, then
-// the NGO Support Hub (with a preview of the toolkit), then reports, then FAQ.
+// reports, then the NGO Support Hub (with a preview of the toolkit), then FAQ.
 
 const PREVIEW_GUIDES = TOOLKIT.slice(0, 4)
 // One trusted link from each of the first four library topics.
@@ -35,7 +35,7 @@ const Resources = () => {
     <div className="min-h-screen swk-weave">
       <Seo
         title="Resources | SWK Ghana"
-        description="Free NGO toolkit and trusted links, SWK Ghana's impact reports, and answers to common questions."
+        description="SWK Ghana's event and impact reports, a free NGO toolkit with trusted links, and answers to common questions."
         path="/resources"
       />
 
@@ -45,11 +45,11 @@ const Resources = () => {
         <div className="relative swk-shell py-7 sm:py-9">
           <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">Resources</h1>
           <p className="mt-2 max-w-2xl text-sm text-white/80 sm:text-base">
-            Free tools for NGOs and non-profits, our reports, and answers to common questions.
+            Our reports, free tools for NGOs and non-profits, and answers to common questions.
           </p>
           <nav className="mt-4 flex flex-wrap gap-2 text-sm font-semibold" aria-label="On this page">
-            <a href="#ngo-support" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Support for NGOs and NPOs</a>
             <a href="#reports" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Reports</a>
+            <a href="#ngo-support" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Support for NGOs and NPOs</a>
             <a href="#faq" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">FAQ</a>
           </nav>
         </div>
@@ -58,7 +58,47 @@ const Resources = () => {
 
       <div className="swk-shell space-y-14 py-10 sm:space-y-16 sm:py-12">
 
-        {/* ══ 1. Support for NGOs and NPOs ══════════════════════════════════ */}
+        {/* ══ 1. Reports ════════════════════════════════════════════════════ */}
+        <section id="reports" className="scroll-mt-28">
+          <SectionTitle
+            eyebrow="Reports"
+            title="What we do, in numbers"
+            action={(
+              <Link to="/reports" className="btn-gradient shrink-0 rounded-xl px-5 py-2.5 text-center text-sm font-semibold">
+                View all reports →
+              </Link>
+            )}
+          >
+            Event reports, impact reports and our annual reports, tracking our programmes, reach and results.
+          </SectionTitle>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {LATEST_REPORTS.map((r) => (
+              <article key={r.id} className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                {r.thumbnail && (
+                  <img src={r.thumbnail} alt="" className="h-40 w-full object-cover" loading="lazy" decoding="async" />
+                )}
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <p className="text-xs text-gray-600">{r.category} · {r.date}</p>
+                  <h3 className="text-base font-bold leading-snug text-gray-900">{r.title}</h3>
+                  <p className="flex-1 text-sm leading-relaxed text-gray-600">{r.description}</p>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+                    <a href={r.driveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                      <LuFileText className="h-4 w-4" aria-hidden="true" />Read
+                    </a>
+                    {r.downloadLink && (
+                      <a href={r.downloadLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
+                        <LuDownload className="h-4 w-4" aria-hidden="true" />PDF
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 2. Support for NGOs and NPOs ══════════════════════════════════ */}
         <section id="ngo-support" className="scroll-mt-28">
           <SectionTitle
             eyebrow="NGO Support Hub"
@@ -115,46 +155,6 @@ const Resources = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        {/* ══ 2. Reports ════════════════════════════════════════════════════ */}
-        <section id="reports" className="scroll-mt-28">
-          <SectionTitle
-            eyebrow="Reports"
-            title="What we do, in numbers"
-            action={(
-              <Link to="/reports" className="btn-gradient shrink-0 rounded-xl px-5 py-2.5 text-center text-sm font-semibold">
-                View all reports →
-              </Link>
-            )}
-          >
-            Event reports, impact reports and our annual reports, tracking our programmes, reach and results.
-          </SectionTitle>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {LATEST_REPORTS.map((r) => (
-              <article key={r.id} className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-                {r.thumbnail && (
-                  <img src={r.thumbnail} alt="" className="h-40 w-full object-cover" loading="lazy" decoding="async" />
-                )}
-                <div className="flex flex-1 flex-col gap-2 p-5">
-                  <p className="text-xs text-gray-600">{r.category} · {r.date}</p>
-                  <h3 className="text-base font-bold leading-snug text-gray-900">{r.title}</h3>
-                  <p className="flex-1 text-sm leading-relaxed text-gray-600">{r.description}</p>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
-                    <a href={r.driveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
-                      <LuFileText className="h-4 w-4" aria-hidden="true" />Read
-                    </a>
-                    {r.downloadLink && (
-                      <a href={r.downloadLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
-                        <LuDownload className="h-4 w-4" aria-hidden="true" />PDF
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </article>
-            ))}
           </div>
         </section>
 
