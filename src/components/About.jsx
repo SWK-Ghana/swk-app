@@ -132,10 +132,10 @@ const About = () => {
                     className="w-full h-48 object-cover"
                     loading="lazy"
                   />
-                  <div className="p-5">
+                  <div className="p-5 text-center">
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#1E963C] transition-colors duration-300">{area.title}</h3>
                     <p className="text-gray-800 leading-relaxed text-sm">{area.desc}</p>
-                    <div className="mt-4 flex items-center text-[#17702D] font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                    <div className="mt-4 flex items-center justify-center text-[#17702D] font-semibold group-hover:translate-x-2 transition-transform duration-300">
                       Learn More
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -151,9 +151,9 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
             {/* Target Group */}
             <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-lg border border-gray-200">
-              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Our Target Group</h2>
+              <h2 className="text-center text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Our Target Group</h2>
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
+                <div className="flex flex-col items-center gap-4 text-center">
                   {/* Fixed: wider box, no overflow */}
                   <div className="flex-shrink-0 w-16 h-16 bg-[#F2FAE8] rounded-xl flex items-center justify-center">
                     <span className="text-[#17702D] font-bold text-sm leading-tight text-center">15–35</span>
@@ -164,8 +164,8 @@ const About = () => {
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-gray-900">We focus on:</h4>
-                  <ul className="space-y-2 text-gray-800">
+                  <h4 className="text-center font-semibold text-gray-900">We focus on:</h4>
+                  <ul className="mx-auto w-fit space-y-2 text-gray-800">
                     {[
                       'Urban poor, rural, and peri-urban communities',
                       'Young women and girls',
@@ -185,7 +185,7 @@ const About = () => {
             {/* Impact Stats */}
             <div className="relative isolate overflow-hidden rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 text-white">
               <FlowBackdrop veil="swk-veil-green" />
-              <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6 text-white">Our Impact</h2>
+              <h2 className="text-center text-xl xs:text-2xl sm:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6 text-white">Our Impact</h2>
               <div className="grid grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">236</div>
