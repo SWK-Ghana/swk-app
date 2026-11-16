@@ -143,12 +143,12 @@ const Reports = () => {
 
       {/* ── All reports with filter ── */}
       <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 xs:mb-8">
+        <div className="flex flex-col items-center gap-4 mb-6 xs:mb-8 text-center">
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900">
             All Documents
           </h2>
           {/* Category filter */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -235,7 +235,7 @@ const Reports = () => {
 
       {/* ── Articles section ── */}
       <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200">
-        <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6">
+        <h2 className="text-center text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-4 xs:mb-6">
           Latest Articles
         </h2>
         {articles.length > 0 ? (

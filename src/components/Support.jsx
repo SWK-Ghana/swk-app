@@ -182,7 +182,7 @@ const Support = () => {
       {/* ══ Toolkit ═══════════════════════════════════════════════════════ */}
       <section id="toolkit" className="scroll-mt-28 swk-weave py-16 sm:py-20">
         <div className="swk-shell">
-          <div className="max-w-2xl">
+          <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Seven practical guides, ready to use today</h2>
             <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
               Written by our team from what we’ve learned running a youth-led NGO in Ghana. Download them, print
@@ -222,7 +222,7 @@ const Support = () => {
       {/* ══ Library ═══════════════════════════════════════════════════════ */}
       <section id="library" className="scroll-mt-28 py-16 sm:py-20">
         <div className="swk-shell">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col items-center gap-6 text-center">
             <div className="max-w-2xl">
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Links worth your time</h2>
               <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
@@ -230,7 +230,7 @@ const Support = () => {
                 checked by our team.
               </p>
             </div>
-            <label className="relative block w-full lg:max-w-sm">
+            <label className="relative block w-full max-w-md text-left">
               <span className="sr-only">Search resources</span>
               <svg className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
@@ -245,7 +245,7 @@ const Support = () => {
             </label>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter by topic">
+          <div className="mt-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by topic">
             {[{ id: 'all', label: 'All' }, ...CATEGORIES].map((c) => {
               const on = cat === c.id
               return (

@@ -20,7 +20,7 @@ const LATEST_REPORTS = REPORTS.filter((r) => r.driveLink).slice(0, 3)
 const kb = (bytes) => (bytes ? `${Math.round(bytes / 1024)} KB` : null)
 
 const SectionTitle = ({ eyebrow, title, children, action }) => (
-  <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+  <div className="mb-6 flex flex-col items-center gap-4 text-center">
     <div className="max-w-2xl">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">{eyebrow}</p>
       <h2 className="mt-2 text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">{title}</h2>
@@ -160,7 +160,7 @@ const Resources = () => {
 
         {/* ══ 3. FAQ ════════════════════════════════════════════════════════ */}
         <section id="faq" className="scroll-mt-28">
-          <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="flex flex-col items-center gap-5 rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-8">
             <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">FAQ</p>
               <h2 className="mt-2 text-2xl font-bold text-gray-900">Questions about SWK Ghana?</h2>
@@ -168,7 +168,7 @@ const Resources = () => {
                 Answers about our programmes, the marketplace, partnerships, giving and how to get involved.
               </p>
             </div>
-            <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+            <div className="flex shrink-0 flex-col items-center gap-2">
               <Link to="/faq" className="btn-gradient rounded-xl px-5 py-2.5 text-center text-sm font-semibold">View the FAQ →</Link>
               <Link to="/contact" className="text-center text-sm font-semibold text-[#17702D] hover:underline">Still stuck? Contact us</Link>
             </div>
@@ -177,7 +177,7 @@ const Resources = () => {
 
         {/* ══ Coming soon ═══════════════════════════════════════════════════ */}
         <section>
-          <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">Coming soon</h2>
+          <h2 className="mb-4 text-center text-xl font-bold text-gray-900 sm:text-2xl">Coming soon</h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {[
               ['Video Library', 'Recorded webinars, programme recaps, and educational videos.'],

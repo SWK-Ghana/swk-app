@@ -600,7 +600,7 @@ const Home = () => {
               />
             </div>
             {/* Text */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 text-center">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Building Africa's Next Generation of Changemakers
               </h2>
@@ -610,7 +610,7 @@ const Home = () => {
               <p className="text-lg text-gray-500 font-light leading-relaxed mb-8">
                 Founded in 2024, our vision is a thriving Africa where empowered youth shape resilient communities and rewrite the future of the continent.
               </p>
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
                 {[
                   { label: 'Founded', value: '2024' },
                   { label: 'Based in', value: 'Accra, Ghana' },
@@ -1047,7 +1047,7 @@ const Home = () => {
               />
             </div>
             {/* Text */}
-            <div className="order-1 lg:order-2 text-center lg:text-left">
+            <div className="order-1 lg:order-2 text-center">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Welcome to the Team
               </h2>
@@ -1059,7 +1059,7 @@ const Home = () => {
               <p className="text-lg text-gray-500 font-light leading-relaxed mb-8">
                 The mission grows stronger with every person who joins it — we're glad to be building this with you.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="btn-gradient text-base px-8 py-4" onClick={() => navigate('/team')}>
                   Meet the Full Team →
                 </button>
