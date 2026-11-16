@@ -78,11 +78,11 @@ const Resources = () => {
                 {r.thumbnail && (
                   <img src={r.thumbnail} alt="" className="h-40 w-full object-cover" loading="lazy" decoding="async" />
                 )}
-                <div className="flex flex-1 flex-col gap-2 p-5">
+                <div className="flex flex-1 flex-col gap-2 p-5 text-center">
                   <p className="text-xs text-gray-600">{r.category} · {r.date}</p>
                   <h3 className="text-base font-bold leading-snug text-gray-900">{r.title}</h3>
                   <p className="flex-1 text-sm leading-relaxed text-gray-600">{r.description}</p>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+                  <div className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm font-bold">
                     <a href={r.driveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#17702D] hover:text-[#0F5A24]">
                       <LuFileText className="h-4 w-4" aria-hidden="true" />Read
                     </a>
@@ -183,7 +183,7 @@ const Resources = () => {
               ['Video Library', 'Recorded webinars, programme recaps, and educational videos.'],
               ['Community Hub', 'A space to connect with fellow SWK Ghana members and changemakers.'],
             ].map(([title, description]) => (
-              <div key={title} className="rounded-2xl border border-dashed border-gray-300 bg-white/70 p-5">
+              <div key={title} className="rounded-2xl border border-dashed border-gray-300 bg-white/70 p-5 text-center">
                 <h3 className="mb-2 text-base font-bold text-gray-800">{title}</h3>
                 <p className="text-sm leading-relaxed text-gray-600">{description}</p>
               </div>

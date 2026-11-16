@@ -105,7 +105,7 @@ const FAQ = () => {
           </div>
 
           <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
-            <FlowPanel className="p-6 sm:p-8">
+            <FlowPanel className="p-6 text-center sm:p-8">
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Still have a question?</h2>
               <p className="text-white/90 text-sm sm:text-base mb-5">
                 Can't find what you're looking for? Our team is happy to help.

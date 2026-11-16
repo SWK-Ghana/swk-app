@@ -25,7 +25,7 @@ const ExternalIcon = () => (
 )
 
 const DocActions = ({ item }) => (
-  <div className="flex flex-wrap items-center gap-2">
+  <div className="flex flex-wrap items-center justify-center gap-2">
     <a
       href={item.href}
       download
@@ -193,7 +193,7 @@ const Support = () => {
           {/* Featured: the Ghana checklist */}
           <article className="mt-10 grid overflow-hidden rounded-3xl border border-[#D4F0A0] bg-white shadow-sm md:grid-cols-[1fr_1.15fr]">
             <Cover no={featured.no} title={featured.title} edition={featured.edition} size="lg" className="min-h-[15rem]" />
-            <div className="flex flex-col justify-center gap-4 p-7 sm:p-9">
+            <div className="flex flex-col justify-center gap-4 p-7 text-center sm:p-9">
               <h3 className="text-2xl font-bold text-gray-900">
                 {featured.title}: <span className="text-[#17702D]">{featured.edition}</span>
               </h3>
@@ -207,7 +207,7 @@ const Support = () => {
             {rest.map((d) => (
               <article key={d.file} className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#B5DE7F] hover:shadow-md">
                 <Cover no={d.no} title={d.title} edition={d.edition} className="h-40" />
-                <div className="flex flex-1 flex-col gap-3 p-6">
+                <div className="flex flex-1 flex-col gap-3 p-6 text-center">
                   <h3 className="text-lg font-bold leading-snug text-gray-900">{d.title}</h3>
                   <p className="flex-1 text-sm leading-relaxed text-gray-600">{d.desc}</p>
                   <DocMeta item={d} />
@@ -320,13 +320,13 @@ const Support = () => {
         <div className="relative isolate overflow-hidden rounded-3xl bg-[#0C2E11] px-6 py-12 text-white sm:px-10 lg:px-14">
           <FlowBackdrop />
           <div className="relative grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
-            <div>
+            <div className="text-center">
               <h2 className="text-3xl font-bold text-white sm:text-4xl">What would help your organisation next?</h2>
-              <p className="mt-4 max-w-xl leading-relaxed text-white/75">
+              <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/75">
                 Tell us which template, guide or tool you need, or share a resource that helped you. We add to this hub
                 as we learn.
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <a href={SUGGEST} className="inline-flex items-center gap-2 rounded-xl bg-[#78C31E] px-6 py-3.5 font-bold text-[#0C2E11] transition-colors hover:bg-[#8AD62B] hover:text-[#0C2E11]">
                   Suggest a resource
                 </a>
@@ -337,10 +337,10 @@ const Support = () => {
                 )}
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
               <p className="font-bold text-white">Follow SWK Ghana</p>
               <p className="mt-1 text-sm text-white/70">New resources, events and opportunities for NGOs and young changemakers.</p>
-              <SocialLinks tone="dark" size="md" className="mt-4" />
+              <SocialLinks tone="dark" size="md" className="mt-4 justify-center" />
             </div>
           </div>
         </div>

@@ -106,7 +106,7 @@ const Reports = () => {
                 />
               </div>
               {/* Content */}
-              <div className="p-5 xs:p-6 flex flex-col flex-1">
+              <div className="p-5 xs:p-6 flex flex-col flex-1 text-center">
                 <p className="text-xs text-gray-700 mb-1">{report.date}</p>
                 <h3 className="text-base xs:text-lg font-bold text-gray-900 mb-2 leading-snug">
                   {report.title}
@@ -193,7 +193,7 @@ const Reports = () => {
                 </div>
               )}
 
-              <div className="p-4 flex flex-col flex-1">
+              <div className="p-4 flex flex-col flex-1 text-center">
                 <p className="text-xs text-gray-700 mb-2">{report.date}</p>
                 <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug flex-1">
                   {report.title}
@@ -243,7 +243,7 @@ const Reports = () => {
             {articles.map((article) => (
               <div
                 key={article.id}
-                className="bg-gradient-to-br from-[#F2FAE8] to-white rounded-xl border border-[#D4F0A0] p-4 xs:p-5 hover:shadow-md transition-shadow"
+                className="bg-gradient-to-br from-[#F2FAE8] to-white rounded-xl border border-[#D4F0A0] p-4 xs:p-5 text-center hover:shadow-md transition-shadow"
               >
                 <p className="text-xs text-gray-700 mb-3">{article.date}</p>
                 <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-2 leading-snug">

@@ -57,7 +57,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xs:gap-10 sm:gap-12">
             {/* Contact Information */}
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200">
-              <h2 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-6 xs:mb-7 sm:mb-8">Get in Touch</h2>
+              <h2 className="text-center text-2xl xs:text-3xl font-bold text-gray-900 mb-6 xs:mb-7 sm:mb-8">Get in Touch</h2>
               <div className="space-y-5 xs:space-y-6 sm:space-y-7">
                 {/* Email */}
                 <div className="flex items-start space-x-3 xs:space-x-4">
@@ -121,7 +121,7 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200">
-              <h2 className="text-xl xs:text-2xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Send us a Message</h2>
+              <h2 className="text-center text-xl xs:text-2xl font-bold text-gray-900 mb-4 xs:mb-5 sm:mb-6">Send us a Message</h2>
 
               {/* Success state */}
               {status === 'success' ? (

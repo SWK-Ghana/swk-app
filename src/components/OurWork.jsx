@@ -246,14 +246,14 @@ const VideoCard = ({ gradient, border, ytId, title, desc }) => {
           />
         </div>
       )}
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 flex flex-col flex-1 text-center">
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{desc}</p>
         <a
           href={`https://www.youtube.com/watch?v=${ytId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 self-start py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
+          className="mt-2 self-center py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
         >
           <LuPlay className="h-3.5 w-3.5" aria-hidden="true" /> Watch on YouTube
         </a>
@@ -287,7 +287,7 @@ const OurWork = () => {
         <div className="relative isolate rounded-xl xs:rounded-2xl overflow-hidden shadow-sm border border-[#78C31E]/40 bg-[#0C2E11] mb-8 xs:mb-10 sm:mb-12">
           <FlowBackdrop />
           <div className="grid grid-cols-1 md:grid-cols-2 items-center">
-            <div className="p-5 xs:p-6 sm:p-8 md:p-10 order-2 md:order-1">
+            <div className="p-5 xs:p-6 sm:p-8 md:p-10 order-2 md:order-1 text-center">
               <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
                 Agribusiness Summit 2026
               </h2>
@@ -297,7 +297,7 @@ const OurWork = () => {
                 partners met in Accra for a panel, Spotlight talks from the field and a hands-on
                 Agribusiness Model Canvas workshop.
               </p>
-              <ul className="space-y-1.5 mb-5 text-xs xs:text-sm text-white/90">
+              <ul className="mx-auto w-fit space-y-1.5 mb-5 text-left text-xs xs:text-sm text-white/90">
                 <li className="flex items-start gap-2"><LuCalendarDays className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />Held on Saturday, 7 November 2026</li>
                 <li className="flex items-start gap-2"><LuMapPin className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />The GracedLife Leadership Centre, Ashaley Botwe, Accra</li>
                 <li className="flex items-start gap-2"><LuHandshake className="mt-0.5 h-4 w-4 flex-none text-[#A8E04A]" aria-hidden="true" />With TGLC, Agribusiness e-Academy, Calidad Farms, The Food Discourse, Rotaract Club of Accra Ring Road Central &amp; Dream Renewables</li>
@@ -358,11 +358,11 @@ const OurWork = () => {
                 ) : (
                   <img src={p.thumb} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
                 )}
-                <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                   <h4 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h4>
                   <p className="text-xs xs:text-sm text-gray-800 leading-relaxed flex-1 mb-3">{p.desc}</p>
                   {p.stat && (
-                    <span className="self-start text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">
+                    <span className="self-center text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">
                       {p.stat}
                     </span>
                   )}
@@ -373,7 +373,7 @@ const OurWork = () => {
 
           {/* Video projects */}
           <div className="mb-2">
-            <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-800 mb-4 flex items-center justify-center gap-2">
               <LuClapperboard className="h-5 w-5 text-[#17702D]" aria-hidden="true" /> Video Stories
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5">
@@ -433,12 +433,12 @@ const OurWork = () => {
                   />
                 </div>
                 <div className="p-5 xs:p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center justify-center gap-2 mb-2">
                     <card.icon className="h-6 w-6 text-[#17702D]" aria-hidden="true" />
                     <h3 className="text-lg xs:text-xl font-bold text-gray-900">{card.title}</h3>
                   </div>
-                  <p className="text-sm text-gray-700 leading-relaxed flex-1 mb-4">{card.desc}</p>
-                  <span className={`self-start inline-flex items-center gap-1 text-sm font-bold ${card.linkClass} group-hover:gap-2 transition-all`}>
+                  <p className="text-center text-sm text-gray-700 leading-relaxed flex-1 mb-4">{card.desc}</p>
+                  <span className={`self-center inline-flex items-center gap-1 text-sm font-bold ${card.linkClass} group-hover:gap-2 transition-all`}>
                     {card.cta} <span aria-hidden="true">→</span>
                   </span>
                 </div>
@@ -473,7 +473,7 @@ const OurWork = () => {
                   className="w-full h-40 object-cover"
                   loading="lazy"
                 />
-                <div className="p-4 xs:p-5">
+                <div className="p-4 xs:p-5 text-center">
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-800 leading-relaxed">{item.desc}</p>
                 </div>

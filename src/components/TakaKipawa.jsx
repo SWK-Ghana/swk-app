@@ -98,7 +98,7 @@ const TakaKipawa = () => {
               </p>
             </div>
             <div className="bg-gradient-to-br from-[#F2FAE8] to-white rounded-2xl p-8 border border-[#D4F0A0]">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">The Problem We Solve</h3>
+              <h3 className="text-center text-lg font-bold text-gray-900 mb-4">The Problem We Solve</h3>
               <ul className="space-y-3">
                 {[
                   'Over 60% of households face irregular waste collection in Ga West Municipality alone',
@@ -129,8 +129,8 @@ const TakaKipawa = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F2FAE8] text-[#17702D]">
+              <div key={i} className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F2FAE8] text-[#17702D]">
                   <f.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{f.title}</h3>

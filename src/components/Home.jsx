@@ -90,14 +90,14 @@ const VideoCard = ({ bg, border, ytId, title, description }) => {
           />
         </div>
       )}
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 flex flex-col flex-1 text-center">
         <h3 className="text-sm xs:text-base font-semibold text-gray-900 mb-1 leading-snug">{title}</h3>
         <p className="text-xs text-gray-800 leading-relaxed flex-1">{description}</p>
         <a
           href={`https://www.youtube.com/watch?v=${ytId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 self-start py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
+          className="mt-2 self-center py-1.5 text-xs font-bold text-[#17702D] hover:text-[#0F5A24] hover:underline flex items-center gap-1"
         >
           <LuPlay className="h-3.5 w-3.5" aria-hidden="true" /> Watch on YouTube
         </a>
@@ -522,10 +522,10 @@ const Home = () => {
                     />
                   )}
 
-                  <div className="flex flex-col flex-1">
+                  <div className="flex flex-col flex-1 text-center">
                     {/* The flag sits in the date row rather than the card's
                         corner, where it would cover the flyer's partner logos. */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 mb-5">
                       <div className="flex-shrink-0 flex flex-col items-center justify-center bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-center">
                         <span className="text-2xl xs:text-3xl font-bold text-white leading-none">{e.day}</span>
                         <span className="text-xs font-bold text-white/75 uppercase tracking-wide mt-1">
@@ -540,7 +540,7 @@ const Home = () => {
                     <p className="text-sm xs:text-base text-white/75 leading-relaxed mb-4 flex-1">{e.desc}</p>
                     <p className="text-xs xs:text-sm text-[#A8E04A] font-semibold mb-5">{e.meta}</p>
 
-                    <span className="self-start inline-flex items-center gap-2 bg-[#78C31E] group-hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-5 py-2.5 rounded-full transition-colors">
+                    <span className="self-center inline-flex items-center gap-2 bg-[#78C31E] group-hover:bg-[#8AD62B] text-[#123D16] text-sm xs:text-base font-bold px-5 py-2.5 rounded-full transition-colors">
                       {e.cta} <span aria-hidden="true">→</span>
                     </span>
                   </div>
@@ -652,7 +652,7 @@ const Home = () => {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="p-4 xs:p-5">
+                <div className="p-4 xs:p-5 text-center">
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
@@ -715,19 +715,19 @@ const Home = () => {
                 className="h-full min-h-[14rem] w-full object-cover"
               />
             </a>
-            <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
+            <div className="flex flex-col justify-center gap-4 p-6 text-center sm:p-8">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Just held · 7 November 2026</p>
               <h3 className="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">Agribusiness Summit 2026</h3>
               <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
                 Our first in-person Summit, in Accra: a panel on building profitable agribusinesses, Spotlight talks from
                 the field, and a hands-on Agribusiness Model Canvas workshop where groups pitched their ideas.
               </p>
-              <ul className="flex flex-wrap gap-2 text-xs font-semibold text-[#17702D]">
+              <ul className="flex flex-wrap justify-center gap-2 text-xs font-semibold text-[#17702D]">
                 {['138 registrations', '62 in the room', '13 speakers and facilitators', '6 partners'].map((s) => (
                   <li key={s} className="rounded-full border border-[#C0E870] bg-[#F2FAE8] px-3 py-1">{s}</li>
                 ))}
               </ul>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 pt-1">
                 <a href="/reports/agribusiness-summit-2026" className="btn-gradient rounded-xl px-5 py-2.5 text-sm font-semibold">
                   See what happened →
                 </a>
@@ -758,16 +758,16 @@ const Home = () => {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="p-4 xs:p-5 flex flex-col flex-1">
+                <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                   <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
                   <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.desc}</p>
-                  <span className="self-start text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">{p.stat}</span>
+                  <span className="self-center text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#C0E870] px-3 py-1 rounded-full">{p.stat}</span>
                   {p.title === 'Agribusiness Webinar Series' && (
                     <a
                       href="https://chat.whatsapp.com/LrSVJrNFHGY6kdPnW8xoTu?mode=gi_t"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 flex items-center gap-2 text-xs font-semibold text-[#0C2E11] bg-[#25D366] hover:bg-[#1ebe5d] px-3 py-2 rounded-lg transition-colors self-start"
+                      className="mt-3 flex items-center gap-2 text-xs font-semibold text-[#0C2E11] bg-[#25D366] hover:bg-[#1ebe5d] px-3 py-2 rounded-lg transition-colors self-center"
                     >
                       <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
@@ -797,7 +797,7 @@ const Home = () => {
                       decoding="async"
                     />
                   </div>
-                  <div className="p-4 xs:p-5 flex flex-col flex-1">
+                  <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                     <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-1">{p.title}</h3>
                     <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1 mb-3">{p.short}</p>
                     <span className="text-sm font-bold text-[#17702D] group-hover:text-[#1E963C]">Read the story →</span>
@@ -809,7 +809,7 @@ const Home = () => {
 
           {/* Video stories */}
           <div>
-            <h3 className="text-base xs:text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <h3 className="text-base xs:text-lg font-semibold text-gray-800 mb-4 flex items-center justify-center gap-2">
               <LuClapperboard className="h-5 w-5 text-[#17702D]" aria-hidden="true" /> Video Stories
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5">
@@ -826,12 +826,12 @@ const Home = () => {
           />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left — app info */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="w-14 h-14 rounded-2xl bg-[#EAF6DC] flex items-center justify-center shadow-inner">
                   <LuRecycle className="h-7 w-7 text-[#17702D]" aria-hidden="true" />
                 </div>
-                <div>
+                <div className="text-left">
                   <h3 className="text-xl font-bold text-gray-900">Taka Kipawa App</h3>
                   <span className="text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#D4F0A0] px-2.5 py-1 rounded-full">
                     Live & Active
@@ -855,7 +855,7 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 <a
                   href="https://takakipawa.swkghana.org"
                   target="_blank"
@@ -897,11 +897,11 @@ const Home = () => {
               { icon: LuMegaphone, title: 'Youth Advocacy Initiatives', desc: 'Amplifying youth voices in policy discussions on climate and sustainability at local and continental levels.' },
             ].map((a, idx) => (
               <div key={idx} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)] bg-gradient-to-br from-[#F2FAE8] to-white rounded-xl p-5 border border-[#D4F0A0] hover:shadow-md transition-shadow flex flex-col">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#17702D] shadow-sm ring-1 ring-[#D4F0A0]">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#17702D] shadow-sm ring-1 ring-[#D4F0A0]">
                   <a.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{a.title}</h3>
-                <p className="text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{a.desc}</p>
+                <h3 className="text-center text-base font-semibold text-gray-900 mb-2">{a.title}</h3>
+                <p className="text-center text-xs xs:text-sm text-gray-600 leading-relaxed flex-1">{a.desc}</p>
               </div>
             ))}
           </div>
@@ -921,7 +921,7 @@ const Home = () => {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt="Webinar Report: Elevator Pitch Workshop — September 2026" className="w-full h-48 object-cover" loading="lazy" decoding="async" />
               </div>
-              <div className="p-4 xs:p-5 flex flex-col flex-1">
+              <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                 <h3 className="text-base font-semibold text-gray-900 mb-2">Elevator Pitch Workshop — September 2026</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our workshop with Aequitas Foundation: 30+ joined live, 63 registered from 4 countries. Who took part, what we learned, and what is next.</p>
                 <div className="flex gap-2">
@@ -954,7 +954,7 @@ const Home = () => {
                   <LuChartColumn className="h-12 w-12 text-[#17702D]" aria-hidden="true" />
                 </div>
               </div>
-              <div className="p-4 xs:p-5 flex flex-col flex-1">
+              <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                 <h3 className="text-base font-semibold text-gray-900 mb-2">SWK Ghana Annual Report 2025</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">Our annual review of programs, partnerships, community impact, and organizational milestones for 2025.</p>
                 <div className="flex gap-2">
@@ -972,10 +972,10 @@ const Home = () => {
                 <LuClipboardList className="h-12 w-12 text-[#17702D]" aria-hidden="true" />
                 <span className="text-sm font-semibold text-[#0F5A24]">Coming Soon</span>
               </div>
-              <div className="p-4 xs:p-5 flex flex-col flex-1">
+              <div className="p-4 xs:p-5 flex flex-col flex-1 text-center">
                 <h3 className="text-base font-semibold text-gray-900 mb-2">Youth Development Program Summary</h3>
                 <p className="text-xs text-gray-600 leading-relaxed mb-4 flex-1">A comprehensive summary of SWK Ghana's youth development programs, reach, and outcomes across Ghana.</p>
-                <span className="self-start text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#D4F0A0] px-3 py-2 rounded-lg">Coming Soon</span>
+                <span className="self-center text-xs font-semibold text-[#17702D] bg-[#F2FAE8] border border-[#D4F0A0] px-3 py-2 rounded-lg">Coming Soon</span>
               </div>
             </div>
           </div>

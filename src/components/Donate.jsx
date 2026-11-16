@@ -221,14 +221,14 @@ const Donate = () => {
         <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
 
           <aside className="lg:order-2 lg:sticky lg:top-28 lg:self-start">
-            <h2 className="text-lg font-bold text-gray-900 mb-3">What your gift does</h2>
+            <h2 className="text-center text-lg font-bold text-gray-900 mb-3">What your gift does</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
             {[
               { amt: 'GH₵100', impact: 'Sponsors a youth for one webinar session' },
               { amt: 'GH₵500', impact: 'Funds a community outreach activity' },
               { amt: 'GH₵1,000', impact: 'Supports a skills-training workshop' },
             ].map((i) => (
-              <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center lg:text-left">
+              <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center">
                 <div className="text-lg font-bold text-[#17702D]">{i.amt}</div>
                 <div className="text-sm text-gray-600 mt-1 leading-snug">{i.impact}</div>
               </div>

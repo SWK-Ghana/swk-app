@@ -216,8 +216,8 @@ const GetInvolved = () => {
 
           {/* Ways to Get Involved */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6 sm:gap-7 md:gap-8 mb-8 xs:mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#F2FAE8] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#F2FAE8] rounded-lg flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
                 <svg className="w-7 h-7 xs:w-8 xs:h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -227,8 +227,8 @@ const GetInvolved = () => {
               <button type="button" className="btn-gradient w-full" onClick={() => setIsVolunteerOpen(true)}>Become a Volunteer</button>
             </div>
 
-            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
                 <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
@@ -238,8 +238,8 @@ const GetInvolved = () => {
               <button type="button" className="btn-gradient w-full" onClick={() => setIsDonateOpen(true)}>Make a Donation</button>
             </div>
 
-            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mb-4 xs:mb-5 sm:mb-6">
+            <div className="bg-white rounded-lg xs:rounded-xl p-5 xs:p-6 sm:p-7 md:p-8 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 xs:w-16 xs:h-16 bg-[#EAF6DC] rounded-lg flex items-center justify-center mx-auto mb-4 xs:mb-5 sm:mb-6">
                 <svg className="w-8 h-8 text-[#17702D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2" />
                 </svg>
