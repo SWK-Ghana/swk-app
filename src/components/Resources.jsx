@@ -42,12 +42,12 @@ const Resources = () => {
       {/* Slim header: the page gets straight to the resources. */}
       <header className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
         <FlowBackdrop />
-        <div className="relative swk-shell py-7 sm:py-9">
+        <div className="relative swk-shell py-7 text-center sm:py-9">
           <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">Resources</h1>
-          <p className="mt-2 max-w-2xl text-sm text-white/80 sm:text-base">
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-white/80 sm:text-base">
             Our reports, free tools for NGOs and non-profits, and answers to common questions.
           </p>
-          <nav className="mt-4 flex flex-wrap gap-2 text-sm font-semibold" aria-label="On this page">
+          <nav className="mt-4 flex flex-wrap justify-center gap-2 text-sm font-semibold" aria-label="On this page">
             <a href="#reports" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Reports</a>
             <a href="#ngo-support" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">Support for NGOs and NPOs</a>
             <a href="#faq" className="rounded-full border border-white/25 px-4 py-1.5 text-white hover:border-[#78C31E] hover:text-[#A8E04A]">FAQ</a>

@@ -121,15 +121,15 @@ const Support = () => {
       <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
         <FlowBackdrop />
         <div className="relative swk-shell grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:py-24">
-          <div className="anim-rise">
+          <div className="anim-rise text-center">
             <h1 className="text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
               Free tools to help your NGO grow.
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
               Templates, guides and trusted links we use ourselves, shared free with NGOs, community groups and
               youth-led organisations in Ghana and across Africa.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href="#toolkit" className="inline-flex items-center gap-2 rounded-xl bg-[#78C31E] px-6 py-3.5 text-sm font-bold text-[#0C2E11] transition-colors hover:bg-[#8AD62B] hover:text-[#0C2E11] sm:text-base">
                 Get the free toolkit <span aria-hidden="true">&darr;</span>
               </a>

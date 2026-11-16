@@ -72,10 +72,10 @@ const PageHero = ({ title, hideTitle, lede, pattern, image, layout = 'split', as
   return (
     <section className="relative isolate overflow-hidden bg-[#0C2E11] text-white">
       <FlowBackdrop />
-      <div className={`swk-shell grid items-center gap-12 py-14 sm:py-16 lg:gap-16 lg:py-20 ${image ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]' : 'lg:grid-cols-[minmax(0,1fr)_auto]'}`}>
-        <div className="anim-rise max-w-3xl">
+      <div className={`swk-shell grid items-center gap-12 py-14 sm:py-16 lg:gap-16 lg:py-20 ${image ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]' : side ? 'lg:grid-cols-[minmax(0,1fr)_auto]' : ''}`}>
+        <div className="anim-rise mx-auto max-w-3xl text-center">
           {heading}
-          {lede && <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{lede}</p>}
+          {lede && <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{lede}</p>}
           {children}
         </div>
         {side}

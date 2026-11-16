@@ -93,6 +93,11 @@
     .hero__facts { display: grid; gap: .6rem; margin-top: 1.5rem; }
     .hero__fact { display: flex; align-items: flex-start; gap: .65rem; font-size: .95rem; color: rgba(255,255,255,.9); }
     .hero__fact svg { width: 20px; height: 20px; flex: none; color: var(--lime); margin-top: .1rem; }
+    /* Centred header: title, lede and facts sit in the middle of the page. */
+    .hero { text-align: center; }
+    .hero h1, .hero__lede { margin-inline: auto; }
+    .hero__facts { justify-items: center; }
+    .hero__fact { text-align: left; }
 
     /* Form card: the same system as the Summit registration form. */
     .reg { background: var(--cream); padding-block: clamp(2.5rem, 7vw, 4.5rem); }
