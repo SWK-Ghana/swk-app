@@ -8,6 +8,7 @@ import {
 import WalkInForm from './admin/WalkInForm'
 import { Field, Notice, buttonClass, inputClass, quietButtonClass } from './admin/ui'
 import { applyQueue, doorStore, matches, timeOf } from './admin/summitShared'
+import { onTabReturn, tabActive } from '../utils/activeTab'
 
 const MAX_RESULTS = 40
 const REFRESH_MS = 30000
@@ -135,8 +136,11 @@ const Door = ({ onSignedOut }) => {
     const down = () => setOnline(false)
     window.addEventListener('online', up)
     window.addEventListener('offline', down)
-    const retry = setInterval(() => { if (queueRef.current.length) flush(); else refresh() }, queueRef.current.length ? RETRY_MS : REFRESH_MS)
-    return () => { window.removeEventListener('online', up); window.removeEventListener('offline', down); clearInterval(retry) }
+    // Unsent check-ins always keep retrying; the list itself only refreshes while
+    // someone is looking, so a phone left on this page doesn't call the server all night.
+    const retry = setInterval(() => { if (queueRef.current.length) flush(); else if (tabActive()) refresh() }, queueRef.current.length ? RETRY_MS : REFRESH_MS)
+    const stopReturn = onTabReturn(() => { if (queueRef.current.length) flush(); else refresh() })
+    return () => { window.removeEventListener('online', up); window.removeEventListener('offline', down); clearInterval(retry); stopReturn() }
   }, [refresh, flush])
 
   const people = useMemo(() => applyQueue(server.attendees, queue), [server, queue])

@@ -8,6 +8,7 @@ import WalkInForm from './WalkInForm'
 import { downloadFile, matches, nameSort, timeOf, toCsv } from './summitShared'
 import { longDate, printReceipt } from './receiptTemplate'
 import { reportFileName, reportHtml } from './summitReport'
+import { onTabReturn, tabActive } from '../../utils/activeTab'
 
 const REFRESH_MS = 30000
 const FILTERS = [
@@ -230,8 +231,10 @@ const Summit = ({ user }) => {
 
   useEffect(() => {
     load()
-    const timer = setInterval(load, REFRESH_MS)
-    return () => clearInterval(timer)
+    // Only while someone is looking: a forgotten tab must not keep calling the server.
+    const timer = setInterval(() => { if (tabActive()) load() }, REFRESH_MS)
+    const stopReturn = onTabReturn(load)
+    return () => { clearInterval(timer); stopReturn() }
   }, [load])
 
   const act = async (work, message) => {
