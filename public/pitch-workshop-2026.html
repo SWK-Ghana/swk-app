@@ -1241,6 +1241,21 @@
     @media print {
       .poster-frame::before { display: none; }
     }
+    /* ── Centred titles, section headings and short cards ── */
+    .hero__grid > div:first-child { text-align: center; }
+    .hero__meta { width: fit-content; margin-inline: auto; text-align: left; }
+    .hero__cta { justify-content: center; }
+    .hero__ended { margin-inline: auto; text-align: left; }
+    .recap__grid > div:first-child, .why__grid > div:first-child, .facil__grid > div:first-child { text-align: center; }
+    .recap__links { justify-content: center; }
+    .frame__head, .prog__head, .who__head, .more__head { text-align: center; margin-inline: auto; }
+    .section-title, .lede { margin-inline: auto; }
+    .part { text-align: center; }
+    .card h3 { text-align: center; }
+    .card:not(:has(ul)), .frame__note { text-align: center; }
+    .frame__note { margin-inline: auto; }
+    .more__card { text-align: center; }
+    .more__tag, .more__go { align-self: center; }
   </style>
 <script src="/visit.js" data-auto defer></script>
 </head>

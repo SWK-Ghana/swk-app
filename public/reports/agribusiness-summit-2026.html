@@ -288,6 +288,21 @@
       .hero::before { display: none; }
       .chapter, .card, .voice, .partner { break-inside: avoid; }
     }
+    /* ── Centred titles, section headings and short cards ── */
+    .hero__grid > div:first-child { text-align: center; }
+    .hero__lede { margin-inline: auto; }
+    .hero__facts { width: fit-content; margin-inline: auto; text-align: left; }
+    .hero__cta { justify-content: center; }
+    .eyebrow::after { content: ""; width: clamp(24px, 5vw, 44px); height: 3px; border-radius: 2px; background: var(--lime); flex: none; }
+    .section__head { text-align: center; margin-inline: auto; }
+    .lessons li { text-align: center; }
+    .card h3, .card__hint { text-align: center; }
+    .card:has(.lesson__n), .next { text-align: center; }
+    .next a { align-self: center; }
+    .support > div:first-child { text-align: center; }
+    .support__lede { margin-inline: auto; }
+    .support__cta { justify-content: center; }
+    .way { text-align: center; }
   </style>
   <script src="/visit.js" data-auto defer></script>
 </head>

@@ -296,6 +296,19 @@
       html { scroll-behavior: auto; }
       .btn, .more__card, .footer__back { transition: none; }
     }
+    /* ── Centred titles, section headings and short cards ── */
+    .hero__grid > div:first-child { text-align: center; }
+    .hero__lede { margin-inline: auto; }
+    .hero__facts { width: fit-content; margin-inline: auto; text-align: left; }
+    .hero__cta { justify-content: center; }
+    .eyebrow::after { content: ""; width: clamp(24px, 5vw, 44px); height: 3px; border-radius: 2px; background: var(--lime); flex: none; }
+    .about .shell { text-align: center; }
+    .section-title, .about__body { margin-inline: auto; }
+    .about__body { max-width: 62ch; }
+    .roles { text-align: left; }
+    .tagcloud { justify-content: center; }
+    .more__head, .more__card { text-align: center; }
+    .more__tag, .more__go { align-self: center; }
   </style>
 <script src="/visit.js" data-auto defer></script>
 </head>

@@ -1997,6 +1997,18 @@
     @media print {
       .hero__kente { display: none; }
     }
+    /* ── Centred titles, section headings and short cards ── */
+    .hero__grid > div:first-child { text-align: center; }
+    .hero__sub { margin-inline: auto; }
+    .hero__when, .hero__meta, .hero__cta { justify-content: center; }
+    .eyebrow::after { content: ""; width: clamp(24px, 5vw, 44px); height: 3px; border-radius: 2px; background: var(--lime); flex: none; }
+    .about__grid > div:first-child, .expect__head, .why__head, .speakers__head, .more__head { text-align: center; margin-inline: auto; }
+    .section-title, .expect__head p, .why__head p, .speakers__head p { margin-inline: auto; }
+    .phase, .reason { text-align: center; }
+    .phase__icon, .reason__icon { margin-inline: auto; }
+    .speakers__foot { text-align: center; }
+    .more__card { text-align: center; }
+    .more__tag, .more__go { align-self: center; }
   </style>
 <script src="/visit.js" data-auto defer></script>
 </head>
