@@ -9,6 +9,8 @@
   "compatibility_date": "2026-11-01",
   // The server code in api/ uses Node's crypto and process.env.
   "compatibility_flags": ["nodejs_compat"],
+  // Variables set in the Cloudflare dashboard survive each deploy from GitHub.
+  "keep_vars": true,
   // Keep the swkghana.<account>.workers.dev test address and per-build preview links on.
   "workers_dev": true,
   "preview_urls": true,

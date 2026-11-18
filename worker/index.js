@@ -77,6 +77,16 @@ export default {
       return withSecurityHeaders(await env.ASSETS.fetch(new Request(url, request)))
     }
 
+    // Which settings the server can see: yes or no for each name, never a value.
+    if (path === '/api/health') {
+      const names = ['SANITY_TOKEN', 'ADMIN_SESSION_SECRET', 'ADMIN_PASSWORD', 'REGISTRATION_STATS_KEY', 'BREVO_API_KEY']
+      const seen = (source) => Object.fromEntries(names.map((n) => [n, Boolean(source && source[n])]))
+      return withSecurityHeaders(Response.json(
+        { worker: seen(env), process: seen(globalThis.process?.env) },
+        { headers: { 'Cache-Control': 'no-store' } },
+      ))
+    }
+
     if (API[path]) {
       try {
         return withSecurityHeaders(await asNode(API[path], request))
