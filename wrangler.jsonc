@@ -4,7 +4,7 @@
 // vercel.json is kept so the site can still be deployed to Vercel.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "swk-app",
+  "name": "swkghana",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-01",
   "assets": {
