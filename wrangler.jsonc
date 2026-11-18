@@ -1,0 +1,30 @@
+// Cloudflare Workers hosting for swkghana.org (moved from Vercel in November 2026).
+// The site is served as static files from dist/. The small router in worker/index.js
+// only runs for the short addresses of the static pages and for /api.
+// vercel.json is kept so the site can still be deployed to Vercel.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "swk-app",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // /about serves about/index.html and /mentorship-2027-mentors serves the .html file.
+    "html_handling": "drop-trailing-slash",
+    // Any other address is a page of the React app.
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*",
+      "/epwwebinar",
+      "/pitch",
+      "/volunteers",
+      "/feedback",
+      "/speaker-feedback",
+      "/mentorship",
+      "/become-a-mentor",
+      "/partners"
+    ]
+  },
+  "observability": { "enabled": true }
+}
