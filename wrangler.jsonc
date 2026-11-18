@@ -7,6 +7,9 @@
   "name": "swkghana",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-01",
+  // Keep the swkghana.<account>.workers.dev test address and per-build preview links on.
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
