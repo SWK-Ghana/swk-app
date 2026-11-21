@@ -76,7 +76,14 @@ const Footer = () => (
 
       {/* Bottom bar */}
       <div className="border-t border-white/10 mt-6 xs:mt-8 pt-6 xs:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs xs:text-sm text-white/65">
-        <p className="text-white/65">&copy; 2026 SWK Ghana LBG. All rights reserved.</p>
+        <p className="text-white/65 text-center sm:text-left">
+          &copy; 2026 SWK Ghana LBG. All rights reserved.
+          <span className="mx-2 hidden sm:inline" aria-hidden="true">·</span>
+          <span className="mt-1 block sm:mt-0 sm:inline">
+            Website built by{' '}
+            <a href="https://koombei.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-white/80 hover:text-[#A8E04A] underline-offset-2 hover:underline transition-colors">KoomBei (koombei.com)</a>
+          </span>
+        </p>
         <div className="flex items-center gap-4">
           <a href="/privacy-policy" className="inline-block py-1 text-white/65 hover:text-white transition-colors">Privacy Policy</a>
           <p className="text-white/65">Building resilient communities across Africa 🌍</p>
