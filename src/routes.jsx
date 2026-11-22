@@ -25,6 +25,7 @@ export const routes = [
       { index: true, element: <Home /> },
       { path: 'about', lazy: page(() => import('./components/About')) },
       { path: 'our-work', lazy: page(() => import('./components/OurWork')) },
+      { path: 'our-work/:slug', lazy: page(() => import('./components/FocusArea')) },
       { path: 'team', lazy: page(() => import('./components/MeetTheTeam')) },
       { path: 'resources', lazy: page(() => import('./components/Resources')) },
       { path: 'faq', lazy: page(() => import('./components/FAQ')) },

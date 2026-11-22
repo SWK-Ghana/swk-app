@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
+import { FOCUS_AREAS } from "../../data/focusAreas";
 
 // `children` makes a dropdown (hover or click on desktop, accordion on
 // mobile); `desc` is the one-line hint under each item; `footer` adds a
@@ -11,12 +12,11 @@ const NAV_LINKS = [
   {
     label: "Our Work",
     href: "/our-work",
-    children: [
-      { label: "Overview", href: "/our-work", desc: "Our programmes and their impact" },
-      { label: "Mentorship Programme", href: "/mentorship-programme", desc: "Agribusiness mentoring for young people, 2027" },
-      { label: "Taka Kipawa", href: "/taka-kipawa", desc: "Turning waste into a cleaner Ga West" },
-      { label: "Marketplace", href: "/marketplace", desc: "Shop youth-led green businesses" },
-    ],
+    // Our six focus areas (src/data/focusAreas.js), Agribusiness first.
+    children: FOCUS_AREAS.map((a) => ({ label: a.name, href: `/our-work/${a.slug}`, desc: a.menuDesc })),
+    footer: { label: "All our work", href: "/our-work" },
+    // Pages that belong to Our Work without a menu entry of their own.
+    also: ["/mentorship-programme", "/taka-kipawa"],
   },
   { label: "Team", href: "/team" },
   {
@@ -62,7 +62,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
   // A grouped item is "active" when the current route matches it or any child.
   const isGroupActive = (link) =>
     link.children
-      ? isActive(link.href) || link.children.some((c) => isActive(c.href))
+      ? isActive(link.href) || link.children.some((c) => isActive(c.href)) || (link.also || []).some((h) => isActive(h))
       : isActive(link.href);
 
   // Mobile accordion entries: the children, plus the footer link if any.

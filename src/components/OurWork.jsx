@@ -4,6 +4,8 @@ import Seo from './Seo'
 import PageHero from './PageHero'
 import { FlowBackdrop, FlowPanel } from './Patterns'
 import Partnerships from './Partnerships'
+import { FOCUS_AREAS, cld } from '../data/focusAreas'
+import { AREA_ICONS } from '../data/focusAreaIcons'
 import { LuCalendarDays, LuClapperboard, LuHandshake, LuMapPin, LuPlay, LuRecycle, LuShoppingCart, LuTicket } from 'react-icons/lu'
 
 // ─── Cloudinary helpers ───────────────────────────────────────────────────────
@@ -275,10 +277,36 @@ const OurWork = () => {
       />
       <PageHero
         title="Our Work"
-        lede="From agribusiness webinars to climate action films: explore the full breadth of SWK Ghana's programs and impact."
+        lede="Our work is organised around six focus areas, led by agribusiness. Choose one to see what we do, what we have done and what comes next."
         image={{ path: 'v1773660844/photo_2026-03-16_11-33-50_wn3lbm.jpg', alt: 'A speaker addressing young people at an SWK Ghana programme', position: '50% 22%', aspect: 'lg:aspect-[4/5]', frame: 'max-w-xl lg:max-w-md' }}
       />
       <div className="swk-shell py-8 xs:py-10 sm:py-12 md:py-14">
+
+        {/* ── Our six focus areas (src/data/focusAreas.js), each with its own page ── */}
+        <section className="mb-10 sm:mb-14" aria-labelledby="focus-title">
+          <div className="mx-auto mb-8 max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Our focus areas</p>
+            <h2 id="focus-title" className="mt-2 text-2xl font-bold leading-tight text-gray-900 sm:text-3xl md:text-4xl">Six areas, one mission.</h2>
+            <p className="mt-3 text-base leading-relaxed text-gray-600 sm:text-lg">Empowering young people as changemakers, starting with agribusiness, where we have done the most so far.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {FOCUS_AREAS.map((a, i) => {
+              const Icon = AREA_ICONS[a.slug]
+              return (
+                <a key={a.slug} href={`/our-work/${a.slug}`} className={`group flex flex-col overflow-hidden rounded-2xl border bg-white text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${i === 0 ? 'border-[#78C31E] ring-2 ring-[#78C31E]/40' : 'border-gray-200 hover:border-[#78C31E]'}`}>
+                  <img src={a.hero.src || cld(a.hero.path, 700)} alt={a.hero.alt} className="h-44 w-full object-cover" loading="lazy" />
+                  <div className="flex flex-1 flex-col p-5">
+                    <span className="mx-auto -mt-11 mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[#17702D] shadow-md ring-1 ring-[#D4F0A0]"><Icon className="h-6 w-6" aria-hidden="true" /></span>
+                    {i === 0 && <span className="mx-auto mb-2 rounded-full bg-[#78C31E] px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-[#123D16]">Where we have done the most</span>}
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#17702D]">{a.name}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{a.short}</p>
+                    <span className="mt-4 text-sm font-bold text-[#17702D] group-hover:underline">Explore <span aria-hidden="true">→</span></span>
+                  </div>
+                </a>
+              )
+            })}
+          </div>
+        </section>
 
         {/* ── Featured: Agribusiness Summit 2026 ──
              The report is a static page outside the React router, so this uses a
@@ -292,7 +320,7 @@ const OurWork = () => {
                 Agribusiness Summit 2026
               </h2>
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
-                The crown of Phase 1 of our agribusiness journey: four webinars of sensitisation and education
+                The crown of Phase 1 of our agribusiness journey: five webinars of sensitisation and education
                 reached 300+ young people across 9+ countries, then on 7 November 2026 young people, farmers,
                 founders and partners met in Accra for a panel, Spotlight talks from the field and a hands-on
                 Agribusiness Model Canvas workshop.
@@ -446,41 +474,6 @@ const OurWork = () => {
                   </span>
                 </div>
               </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* ── Focus areas ── */}
-        <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 md:p-10 shadow-sm border border-gray-200 mb-8 xs:mb-10 sm:mb-12">
-          <div className="text-center mb-6 xs:mb-8">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Focus Areas
-            </h2>
-            <p className="text-sm xs:text-base text-gray-800 max-w-2xl mx-auto">
-              Six interconnected pillars driving sustainable impact across Ghana.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
-            {[
-              { img: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development', desc: 'Leadership workshops, skills training, and mentorship for young change-makers.' },
-              { img: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
-              { img: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
-              { img: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
-              { img: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
-              { img: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
-            ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <img
-                  src={img(item.img)}
-                  alt={item.title}
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-                <div className="p-4 xs:p-5 text-center">
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-800 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
             ))}
           </div>
         </div>

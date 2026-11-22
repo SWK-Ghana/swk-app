@@ -2,6 +2,7 @@ import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } fr
 import { Link, useNavigate } from 'react-router-dom'
 import { sendEmail, subscribeContact } from '../utils/brevo'
 import Seo from './Seo'
+import { FOCUS_AREAS } from '../data/focusAreas'
 import { FlowPanel, FlowStrip } from './Patterns'
 import { PARTNERSHIPS } from '../data/partnerships'
 import { trackConversion } from '../utils/analytics'
@@ -277,7 +278,7 @@ const Home = () => {
       tag: 'Summit',
       tagClass: 'bg-[#1E963C] text-white',
       title: 'Agribusiness Summit 2026: what happened',
-      desc: 'The crown of Phase 1 of our agribusiness journey, after four webinars: our first in-person Summit brought young people, farmers, founders and partners together in Accra for a panel, Spotlight talks from the field and a hands-on Agribusiness Model Canvas workshop. Phase 2, the Mentorship Programme, follows in 2027.',
+      desc: 'The crown of Phase 1 of our agribusiness journey, after five webinars: our first in-person Summit brought young people, farmers, founders and partners together in Accra for a panel, Spotlight talks from the field and a hands-on Agribusiness Model Canvas workshop. Phase 2, the Mentorship Programme, follows in 2027.',
       meta: '138 registrations · 13 speakers and facilitators · 6 partners',
       href: '/reports/agribusiness-summit-2026',
       cta: 'See what happened',
@@ -632,31 +633,25 @@ const Home = () => {
 
         {/* ══ 4. FOCUS AREAS ══════════════════════════════════════════════════ */}
         <Section>
-          <SectionHeader title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa." />
+          <SectionHeader title="Our Focus Areas" subtitle="Six pillars driving sustainable youth development across Ghana and Africa, led by agribusiness." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
-            {[
-              { src: 'v1773615456/photo_2026-03-15_22-53-09_kvzvfr.jpg', title: 'Youth Development Programs', desc: 'Leadership workshops, skills training, and mentorship for youth change-makers.' },
-              { src: 'v1773660247/photo_2026-03-16_11-22-33_gfsqwy.jpg', title: 'Circular Economy Initiatives', desc: 'Waste reduction, recycling workshops, and sustainable consumption education.' },
-              { src: 'v1760551738/Blue_and_Yellow_Bold_Online_Course_Facebook_Post_1_ubqtmu.png', title: 'Agribusiness Development', desc: 'Training in sustainable agriculture and agribusiness value chains.' },
-              { src: 'v1773660247/photo_2026-03-16_11-22-22_i0nolg.jpg', title: 'Technology & Innovation', desc: 'Digital literacy, hackathons, and innovation labs for sustainable solutions.' },
-              { src: 'v1773660248/photo_2026-03-16_11-22-40_zbflj4.jpg', title: 'Climate Action Projects', desc: 'Conservation, climate education, and youth-led environmental initiatives.' },
-              { src: 'v1773615455/photo_2026-03-15_22-53-49_d6sonh.jpg', title: 'Community Engagement', desc: 'Grassroots projects, forums, and participatory initiatives for resilience.' },
-            ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+            {FOCUS_AREAS.map((a) => (
+              <a key={a.slug} href={`/our-work/${a.slug}`} className="group bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md hover:border-[#78C31E] transition-all flex flex-col">
                 <img
-                  src={img(item.src)}
-                  srcSet={cardSrcset(item.src)}
+                  src={a.hero.src || img(a.hero.path)}
+                  srcSet={a.hero.srcSet || cardSrcset(a.hero.path)}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  alt={item.title}
+                  alt={a.hero.alt}
                   className="w-full h-40 object-cover"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="p-4 xs:p-5 text-center">
-                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                <div className="p-4 xs:p-5 text-center flex flex-col flex-1">
+                  <h3 className="text-base xs:text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#17702D]">{a.name}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-1">{a.short}</p>
+                  <span className="mt-3 text-sm font-bold text-[#17702D] group-hover:underline">Explore <span aria-hidden="true">→</span></span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </Section>
@@ -719,7 +714,7 @@ const Home = () => {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Phase 1, crowned · 7 November 2026</p>
               <h3 className="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">Agribusiness Summit 2026</h3>
               <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
-                Four webinars of sensitisation and education, crowned by our first in-person Summit in Accra: a panel on
+                Five webinars of sensitisation and education, crowned by our first in-person Summit in Accra: a panel on
                 building profitable agribusinesses, Spotlight talks from the field, and a hands-on Agribusiness Model Canvas
                 workshop where groups pitched their ideas.
               </p>

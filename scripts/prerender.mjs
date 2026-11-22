@@ -21,6 +21,8 @@ const SITE = 'https://swkghana.org'
 const STATIC_ROUTES = [
   '/', '/about', '/our-work', '/team', '/resources', '/faq', '/support', '/get-involved',
   '/contact', '/donate', '/reports', '/blog', '/taka-kipawa', '/mentorship-programme',
+  '/our-work/agribusiness', '/our-work/youth-development', '/our-work/circular-economy',
+  '/our-work/technology-innovation', '/our-work/climate-action', '/our-work/community-engagement',
   '/privacy-policy',
 ]
 

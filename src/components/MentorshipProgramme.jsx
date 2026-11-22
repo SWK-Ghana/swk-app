@@ -20,9 +20,9 @@ const FACTS = [
   { n: '40%+', label: 'of places for young women' },
 ]
 
-// Phase 1 (sensitisation and education: four webinars, crowned by the Summit), then Phase 2.
+// Phase 1 (sensitisation and education: five webinars, crowned by the Summit), then Phase 2.
 const JOURNEY = [
-  { tag: 'Phase 1 · 2025 to 2026', title: 'Four agribusiness webinars', text: 'Sensitisation and education: practical, online sessions on agribusiness, from strategic partnerships to the Elevator Pitch Workshop.', stat: '300+ young people in 9+ countries', link: { href: '/our-work', label: 'See our work' } },
+  { tag: 'Phase 1 · 2025 to 2026', title: 'Five agribusiness webinars', text: 'Sensitisation and education: practical, online sessions on agribusiness, from strategic partnerships to the Elevator Pitch Workshop.', stat: '300+ young people in 9+ countries', link: { href: '/our-work/agribusiness', label: 'Our agribusiness work' } },
   { tag: 'The crown of Phase 1', title: 'Agribusiness Summit 2026', text: 'Our first in-person Summit, on 7 November 2026 in Accra: a panel, Spotlight talks from the field and a hands-on Agribusiness Model Canvas workshop.', stat: '138 registrations · 62 in the room', link: { href: '/reports/agribusiness-summit-2026', label: 'Read the Summit report' } },
   { tag: 'Phase 2 · 2027', title: 'Mentorship Programme', text: 'Six months with a mentor who runs an agribusiness: learn inside a real business, then take your first steps.', stat: '20 young people · 5 mentors · 6 months', current: true },
 ]
