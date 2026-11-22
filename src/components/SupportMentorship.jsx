@@ -101,13 +101,13 @@ const after = (
 const MENTORSHIP_CAMPAIGN = {
   designation: 'Mentorship Programme 2027',
   seo: {
-    title: 'Support 20 Young Agripreneurs | SWK Ghana Mentorship Programme 2027',
+    title: 'Sponsor 1 of 20 Young Agripreneurs | SWK Ghana Mentorship Programme 2027',
     description: 'Give to the SWK Agribusiness Mentorship Programme 2027: six months with a mentor who runs an agribusiness, then first real steps, for 20 young people in Ghana. Card, Mobile Money or MoMo Pay.',
     path: '/support-mentorship',
   },
   hero: {
-    title: 'Support 20 young agripreneurs',
-    lede: 'Your gift gives a young Ghanaian six months with a mentor who runs an agribusiness, then the support to take their first real steps.',
+    title: 'Sponsor 1 of 20 young agripreneurs today',
+    lede: 'Six months of one-on-one and group mentorship, a business plan, and links to buyers and finance: taking a young Ghanaian from idea to first steps.',
     aside: (
       <div className="relative mx-auto w-full max-w-xl">
         <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-[#78C31E]/80" aria-hidden="true" />
@@ -136,7 +136,7 @@ const MENTORSHIP_CAMPAIGN = {
     { amt: 'GH₵200', value: 200, impact: 'A month of data and transport for one mentee' },
     { amt: 'GH₵2,000', value: 2000, impact: 'Pays one mentor for a month' },
     { amt: 'GH₵5,000', value: 5000, impact: 'One young person’s first-step grant' },
-    { amt: 'GH₵14,000', value: 14000, impact: 'One young person’s full six-month place' },
+    { amt: 'GH₵14,000', value: 14000, impact: 'Sponsors one young person’s full six-month place' },
   ],
   ghsPresets: [200, 2000, 5000, 14000],
   before,

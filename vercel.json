@@ -6,6 +6,11 @@
       "permanent": false
     },
     {
+      "source": "/sponsor",
+      "destination": "/support-mentorship",
+      "permanent": false
+    },
+    {
       "source": "/summit",
       "destination": "/reports/agribusiness-summit-2026",
       "permanent": false

@@ -1,5 +1,6 @@
 # Cloudflare redirects (the same as "redirects" in vercel.json).
 /give               /donate                                 302
+/sponsor            /support-mentorship                     302
 /summit             /reports/agribusiness-summit-2026       302
 /marketplace        https://marketplace.swkghana.org        302
 /marketplace/*      https://marketplace.swkghana.org/:splat 302
