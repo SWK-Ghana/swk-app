@@ -20,6 +20,13 @@ const FACTS = [
   { n: '40%+', label: 'of places for young women' },
 ]
 
+// Phase 1 (sensitisation and education: four webinars, crowned by the Summit), then Phase 2.
+const JOURNEY = [
+  { tag: 'Phase 1 · 2025 to 2026', title: 'Four agribusiness webinars', text: 'Sensitisation and education: practical, online sessions on agribusiness, from strategic partnerships to the Elevator Pitch Workshop.', stat: '300+ young people in 9+ countries', link: { href: '/our-work', label: 'See our work' } },
+  { tag: 'The crown of Phase 1', title: 'Agribusiness Summit 2026', text: 'Our first in-person Summit, on 7 November 2026 in Accra: a panel, Spotlight talks from the field and a hands-on Agribusiness Model Canvas workshop.', stat: '138 registrations · 62 in the room', link: { href: '/reports/agribusiness-summit-2026', label: 'Read the Summit report' } },
+  { tag: 'Phase 2 · 2027', title: 'Mentorship Programme', text: 'Six months with a mentor who runs an agribusiness: learn inside a real business, then take your first steps.', stat: '20 young people · 5 mentors · 6 months', current: true },
+]
+
 const WHY = [
   { n: '21.9%', title: 'Young people need work', text: 'Unemployment among Ghanaians aged 15 to 35 in the first three quarters of 2025, nearly twice the national rate.', source: 'Ghana Statistical Service, 2026' },
   { n: '2.0m → 1.2m', title: 'They are leaving agriculture', text: 'Young people working in agriculture, 2010 to 2021, even though agriculture still employs about a third of Ghana\'s workforce.', source: 'GSS, Ghana in Numbers 2025' },
@@ -103,7 +110,7 @@ const MentorshipProgramme = () => (
 
     <PageHero
       title="Agribusiness Mentorship Programme 2027"
-      lede="Learn from a mentor, then take your first steps. Six months for 20 young agripreneurs in Ghana, guided by people who already run agribusinesses."
+      lede="Phase 2 of our agribusiness journey. Learn from a mentor, then take your first steps: six months for 20 young agripreneurs in Ghana, guided by people who already run agribusinesses."
       aside={(
         <div className="relative mx-auto w-full max-w-xl">
           <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-[#78C31E]/80" aria-hidden="true" />
@@ -142,6 +149,37 @@ const MentorshipProgramme = () => (
         </dl>
       </div>
     </div>
+
+    {/* One journey: Phase 1 (webinars, crowned by the Summit), then Phase 2 (mentorship) */}
+    <section className="py-16 sm:py-20">
+      <div className="swk-shell">
+        <SectionHead eyebrow="Our agribusiness journey" title="Not a new start: the next step.">
+          Phase 1 raised awareness and built knowledge. The Summit crowned it. Phase 2 turns that knowledge into businesses, with a mentor at your side.
+        </SectionHead>
+        <ol className="grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr]">
+          {JOURNEY.map((j, i) => (
+            <React.Fragment key={j.title}>
+              {i > 0 && (
+                <li aria-hidden="true" className="flex items-center justify-center text-[#78C31E]">
+                  <LuArrowRight className="h-7 w-7 rotate-90 lg:rotate-0" />
+                </li>
+              )}
+              <li className={`flex flex-col rounded-2xl p-6 text-center ${j.current ? 'bg-[#0C2E11] text-white shadow-xl' : 'border border-[#D4F0A0] bg-gradient-to-br from-[#F2FAE8] to-white'}`}>
+                <span className={`mx-auto rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${j.current ? 'bg-[#78C31E] text-[#123D16]' : 'bg-white text-[#17702D] ring-1 ring-[#D4F0A0]'}`}>{j.tag}</span>
+                <h3 className={`mt-3 text-xl font-bold ${j.current ? 'text-white' : 'text-gray-900'}`}>{j.title}</h3>
+                <p className={`mt-2 flex-1 text-sm leading-relaxed ${j.current ? 'text-white/85' : 'text-gray-600'}`}>{j.text}</p>
+                <p className={`mt-3 text-sm font-bold ${j.current ? 'text-[#A8E04A]' : 'text-[#17702D]'}`}>{j.stat}</p>
+                {j.link && (
+                  <a href={j.link.href} className="mt-3 inline-flex items-center justify-center gap-1.5 self-center text-sm font-bold text-[#17702D] hover:underline">
+                    {j.link.label} <LuArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
+              </li>
+            </React.Fragment>
+          ))}
+        </ol>
+      </div>
+    </section>
 
     {/* Why */}
     <section className="swk-weave py-16 sm:py-20">

@@ -292,9 +292,9 @@ const OurWork = () => {
                 Agribusiness Summit 2026
               </h2>
               <p className="text-sm xs:text-base text-white/80 leading-relaxed mb-4">
-                Our first in-person flagship event, growing out of a webinar series that has reached 300+
-                young people across 9+ countries. On 7 November 2026, young people, farmers, founders and
-                partners met in Accra for a panel, Spotlight talks from the field and a hands-on
+                The crown of Phase 1 of our agribusiness journey: four webinars of sensitisation and education
+                reached 300+ young people across 9+ countries, then on 7 November 2026 young people, farmers,
+                founders and partners met in Accra for a panel, Spotlight talks from the field and a hands-on
                 Agribusiness Model Canvas workshop.
               </p>
               <ul className="mx-auto w-fit space-y-1.5 mb-5 text-left text-xs xs:text-sm text-white/90">
@@ -310,7 +310,7 @@ const OurWork = () => {
                 See what happened <span aria-hidden="true">→</span>
               </a>
               <a href="/mentorship-programme" className="mt-3 block text-sm font-bold text-[#A8E04A] hover:text-white hover:underline">
-                Next: Mentorship Programme 2027 <span aria-hidden="true">→</span>
+                Phase 2: Mentorship Programme 2027 <span aria-hidden="true">→</span>
               </a>
             </div>
             <div className="order-1 md:order-2 p-5 xs:p-6 sm:p-8 md:p-10 md:pl-0">

@@ -277,7 +277,7 @@ const Home = () => {
       tag: 'Summit',
       tagClass: 'bg-[#1E963C] text-white',
       title: 'Agribusiness Summit 2026: what happened',
-      desc: 'Our first in-person Summit brought young people, farmers, founders and partners together in Accra: a panel on building profitable agribusinesses, Spotlight talks from the field, and a hands-on Agribusiness Model Canvas workshop. See the day in photos, numbers and voices.',
+      desc: 'The crown of Phase 1 of our agribusiness journey, after four webinars: our first in-person Summit brought young people, farmers, founders and partners together in Accra for a panel, Spotlight talks from the field and a hands-on Agribusiness Model Canvas workshop. Phase 2, the Mentorship Programme, follows in 2027.',
       meta: '138 registrations · 13 speakers and facilitators · 6 partners',
       href: '/reports/agribusiness-summit-2026',
       cta: 'See what happened',
@@ -716,11 +716,12 @@ const Home = () => {
               />
             </a>
             <div className="flex flex-col justify-center gap-4 p-6 text-center sm:p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Just held · 7 November 2026</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#17702D]">Phase 1, crowned · 7 November 2026</p>
               <h3 className="text-2xl font-bold leading-tight text-gray-900 sm:text-3xl">Agribusiness Summit 2026</h3>
               <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
-                Our first in-person Summit, in Accra: a panel on building profitable agribusinesses, Spotlight talks from
-                the field, and a hands-on Agribusiness Model Canvas workshop where groups pitched their ideas.
+                Four webinars of sensitisation and education, crowned by our first in-person Summit in Accra: a panel on
+                building profitable agribusinesses, Spotlight talks from the field, and a hands-on Agribusiness Model Canvas
+                workshop where groups pitched their ideas.
               </p>
               <ul className="flex flex-wrap justify-center gap-2 text-xs font-semibold text-[#17702D]">
                 {['138 registrations', '62 in the room', '13 speakers and facilitators', '6 partners'].map((s) => (
@@ -732,7 +733,7 @@ const Home = () => {
                   See what happened →
                 </a>
                 <a href="/mentorship-programme" className="text-sm font-bold text-[#17702D] hover:underline">
-                  Next: Mentorship Programme 2027 →
+                  Phase 2: Mentorship Programme 2027 →
                 </a>
               </div>
             </div>
