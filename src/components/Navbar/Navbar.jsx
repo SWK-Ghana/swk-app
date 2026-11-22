@@ -56,7 +56,7 @@ const Navbar = ({ logoSrc = "https://res.cloudinary.com/dwgj3lovn/image/upload/v
   const isActive = (href) => {
     if (!currentPath) return false;
     if (href === "/") return currentPath === "/";
-    return currentPath.startsWith(href);
+    return currentPath === href || currentPath.startsWith(`${href}/`);
   };
 
   // A grouped item is "active" when the current route matches it or any child.

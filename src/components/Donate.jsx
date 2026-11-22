@@ -15,12 +15,19 @@ const PAYSTACK_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || ''
 const FLW_KEY = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || ''
 
 const MOMO_MERCHANT_ID = '670968'
-const MOMO_STEPS = [
+const momoSteps = (reference) => [
   'Dial *170# on your MTN line.',
   'Choose MoMoPay & Pay Bill, then MoMoPay.',
   `Enter the Merchant ID ${MOMO_MERCHANT_ID}.`,
-  'Enter the amount, and “Donation — your name” as the reference.',
+  `Enter the amount, and “${reference}” as the reference.`,
   'Check the merchant name, then confirm with your MoMo PIN. MTN sends you an SMS receipt.',
+]
+
+// What a general gift does (a campaign brings its own list).
+const DEFAULT_IMPACTS = [
+  { amt: 'GH₵100', impact: 'Sponsors a youth for one webinar session' },
+  { amt: 'GH₵500', impact: 'Funds a community outreach activity' },
+  { amt: 'GH₵1,000', impact: 'Supports a skills-training workshop' },
 ]
 const DONATE_EMAIL = 'info@swkghana.org'
 const LOGO_URL = 'https://res.cloudinary.com/dwgj3lovn/image/upload/v1760294682/SWK_LOGO_es585y.png'
@@ -72,7 +79,12 @@ const CopyField = ({ label, value, copyValue, event }) => {
   )
 }
 
-const Donate = () => {
+// `campaign` (optional) turns this into a giving page for one programme:
+//   { designation, seo: { title, description, path }, hero: PageHero props,
+//     impactsTitle, impacts: [{ amt, value, impact }], ghsPresets, before, after }
+// The designation is added to the Paystack metadata, the Flutterwave description
+// and the MoMo reference, so gifts can be told apart in the dashboards.
+const Donate = ({ campaign }) => {
   const [method, setMethod] = useState('paystack')
   const [currency, setCurrency] = useState('USD') // international tab only
   const [amount, setAmount] = useState('')
@@ -83,7 +95,11 @@ const Donate = () => {
   const [message, setMessage] = useState('')
 
   const activeCurrency = method === 'intl' ? currency : 'GHS'
-  const { symbol, presets } = CURRENCIES[activeCurrency]
+  const { symbol } = CURRENCIES[activeCurrency]
+  const presets = activeCurrency === 'GHS' && campaign?.ghsPresets ? campaign.ghsPresets : CURRENCIES[activeCurrency].presets
+  const designation = campaign?.designation || 'General donation'
+  const momoReference = campaign ? `${campaign.designation} — your name` : 'Donation — your name'
+  const impacts = campaign?.impacts || DEFAULT_IMPACTS
   const numericAmount = Number(amount)
   const amountValid = numericAmount >= 1 && Number.isFinite(numericAmount)
 
@@ -119,7 +135,9 @@ const Donate = () => {
       transaction_id: reference,
     })
     setStatus('success')
-    setMessage(`Thank you for your generous donation of ${symbol}${numericAmount}! A receipt has been sent to your email.`)
+    setMessage(campaign
+      ? `Thank you for your gift of ${symbol}${numericAmount} to the ${campaign.designation}! A receipt has been sent to your email.`
+      : `Thank you for your generous donation of ${symbol}${numericAmount}! A receipt has been sent to your email.`)
   }
 
   const handlePaystack = async () => {
@@ -130,8 +148,10 @@ const Donate = () => {
       amount: Math.round(numericAmount * 100), // pesewas
       currency: 'GHS',
       metadata: {
+        designation,
         custom_fields: [
           { display_name: 'Donor Name', variable_name: 'donor_name', value: name || 'Anonymous' },
+          { display_name: 'Gift for', variable_name: 'designation', value: designation },
         ],
       },
       callback: (response) => onSuccess(response?.reference),
@@ -147,14 +167,14 @@ const Donate = () => {
     const FlutterwaveCheckout = await loadFlutterwave()
     FlutterwaveCheckout({
       public_key: FLW_KEY,
-      tx_ref: `SWK-DON-${Date.now()}`,
+      tx_ref: `SWK-${campaign ? 'MENT' : 'DON'}-${Date.now()}`,
       amount: numericAmount,
       currency,
       payment_options: 'card',
       customer: { email, name: name || 'Anonymous Donor' },
       customizations: {
         title: 'SWK Ghana',
-        description: 'Donation to SWK Ghana — empowering youth for sustainable change',
+        description: campaign ? `Gift to SWK Ghana: ${campaign.designation}` : 'Donation to SWK Ghana — empowering youth for sustainable change',
         logo: LOGO_URL,
       },
       callback: (payment) => {
@@ -179,7 +199,7 @@ const Donate = () => {
       setMessage(`Please enter a donation amount of at least ${symbol}1.`)
       return
     }
-    trackEvent('donate_start', { value: numericAmount, currency: activeCurrency, method })
+    trackEvent('donate_start', { value: numericAmount, currency: activeCurrency, method, designation })
 
     const key = method === 'paystack' ? PAYSTACK_KEY : FLW_KEY
     if (!key) {
@@ -199,35 +219,46 @@ const Donate = () => {
     }
   }
 
-  const receiptMailto = `mailto:${DONATE_EMAIL}?subject=${encodeURIComponent('Donation by MoMo Pay — SWK Ghana')}&body=${encodeURIComponent(
+  const receiptMailto = `mailto:${DONATE_EMAIL}?subject=${encodeURIComponent(campaign ? `MoMo Pay gift — ${campaign.designation}` : 'Donation by MoMo Pay — SWK Ghana')}&body=${encodeURIComponent(
     `Hi SWK Ghana,\n\nI have just sent a donation by MoMo Pay (Merchant ID ${MOMO_MERCHANT_ID}).\n\nName: \nAmount: \nMoMo number I paid from: \nDate: \n\nPlease acknowledge receipt. Thank you!`
   )}`
 
   return (
     <div className="min-h-screen swk-weave">
+      {campaign ? <Seo {...campaign.seo} /> : (
       <Seo
         title="Donate to SWK Ghana – Support Youth-Led Sustainable Change"
         description="Support SWK Ghana by card, Mobile Money, MoMo Pay, or international payment in USD, GBP or EUR. Every gift funds youth programs, climate action, and community initiatives across Ghana."
         path="/donate"
       />
+      )}
+      {campaign ? <PageHero {...campaign.hero} /> : (
       <PageHero
         title="Donate to SWK Ghana"
         lede="Every contribution funds youth programs, climate action, agribusiness training, and community initiatives across Ghana. Give from anywhere in the world."
         image={{ path: 'v1773660247/photo_2026-03-16_11-22-15_enjvh6.jpg', alt: 'Young people working on laptops at an SWK Ghana skills workshop', position: '50% 45%', aspect: 'lg:aspect-[3/2]' }}
       />
-      <div className="swk-shell py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
+      )}
+      {campaign?.before}
+      <div id="give" className="swk-shell scroll-mt-24 py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20">
         {/* Payment options in the main column; what a gift does alongside on
             large screens (first on phones). Both start on the header's edge. */}
         <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
 
           <aside className="lg:order-2 lg:sticky lg:top-28 lg:self-start">
-            <h2 className="text-center text-lg font-bold text-gray-900 mb-3">What your gift does</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
-            {[
-              { amt: 'GH₵100', impact: 'Sponsors a youth for one webinar session' },
-              { amt: 'GH₵500', impact: 'Funds a community outreach activity' },
-              { amt: 'GH₵1,000', impact: 'Supports a skills-training workshop' },
-            ].map((i) => (
+            <h2 className="text-center text-lg font-bold text-gray-900 mb-3">{campaign?.impactsTitle || 'What your gift does'}</h2>
+            <div className={`grid grid-cols-1 gap-3 lg:grid-cols-1 ${impacts.length === 4 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
+            {impacts.map((i) => i.value ? (
+              <button
+                key={i.amt}
+                type="button"
+                onClick={() => { switchMethod('paystack'); choosePreset(i.value) }}
+                className={`rounded-xl border p-4 text-center transition-colors ${selectedPreset === i.value && method === 'paystack' ? 'border-[#78C31E] bg-[#F2FAE8]' : 'border-[#D4F0A0] bg-white hover:border-[#78C31E]'}`}
+              >
+                <div className="text-lg font-bold text-[#17702D]">{i.amt}</div>
+                <div className="text-sm text-gray-600 mt-1 leading-snug">{i.impact}</div>
+              </button>
+            ) : (
               <div key={i.amt} className="bg-white rounded-xl border border-[#D4F0A0] p-4 text-center">
                 <div className="text-lg font-bold text-[#17702D]">{i.amt}</div>
                 <div className="text-sm text-gray-600 mt-1 leading-snug">{i.impact}</div>
@@ -294,7 +325,7 @@ const Donate = () => {
                 <CopyField label="Merchant ID" value={MOMO_MERCHANT_ID} event="momo_merchant_id" />
 
                 <ol className="space-y-2.5 text-sm text-gray-700">
-                  {MOMO_STEPS.map((step, i) => (
+                  {momoSteps(momoReference).map((step, i) => (
                     <li key={step} className="flex items-start gap-3">
                       <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#17702D] text-xs font-bold text-white" aria-hidden="true">{i + 1}</span>
                       <span>{step}</span>
@@ -360,7 +391,7 @@ const Donate = () => {
                             : 'border-gray-200 text-gray-700 hover:border-[#C0E870]'
                         }`}
                       >
-                        {v}
+                        {v.toLocaleString('en-GH')}
                       </button>
                     ))}
                   </div>
@@ -431,8 +462,8 @@ const Donate = () => {
                   {status === 'processing'
                     ? 'Opening secure checkout…'
                     : amountValid
-                      ? `Donate ${symbol}${numericAmount}`
-                      : 'Donate'}
+                      ? `${campaign ? 'Give' : 'Donate'} ${symbol}${numericAmount.toLocaleString('en-GH')}`
+                      : campaign ? 'Give' : 'Donate'}
                 </button>
 
                 <p className="text-center text-xs text-gray-500 flex items-center justify-center gap-1.5">
@@ -455,6 +486,7 @@ const Donate = () => {
           </div>
         </div>
       </div>
+      {campaign?.after}
     </div>
   )
 }

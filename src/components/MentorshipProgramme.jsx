@@ -76,7 +76,7 @@ const WAYS = [
   { icon: LuSprout, title: 'Young people', text: 'Aged 18 to 35 with an agribusiness idea or an early venture? Register your interest and we will tell you when applications open.', cta: 'Register your interest', to: '/mentorship' },
   { icon: LuHandshake, title: 'Mentors', text: 'Run an agribusiness with at least five years\' experience? Guide a circle of four young people, with a monthly stipend.', cta: 'Become a mentor', to: '/become-a-mentor' },
   { icon: LuHeartHandshake, title: 'Volunteers', text: 'Help with mentee support, events, communications, design, research and more, in person or online.', cta: 'Volunteer with us', to: '/volunteers' },
-  { icon: LuMail, title: 'Partners and sponsors', text: 'Fund a mentor circle, a young person\'s place, an event, or give in kind. We will send you the sponsorship pack.', cta: 'Talk to us', href: 'mailto:info@swkghana.org?subject=Partnering%20on%20the%20SWK%20Mentorship%20Programme%202027' },
+  { icon: LuMail, title: 'Givers and sponsors', text: 'Give online to support a young person, or, as an organisation, fund a mentor circle, an event, or give in kind.', cta: 'Support the programme', href: '/support-mentorship' },
 ]
 
 const FAQS = [

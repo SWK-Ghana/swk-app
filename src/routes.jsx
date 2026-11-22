@@ -39,6 +39,7 @@ export const routes = [
       { path: 'marketplace', lazy: page(() => import('./components/Marketplace')) },
       { path: 'taka-kipawa', lazy: page(() => import('./components/TakaKipawa')) },
       { path: 'mentorship-programme', lazy: page(() => import('./components/MentorshipProgramme')) },
+      { path: 'support-mentorship', lazy: page(() => import('./components/SupportMentorship')) },
       { path: 'privacy-policy', lazy: page(() => import('./components/PrivacyPolicy')) },
       { path: 'certificate/:id', lazy: page(() => import('./components/Certificate')) },
     ],
