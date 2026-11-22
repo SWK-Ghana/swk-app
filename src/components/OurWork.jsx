@@ -309,6 +309,9 @@ const OurWork = () => {
               >
                 See what happened <span aria-hidden="true">→</span>
               </a>
+              <a href="/mentorship-programme" className="mt-3 block text-sm font-bold text-[#A8E04A] hover:text-white hover:underline">
+                Next: Mentorship Programme 2027 <span aria-hidden="true">→</span>
+              </a>
             </div>
             <div className="order-1 md:order-2 p-5 xs:p-6 sm:p-8 md:p-10 md:pl-0">
               <a href="/reports/agribusiness-summit-2026" tabIndex={-1} aria-hidden="true">

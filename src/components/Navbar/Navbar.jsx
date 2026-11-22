@@ -13,6 +13,7 @@ const NAV_LINKS = [
     href: "/our-work",
     children: [
       { label: "Overview", href: "/our-work", desc: "Our programmes and their impact" },
+      { label: "Mentorship Programme", href: "/mentorship-programme", desc: "Agribusiness mentoring for young people, 2027" },
       { label: "Taka Kipawa", href: "/taka-kipawa", desc: "Turning waste into a cleaner Ga West" },
       { label: "Marketplace", href: "/marketplace", desc: "Shop youth-led green businesses" },
     ],

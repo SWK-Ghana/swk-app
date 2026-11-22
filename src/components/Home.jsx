@@ -731,7 +731,7 @@ const Home = () => {
                 <a href="/reports/agribusiness-summit-2026" className="btn-gradient rounded-xl px-5 py-2.5 text-sm font-semibold">
                   See what happened →
                 </a>
-                <a href="/mentorship" className="text-sm font-bold text-[#17702D] hover:underline">
+                <a href="/mentorship-programme" className="text-sm font-bold text-[#17702D] hover:underline">
                   Next: Mentorship Programme 2027 →
                 </a>
               </div>

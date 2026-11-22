@@ -20,7 +20,7 @@ const SITE = 'https://swkghana.org'
 
 const STATIC_ROUTES = [
   '/', '/about', '/our-work', '/team', '/resources', '/faq', '/support', '/get-involved',
-  '/contact', '/donate', '/reports', '/blog', '/taka-kipawa',
+  '/contact', '/donate', '/reports', '/blog', '/taka-kipawa', '/mentorship-programme',
   '/privacy-policy',
 ]
 
