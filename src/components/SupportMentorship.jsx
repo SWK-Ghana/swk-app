@@ -101,12 +101,12 @@ const after = (
 const MENTORSHIP_CAMPAIGN = {
   designation: 'Mentorship Programme 2027',
   seo: {
-    title: 'Sponsor 1 of 20 Young Agripreneurs | SWK Ghana Mentorship Programme 2027',
+    title: 'Sponsor 20 Young Entrepreneurs | SWK Ghana Mentorship Programme 2027',
     description: 'Give to the SWK Agribusiness Mentorship Programme 2027: six months with a mentor who runs an agribusiness, then first real steps, for 20 young people in Ghana. Card, Mobile Money or MoMo Pay.',
     path: '/support-mentorship',
   },
   hero: {
-    title: 'Sponsor 1 of 20 young agripreneurs today',
+    title: 'Sponsor 20 young entrepreneurs',
     lede: 'Six months of one-on-one and group mentorship, a business plan, and links to buyers and finance: taking a young Ghanaian from idea to first steps.',
     aside: (
       <div className="relative mx-auto w-full max-w-xl">
